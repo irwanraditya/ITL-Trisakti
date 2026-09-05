@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Analitika Bisnis — Deck Satu Semester (ID/EN)",
+    "category": "Teaching",
+    "type": "Course Deck",
+    "description": "Deck satu semester untuk mata kuliah Analitika Bisnis, dari data operasional hingga keputusan.",
+    "icon": "∑",
+    "filename": "Analitika Bisnis(3).html"
+  },
+  {
+    "title": "Pengantar Manajemen — Deck Satu Semester (ID/EN)",
+    "category": "Teaching",
+    "type": "Course Deck",
+    "description": "Deck satu semester untuk mata kuliah Pengantar Manajemen dengan pendekatan kasus berjalan.",
+    "icon": "M",
+    "filename": "Pengantar Manajemen.html"
+  }
+]

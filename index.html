@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Academic Digital Hub — ITL Trisakti</title>
+<style>
+:root{--navy:#0b1f3a;--gold:#c9a227;--ink:#172033;--muted:#667085;--bg:#f5f7fa;--card:#fff;--line:#e4e7ec}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{background:linear-gradient(135deg,#07172c,#0b1f3a);color:#fff;padding:22px 6vw;border-bottom:4px solid var(--gold)}
+.brand{font-weight:800;letter-spacing:.045em}.sub{opacity:.72;font-size:13px;margin-top:4px}
+main{max-width:1240px;margin:auto;padding:58px 24px 70px}.eyebrow{color:var(--gold);font-weight:800;letter-spacing:.14em;font-size:12px;text-transform:uppercase}
+h1{font-family:Georgia,serif;font-size:clamp(40px,5vw,66px);line-height:1.02;margin:12px 0}.lead{max-width:760px;color:var(--muted);font-size:17px;line-height:1.7}
+.portal{margin:42px 0 58px;background:var(--navy);border-radius:20px;overflow:hidden;box-shadow:0 16px 45px rgba(11,31,58,.12);color:#fff}
+.portal-top{padding:22px 24px;display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}.portal-title{font-family:Georgia,serif;font-size:26px}.portal-desc{color:rgba(255,255,255,.68);font-size:14px;margin-top:5px}
+.portal-link{display:inline-flex;align-items:center;text-decoration:none;background:#fff;color:var(--navy);padding:10px 15px;border-radius:9px;font-weight:800}
+.frame-wrap{background:#dfe4ea;padding:0}.frame-wrap iframe{display:block;width:100%;height:620px;border:0;background:#fff}
+.frame-fallback{display:none;padding:28px;text-align:center;color:var(--muted);background:#fff}
+.toolbar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin:0 0 24px}
+h2{margin:0;font-family:Georgia,serif;font-size:28px}input{width:min(380px,100%);padding:13px 16px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;min-height:245px;box-shadow:0 5px 20px rgba(11,31,58,.045)}
+.icon{width:44px;height:44px;border-radius:12px;background:#f5edcf;color:var(--navy);display:grid;place-items:center;font-weight:900;margin-bottom:18px}.meta{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.card h3{font-family:Georgia,serif;font-size:24px;margin:8px 0 10px}.desc{color:var(--muted);line-height:1.6;margin:0 0 20px}.open{margin-top:auto;display:inline-flex;align-self:flex-start;text-decoration:none;background:var(--navy);color:#fff;padding:10px 15px;border-radius:9px;font-weight:700}
+.empty{padding:40px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px}
+footer{padding:30px 6vw;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.toolbar{align-items:stretch;flex-direction:column}.frame-wrap iframe{height:70vh}main{padding-top:42px}.portal-top{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="brand">INSTITUT TRANSPORTASI DAN LOGISTIK TRISAKTI</div><div class="sub">Academic Digital Hub</div></header>
+<main>
+<div class="eyebrow">Academic Resources</div>
+<h1>Academic Digital Hub</h1>
+<p class="lead">A centralized academic gateway for teaching materials, course decks, and the ITL Trisakti academic platform.</p>
+
+<section class="portal" aria-label="ITL Trisakti Academic Portal">
+  <div class="portal-top">
+    <div>
+      <div class="portal-title">ITL Trisakti Academic Portal</div>
+      <div class="portal-desc">Access the official academic platform directly from this hub.</div>
+    </div>
+    <a class="portal-link" href="https://academic.itltrisakti.ac.id/" target="_blank" rel="noopener">Open in New Tab ↗</a>
+  </div>
+  <div class="frame-wrap">
+    <iframe
+      src="https://academic.itltrisakti.ac.id/"
+      title="ITL Trisakti Academic Portal"
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="fullscreen">
+    </iframe>
+  </div>
+  <div class="frame-fallback" id="frameFallback">
+    The academic portal may block embedded viewing in some browsers. Use <a href="https://academic.itltrisakti.ac.id/" target="_blank" rel="noopener">Open in New Tab</a>.
+  </div>
+</section>
+
+<div class="toolbar"><h2>Teaching &amp; Learning</h2><input id="search" type="search" placeholder="Search academic resources…"></div>
+<div id="grid" class="grid"></div>
+</main>
+<footer>INSTITUT TRANSPORTASI DAN LOGISTIK TRISAKTI · Academic Digital Hub · © 2026</footer>
+<script>
+const grid=document.getElementById('grid'),search=document.getElementById('search');
+let projects=[];
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+function render(){const q=search.value.toLowerCase().trim();const rows=projects.filter(p=>[p.title,p.category,p.type,p.description,p.filename].join(' ').toLowerCase().includes(q));grid.innerHTML=rows.length?rows.map(p=>`<article class="card"><div class="icon">${esc(p.icon||'▤')}</div><div class="meta">${esc(p.category||'Academic')} · ${esc(p.type||'HTML Resource')}</div><h3>${esc(p.title)}</h3><p class="desc">${esc(p.description||'Academic Digital Resource at ITL Trisakti.')}</p><a class="open" href="${encodeURI(p.filename)}">Open Resource →</a></article>`).join(''):'<div class="empty">No academic resource found.</div>';}
+async function load(){try{const r=await fetch('projects.json?v='+Date.now());projects=await r.json();render();}catch(e){grid.innerHTML='<div class="empty">Unable to load academic resources.</div>';}}
+search.addEventListener('input',render);load();
+</script>
+</body>
+</html>
