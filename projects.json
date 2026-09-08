@@ -14,5 +14,12 @@
     "description": "Deck satu semester untuk mata kuliah Pengantar Manajemen dengan pendekatan kasus berjalan.",
     "icon": "M",
     "filename": "Pengantar Manajemen.html"
-  }
+  },
+  {
+    "title": "Prinsip-Prinsip Manajemen",
+    "category": "Teaching",
+    "type": "Course Deck",
+    "description": "Deck satu semester untuk mata kuliah Prinsip-Prinsip Manajemen dengan pendekatan kasus berjalan.",
+    "icon": "M",
+    "filename": "Prinsip-Prinsip Manajemen.html"
 ]
