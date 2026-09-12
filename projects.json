@@ -22,5 +22,13 @@
     "description": "Deck satu semester untuk mata kuliah Prinsip-Prinsip Manajemen dengan pendekatan kasus berjalan.",
     "icon": "M",
     "filename": "Prinsip-Prinsip Manajemen.html"
+  },
+  {
+    "title": "Presentation Skills",
+    "category": "Teaching",
+    "type": "Course Deck",
+    "description": "Deck satu semester untuk setiap mata kuliah yang memiliki tugas membuat presentasi.",
+    "icon": "M",
+    "filename": "Presentation Skills.html"
   }
 ]
