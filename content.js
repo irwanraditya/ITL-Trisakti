@@ -1,0 +1,837 @@
+/* =====================================================================
+   content.js — kamus isi dwibahasa (ID / EN)
+   Sumber: "FMCG Business Presentation Skills MASTERCLASS Deck" (87 halaman)
+   oleh Aufa Rais Rehaldy, MT Retail Operations, PT Suntone Wisdom (2026).
+   Seluruh angka berasal dari kasus ilustratif di dalam deck sumber.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------- UI ---- */
+const UI = {
+  id: {
+    appTitle: 'FMCG Business Presentation Skills',
+    appSub: 'Masterclass interaktif',
+    search: 'Cari konsep, contoh, latihan…',
+    searchEmpty: 'Tidak ada hasil.',
+    toc: 'Daftar isi', close: 'Tutup', prev: 'Sebelumnya', next: 'Berikutnya',
+    progress: 'Kemajuan', section: 'Bagian',
+    modeLearn: 'Mode Belajar', modePresent: 'Mode Presentasi',
+    modeLearnHint: 'Penjelasan, latihan, dan kunci jawaban ditampilkan.',
+    modePresentHint: 'Hanya slide bersih. Tekan Esc untuk keluar.',
+    themeLight: 'Terang', themeDark: 'Gelap', full: 'Layar penuh',
+    showWhy: 'Tunjukkan alasannya', hideWhy: 'Sembunyikan',
+    before: 'Sebelum', after: 'Sesudah', weak: 'Lemah', strong: 'Kuat',
+    tryIt: 'Coba sendiri', example: 'Isi contoh', reset: 'Kosongkan',
+    generate: 'Buat ringkasan', result: 'Hasil',
+    start: 'Mulai', show: 'Tampilkan slide', answerNow: 'Jawab sekarang',
+    checkAnswer: 'Periksa jawaban', correct: 'Tepat', notQuite: 'Belum tepat',
+    yourPlan: 'Cetak biru presentasi Anda',
+    keyboard: '← → navigasi · Spasi lanjut · F layar penuh · / cari',
+    srcNote: 'Diadaptasi dengan atribusi dari deck sumber. Angka bersifat ilustratif.',
+    pctReady: 'siap', ready: 'SIAP PRESENTASI', keepGoing: 'Lanjutkan',
+    learnOnly: 'Tersedia di Mode Belajar.',
+  },
+  en: {
+    appTitle: 'FMCG Business Presentation Skills',
+    appSub: 'Interactive masterclass',
+    search: 'Search concepts, examples, exercises…',
+    searchEmpty: 'No results.',
+    toc: 'Contents', close: 'Close', prev: 'Previous', next: 'Next',
+    progress: 'Progress', section: 'Section',
+    modeLearn: 'Learning Mode', modePresent: 'Presentation Mode',
+    modeLearnHint: 'Explanations, exercises, and answers are shown.',
+    modePresentHint: 'Clean slides only. Press Esc to exit.',
+    themeLight: 'Light', themeDark: 'Dark', full: 'Fullscreen',
+    showWhy: 'Show me why', hideWhy: 'Hide',
+    before: 'Before', after: 'After', weak: 'Weak', strong: 'Strong',
+    tryIt: 'Try it', example: 'Load example', reset: 'Clear',
+    generate: 'Generate summary', result: 'Result',
+    start: 'Start', show: 'Show the slide', answerNow: 'Answer now',
+    checkAnswer: 'Check answer', correct: 'Correct', notQuite: 'Not quite',
+    yourPlan: 'Your presentation blueprint',
+    keyboard: '← → navigate · Space advances · F fullscreen · / search',
+    srcNote: 'Adapted with attribution from the source deck. Figures are illustrative.',
+    pctReady: 'ready', ready: 'READY TO PRESENT', keepGoing: 'Keep going',
+    learnOnly: 'Available in Learning Mode.',
+  }
+};
+
+/* ------------------------------------------------------------ SECTIONS -- */
+/* Setiap blok: {t: tipe, ...} — dirender oleh app.js                        */
+
+const SECTIONS = [
+
+/* 01 */ {
+  id: 'cover', kicker: { id: 'Masterclass', en: 'Masterclass' },
+  title: { id: 'FMCG Business Presentation Skills', en: 'FMCG Business Presentation Skills' },
+  lead: { id: 'Dari data lapangan menjadi keputusan yang benar-benar diambil ruangan.',
+          en: 'From field data to a decision the room will actually act on.' },
+  blocks: [
+    { t: 'pills', items: [
+      { id: '4 pilar', en: '4 pillars' }, { id: '1 data toolkit', en: '1 data toolkit' },
+      { id: '3 sesi kerja', en: '3 work sessions' }, { id: '60 contoh', en: '60 worked examples' }] },
+    { t: 'note', text: {
+      id: 'Sumber: deck masterclass oleh Aufa Rais Rehaldy, MT Retail Operations, PT Suntone Wisdom. Disusun ulang menjadi pengalaman belajar interaktif dengan atribusi.',
+      en: 'Source: masterclass deck by Aufa Rais Rehaldy, MT Retail Operations, PT Suntone Wisdom. Rebuilt as an interactive learning experience, with attribution.' } }
+  ]
+},
+
+/* 02 */ {
+  id: 'opening', kicker: { id: 'Pembuka', en: 'The opening' },
+  title: { id: 'Data yang sama. Rapat yang sama. Dua cara membuka.',
+           en: 'Same data. Same meeting. Two openings.' },
+  lead: { id: 'Mana yang menghasilkan keputusan sebelum kopinya dingin?',
+          en: 'Which one gets a decision before the coffee goes cold?' },
+  blocks: [
+    { t: 'ba',
+      before: { label: { id: 'A · Laporan', en: 'A · Report' },
+        head: { id: '“Sales Performance Update — July”', en: '“Sales Performance Update — July”' },
+        body: { id: 'Agenda · Latar belakang · Metodologi dan sumber data · Delapan slide berisi semua angka · “Terima kasih, ada pertanyaan?”',
+                en: 'Agenda · Market background · Methodology and data source · Eight slides of every number we have · “Thank you — any questions?”' },
+        verdict: { id: 'Keputusan tiba di menit ke-9 — kalau tiba sama sekali.',
+                   en: 'Decision arrives at minute 9 — if it arrives at all.' } },
+      after: { label: { id: 'B · Keputusan', en: 'B · Decision' },
+        head: { id: '“Juli tutup 8% di bawah rencana — dan satu kanal menjelaskan tiga perempatnya.”',
+                en: '“July closed 8% behind plan — and one channel explains three quarters of it.”' },
+        body: { id: '1 Ini selisihnya dan di mana letaknya · 2 Ini sebabnya · 3 Ini dua opsi menutupnya · 4 Ini yang saya minta diputuskan hari ini',
+                en: '1 Here is the gap, and where it sits · 2 Here is why it happened · 3 Here are two options to close it · 4 Here is what I need decided today' },
+        verdict: { id: 'Keputusan tiba di detik ke-12. Sisanya adalah bukti.',
+                   en: 'Decision arrives at second 12. Everything after is evidence.' } },
+      why: { id: 'Keduanya jujur dan memuat data yang sama persis. Yang membedakan hanya urutan: B menaruh kesimpulan di depan, sehingga sisa rapat dipakai untuk menguji kesimpulan itu, bukan untuk menunggu kesimpulannya muncul.',
+             en: 'Both are honest and carry exactly the same data. The only difference is order: B puts the conclusion first, so the rest of the meeting is spent testing it rather than waiting for it.' } },
+    { t: 'band', text: { id: 'Keduanya jujur. Hanya satu yang menghargai waktu ruangan.',
+                         en: 'Both are honest. Only one of them respects the room’s time.' } }
+  ]
+},
+
+/* 03 */ {
+  id: 'why', kicker: { id: 'Mengapa keterampilan ini bernilai', en: 'Why this skill is worth money' },
+  title: { id: 'Firma termahal di dunia menjual satu hal: sebuah argumen.',
+           en: 'The most expensive firms on earth sell one thing: an argument.' },
+  lead: { id: 'Yang dibayar klien bukan mesin dan bukan pabrik, melainkan rekomendasi — dan deck yang membuatnya sulit dibantah.',
+          en: 'What a client pays for is not a machine or a factory. It is a recommendation — and a deck that makes it very hard to argue with.' },
+  blocks: [
+    { t: 'stats', items: [
+      { big: '$300–500', cap: { id: 'per jam konsultan', en: 'per consultant-hour' } },
+      { big: '~$150k', cap: { id: 'per minggu, per tim', en: 'per week, per team' } },
+      { big: '~$1,2M', cap: { id: 'untuk studi delapan minggu', en: 'for an 8-week study' } }] },
+    { t: 'band', text: { id: 'Kalau argumen adalah produknya, maka cara Anda menyusunnya bukan soft skill.',
+                         en: 'If the argument is the product, then how you build it is not a soft skill.' } },
+    { t: 'note', text: { id: 'Angka tarif pada deck sumber dinyatakan sebagai estimasi pasar, bukan tarif resmi yang dipublikasikan.',
+                         en: 'The fee figures in the source deck are stated as market estimates, not published rates.' } }
+  ]
+},
+
+/* 04 */ {
+  id: 'truth', kicker: { id: 'Kenyataan yang tidak nyaman', en: 'The uncomfortable truth' },
+  title: { id: 'Sebagian besar pelatihan presentasi memperbaiki separuh yang salah.',
+           en: 'Most presentation training fixes the wrong half.' },
+  lead: { id: 'Delapan puluh persen sudah diputuskan sebelum Anda membuka mulut.',
+          en: 'Eighty per cent is decided before you open your mouth.' },
+  blocks: [
+    { t: 'split2', items: [
+      { big: '80%', head: { id: 'sudah diputuskan sebelum Anda bicara', en: 'is decided before you open your mouth' },
+        body: { id: 'Pada cara argumen dibangun, diurutkan, dan dibuktikan.', en: 'In how the argument is built, ordered and evidenced.' }, accent: true },
+      { big: '20%', head: { id: 'adalah penyampaian', en: 'is delivery' },
+        body: { id: 'Nyata, bisa dilatih, dan sama sekali tidak bisa menyelamatkan argumen yang lemah.', en: 'Real, trainable, and completely unable to rescue a weak argument.' } }] },
+    { t: 'quote', text: { id: 'Penyaji percaya diri dengan argumen buruk kalah perlahan. Penyaji gugup dengan argumen kuat tetap mendapat keputusan — dan hanya itu yang diukur siapa pun.',
+                          en: 'A confident presenter with a badly built argument loses slowly. A nervous presenter with a well-built argument still gets the decision — which is the only thing anyone is measuring.' } }
+  ]
+},
+
+/* 05 */ {
+  id: 'pillars', kicker: { id: 'Peta', en: 'The map' },
+  title: { id: 'Empat pilar, satu toolkit data', en: 'Four pillars, one data toolkit' },
+  lead: { id: 'Setiap pilar menjawab satu pertanyaan yang berbeda. Urutannya disengaja.',
+          en: 'Each pillar answers a different question. The order is deliberate.' },
+  blocks: [
+    { t: 'cards', cols: 3, items: [
+      { n: '01', h: { id: 'Structure', en: 'Structure' }, p: { id: 'Mengubah folder berisi angka menjadi cerita yang berakhir pada keputusan.', en: 'Turning a folder full of numbers into a story that ends in a decision.' }, go: 'decision-order' },
+      { n: '02', h: { id: 'Clarity', en: 'Clarity' }, p: { id: 'Satu slide, satu pesan — dan judul yang menyatakan temuan.', en: 'One slide, one message — and a title that states the finding.' }, go: 'one-message' },
+      { n: '03', h: { id: 'Data Craft', en: 'Data Craft' }, p: { id: 'Grafik yang menunjuk, bukan grafik yang menampung.', en: 'Charts that point, not charts that store.' }, go: 'message-chart' },
+      { n: '04', h: { id: 'Format & Density', en: 'Format & Density' }, p: { id: 'Seberapa padat itu benar, ditentukan oleh cara deck dibaca.', en: 'How packed is right, decided by how the deck will be read.' }, go: 'density' },
+      { n: '05', h: { id: 'Confidence', en: 'Confidence' }, p: { id: 'Menjaga ruangan saat pertanyaannya mulai tidak nyaman.', en: 'Holding the room when the questions get uncomfortable.' }, go: 'confidence' },
+      { n: '06', h: { id: 'Engagement', en: 'Engagement' }, p: { id: 'Membuka kuat, menutup tajam, lalu berhenti bicara.', en: 'Open strong, close sharp, then stop talking.' }, go: 'engagement' }] }
+  ]
+},
+
+/* 06 */ {
+  id: 'decision-order', kicker: { id: 'Pilar 1 · Structure', en: 'Pillar 1 · Structure' },
+  title: { id: 'Temuan yang sama. Data yang sama. Dua urutan.',
+           en: 'Same finding. Same data. Two orders.' },
+  lead: { id: 'Anda memperoleh kesimpulan paling akhir. Itu tidak berarti kesimpulannya harus tiba paling akhir.',
+          en: 'You earned the conclusion last. That does not mean it should arrive last.' },
+  blocks: [
+    { t: 'orders',
+      left: { label: { id: 'Urutan laporan · cara Anda bekerja', en: 'Report order · how you did the work' },
+        items: [
+          { id: 'Agenda', en: 'Agenda' }, { id: 'Latar belakang', en: 'Background' },
+          { id: 'Metode', en: 'Method' }, { id: 'Data', en: 'Data' },
+          { id: 'Data lagi', en: 'More data' }, { id: 'Kesimpulan?', en: 'Conclusion?' }],
+        verdict: { id: 'Keputusan terkubur di bawah — dan rapat berakhir sebelum siapa pun sampai ke bawah.',
+                   en: 'The decision is buried at the bottom — and meetings end before anyone reaches the bottom.' } },
+      right: { label: { id: 'Urutan keputusan · yang harus mereka lakukan', en: 'Decision order · what they must do' },
+        items: [
+          { id: 'Keputusan', en: 'Decision' }, { id: 'Karena — 1', en: 'Because — 1' },
+          { id: 'Karena — 2', en: 'Because — 2' }, { id: 'Karena — 3', en: 'Because — 3' },
+          { id: 'Bukti', en: 'Evidence' }, { id: 'Cadangan', en: 'Backup' }],
+        verdict: { id: 'Tidak ada yang dihapus. Fakta yang sama, dibalik — dan hanya satu versi yang menghasilkan keputusan.',
+                   en: 'Nothing gets deleted. The same facts, reversed — and one version gets a decision.' } } },
+    { t: 'quote', text: { id: 'Dokter memberi diagnosis lebih dulu, lalu hasil laboratorium kalau Anda memintanya. Manajer Anda berada dalam posisi yang sama, di setiap rapat, sepanjang hari.',
+                          en: 'A doctor gives you the diagnosis first, then the blood panel if you ask for it. Your manager is in exactly that position, in every meeting, all day.' } }
+  ]
+},
+
+/* 07 */ {
+  id: 'pyramid', kicker: { id: 'Alat 1 · The Pyramid Principle', en: 'Tool 1 · The Pyramid Principle' },
+  title: { id: 'Jawaban dulu — lalu buktikan', en: 'Answer first — then earn it' },
+  lead: { id: 'Satu pesan pengatur, tiga penyangga, bukti di bawahnya. Minto, McKinsey, 1970-an.',
+          en: 'One governing message, three supports, evidence underneath. Minto, McKinsey, 1970s.' },
+  blocks: [
+    { t: 'governing', text: { id: '“Perbaiki kesenjangan stok Modern Trade sebelum kita membelanjakan satu rupiah lagi untuk promosi.”',
+                              en: '“Fix the Modern Trade stock gap before we spend another rupiah on promotion.”' },
+      label: { id: 'Pesan pengatur — satu kalimat yang harus dibawa pulang ruangan',
+               en: 'Governing message — the one sentence the room must leave with' } },
+    { t: 'cards', cols: 3, items: [
+      { n: '1', h: { id: '78% dari selisih Juli', en: 'It is 78% of the July gap' },
+        p: { id: 'Rp 0,7 bio dari Rp 0,9 bio kekurangan nasional ada di satu kanal.', en: 'Rp 0,7 bio of the Rp 0,9 bio national shortfall sits in one channel.' },
+        tags: ['Channel P&L', 'Sell-out file'] },
+      { n: '2', h: { id: 'Satu-satunya kanal yang turun', en: 'It is the only channel declining' },
+        p: { id: '−6% dibanding bulan lalu, sementara General Trade bertahan dan E-Commerce tumbuh 9%.', en: '−6% versus last month, while General Trade held and E-Commerce grew 9%.' },
+        tags: ['MoM trend', 'Channel index'] },
+      { n: '3', h: { id: 'Sebabnya pasokan, bukan permintaan', en: 'The cause is supply, not demand' },
+        p: { id: '3 dari 10 SKU teratas kosong selama 11 hari — laju penjualan bertahan saat stoknya ada.', en: '3 of the top-10 SKUs were out of stock for 11 days — rate of sale held when stock was there.' },
+        tags: ['Stock report', 'Days-OOS log'] }] },
+    { t: 'test', text: { id: 'Ujinya: kalau ruangan hanya mendengar kalimat pengatur lalu keluar — apakah mereka tetap tahu harus berbuat apa? Kalau tidak, kalimat pengaturnya salah.',
+                         en: 'The test: if the room hears only the governing message and then walks out — do they still know what to do? If not, the governing message is wrong.' } }
+  ]
+},
+
+/* 08 */ {
+  id: 'siap', kicker: { id: 'Alat 2 · SIAP Spine', en: 'Tool 2 · The SIAP spine' },
+  title: { id: 'SIAP — empat kalimat sebelum Anda membuka PowerPoint',
+           en: 'SIAP — four sentences before you open PowerPoint' },
+  lead: { id: 'Situation → Issue → Answer → Push. Kalau deck Anda SIAP, Anda juga siap.',
+          en: 'Situation → Issue → Answer → Push. If your deck is SIAP, so are you.' },
+  blocks: [
+    { t: 'siapRows' },
+    { t: 'band', text: { id: 'Kalau keempat kalimatnya belum siap, deck-nya belum siap. Tulis dulu dalam email kepada diri sendiri.',
+                         en: 'If the four sentences are not ready, the deck is not ready. Write them in an email to yourself first.' } },
+    { t: 'siapBuilder' }
+  ]
+},
+
+/* 09 */ {
+  id: 'storylines', kicker: { id: 'Pilar 1 · Structure', en: 'Pillar 1 · Structure' },
+  title: { id: 'Tiga alur cerita mencakup hampir semua yang Anda presentasikan',
+           en: 'Three storylines cover almost everything you present' },
+  lead: { id: 'Pilih polanya lebih dulu — urutan slide-nya akan mengikuti dengan sendirinya.',
+          en: 'Pick the pattern first — the slide order then falls out of it automatically.' },
+  blocks: [
+    { t: 'storylines', items: [
+      { h: { id: 'Performance Review', en: 'Performance Review' }, q: { id: '“Bagaimana hasil kita?”', en: '“How did we do?”' },
+        steps: [{ id: 'Hasil versus target', en: 'Result versus target' }, { id: 'Pendorong terbesar selisihnya', en: 'Biggest driver of the variance' },
+                { id: 'Apa yang sudah kita kerjakan', en: 'What we are already doing' }, { id: 'Apa yang kami butuhkan dari Anda', en: 'What we need from you' }],
+        use: { id: 'Monthly business review, tutup kuartal, penutupan kampanye', en: 'Monthly business reviews, quarterly closes, campaign wrap-ups' } },
+      { h: { id: 'Proposal', en: 'Proposal' }, q: { id: '“Apa yang sebaiknya kita lakukan?”', en: '“What should we do?”' },
+        steps: [{ id: 'Peluang atau risikonya', en: 'The opportunity or the risk' }, { id: 'Opsi yang dipertimbangkan', en: 'Options considered' },
+                { id: 'Opsi yang direkomendasikan dan alasannya', en: 'Recommended option and why' }, { id: 'Biaya, waktu, keputusan yang diperlukan', en: 'Cost, timing, decision needed' }],
+        use: { id: 'Permintaan anggaran, penambahan orang, distributor baru, program baru', en: 'Budget asks, headcount, new distributor, new programme' } },
+      { h: { id: 'Problem Solving', en: 'Problem Solving' }, q: { id: '“Apa yang salah?”', en: '“What went wrong?”' },
+        steps: [{ id: 'Apa yang terjadi, dalam angka', en: 'What happened, in numbers' }, { id: 'Akar masalah, bukan gejala', en: 'Root cause, not symptoms' },
+                { id: 'Perbaikannya dan siapa pemiliknya', en: 'The fix and who owns it' }, { id: 'Cara mencegah terulang', en: 'How we prevent a repeat' }],
+        use: { id: 'Kekosongan stok, tunggakan klaim, pelanggaran kepatuhan, pembengkakan biaya', en: 'Stock-outs, claim backlogs, compliance misses, cost overruns' } }] },
+    { t: 'band', text: { id: 'Kesalahan struktur paling umum: menjawab pertanyaan proposal dengan performance review.',
+                         en: 'The most common structural error: answering a proposal question with a performance review.' } }
+  ]
+},
+
+/* 10 */ {
+  id: 'ladder', kicker: { id: 'Pilar 1 · Structure', en: 'Pillar 1 · Structure' },
+  title: { id: 'Tangga “so what” — tiga anak tangga, kebanyakan orang berhenti di yang pertama',
+           en: 'The “so what” ladder — three rungs, most people stop at one' },
+  lead: { id: 'Observation adalah apa yang Anda lihat. Finding adalah artinya. Decision adalah apa yang berubah karenanya.',
+          en: 'An observation is what you saw. A finding is what it means. A decision is what changes because of it.' },
+  blocks: [
+    { t: 'ladder', items: [
+      { fn: 'Category / Data',
+        o: { id: '5 SKU teratas menyumbang 64% nilai nasional.', en: 'Top 5 SKUs are 64% of national value.' },
+        f: { id: 'Kita berjarak satu delisting SKU dari kehilangan seperlima bisnis.', en: 'We are one SKU delisting away from losing a fifth of the business.' },
+        d: { id: 'Lindungi kelimanya di setiap negosiasi — setujui cadangan stok terjamin.', en: 'Protect those five in every negotiation — approve a guaranteed stock reserve.' } },
+      { fn: 'General Trade',
+        o: { id: 'Coverage Jawa Timur 82% terhadap target 90%.', en: 'Coverage in East Java is 82% against 90% target.' },
+        f: { id: 'Selisihnya 340 outlet, semuanya dilayani dua distributor tanpa tenaga penjual lapis kedua.', en: 'The gap is 340 outlets, all served by two distributors with no second-tier sales force.' },
+        d: { id: 'Tambah satu sub-distributor di Malang sebelum Oktober, atau terima selisih 8 poin sepanjang tahun.', en: 'Add one sub-distributor in Malang before October, or accept the 8-point gap all year.' } },
+      { fn: 'Finance BP',
+        o: { id: 'Belanja promosi 6% di atas anggaran sejak awal tahun.', en: 'Promotion spend is 6% over budget year to date.' },
+        f: { id: 'Seluruh kelebihannya ada pada satu mekanik yang mengembalikan di bawah Rp 1,50 per rupiah.', en: 'All of the overspend sits in one mechanic that returns below Rp 1,50 per rupiah.' },
+        d: { id: 'Hentikan mekanik itu sekarang dan alihkan Rp 240 jt ke display yang mengembalikan Rp 3,10.', en: 'Stop that mechanic now and reallocate Rp 240 jt to display, which returns Rp 3,10.' } }] },
+    { t: 'band', text: { id: 'Kalau slide Anda berhenti di kolom pertama, Anda baru saja mengirim spreadsheet yang diberi bingkai.',
+                         en: 'If your slide stops in the first column, you have sent a spreadsheet with a border around it.' } }
+  ]
+},
+
+/* 11 */ {
+  id: 'action-title', kicker: { id: 'Pilar 2 · Clarity', en: 'Pillar 2 · Clarity' },
+  title: { id: 'Anatomi action title', en: 'Anatomy of an action title' },
+  lead: { id: 'Empat bagian. Sebagian besar judul slide bisnis hanya punya satu di antaranya.',
+          en: 'Four parts. Most business slide titles have exactly one of them.' },
+  blocks: [
+    { t: 'anatomy' },
+    { t: 'band', text: { id: 'Yang paling sering hilang adalah bagian keempat. “Modern Trade turun 17%” adalah fakta. Menambah empat kata mengubahnya menjadi judul yang menggerakkan rapat.',
+                         en: 'The most common miss is number four. “Modern Trade closed 17% short” is a fact. Adding four words turns it into a title that moves a meeting.' } },
+    { t: 'titleBuilder' }
+  ]
+},
+
+/* 12 */ {
+  id: 'work1', kicker: { id: 'Sesi kerja 1 · 5 menit', en: 'Work session 1 · 5 min' },
+  title: { id: 'Ubah observasi menjadi judul temuan', en: 'Turn the observation into a headline' },
+  lead: { id: 'Maksimal 16 kata · harus mengandung kata kerja · dimengerti tanpa grafiknya · bisa ditindaklanjuti besok.',
+          en: 'No more than 16 words · must contain a verb · a stranger gets it without the chart · someone can act on it tomorrow.' },
+  learnOnly: true,
+  blocks: [
+    { t: 'given', text: { id: '“Dari 22 distributor, 4 mengantarkan 61% volume nasional. Sembilan terbawah masing-masing di bawah 60% target bulanannya.”',
+                          en: '“Of 22 distributors, 4 deliver 61% of national volume. The bottom 9 are each below 60% of their monthly target.”' } },
+    { t: 'exercise', field: 'work1' },
+    { t: 'gbb', items: [
+      { tag: { id: 'Baik', en: 'Good' }, tone: 'g1',
+        text: { id: '“Empat distributor membawa 61% volume nasional.”', en: '“Four distributors carry 61% of national volume.”' },
+        note: { id: 'Sudah temuan, bukan label. Tetapi berhenti di anak tangga observasi: pembaca masih harus memutuskan sendiri apakah itu baik atau buruk. Tanpa konsekuensi. Tanpa permintaan.',
+                en: 'A finding, not a label — already ahead of most titles. But it stops at the observation rung: the reader still has to decide whether that is good or bad. No consequence. No ask.' } },
+      { tag: { id: 'Lebih baik', en: 'Better' }, tone: 'g2',
+        text: { id: '“Empat dari 22 distributor membawa 61% volume — sembilan terbawah bernilai Rp 1,4 bio bila mencapai 80% target.”',
+                en: '“Four of 22 distributors carry 61% of volume — the bottom 9 are worth Rp 1,4 bio if they reach 80% of target.”' },
+        note: { id: 'Kini punya konsekuensi dan ukuran. Pembaca bisa membantahnya, dan itu justru yang Anda inginkan. Masih belum ada pemilik dan tanggal.',
+                en: 'Now it has a consequence and a size. A reader can argue with it, which is exactly what you want. Still no owner and no date.' } },
+      { tag: { id: 'Terbaik', en: 'Best' }, tone: 'g3',
+        text: { id: '“4 dari 22 distributor membawa 61% volume & sembilan terbawah bernilai Rp 1,4 bio bila mencapai 80%. Perlu rencana second-source untuk dua teritori teratas, disahkan Oktober.”',
+                en: '“4 of 22 distributors carry 61% of volume & the bottom 9 are worth Rp 1,4 bio if reach 80%. Need a second-source plan for the top two territories signed off by October.”' },
+        note: { id: 'Temuan, konsekuensi, permintaan, tenggat. Enam belas kata berpikir yang menghemat rapat empat puluh menit.',
+                en: 'Finding, consequence, ask, deadline. Sixteen words of thinking that save a forty-minute meeting.' } }] },
+    { t: 'band', text: { id: 'Jarak antara Baik dan Terbaik kira-kira sembilan puluh detik berpikir. Itulah seluruh hasil dari sesi ini.',
+                         en: 'The distance between GOOD and BEST is about ninety seconds of thinking. That is the whole return on this session.' } }
+  ]
+},
+
+/* 13 */ {
+  id: 'one-message', kicker: { id: 'Pilar 2 · Clarity', en: 'Pillar 2 · Clarity' },
+  title: { id: 'Kalau satu slide membuat dua poin, itu dua slide',
+           en: 'If a slide is making two points, it is two slides' },
+  lead: { id: 'Aturan Apple sejak 2009, dan alasan slide keynote mereka terlihat nyaris kosong.',
+          en: 'Apple’s rule since 2009, and the reason their keynote slides look almost empty.' },
+  blocks: [
+    { t: 'vs',
+      left: { label: { id: 'Yang dilakukan kebanyakan slide', en: 'What most slides do' }, tone: 'bad', items: [
+        { id: 'Judul menjelaskan topik, bukan temuan', en: 'Title describes the topic, not the finding' },
+        { id: 'Grafik menampilkan semua yang diukur', en: 'The chart shows everything that was measured' },
+        { id: 'Bullet menarasikan ulang isi grafik', en: 'Bullets narrate what the chart already says' },
+        { id: 'Pembaca harus menyimpulkan sendiri', en: 'The reader has to work out the point' },
+        { id: 'Penyaji menjelaskannya secara lisan — sekali', en: 'The presenter explains it verbally — once' }] },
+      right: { label: { id: 'Yang dilakukan slide yang jernih', en: 'What a clear slide does' }, tone: 'good', items: [
+        { id: 'Judul menyatakan temuan dalam kalimat utuh', en: 'Title states the finding in a full sentence' },
+        { id: 'Grafik hanya menampilkan yang membuktikan temuan itu', en: 'The chart shows only what proves that finding' },
+        { id: 'Satu callout memuat angka yang menentukan keputusan', en: 'One callout carries the number the decision turns on' },
+        { id: 'Sisanya dihapus atau dipindah ke backup', en: 'Everything else is deleted or moved to backup' },
+        { id: 'Tetap bekerja saat diteruskan tanpa Anda', en: 'It still works when forwarded without you' }] } },
+    { t: 'band', text: { id: 'Slide Anda akan diteruskan kepada orang yang tidak pernah mendengar Anda bicara. Bangunlah untuk orang itu.',
+                         en: 'Your slide will be forwarded to someone who never heard you speak. Build for that person.' } }
+  ]
+},
+
+/* 14 */ {
+  id: 'five-zones', kicker: { id: 'Pilar 2 · Clarity', en: 'Pillar 2 · Clarity' },
+  title: { id: 'Lima zona yang dibutuhkan setiap slide bisnis', en: 'The five zones every business slide needs' },
+  lead: { id: 'Dalam urutan ini, setiap kali — dan zona empat adalah yang paling sering dilupakan.',
+          en: 'In this order, every time — and zone four is the one people forget.' },
+  blocks: [
+    { t: 'zones' },
+    { t: 'band', text: { id: 'Zona empat yang hilang adalah alasan begitu banyak deck berakhir dengan “menarik, terima kasih”.',
+                         en: 'A missing zone four is why so many decks end in “interesting, thanks”.' } }
+  ]
+},
+
+/* 15 */ {
+  id: 'six-second', kicker: { id: 'Pilar 2 · Clarity', en: 'Pillar 2 · Clarity' },
+  title: { id: 'Uji 6 Detik', en: 'The Six-Second Test' },
+  lead: { id: 'Selama itulah pembaca memberi waktu sebelum memutuskan akan terlibat atau tidak.',
+          en: 'How long a reader gives your slide before deciding whether to engage with it at all.' },
+  blocks: [
+    { t: 'cards', cols: 3, items: [
+      { n: '1', h: { id: 'Bisakah mereka menyebut pesannya?', en: 'Can they name the message?' },
+        p: { id: 'Baca judulnya saja. Kalau poinnya tidak ada di judul, perbaiki judulnya — bukan grafiknya.', en: 'Read the title on its own. If the point is not in the title, rewrite the title — not the chart.' } },
+      { n: '2', h: { id: 'Bisakah mereka menemukan buktinya?', en: 'Can they find the proof?' },
+        p: { id: 'Satu elemen harus menarik mata. Kalau tiga elemen bersaing, tidak ada yang menang.', en: 'One element should pull the eye. If three elements compete, none of them wins.' } },
+      { n: '3', h: { id: 'Tahukah mereka apa yang terjadi berikutnya?', en: 'Do they know what happens next?' },
+        p: { id: 'Implikasi atau permintaan, terlihat di slide — bukan tersirat, bukan hanya di suara Anda.', en: 'An implication or an ask, visible on the slide — not implied, and not only in your voice.' } }] },
+    { t: 'sixSecond' },
+    { t: 'band', text: { id: 'Gagal di salah satu dari tiga, slide itu belum selesai — berapa lama pun Anda mengerjakannya.',
+                         en: 'Fail any one of the three and the slide is not finished, however long you spent on it.' } }
+  ]
+},
+
+/* 16 */ {
+  id: 'ba-gallery', kicker: { id: 'Pilar 2 · Clarity · Contoh', en: 'Pillar 2 · Clarity · Worked examples' },
+  title: { id: 'Label menamai topik. Judul temuan mengerjakan pekerjaannya.',
+           en: 'A label makes them work. A headline does the work.' },
+  lead: { id: 'Slide yang sama, data yang sama — bedanya hanya seberapa banyak berpikir yang sudah Anda kerjakan untuk pembaca.',
+          en: 'Same slide, same data — the only difference is how much thinking you did on the reader’s behalf.' },
+  blocks: [
+    { t: 'pairs', items: [
+      { fn: 'General Trade',
+        b: { id: '“Distributor performance — July”', en: '“Distributor performance — July”' },
+        a: { id: '“Empat dari 22 distributor membawa 61% volume nasional — 18 sisanya butuh rencana coverage”', en: '“Four of 22 distributors carry 61% of national volume — the other 18 need a coverage plan”' },
+        why: { id: 'Topik berubah menjadi temuan. Pembaca kini tahu harus melihat ke mana sebelum ia melihat.', en: 'A topic becomes a finding. The reader now knows where to look before they look.' } },
+      { fn: 'Finance BP',
+        b: { id: '“Claim status update”', en: '“Claim status update”' },
+        a: { id: '“Tunggakan klaim berlipat menjadi 148 item terbuka — 70% kekurangan dokumen yang sama”', en: '“Claim backlog doubled to 148 open items — 70% are missing the same single document”' },
+        why: { id: 'Angka ditambah sebab. Pembaca bisa membantah Anda, dan itu berarti mereka terlibat.', en: 'A number plus a cause. The reader can challenge you, which means they are engaged.' } },
+      { fn: 'Category / Data',
+        b: { id: '“SKU sales report”', en: '“SKU sales report”' },
+        a: { id: '“5 SKU teratas adalah 64% nilai — dan SKU yang paling cepat turun ada di antaranya”', en: '“Top 5 SKUs are 64% of value — and the fastest declining SKU is one of them”' },
+        why: { id: 'Menyebut pengecualian, bukan rata-rata. Rata-rata tidak pernah menghasilkan tindakan.', en: 'Names the exception rather than the average. Averages never produce an action.' } },
+      { fn: 'Retail Ops',
+        b: { id: '“Coverage tracker — week 33”', en: '“Coverage tracker — week 33”' },
+        a: { id: '“Sembilan toko tanpa BA selama tiga minggu dan kesembilannya ada di kuartil terbawah”', en: '“Nine stores have had no BA for three weeks and all nine are in the bottom quartile”' },
+        why: { id: 'Dua fakta digabung menjadi satu implikasi yang bisa ditindaklanjuti.', en: 'Two facts joined into one implication that can be acted on.' } }] },
+    { t: 'band', text: { id: 'Judul temuan punya subjek, kata kerja, dan konsekuensi. Label tidak punya ketiganya.',
+                         en: 'A headline has a subject, a verb and a consequence. A label has none of the three.' } }
+  ]
+},
+
+/* 17 */ {
+  id: 'message-chart', kicker: { id: 'Toolkit · Data Craft', en: 'Toolkit · Data Craft' },
+  title: { id: 'Biarkan pesan yang memilih grafiknya — jangan pernah sebaliknya',
+           en: 'Let the message pick the chart — never the reverse' },
+  lead: { id: 'Tulis judulnya lebih dulu. Jenis grafik lalu menjadi pencarian, bukan keputusan kreatif.',
+          en: 'Write the headline first. The chart type is then a lookup, not a creative decision.' },
+  blocks: [
+    { t: 'oneDataset' },
+    { t: 'band', text: { id: 'Tiga angka yang sama, tiga bentuk. Pilih bentuk yang menjawab pertanyaan yang benar-benar diajukan kepada Anda.',
+                         en: 'Same three numbers, three shapes. Pick the shape that answers the question you were actually asked.' } }
+  ]
+},
+
+/* 18 */ {
+  id: 'chart-selector', kicker: { id: 'Toolkit · Data Craft', en: 'Toolkit · Data Craft' },
+  title: { id: 'Pemilih grafik', en: 'Chart selector' },
+  lead: { id: 'Apa yang sedang Anda tunjukkan? Pilih satu, dan lembar contekan akan menjawab.',
+          en: 'What are you trying to show? Pick one, and the cheat sheet answers.' },
+  blocks: [{ t: 'chartSelector' }]
+},
+
+/* 19 */ {
+  id: 'chart-crimes', kicker: { id: 'Toolkit · Data Craft', en: 'Toolkit · Data Craft' },
+  title: { id: 'Empat kejahatan grafik', en: 'Four chart crimes' },
+  lead: { id: 'Klik bagian yang bermasalah pada tiap grafik. Semuanya secara teknis adalah grafik; tidak satu pun pelaporan yang jujur.',
+          en: 'Click the problem in each chart. Each one is technically a chart. None of them is honest reporting.' },
+  blocks: [
+    { t: 'chartCrimes' },
+    { t: 'band', text: { id: 'Tidak satu pun soal selera. Keempatnya mengubah kesimpulan pembaca dari data yang identik.',
+                         en: 'None of these is a taste question. All four change what the reader concludes from identical data.' } }
+  ]
+},
+
+/* 20 */ {
+  id: 'pointing', kicker: { id: 'Toolkit · Data Craft', en: 'Toolkit · Data Craft' },
+  title: { id: 'Tiga teknik menunjuk', en: 'Three pointing techniques' },
+  lead: { id: 'Warna, urutan dengan pembanding, dan anotasi. Masing-masing satu menit di Excel.',
+          en: 'Colour, sort against a benchmark, and annotation — one minute each in Excel.' },
+  blocks: [
+    { t: 'colourDemo' },
+    { t: 'cards', cols: 3, items: [
+      { n: '1', h: { id: 'Warna yang menunjuk', en: 'Colour does the pointing' },
+        p: { id: 'Abu-abukan semuanya, lalu warnai hanya batang yang dibicarakan kalimat Anda. Satu warna aksen per grafik.', en: 'Mute everything, then colour only the bar your sentence is about. One accent colour per chart.' } },
+      { n: '2', h: { id: 'Urutkan lalu beri garis pembanding', en: 'Sort, then add a benchmark' },
+        p: { id: 'Urutan alfabetis adalah pilihan perangkat lunak. Garis target adalah pilihan Anda.', en: 'Alphabetical order is the software’s choice. A benchmark line is yours.' } },
+      { n: '3', h: { id: 'Tulis temuannya di atas grafik', en: 'Write the insight onto the chart' },
+        p: { id: 'Sebut titik baliknya dan sebabnya, bukan bentuknya. Satu anotasi saja — dua anotasi berarti dua slide.', en: 'Name the turning point and the cause, not the shape. One annotation only — two means two slides.' } }] },
+    { t: 'band', text: { id: 'Anotasi adalah argumennya. Grafik hanyalah bukti pembayarannya.',
+                         en: 'The annotation is the argument. The chart is only the receipt.' } }
+  ]
+},
+
+/* 21 */ {
+  id: 'numbers', kicker: { id: 'Toolkit · Data Craft', en: 'Toolkit · Data Craft' },
+  title: { id: 'Cara menulis angkanya sendiri', en: 'How to write the numbers themselves' },
+  lead: { id: 'Presisi yang tidak bisa ditindaklanjuti hanyalah kebisingan yang memakai jas laboratorium.',
+          en: 'Precision you cannot act on is just noise wearing a lab coat.' },
+  blocks: [
+    { t: 'numbers', items: [
+      { w: 'Rp 6.402.031.900', r: 'Rp 6,4 bio', n: { id: 'Sembilan digit, dibaca keras, memakan empat detik dan tidak ada yang mengingatnya.', en: 'Nine digits, read aloud, takes four seconds and nobody retains it.' } },
+      { w: 'Rp 330.482.117', r: 'Rp 330 jt', n: { id: 'Bulatkan ke satuan tempat keputusan diambil. Tidak ada yang menyetujui sampai rupiah.', en: 'Round to the unit the decision is made in. Nobody approves to the rupiah.' } },
+      { w: 'achievement of 92,53%', r: '93% of target', n: { id: 'Dua angka desimal menyiratkan presisi yang tidak dimiliki data Anda.', en: 'Two decimal places imply a precision your data does not have.' } },
+      { w: '−5,47% vs LM', r: 'down 5% on last month', n: { id: 'Tulis seperti Anda mengucapkannya di rapat.', en: 'Say it the way you would say it out loud in the meeting.' } },
+      { w: '62 BA / 90 POS / 3 ACC', r: '62 BAs across 90 stores in 3 accounts', n: { id: 'Akronim memakan satu detik per orang. Kalikan dengan jumlah peserta rapat.', en: 'Acronyms cost the room a second each. Multiply by the number of people.' } }] },
+    { t: 'band', text: { id: 'Bulatkan ke satuan tempat keputusan diambil. Simpan angka persisnya di berkas, bukan di slide.',
+                         en: 'Round to the unit the decision is made in. Keep the exact number in the file, not on the slide.' } }
+  ]
+},
+
+/* 22 */ {
+  id: 'density', kicker: { id: 'Format & Density', en: 'Format & Density' },
+  title: { id: 'Kepadatan bukan soal selera', en: 'Density is not a taste question' },
+  lead: { id: 'Ditentukan oleh satu hal: apakah Anda ada di ruangan ketika deck itu dibaca.',
+          en: 'It is decided by one thing: whether you are in the room when it is read.' },
+  blocks: [{ t: 'densityChecker' }]
+},
+
+/* 23 */ {
+  id: 'dense-clear', kicker: { id: 'Format & Density', en: 'Format & Density' },
+  title: { id: 'Padat bukan masalahnya. Tidak berjenjang, itu masalahnya.',
+           en: 'Dense is not the problem. Undifferentiated is.' },
+  lead: { id: 'Kedua panel memuat empat belas fakta yang sama persis. Hanya satu yang bisa dibaca dalam enam detik.',
+          en: 'Both panels carry exactly the same fourteen facts. Only one of them can be read in six seconds.' },
+  blocks: [
+    { t: 'denseDemo' },
+    { t: 'cards', cols: 3, items: [
+      { n: '1', h: { id: 'Maksimal tiga ukuran huruf', en: 'Three type sizes, maximum' }, p: { id: 'Judul, isi, keterangan. Ukuran keempat berhenti terbaca sebagai hierarki dan mulai terbaca sebagai kebisingan.', en: 'Heading, body, caption. A fourth size stops reading like hierarchy and starts reading like noise.' } },
+      { n: '2', h: { id: 'Ruang, bukan garis', en: 'Space, not borders' }, p: { id: 'Jarak memisahkan dua blok lebih bersih daripada garis, dan tidak memakan apa pun secara visual.', en: 'A gap separates two blocks more cleanly than a line does, and costs nothing visually.' } },
+      { n: '3', h: { id: 'Potong menjadi kartu', en: 'Chunk into cards' }, p: { id: 'Delapan kartu pendek dibaca. Satu paragraf padat berisi delapan fakta yang sama tidak dibaca.', en: 'Eight short cards are read. One dense paragraph containing the same eight facts is not.' } }] },
+    { t: 'band', text: { id: 'Tidak ada yang mengeluh sebuah slide terlalu banyak informasi. Mereka mengeluh tidak menemukan poinnya.',
+                         en: 'Nobody complains that a slide had too much information. They complain they could not find the point.' } }
+  ]
+},
+
+/* 24 */ {
+  id: 'confidence', kicker: { id: 'Pilar 3 · Confidence', en: 'Pillar 3 · Confidence' },
+  title: { id: 'Percaya diri adalah persiapan, bukan kepribadian',
+           en: 'Confidence is preparation, not personality' },
+  lead: { id: 'Gugup itu wajar. Tertangkap tidak siap itu pilihan.',
+          en: 'Being nervous is normal. Being caught unprepared is optional.' },
+  blocks: [
+    { t: 'stats', items: [
+      { big: '3', cap: { id: 'angka yang Anda kuasai di luar kepala', en: 'numbers you know cold' },
+        sub: { id: 'Angka utama, angka di belakangnya, dan angka yang akan dipersoalkan orang. Ucapkan tanpa melihat catatan.', en: 'The headline figure, the number behind it, and the number someone will challenge. Say them out loud without looking.' },
+        ex: 'Rp 0,9 bio gap · 78% in one channel · 11 days out of stock' },
+      { big: '3', cap: { id: 'pertanyaan yang sudah Anda jawab', en: 'questions you have answered' },
+        sub: { id: 'Tulis tiga pertanyaan tersulit dan jawab dalam kalimat utuh sebelum rapat, bukan saat rapat.', en: 'Write down the three hardest questions and answer them in full sentences before the meeting, not during it.' },
+        ex: '“Is this seasonality?” · “Why now?” · “What if we do nothing?”' },
+      { big: '60', cap: { id: 'detik dilatih dengan suara keras', en: 'seconds rehearsed out loud' },
+        sub: { id: 'Hanya pembuka dan permintaannya. Dengan suara, bukan dalam kepala — keduanya keterampilan berbeda.', en: 'The opening and the ask only. Out loud, not in your head — they are different skills.' },
+        ex: { id: '30 detik pertama + 30 detik terakhir = satu-satunya bagian yang diingat orang', en: 'First 30 seconds + last 30 seconds = the only parts anyone remembers' } }] },
+    { t: 'band', text: { id: 'Enam menit persiapan menghapus kira-kira sembilan puluh persen momen orang membeku.',
+                         en: 'Six minutes of preparation removes roughly ninety per cent of the moments where people freeze.' } }
+  ]
+},
+
+/* 25 */ {
+  id: 'hard-questions', kicker: { id: 'Pilar 3 · Confidence', en: 'Pillar 3 · Confidence' },
+  title: { id: 'Menghadapi pertanyaan sulit — empat ketukan',
+           en: 'Handling a hard question — four beats' },
+  lead: { id: 'Pause → Restate → Answer → Bridge. Latih sampai berjalan tanpa perlu dipikirkan.',
+          en: 'Pause → Restate → Answer → Bridge. Practise them until they run without thinking.' },
+  blocks: [
+    { t: 'beats', items: [
+      { n: '1', h: 'Pause', p: { id: 'Dua detik hening. Terbaca sebagai mempertimbangkan, bukan mengulur — dan mencegah Anda menjawab pertanyaan yang salah.', en: 'Two seconds of silence. It reads as considered, not as stalling — and it stops you answering the wrong question.' }, s: { id: '— (tidak berkata apa-apa) —', en: '— (say nothing) —' } },
+      { n: '2', h: 'Restate', p: { id: 'Ulangi pertanyaannya dengan kata-kata Anda. Membeli waktu berpikir dan memastikan Anda menjawab yang benar-benar ditanyakan.', en: 'Say the question back in your own words. It buys thinking time and confirms you are answering what was actually asked.' }, s: { id: '“Jadi pertanyaannya apakah ini musiman atau struktural.”', en: '“So the question is whether this is seasonal rather than structural.”' } },
+      { n: '3', h: 'Answer', p: { id: 'Jawaban langsung lebih dulu, satu kalimat. Lalu paling banyak dua kalimat pendukung. Lalu berhenti bicara.', en: 'The direct answer first, in one sentence. Then at most two sentences of support. Then stop talking.' }, s: { id: '“Bukan musiman. Juli lalu kita di 104%.”', en: '“It is not seasonal. Last July we were at 104%.”' } },
+      { n: '4', h: 'Bridge', p: { id: 'Kembali ke pesan pengatur Anda supaya jawabannya mendarat di dalam argumen Anda, bukan di luarnya.', en: 'Return to your governing message so the answer lands inside your argument, not outside it.' }, s: { id: '“Yang justru menegaskan permintaannya: alokasi, bukan perubahan target.”', en: '“Which is why the ask is the allocation, not a target change.”' } }] },
+    { t: 'hardQ' },
+    { t: 'band', text: { id: 'Setiap jawaban kuat dimulai dengan kata langsung: ya, tidak, atau sebuah angka. Tidak pernah dengan “itu pertanyaan bagus”.',
+                         en: 'Every strong answer starts with a direct word: yes, no, or a number. Never with “that’s a good point”.' } }
+  ]
+},
+
+/* 26 */ {
+  id: 'engagement', kicker: { id: 'Pilar 4 · Engagement', en: 'Pillar 4 · Engagement' },
+  title: { id: 'Buka kuat, tandai perpindahan, tutup dengan permintaan',
+           en: 'Open strong, signpost, close with the ask' },
+  lead: { id: 'Anda punya sekitar enam puluh detik sebelum ruangan memutuskan seberapa serius mendengarkan.',
+          en: 'You have about sixty seconds before the room decides how closely to listen.' },
+  blocks: [
+    { t: 'cards', cols: 3, items: [
+      { n: { id: 'Pembuka 1', en: 'Opener 1' }, h: { id: 'Angka', en: 'The number' },
+        p: { id: '“Rp 0,9 bio. Itu yang Juli renggut dari kita, dan tiga perempatnya ada di satu kanal.”', en: '“Rp 0,9 bio. That is what July cost us, and three quarters of it sits in one channel.”' } },
+      { n: { id: 'Pembuka 2', en: 'Opener 2' }, h: { id: 'Kontras', en: 'The contrast' },
+        p: { id: '“Dua kanal tumbuh bulan ini. Satu turun 6%. Ketiganya punya rencana dan anggaran yang sama.”', en: '“Two channels grew this month. One fell 6%. All three had the same plan and the same budget.”' } },
+      { n: { id: 'Pembuka 3', en: 'Opener 3' }, h: { id: 'Pertanyaan', en: 'The question' },
+        p: { id: '“Kalau Anda punya Rp 400 jt untuk dibelanjakan Senin, kanal mana? Tahan jawabannya.”', en: '“If you had Rp 400 jt to spend on Monday, which channel would you put it into? Hold that answer.”' } }] },
+    { t: 'vs',
+      left: { label: { id: '30 detik pertama', en: 'First 30 seconds' }, tone: 'neutral', items: [
+        { id: 'Tidak ada sapaan lebih dari empat kata', en: 'No greeting longer than four words' },
+        { id: 'Permintaan disebut dalam tarikan napas pertama', en: 'The ask is named in the first breath' },
+        { id: 'Tidak ada slide agenda, pernah', en: 'No agenda slide, ever' }] },
+      right: { label: { id: '30 detik terakhir', en: 'Last 30 seconds' }, tone: 'good', items: [
+        { id: 'Ulangi pesan pengatur satu kali', en: 'Repeat the governing message once' },
+        { id: 'Sebut keputusan, pemilik, dan tanggalnya', en: 'Name the decision, the owner and the date' },
+        { id: 'Akhiri dengan pertanyaan, lalu diam', en: 'End on a question, then be silent' }] } },
+    { t: 'band', text: { id: 'Presentasi yang berakhir dengan “ada pertanyaan?” telah menyerahkan keputusan kepada siapa pun yang bicara duluan.',
+                         en: 'A presentation that ends in “any questions?” has handed the decision to whoever speaks first.' } }
+  ]
+},
+
+/* 27 */ {
+  id: 'ai', kicker: { id: 'Toolkit · AI Assist', en: 'Toolkit · AI Assist' },
+  title: { id: 'Di mana AI membantu menyusun deck — dan di mana ia merugikan',
+           en: 'Where AI helps you build a deck — and where it hurts' },
+  lead: { id: 'Enam langkah dari ekspor mentah sampai ke ruangan. AI benar-benar bagus di tiga, dan berbahaya di dua.',
+          en: 'Six steps from raw export to the room. AI is genuinely good at three of them, and dangerous at two.' },
+  blocks: [
+    { t: 'aiFlow', items: [
+      { n: '1', h: { id: 'Tarik dan bersihkan data', en: 'Pull and clean the data' }, role: 'lead', p: { id: 'Rumus, pivot, menghapus duplikat dari ekspor berantakan. Periksa sendiri jumlah barisnya.', en: 'Formulas, pivots, de-duping a messy export. Check the row count yourself.' } },
+      { n: '2', h: { id: 'Temukan temuannya', en: 'Find the finding' }, role: 'you', p: { id: 'Model tidak tahu angka mana yang ditindaklanjuti direktur Anda. Ia memberi angka terbesar, bukan angka yang bisa diputuskan.', en: 'The model does not know which number your director acts on. It hands you the biggest number, not the decidable one.' } },
+      { n: '3', h: { id: 'Tulis alur ceritanya', en: 'Write the storyline' }, role: 'assist', p: { id: 'Beri SIAP dan temuan Anda, minta tiga opsi, pilih satu. Jangan pernah memakai versi pertamanya.', en: 'Give it your SIAP and the finding, ask for three options, pick one. Never ship the first version.' } },
+      { n: '4', h: { id: 'Pilih dan bangun grafiknya', en: 'Choose and build the chart' }, role: 'assist', p: { id: 'Tempel judulnya, tanyakan bentuk grafik mana yang membawanya. Bagus untuk pencarian, ceroboh pada sumbu.', en: 'Paste the headline, ask which chart shape carries it. Good at the lookup, careless with the axis.' } },
+      { n: '5', h: { id: 'Tulis action title', en: 'Write the action titles' }, role: 'lead', p: { id: 'Menulis ulang satu kalimat delapan cara persis keahliannya. Beri angka dan keputusannya, lalu Anda yang memilih.', en: 'Rewriting one sentence eight ways is exactly what it is best at. Give it the number and the decision, then choose.' } },
+      { n: '6', h: { id: 'Pertahankan di ruangan', en: 'Defend it in the room' }, role: 'you', p: { id: 'Tidak ada yang bertanya kepada model di rapat itu. Akuntabilitas tidak bisa didelegasikan, begitu pula kredibilitas.', en: 'Nobody in that meeting is asking the model. Accountability does not delegate, and neither does credibility.' } }] },
+    { t: 'prompt' },
+    { t: 'cards', cols: 3, items: [
+      { n: { id: 'Jebakan 1', en: 'Trap 1' }, h: { id: 'Angka karangan', en: 'The invented number' },
+        p: { id: 'AI membentuk ulang angka yang Anda berikan. Ia tidak pernah menyediakannya. Kalau tidak Anda tempel, hapus.', en: 'AI reshapes numbers you supply. It never supplies them. If you did not paste it, delete it.' } },
+      { n: { id: 'Jebakan 2', en: 'Trap 2' }, h: { id: 'Judul generik', en: 'The generic title' },
+        p: { id: 'Beri angka dan keputusannya lebih dulu, baru minta kalimatnya. Jangan pernah terbalik.', en: 'Give it the number and the decision first, then ask for the sentence. Never the other way round.' } },
+      { n: { id: 'Jebakan 3', en: 'Trap 3' }, h: { id: 'Tempel data rahasia', en: 'The confidential paste' },
+        p: { id: 'Samarkan menjadi Akun A / B / C, atau pakai alat yang sudah disetujui perusahaan. Periksa kebijakannya dulu.', en: 'Anonymise to Account A / B / C, or use the tool your company has approved. Check the policy first.' } }] },
+    { t: 'band', text: { id: 'AI cepat pada kata dan bentuk. Ia menebak pada pertimbangan — jadi peganglah pertimbangannya.',
+                         en: 'AI is fast at the words and the shapes. It is guessing at the judgement — so keep the judgement.' } }
+  ]
+},
+
+/* 28 */ {
+  id: 'recap', kicker: { id: 'Kalau tidak ada lagi yang Anda ingat', en: 'If you remember nothing else' },
+  title: { id: 'Enam hal, satu kalimat masing-masing', en: 'Six things, one sentence each' },
+  lead: { id: 'Dan satu kalimat yang menopang keenamnya.', en: 'And one sentence underneath all six.' },
+  blocks: [
+    { t: 'cards', cols: 3, items: [
+      { n: '1', h: 'Structure', p: { id: 'Tulis SIAP — situation, issue, answer, push — sebelum PowerPoint dibuka.', en: 'Write SIAP — situation, issue, answer, push — before PowerPoint opens.' } },
+      { n: '2', h: 'Clarity', p: { id: 'Satu pesan per slide, dan judulnya menyatakan pesan itu.', en: 'One message per slide, and the title says what the message is.' } },
+      { n: '3', h: 'Data Craft', p: { id: 'Pesan memilih grafiknya; warna menunjuk satu hal saja.', en: 'The message picks the chart; colour points at one thing only.' } },
+      { n: '4', h: 'Format', p: { id: 'Kepadatan ditentukan oleh ada atau tidaknya Anda di ruangan saat dibaca.', en: 'Density is decided by whether you are in the room when it is read.' } },
+      { n: '5', h: 'Confidence', p: { id: 'Tiga angka, tiga pertanyaan, enam puluh detik dengan suara keras.', en: 'Three numbers, three questions, sixty seconds out loud.' } },
+      { n: '6', h: 'Engagement', p: { id: 'Tutup dengan permintaan yang punya pemilik dan tanggal, lalu berhenti bicara.', en: 'Close on the ask with an owner and a date, then stop talking.' } }] },
+    { t: 'quote', text: { id: 'Urutan Anda menemukan sesuatu hampir tidak pernah merupakan urutan orang lain seharusnya mendengarnya.',
+                          en: 'The order you discovered something is almost never the order somebody should hear it.' } }
+  ]
+},
+
+/* 29 */ {
+  id: 'preflight', kicker: { id: 'Penutup', en: 'The close' },
+  title: { id: 'Pemeriksaan sepuluh menit sebelum terbang', en: 'The ten-minute pre-flight check' },
+  lead: { id: 'Jalankan ini sebelum mengirim atau mempresentasikan apa pun. Setiap kali.',
+          en: 'Run this before you send or present anything. Every time.' },
+  blocks: [{ t: 'preflight' }]
+},
+
+/* 30 */ {
+  id: 'plan', kicker: { id: 'Rencana tindakan', en: 'Action plan' },
+  title: { id: 'Presentasi Anda berikutnya', en: 'Your next presentation' },
+  lead: { id: 'Isi lima kolom. Aplikasi akan menyusun cetak birunya.',
+          en: 'Fill in five fields. The app assembles the blueprint.' },
+  blocks: [{ t: 'planBuilder' }]
+},
+
+/* 31 */ {
+  id: 'appendix', kicker: { id: 'Lampiran', en: 'Appendix' },
+  title: { id: 'Lembar contekan, bank kalimat, dan kasus berjalan',
+           en: 'Cheat sheets, phrase bank, and the running case' },
+  lead: { id: 'Cetak yang pertama. Curi yang kedua. Bangun ulang contoh mana pun dari yang ketiga.',
+          en: 'Print the first. Steal the second. Rebuild any example from the third.' },
+  blocks: [
+    { t: 'phrasebank' },
+    { t: 'runningCase' },
+    { t: 'sources' }
+  ]
+}
+
+];
+
+/* ------------------------------------------------- data untuk interaksi -- */
+
+const DATA = {
+  siapExample: {
+    id: { S: 'Target nasional Juli adalah Rp 12,0 bio di ketiga kanal.',
+          I: 'Kita tutup di Rp 11,1 bio — kurang Rp 0,9 bio, di 92,5%.',
+          A: '78% dari selisih itu ada di satu kanal, dan sebabnya 11 hari kekosongan stok pada tiga SKU teratas — bukan permintaan.',
+          P: 'Perlu persetujuan alokasi darurat untuk tiga SKU itu pada hari Jumat.' },
+    en: { S: 'July national target was Rp 12,0 bio across all three channels.',
+          I: 'We closed Rp 11,1 bio — Rp 0,9 bio short, at 92,5%.',
+          A: '78% of that gap is one channel, and the cause is 11 days of out-of-stock on three top SKUs — not demand.',
+          P: 'Need approval for the emergency allocation for those three SKUs on Friday.' }
+  },
+  siapLabels: {
+    id: [['S', 'Situation', 'Yang sudah kita sepakati benar'], ['I', 'Issue', 'Apa yang berubah atau rusak'],
+         ['A', 'Answer', 'Apa yang sebenarnya dikatakan data'], ['P', 'Push', 'Apa yang Anda ingin mereka lakukan']],
+    en: [['S', 'Situation', 'What we already agree is true'], ['I', 'Issue', 'What changed, or what broke'],
+         ['A', 'Answer', 'What the data actually says'], ['P', 'Push', 'What you want them to do']]
+  },
+  titleParts: {
+    id: [['Subjek', 'Modern Trade', 'Sebut bendanya. Bukan “kanalnya”, bukan “kinerjanya”.'],
+         ['Kata kerja + arah', 'turun 17%', 'Sebuah angka dengan arah. Di sinilah kebanyakan judul berhenti.'],
+         ['Buktinya', 'pada tiga SKU teratas', 'Dari mana angkanya berasal, dalam tiga kata.'],
+         ['So what', '— alokasi Jumat', 'Apa yang terjadi berikutnya. Bagian yang hilang di 9 dari 10 judul.']],
+    en: [['Subject', 'Modern Trade', 'Name the thing. Not “the channel”, not “performance”.'],
+         ['Verb + direction', 'closed 17% short', 'A number with a direction. This is where most titles stop.'],
+         ['The proof', 'on three top SKUs', 'Where the number comes from, in three words.'],
+         ['The so what', '— allocation by Friday', 'What happens next. The missing part in 9 out of 10 titles.']]
+  },
+  zones: {
+    id: [['Action title', 'Satu kalimat yang dibawa pulang pembaca sekilas.'],
+         ['Evidence', 'Satu grafik atau tabel yang membuktikan judulnya. Satu, bukan tiga.'],
+         ['Callout', 'Angka yang menentukan keputusan, ditarik keluar dan diperbesar.'],
+         ['The ask', 'Pemilik bernama, tanggal bernama — atau itu hanya informasi.'],
+         ['Source', 'Sumber data dan periodenya, supaya tidak ada yang perlu bertanya.']],
+    en: [['Action title', 'The one sentence a skim-reader takes away.'],
+         ['Evidence', 'The single chart or table that proves the title. One, not three.'],
+         ['Callout', 'The number the decision actually turns on, pulled out and enlarged.'],
+         ['The ask', 'Named owner, named date — or it is just information.'],
+         ['Source', 'Data source and period, so nobody has to ask.']]
+  },
+  sixSecond: {
+    slide: {
+      title: { id: 'Modern Trade turun 17% di bawah target Juli pada tiga SKU teratas — perlu alokasi promo Jumat',
+               en: 'Modern Trade closed 17% short of the July target on three top SKUs — promo allocation needed by Friday' },
+      bars: [['General Trade', 98], ['Modern Trade', 83], ['E-Commerce', 94]],
+      callout: '83%', calloutCap: { id: 'pencapaian Modern Trade', en: 'Modern Trade achievement' },
+      ask: { id: 'Setujui alokasi darurat tiga SKU — Jumat', en: 'Approve emergency allocation on three SKUs — Friday' },
+      src: { id: 'Sumber: sell-out file, Juli 2026. Ilustratif.', en: 'Source: sell-out file, July 2026. Illustrative.' }
+    },
+    questions: {
+      id: [['Apa pesannya?', ['Modern Trade tertinggal, tiga SKU jadi sebabnya', 'Ketiga kanal tumbuh', 'E-Commerce adalah masalahnya'], 0],
+           ['Angka mana yang penting?', ['98%', '83%', '94%'], 1],
+           ['Apa yang harus terjadi berikutnya?', ['Tunggu data bulan depan', 'Setujui alokasi darurat hari Jumat', 'Tambah anggaran promosi menyeluruh'], 1]],
+      en: [['What was the message?', ['Modern Trade is behind, three SKUs explain it', 'All three channels grew', 'E-Commerce is the problem'], 0],
+           ['What number mattered?', ['98%', '83%', '94%'], 1],
+           ['What should happen next?', ['Wait for next month’s data', 'Approve the emergency allocation on Friday', 'Raise promotion budget across the board'], 1]]
+    }
+  },
+  chartPicker: {
+    id: [['Membandingkan item', 'Horizontal bar, diurutkan menurut nilai', 'Pie, doughnut, radar'],
+         ['Menunjukkan tren', 'Line, waktu di sumbu x', 'Clustered column lebih dari 12 periode'],
+         ['Bagian dari keseluruhan', 'Stacked bar 2–3 segmen, atau satu angka besar', 'Pie dengan lebih dari 3 irisan'],
+         ['Kontribusi terhadap perubahan', 'Waterfall, atau blok from → to', 'Dua tabel berdampingan'],
+         ['Hubungan antara dua hal', 'Scatter, dengan outlier diberi label', 'Dual axis, selamanya'],
+         ['Distribusi', 'Histogram, atau bar berperingkat sederhana', 'Box plot di rapat bisnis'],
+         ['Kemajuan terhadap target', 'Bar dengan garis pembanding', 'Gauge, speedometer, termometer'],
+         ['Satu angka yang penting', 'Angkanya, dibuat besar, dengan panah arah', 'Grafik untuk satu nilai tunggal']],
+    en: [['Compare items', 'Horizontal bar, sorted by value', 'Pie, doughnut, radar'],
+         ['Show a trend', 'Line, time on the x-axis', 'Clustered columns over 12 periods'],
+         ['Part of a whole', 'Stacked bar with 2–3 segments, or one big number', 'Pie with more than 3 slices'],
+         ['Contribution to a change', 'Waterfall, or a from → to block', 'Two tables side by side'],
+         ['Relationship between two things', 'Scatter, outlier labelled', 'Dual axis, ever'],
+         ['Distribution', 'Histogram, or a simple ranked bar', 'Box plot in a business meeting'],
+         ['Progress against target', 'Bar with a benchmark line drawn on', 'Gauge, speedometer, thermometer'],
+         ['One number that matters', 'The number, set large, with a direction arrow', 'A chart of a single value']]
+  },
+  crimes: {
+    id: [['Truncated axis', 'Sumbu Y mulai di 90, sehingga selisih tiga poin terlihat seperti jurang.', 'Mulai batang dari nol. Kalau benar-benar perlu diperbesar, pakai line dan katakan begitu di slide.'],
+         ['3D anything', 'Perspektif membuat batang depan terlihat lebih besar pada nilai yang identik.', 'Tidak ada alasan bisnis untuk 3D. Chart Design → Change Chart Type → 2D.'],
+         ['Pie, 8+ irisan', 'Manusia tidak bisa memeringkat sudut. Lewat irisan ketiga, itu dekorasi.', 'Horizontal bar terurut, atau stacked bar dua segmen dengan sisanya digabung.'],
+         ['Dual axis', 'Dua skala membuat Anda bisa menaruh titik perpotongan di mana pun Anda mau.', 'Dua grafik berdampingan, atau indeks kedua seri ke 100 di awal periode.']],
+    en: [['Truncated axis', 'Y-axis starts at 90, so a three-point gap looks like a cliff.', 'Start bars at zero. If you truly need a zoom, use a line and say so on the slide.'],
+         ['3D anything', 'Perspective makes the front bar look bigger at identical values.', 'There is no business case for 3D. Chart Design → Change Chart Type → 2D.'],
+         ['Pie, 8+ slices', 'Human beings cannot rank angles. Past the third slice it is decoration.', 'Sorted horizontal bars, or a stacked bar with two segments and the rest grouped.'],
+         ['Dual axis', 'Two scales let you put the crossing point wherever you want it.', 'Two charts side by side, or index both series to 100 at the start of the period.']]
+  },
+  density: {
+    id: {
+      live: ['Live presentation', 'TERENDAH', 'Anda ada di sana. Slide adalah pemicu, bukan dokumen.',
+        ['Satu pesan per slide', 'Maksimal 30 kata', 'Satu grafik ukuran penuh', 'Tidak ada yang tidak Anda ucapkan']],
+      report: ['Reporting deck', 'SEDANG', 'Dikirim dan dibaca tanpa Anda, sering di ponsel, sering terburu-buru.',
+        ['Tambahkan kotak sintesis READ→', 'Angka diberi label pada grafik', 'Sumber dan periode selalu ada', 'Tetap satu pesan per slide']],
+      onepager: ['One-pager', 'TERTINGGI', 'Ini seluruh argumen dalam satu halaman. Tidak ada slide berikutnya.',
+        ['Potong menjadi kartu, bukan paragraf', 'Maksimal tiga ukuran huruf', 'Ruang kosong yang memisahkan', 'Tetap satu warna aksen']],
+      training: ['Training deck', 'TINGGI', 'Dibawakan langsung, lalu dipakai ulang sebagai handout berbulan-bulan.',
+        ['Contoh nyata, bukan teori', 'Salah dan benar berdampingan', 'Bisa dipahami tanpa fasilitator', 'Lampiran memuat rujukannya']]
+    },
+    en: {
+      live: ['Live presentation', 'LOWEST', 'You are there. The slide is a prompt, not a document.',
+        ['One message per slide', 'Max 30 words', 'One chart at full size', 'Nothing you will not say out loud']],
+      report: ['Reporting deck', 'MEDIUM', 'Sent and read without you, often on a phone, often in a hurry.',
+        ['Add a READ→ synthesis box', 'Numbers labelled on the chart', 'Source and period always', 'Still one message per slide']],
+      onepager: ['One-pager', 'HIGHEST', 'It is the whole argument on one page. There is no next slide.',
+        ['Chunk into cards, not paragraphs', 'Three type sizes maximum', 'Whitespace does the separating', 'One accent colour, still']],
+      training: ['Training deck', 'HIGH', 'Read live, then reused as a handout for months afterwards.',
+        ['Worked examples, not theory', 'Wrong and right side by side', 'Self-explaining without a facilitator', 'Appendix carries the reference']]
+    }
+  },
+  hardQ: {
+    id: [
+      { q: '“Bukankah ini cuma musiman?”',
+        a: ['“Itu pertanyaan bagus, kami akan cek dan kembali kepada Anda.”',
+            '“Bukan. Juli lalu kita di 104% dengan pola musiman yang sama. Yang berbeda tahun ini adalah kekosongan stok.”',
+            '“Mungkin sebagian, sulit dipastikan tanpa data lebih lengkap.”'], c: 1,
+        why: 'Dimulai dengan kata langsung, memberi bukti pembanding satu kalimat, lalu berhenti. Jawaban lain mengembalikan ruangan kepada penanya.' },
+      { q: '“Seberapa yakin Anda dengan angka itu?”',
+        a: ['“Kira-kira benar, kurang lebih, datanya memang kadang berantakan.”',
+            '“Angka sell-out-nya persis. Estimasi pemulihannya berupa rentang — Rp 0,3 sampai 0,5 bio — dan saya memakai batas bawahnya.”',
+            '“Sangat yakin, tim kami sudah memeriksanya berkali-kali.”'], c: 1,
+        why: 'Memisahkan yang persis dari yang diperkirakan, lalu menyebut bahwa ia memakai angka konservatif. Itu menaikkan kredibilitas, bukan menurunkannya.' },
+      { q: '“Kenapa baru diangkat sekarang?”',
+        a: ['“Sebenarnya sudah kami pantau sejak lama, sudah masuk radar kami.”',
+            '“Polanya baru jelas di akhir minggu ketiga. Saya mengangkatnya di rapat pertama setelah itu.”',
+            '“Maaf, seharusnya memang lebih cepat.”'], c: 1,
+        why: 'Menyebut kapan polanya bisa diketahui, bukan membela diri dan bukan minta maaf. Fakta menutup pertanyaannya.' },
+      { q: '“Apa yang terjadi kalau kita tidak berbuat apa-apa?”',
+        a: ['“Mungkin akan memburuk, sulit menyebut angkanya.”',
+            '“Selisihnya berlipat — sekitar Rp 0,7 bio per bulan selama kekosongan stok berlanjut. Q3 akan tutup 6% di bawah.”',
+            '“Kita akan kehilangan momentum dan pesaing akan mengambil ruang.”'], c: 1,
+        why: 'Menjawab dengan angka dan jangka waktu. Konsekuensi yang terukur mengubah pertanyaan menjadi keputusan.' }],
+    en: [
+      { q: '“Isn’t this just seasonality?”',
+        a: ['“That’s a good point, we can look into that and come back to you.”',
+            '“No. Last July we were at 104% with the same seasonal pattern. The difference this year is the stock-out.”',
+            '“Possibly in part, it’s hard to be certain without fuller data.”'], c: 1,
+        why: 'Starts with a direct word, gives one sentence of comparative evidence, then stops. The others hand the room back to whoever asked.' },
+      { q: '“How confident are you in that number?”',
+        a: ['“It’s roughly right, give or take, the data can be a bit messy sometimes.”',
+            '“The sell-out figure is exact. The recovery estimate is a range — Rp 0,3 to 0,5 bio — and I have used the low end.”',
+            '“Very confident, the team has checked it several times.”'], c: 1,
+        why: 'Separates what is exact from what is estimated, then states that the conservative figure was used. That raises credibility rather than lowering it.' },
+      { q: '“Why are you only raising this now?”',
+        a: ['“We’ve actually been tracking it for a while, it’s been on our radar.”',
+            '“The pattern only became clear at the end of week three. I am raising it in the first meeting after that.”',
+            '“Sorry, it should have come sooner.”'], c: 1,
+        why: 'States when the pattern was knowable. Not defensive, not apologetic. The fact closes the question.' },
+      { q: '“What happens if we do nothing?”',
+        a: ['“It would probably get worse, it’s hard to say by how much exactly.”',
+            '“The gap compounds — roughly Rp 0,7 bio a month while the stock-out continues. Q3 would close 6% behind.”',
+            '“We’d lose momentum and competitors would take the space.”'], c: 1,
+        why: 'Answers with a figure and a horizon. A measured consequence turns the question into a decision.' }]
+  },
+  preflight: {
+    id: [['Setiap judul adalah temuan, bukan topik', 'Structure'],
+         ['SIAP ditulis sebelum PowerPoint dibuka', 'Structure'],
+         ['Pola alur cerita disebut dan benar', 'Structure'],
+         ['Satu pesan per slide — tidak ada slide berisi dua poin', 'Clarity'],
+         ['Permintaan punya pemilik dan tanggal di slide', 'Clarity'],
+         ['Setiap grafik lolos uji enam detik', 'Clarity'],
+         ['Satu warna aksen per grafik, sisanya abu-abu', 'Data Craft'],
+         ['Tidak ada rupiah sembilan digit; hanya jt dan bio', 'Data Craft'],
+         ['Kepadatan sesuai tugasnya — live, report, atau one-pager', 'Format'],
+         ['Tiga pertanyaan sulit sudah ditulis dan dijawab', 'Confidence']],
+    en: [['Every title is a finding, not a topic', 'Structure'],
+         ['SIAP is written down before PowerPoint opened', 'Structure'],
+         ['The storyline pattern is named and correct', 'Structure'],
+         ['One message per slide — no slide making two points', 'Clarity'],
+         ['The ask has an owner and a date on the slide', 'Clarity'],
+         ['Every chart passes the six-second test', 'Clarity'],
+         ['One accent colour per chart, everything else grey', 'Data Craft'],
+         ['No nine-digit rupiah anywhere; jt and bio only', 'Data Craft'],
+         ['Density matches the job — live, report or one-pager', 'Format'],
+         ['Three hard questions written out and answered', 'Confidence']]
+  },
+  phrases: {
+    id: [['Membuka', ['“Satu angka sebelum kita mulai:…”', '“Itu seluruh rapatnya — sisanya bukti.”', '“Saya butuh satu keputusan hari ini. Ini dia.”']],
+         ['Menandai perpindahan', ['“Itu tadi apanya. Sekarang mengapanya.”', '“Tiga alasan. Ini yang pertama.”', '“Kalau Anda hanya melihat satu slide hari ini, slide inilah.”']],
+         ['Di bawah tekanan', ['“Jawaban singkat: ya.”', '“Jadi pertanyaannya apakah…”', '“Angkanya tidak ada di depan saya. Saya kirim Kamis siang.”']],
+         ['Menutup', ['“Saya meminta X, diputuskan Jumat. Boleh?”', '“Kita jadi X, ya atau tidak?”', '“Siapa pemiliknya, dan kapan?”']]],
+    en: [['Opening', ['“One number before we start:…”', '“That is the whole meeting — the rest is evidence.”', '“I need one decision today. Here it is.”']],
+         ['Signposting', ['“That was the what. Now the why.”', '“Three reasons. Here is the first.”', '“If you only look at one slide today, it is this one.”']],
+         ['Under pressure', ['“Short answer: yes.”', '“So the question is whether…”', '“I don’t have that in front of me. I’ll send it by Thursday midday.”']],
+         ['Closing', ['“I am asking for X, decided by Friday. Can I have that?”', '“Do we do X, yes or no?”', '“Who owns this, and by when?”']]]
+  },
+  runningCase: {
+    head: { id: 'Sell-out nasional Juli — ilustratif', en: 'July national sell-out — illustrative' },
+    rows: [['Target', 'Rp 12,0 bio'], ['Actual', 'Rp 11,1 bio'], ['Achievement', '92,5%'], ['Gap', 'Rp 0,9 bio']],
+    channels: [['General Trade', '6.3', '6.2', '98%', '+1%'], ['Modern Trade', '4.1', '3.4', '83%', '−6%'], ['E-Commerce', '1.6', '1.5', '94%', '+9%']],
+    extra: { id: 'Angka lain yang dipakai: 5 SKU teratas = 64% nilai nasional · SKU yang paling cepat turun ada di antara kelimanya, −18% dibanding bulan lalu · 4 dari 22 distributor membawa 61% volume.',
+             en: 'Other figures used: top 5 SKUs = 64% of national value · the fastest declining SKU is inside that top 5, at −18% on last month · 4 of 22 distributors carry 61% of volume.' }
+  },
+  sources: [
+    'Minto, B. — The Pyramid Principle (McKinsey, 1970s onward)',
+    'Duarte, N. — Resonate / slide:ology',
+    'Amazon shareholder communications on the six-page memo, 2004 onward',
+    'Apple keynote practice — one idea per slide, widely documented from 2009',
+    'Tufte, E. — chart junk and the data-ink ratio'
+  ]
+};
