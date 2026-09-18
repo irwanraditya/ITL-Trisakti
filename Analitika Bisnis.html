@@ -314,6 +314,13 @@ html.printmode .step{opacity:1 !important;transform:none !important}
 @media (max-width:640px){
   #hud .hint{display:none}
 }
+
+/* --- GitHub/host CSS collision hardening --- */
+#stage .siap{display:flex !important;flex-direction:column !important;gap:.6em !important;flex:1 1 auto !important;min-height:0 !important;align-items:stretch !important;}
+#stage .siap .srow{display:grid !important;grid-template-columns:2.4em 7em minmax(0,1fr) !important;gap:1em !important;align-items:center !important;width:100% !important;position:relative !important;}
+#stage .siap .srow .k{display:flex !important;align-items:center !important;justify-content:center !important;flex:none !important;}
+#stage .siap .srow .t,#stage .siap .srow .v{display:block !important;min-width:0 !important;}
+#stage .siap .srow .t{white-space:normal !important;}
 </style></head><body>
 <div id="bar"></div>
 <div id="stage">
