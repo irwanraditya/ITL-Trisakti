@@ -1,6 +1,6 @@
 /* =====================================================================
    content.js — kamus isi dwibahasa (ID / EN)
-   Sumber: "FMCG Business Presentation Skills MASTERCLASS Deck" (87 halaman)
+   Sumber: "Business Presentation Skills MASTERCLASS Deck" (87 halaman)
    oleh Aufa Rais Rehaldy, MT Retail Operations, PT Suntone Wisdom (2026).
    Seluruh angka berasal dari kasus ilustratif di dalam deck sumber.
    ===================================================================== */
@@ -8,7 +8,7 @@
 /* ---------------------------------------------------------------- UI ---- */
 const UI = {
   id: {
-    appTitle: 'FMCG Business Presentation Skills',
+    appTitle: 'Business Presentation Skills',
     appSub: 'Masterclass interaktif',
     search: 'Cari konsep, contoh, latihan…',
     searchEmpty: 'Tidak ada hasil.',
@@ -31,7 +31,7 @@ const UI = {
     learnOnly: 'Tersedia di Mode Belajar.',
   },
   en: {
-    appTitle: 'FMCG Business Presentation Skills',
+    appTitle: 'Business Presentation Skills',
     appSub: 'Interactive masterclass',
     search: 'Search concepts, examples, exercises…',
     searchEmpty: 'No results.',
@@ -62,7 +62,7 @@ const SECTIONS = [
 
 /* 01 */ {
   id: 'cover', kicker: { id: 'Masterclass', en: 'Masterclass' },
-  title: { id: 'FMCG Business Presentation Skills', en: 'FMCG Business Presentation Skills' },
+  title: { id: 'Business Presentation Skills', en: 'Business Presentation Skills' },
   lead: { id: 'Dari data lapangan menjadi keputusan yang benar-benar diambil ruangan.',
           en: 'From field data to a decision the room will actually act on.' },
   blocks: [
