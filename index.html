@@ -41,11 +41,19 @@ input{width:min(380px,100%);padding:13px 16px;border:1px solid var(--line);borde
 .desc{color:var(--muted);line-height:1.6;margin:0 0 20px}
 .open{margin-top:auto;display:inline-flex;align-self:flex-start;text-decoration:none;background:var(--navy);color:#fff;padding:10px 15px;border-radius:9px;font-weight:700}
 .empty{padding:40px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px}
+.quiz{margin:0 0 18px;padding:14px 14px 10px;border:1px solid #ecdba6;background:#fbf6e6;border-radius:12px}
+.quiz-label{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#7a6213;margin-bottom:8px}
+.quiz-dot{width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.18)}
+.quiz-item{display:flex;justify-content:space-between;align-items:center;gap:12px;text-decoration:none;color:var(--navy);
+  background:#fff;border:1px solid #ecdba6;border-radius:9px;padding:11px 12px;margin-bottom:6px;font-weight:700;min-height:46px}
+.quiz-item:hover{border-color:var(--gold);box-shadow:0 2px 10px rgba(201,162,39,.18)}
+.quiz-item small{font-weight:600;color:var(--muted);white-space:nowrap;font-size:12px}
 footer{padding:30px 6vw;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
 @media(max-width:760px){
   .portal{align-items:flex-start;flex-direction:column;padding:24px}
   .portal a{width:100%;justify-content:center}
   .grid{grid-template-columns:1fr}
+  .quiz-item{flex-direction:column;align-items:flex-start;gap:2px}
   .toolbar{align-items:stretch;flex-direction:column}
   main{padding-top:42px}
 }
@@ -85,10 +93,12 @@ footer{padding:30px 6vw;color:var(--muted);font-size:12px;border-top:1px solid v
   INSTITUT TRANSPORTASI DAN LOGISTIK TRISAKTI · Academic Digital Hub · © 2026
 </footer>
 
+<script src="quiz-config.js"></script>
 <script>
 const grid=document.getElementById('grid');
 const search=document.getElementById('search');
 let projects=[];
+let quizzes=[];
 
 function esc(s){
   return String(s).replace(/[&<>"']/g,m=>({
@@ -96,10 +106,30 @@ function esc(s){
   }[m]));
 }
 
+function norm(s){
+  return String(s||'').toLowerCase().replace(/\.html$/,'').replace(/[^a-z0-9]+/g,' ').trim();
+}
+
+function quizBlock(p){
+  const keys=[norm(p.title),norm(p.filename)];
+  const list=quizzes.filter(q=>keys.includes(norm(q.mata_kuliah)));
+  if(!list.length) return '';
+  return `
+    <div class="quiz">
+      <div class="quiz-label"><span class="quiz-dot"></span>Kuis aktif</div>
+      ${list.map(q=>`
+        <a class="quiz-item" href="quiz.html?kuis=${encodeURIComponent(q.kode)}">
+          <span>${esc(q.judul)}</span>
+          <small>${esc(q.jumlah_soal)} soal · ${esc(q.durasi)} menit →</small>
+        </a>`).join('')}
+    </div>`;
+}
+
 function render(){
   const q=search.value.toLowerCase().trim();
   const rows=projects.filter(p =>
-    [p.title,p.category,p.type,p.description,p.filename]
+    [p.title,p.category,p.type,p.description,p.filename,
+     ...quizzes.filter(z=>norm(z.mata_kuliah)===norm(p.title)).map(z=>z.judul)]
       .join(' ').toLowerCase().includes(q)
   );
 
@@ -110,6 +140,7 @@ function render(){
         <div class="meta">${esc(p.category||'Academic')} · ${esc(p.type||'HTML Resource')}</div>
         <h3>${esc(p.title)}</h3>
         <p class="desc">${esc(p.description||'Academic Digital Resource at ITL Trisakti.')}</p>
+        ${quizBlock(p)}
         <a class="open" href="${encodeURI(p.filename)}">Open Resource →</a>
       </article>
     `).join('')
@@ -126,8 +157,22 @@ async function load(){
   }
 }
 
+async function loadQuizzes(){
+  const api=(window.QUIZ_API||'').trim();
+  if(!api) return;
+  try{
+    const r=await fetch(api+(api.includes('?')?'&':'?')+'api=daftar');
+    const data=await r.json();
+    if(Array.isArray(data)){ quizzes=data; render(); }
+  }catch(e){ /* kuis opsional: kartu tetap tampil tanpa blok kuis */ }
+}
+
 search.addEventListener('input',render);
 load();
+loadQuizzes();
+// segarkan tiap 60 detik selama tab terlihat, supaya kuis yang baru dibuka langsung muncul
+setInterval(()=>{ if(!document.hidden) loadQuizzes(); },60000);
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) loadQuizzes(); });
 </script>
 </body>
 </html>

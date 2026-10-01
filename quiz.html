@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Kuis — ITL Trisakti</title>
+<style>
+:root{
+  --navy:#0b1f3a;--navy2:#102b4d;--gold:#c9a227;
+  --ink:#172033;--muted:#667085;--bg:#f5f7fa;--card:#fff;--line:#e4e7ec;--red:#b42318
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+header{background:linear-gradient(135deg,#07172c,#0b1f3a);color:#fff;padding:18px 6vw;border-bottom:4px solid var(--gold);
+  display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{font-weight:800;letter-spacing:.045em;font-size:14px}
+.sub{opacity:.72;font-size:12px;margin-top:2px}
+header a{color:#fff;opacity:.8;font-size:13px;text-decoration:none;white-space:nowrap}
+header a:hover{opacity:1}
+main{max-width:760px;margin:auto;padding:36px 20px 120px}
+.eyebrow{color:var(--gold);font-weight:800;letter-spacing:.14em;font-size:12px;text-transform:uppercase}
+h1{font-family:Georgia,serif;font-size:clamp(28px,4vw,38px);line-height:1.12;margin:8px 0 6px}
+.lead{color:var(--muted);font-size:15px;margin-bottom:24px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px;box-shadow:0 5px 20px rgba(11,31,58,.045)}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+input,textarea{width:100%;font:inherit;font-size:16px;border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#fff;color:var(--ink)}
+input:focus,textarea:focus{outline:3px solid rgba(201,162,39,.3);border-color:var(--gold)}
+textarea{min-height:170px;resize:vertical;line-height:1.55}
+.field{margin-bottom:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--navy);color:#fff;border:none;border-radius:9px;
+  padding:12px 18px;font:inherit;font-weight:700;cursor:pointer;min-height:46px}
+.btn[disabled]{opacity:.55;cursor:default}
+.note{background:#fbf6e6;border:1px solid #ecdba6;border-radius:12px;padding:14px 16px;font-size:14px;color:#5b4a12}
+.note ul{margin:8px 0 0 18px}
+.q{font-weight:650;margin-bottom:12px;-webkit-user-select:none;user-select:none}
+.qno{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:#f5edcf;color:var(--navy);
+  font-weight:900;font-size:13px;margin-right:8px;vertical-align:1px}
+.count{font-size:12px;color:var(--muted);text-align:right;margin-top:6px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);z-index:5;box-shadow:0 -6px 20px rgba(11,31,58,.06)}
+.barin{max-width:760px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:12px}
+.timer{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:22px;font-weight:800;margin-right:auto;color:var(--navy)}
+.timer.low{color:var(--red)}
+.toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;
+  padding:11px 16px;border-radius:10px;font-size:14px;opacity:0;transition:opacity .2s;z-index:10;max-width:92vw;pointer-events:none}
+.toast.on{opacity:1}
+.err{color:var(--red);font-size:14px;margin-top:12px}
+.center{text-align:center;padding:48px 20px}
+.center h1{margin-bottom:10px}
+.center a{color:var(--navy);font-weight:700}
+.loading{color:var(--muted);text-align:center;padding:60px 0}
+[hidden]{display:none !important}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="brand">INSTITUT TRANSPORTASI DAN LOGISTIK TRISAKTI</div><div class="sub">Academic Digital Hub · Kuis</div></div>
+  <a href="index.html" id="kembali">← Kembali ke hub</a>
+</header>
+
+<main>
+  <p class="loading" id="vMuat">Memuat kuis…</p>
+
+  <div id="vKosong" class="center" hidden>
+    <h1>Kuis tidak tersedia</h1>
+    <p class="lead" id="pesanKosong">Tautan salah, atau kuis belum dibuka oleh dosen.</p>
+    <a href="index.html">Kembali ke hub</a>
+  </div>
+
+  <div id="vMasuk" hidden>
+    <div class="eyebrow">Kuis esai</div>
+    <h1 id="judul"></h1>
+    <p class="lead" id="info"></p>
+    <div class="card">
+      <div class="field"><label for="nama">Nama lengkap</label><input id="nama" autocomplete="name"></div>
+      <div class="field"><label for="nim">NIM</label><input id="nim" autocomplete="off"></div>
+      <div class="note">
+        Selama kuis berlangsung, halaman ini mencatat:
+        <ul>
+          <li>berapa kali dan berapa lama Anda meninggalkan halaman ini,</li>
+          <li>percobaan menempel teks atau menyalin soal (keduanya diblokir),</li>
+          <li>perbandingan panjang jawaban dengan teks yang Anda ketik.</li>
+        </ul>
+        Catatan ini dipakai dosen untuk menentukan siapa yang diminta menjelaskan jawabannya secara lisan.
+        Waktu berjalan sejak Anda menekan Mulai dan tidak berulang bila halaman dimuat ulang.
+      </div>
+      <div style="margin-top:16px"><button class="btn" id="bMulai">Saya mengerti, mulai</button></div>
+      <p class="err" id="errMasuk" hidden></p>
+    </div>
+  </div>
+
+  <div id="vKuis" hidden>
+    <div class="eyebrow">Kuis esai</div>
+    <h1 id="judul2"></h1>
+    <p class="lead" id="siapa"></p>
+    <div id="daftarSoal"></div>
+    <p class="err" id="errKirim" hidden></p>
+  </div>
+
+  <div id="vSelesai" class="center" hidden>
+    <div class="eyebrow">Selesai</div>
+    <h1>Jawaban terkirim</h1>
+    <p class="lead">Terima kasih. Anda boleh menutup halaman ini.</p>
+    <a href="index.html">Kembali ke hub</a>
+  </div>
+</main>
+
+<div class="bar" id="bar" hidden>
+  <div class="barin">
+    <span class="timer" id="timer">--:--</span>
+    <button class="btn" id="bKirim">Kirim jawaban</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="quiz-config.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var API = (window.QUIZ_API || '').trim();
+  var KODE = '';
+  try { KODE = (new URLSearchParams(location.search).get('kuis') || '').trim().toUpperCase(); } catch (e) {}
+  var $ = function (id) { return document.getElementById(id); };
+  var CFG = null;
+
+  var S = {
+    nim: '', nama: '', mulai: 0, selisih: 0, terkirim: false, mengirim: false,
+    keluar: 0, keluarMs: 0, keluarSejak: null, salin: 0, soal: {}
+  };
+
+  /* ---------------------------------------------------------- jaringan */
+  function minta(url, opsi) {
+    var ctl = ('AbortController' in window) ? new AbortController() : null;
+    var t = ctl ? setTimeout(function () { ctl.abort(); }, 25000) : null;
+    opsi = opsi || {};
+    if (ctl) opsi.signal = ctl.signal;
+    return fetch(url, opsi).then(function (r) {
+      if (t) clearTimeout(t);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }, function (e) { if (t) clearTimeout(t); throw e; });
+  }
+  // text/plain = permintaan sederhana, tanpa preflight CORS ke Apps Script
+  function kirimAksi(data) {
+    return minta(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify(data), redirect: 'follow' });
+  }
+
+  /* ---------------------------------------------------------- utilitas */
+  function toast(msg) {
+    var t = $('toast'); t.textContent = msg; t.classList.add('on');
+    clearTimeout(toast._h); toast._h = setTimeout(function () { t.classList.remove('on'); }, 2600);
+  }
+  function kunciDraf() { return 'kuis:' + KODE + ':' + S.nim; }
+  function simpanDraf() {
+    try {
+      var d = {};
+      CFG.soal.forEach(function (q) { d[q.no] = $('ta' + q.no).value; });
+      localStorage.setItem(kunciDraf(), JSON.stringify(d));
+    } catch (e) {}
+  }
+  function muatDraf() {
+    try {
+      var d = JSON.parse(localStorage.getItem(kunciDraf()) || '{}');
+      CFG.soal.forEach(function (q) { if (d[q.no]) { $('ta' + q.no).value = d[q.no]; hitung(q.no); } });
+    } catch (e) {}
+  }
+  function kosong(pesan) {
+    $('vMuat').hidden = true; $('vKosong').hidden = false;
+    if (pesan) $('pesanKosong').textContent = pesan;
+  }
+
+  /* ---------------------------------------------------------- awal */
+  if (!API) { kosong('Kuis belum dikonfigurasi. Hubungi dosen.'); return; }
+  if (!KODE) { kosong(); return; }
+
+  minta(API + (API.indexOf('?') > -1 ? '&' : '?') + 'api=soal&kuis=' + encodeURIComponent(KODE))
+    .then(function (cfg) {
+      if (!cfg || !cfg.soal || !cfg.soal.length) { kosong(); return; }
+      CFG = cfg;
+      document.title = cfg.judul + ' — ITL Trisakti';
+      $('judul').textContent = cfg.judul; $('judul2').textContent = cfg.judul;
+      $('info').textContent = cfg.soal.length + ' soal esai · ' + cfg.durasi + ' menit';
+      $('vMuat').hidden = true; $('vMasuk').hidden = false;
+    })
+    .catch(function () { kosong('Tidak dapat memuat kuis. Periksa koneksi lalu muat ulang halaman.'); });
+
+  $('bMulai').addEventListener('click', function () {
+    var nama = $('nama').value.trim(), nim = $('nim').value.trim(), e = $('errMasuk'), btn = this;
+    e.hidden = true;
+    if (nama.length < 2 || nim.length < 3) { e.textContent = 'Isi nama dan NIM terlebih dahulu.'; e.hidden = false; return; }
+    btn.disabled = true; btn.textContent = 'Memulai…';
+    var t0 = Date.now();
+    kirimAksi({ aksi: 'mulai', kode: KODE, nim: nim, nama: nama })
+      .then(function (r) {
+        if (!r || !r.ok) { throw { pesan: (r && r.pesan) || 'Gagal memulai.' }; }
+        S.nim = nim; S.nama = nama; S.mulai = r.mulai;
+        S.selisih = r.sekarang - Math.round((t0 + Date.now()) / 2);   // koreksi jam perangkat
+        tampilkanKuis();
+      })
+      .catch(function (x) {
+        e.textContent = (x && x.pesan) || 'Koneksi gagal. Coba lagi.'; e.hidden = false;
+        btn.disabled = false; btn.textContent = 'Saya mengerti, mulai';
+      });
+  });
+
+  /* ---------------------------------------------------------- kuis */
+  function tampilkanKuis() {
+    $('vMasuk').hidden = true; $('vKuis').hidden = false; $('bar').hidden = false;
+    $('kembali').hidden = true;
+    $('siapa').textContent = S.nama + ' · ' + S.nim;
+    var html = '';
+    CFG.soal.forEach(function (q) {
+      html += '<div class="card"><p class="q"><span class="qno">' + q.no + '</span><span data-q></span></p>' +
+              '<textarea id="ta' + q.no + '" spellcheck="false" autocomplete="off" autocorrect="off" ' +
+              'autocapitalize="sentences" aria-label="Jawaban soal ' + q.no + '"></textarea>' +
+              '<p class="count" id="ct' + q.no + '">0 karakter</p></div>';
+      S.soal[q.no] = { diketik: 0, tempel: 0, aktifMs: 0, fokusSejak: null };
+    });
+    $('daftarSoal').innerHTML = html;
+    var spans = document.querySelectorAll('[data-q]');
+    CFG.soal.forEach(function (q, i) { spans[i].textContent = q.teks; });   // teks, bukan HTML
+
+    CFG.soal.forEach(function (q) { pasang($('ta' + q.no), q.no); });
+    muatDraf();
+    pasangHalaman();
+    detak(); S.iv = setInterval(detak, 1000);
+  }
+
+  function hitung(no) { $('ct' + no).textContent = $('ta' + no).value.length + ' karakter'; }
+
+  /* ---------------------------------------------------------- pencatatan per soal */
+  function pasang(ta, no) {
+    var s = S.soal[no];
+    function blokir(e) { e.preventDefault(); s.tempel++; toast('Menempel teks tidak diizinkan. Ketik jawaban Anda sendiri.'); }
+    ta.addEventListener('paste', blokir);
+    ta.addEventListener('drop', blokir);
+    ta.addEventListener('beforeinput', function (e) {
+      var t = e.inputType || '';
+      if (t.indexOf('insertFromPaste') === 0 || t === 'insertFromDrop' || t === 'insertFromYank') { blokir(e); return; }
+      if (t === 'insertText' && e.data) s.diketik += e.data.length;
+      else if (t === 'insertLineBreak' || t === 'insertParagraph') s.diketik += 1;
+    });
+    ta.addEventListener('compositionend', function (e) { if (e.data) s.diketik += e.data.length; });
+    ta.addEventListener('focus', function () { s.fokusSejak = Date.now(); });
+    ta.addEventListener('blur', function () {
+      if (s.fokusSejak) { s.aktifMs += Date.now() - s.fokusSejak; s.fokusSejak = null; }
+    });
+    ta.addEventListener('input', function () { hitung(no); clearTimeout(ta._d); ta._d = setTimeout(simpanDraf, 600); });
+  }
+
+  /* ---------------------------------------------------------- pencatatan halaman */
+  function pasangHalaman() {
+    function pergi() { if (S.terkirim || S.keluarSejak !== null) return; S.keluarSejak = Date.now(); S.keluar++; }
+    function kembali() {
+      if (S.keluarSejak === null) return;
+      S.keluarMs += Date.now() - S.keluarSejak; S.keluarSejak = null;
+      if (!S.terkirim) toast('Anda tercatat meninggalkan halaman (' + S.keluar + 'x).');
+    }
+    document.addEventListener('visibilitychange', function () { document.hidden ? pergi() : kembali(); });
+    window.addEventListener('blur', pergi);
+    window.addEventListener('focus', kembali);
+
+    function cegahSalin(e) {
+      var el = e.target;
+      if (el && el.nodeType === 3) el = el.parentNode;
+      if (el && el.closest && el.closest('.q')) { e.preventDefault(); S.salin++; toast('Menyalin soal tidak diizinkan.'); }
+    }
+    document.addEventListener('copy', cegahSalin);
+    document.addEventListener('cut', cegahSalin);
+    window.addEventListener('beforeunload', function (e) {
+      if (!S.terkirim) { simpanDraf(); e.preventDefault(); e.returnValue = ''; }
+    });
+  }
+
+  /* ---------------------------------------------------------- waktu */
+  function sisaMs() { return S.mulai + CFG.durasi * 60000 - (Date.now() + S.selisih); }
+  function detak() {
+    var ms = Math.max(0, sisaMs()), m = Math.floor(ms / 60000), d = Math.floor((ms % 60000) / 1000);
+    var t = $('timer'); t.textContent = (m < 10 ? '0' : '') + m + ':' + (d < 10 ? '0' : '') + d;
+    t.classList.toggle('low', ms < 5 * 60000);
+    if (ms <= 5 * 60000 && !S.peringatan5) { S.peringatan5 = true; toast('Sisa waktu 5 menit.'); }
+    if (ms <= 0 && !S.terkirim && !S.mengirim) kirim(true);
+  }
+
+  /* ---------------------------------------------------------- kirim */
+  $('bKirim').addEventListener('click', function () {
+    var kosongN = CFG.soal.filter(function (q) { return !$('ta' + q.no).value.trim(); }).length;
+    var pesan = kosongN ? 'Masih ada ' + kosongN + ' soal kosong. Tetap kirim?' : 'Kirim jawaban sekarang? Jawaban tidak bisa diubah setelahnya.';
+    if (window.confirm(pesan)) kirim(false);
+  });
+
+  function kirim(otomatis) {
+    if (S.mengirim || S.terkirim) return;
+    S.mengirim = true;
+    Object.keys(S.soal).forEach(function (no) {
+      var s = S.soal[no]; if (s.fokusSejak) { s.aktifMs += Date.now() - s.fokusSejak; s.fokusSejak = Date.now(); }
+    });
+    if (S.keluarSejak !== null) { S.keluarMs += Date.now() - S.keluarSejak; S.keluarSejak = Date.now(); }
+
+    var b = $('bKirim'); b.disabled = true; b.textContent = 'Mengirim…';
+    kirimAksi({
+      aksi: 'kirim', kode: KODE, nim: S.nim, nama: S.nama, otomatis: otomatis,
+      keluar: S.keluar, keluarMs: S.keluarMs, salin: S.salin,
+      jawaban: CFG.soal.map(function (q) {
+        var s = S.soal[q.no];
+        return { no: q.no, jawaban: $('ta' + q.no).value, diketik: s.diketik, tempel: s.tempel, aktifMs: s.aktifMs };
+      })
+    }).then(function (r) {
+      S.mengirim = false;
+      if (r && r.ok) {
+        S.terkirim = true; clearInterval(S.iv);
+        try { localStorage.removeItem(kunciDraf()); } catch (e) {}
+        $('vKuis').hidden = true; $('bar').hidden = true; $('vSelesai').hidden = false;
+        window.scrollTo(0, 0);
+      } else {
+        gagal((r && r.pesan) || 'Pengiriman ditolak.');
+      }
+    }).catch(function () {
+      S.mengirim = false;
+      gagal('Koneksi gagal. Jawaban Anda aman di perangkat ini — tekan Kirim lagi.');
+    });
+  }
+  function gagal(msg) {
+    var e = $('errKirim'); e.textContent = msg; e.hidden = false;
+    var b = $('bKirim'); b.disabled = false; b.textContent = 'Kirim jawaban';
+  }
+})();
+</script>
+</body>
+</html>

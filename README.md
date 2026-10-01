@@ -23,6 +23,8 @@ The landing page intentionally opens the Academic Portal in a new tab instead of
 | --- | --- | --- |
 | Analitika Bisnis | Course Deck | Teaching |
 | Pengantar Manajemen | Course Deck | Teaching |
+| Prinsip-Prinsip Manajemen | Course Deck | Teaching |
+| Presentation Skills | Course Deck | Teaching |
 
 ## 🚀 GitHub Pages
 
@@ -41,7 +43,7 @@ The landing page will then be available through the repository's GitHub Pages UR
 
 You do **not** need to manually edit the landing page every time a new HTML resource is added.
 
-The GitHub Actions workflow:
+The GitHub Actions workflow (not yet committed to this repository):
 
 ```text
 .github/workflows/generate-academic-hub.yml
@@ -75,6 +77,8 @@ git push origin main
 
 GitHub Actions will regenerate `projects.json`.
 
+If you add this workflow, exclude `quiz.html` and `apps-script/` from the scan so they do not appear as course cards.
+
 ## 🏷️ Optional HTML Metadata
 
 For better cards, an HTML resource can include these metadata tags:
@@ -101,13 +105,70 @@ ITL-Trisakti/
 ├── projects.json
 ├── README.md
 │
-├── Analitika Bisnis(3).html
-├── Pengantar Manajemen.html
+├── quiz.html              ← halaman kuis
+├── quiz-config.js         ← URL Web App Apps Script
 │
-└── .github/
-    └── workflows/
-        └── generate-academic-hub.yml
+├── Analitika Bisnis.html
+├── Pengantar Manajemen.html
+├── Prinsip-Prinsip Manajemen.html
+├── Presentation Skills.html
+│
+└── apps-script/           ← disalin ke Google Apps Script, bukan dijalankan di Pages
+    ├── Code.gs
+    └── Index.html
 ```
+
+## 📝 Kuis Esai per Mata Kuliah
+
+Setiap kartu mata kuliah di landing page dapat menampilkan **kuis yang sedang aktif**.
+Soal dan jawaban disimpan di Google Sheet milik dosen melalui Google Apps Script;
+halaman kuisnya sendiri (`quiz.html`) berjalan di GitHub Pages.
+
+```text
+Google Sheet (soal, sesi, jawaban)
+        ↑↓  Apps Script Web App (apps-script/Code.gs)
+GitHub Pages: index.html → kartu "Kuis aktif" → quiz.html?kuis=KODE
+```
+
+### Pemasangan (sekali)
+
+1. Buat Google Sheet baru → **Extensions → Apps Script**.
+2. Tempel isi `apps-script/Code.gs` ke `Code.gs`. Tambahkan berkas HTML bernama `Index`
+   dan tempel isi `apps-script/Index.html`.
+3. Jalankan fungsi `setup` sekali (Run) dan beri izin.
+4. **Deploy → New deployment → Web app**, *Execute as: Me*, *Who has access: **Anyone***.
+5. Salin URL Web App (berakhiran `/exec`) ke `quiz-config.js`:
+
+   ```js
+   window.QUIZ_API = 'https://script.google.com/macros/s/XXXX/exec';
+   ```
+
+6. Commit `quiz-config.js`.
+
+> Akses harus **Anyone**. Pilihan *Anyone with Google account* membuat browser
+> dialihkan ke halaman login sehingga landing page tidak bisa membaca daftar kuis.
+
+### Membuka dan menutup kuis
+
+Semua diatur dari Google Sheet, tanpa mengubah repositori:
+
+| Lembar | Kolom | Fungsi |
+| --- | --- | --- |
+| `Kuis` | `kode`, `judul`, `durasi_menit` | Identitas kuis |
+| `Kuis` | `aktif` | `TRUE` = muncul di landing page dan bisa dikerjakan |
+| `Kuis` | `mata_kuliah` | Harus sama dengan judul kartu, misalnya `Analitika Bisnis` |
+| `Soal` | `kode`, `no`, `soal` | Satu baris per soal |
+| `Ringkasan` | `tanda` | Indikator untuk pertanyaan lisan |
+
+Landing page memperbarui daftar kuis setiap 60 detik.
+
+### Yang dicatat halaman kuis
+
+Keluar halaman, percobaan menempel atau menyalin soal (diblokir), perbandingan panjang
+jawaban dengan teks yang diketik, kecepatan mengetik, dan keterlambatan pengiriman.
+Mahasiswa diberi tahu di awal. Semua tanda adalah **indikator** untuk ditindaklanjuti
+dengan pertanyaan lisan, bukan bukti kecurangan. Ambang dapat diubah di bagian `AMBANG`
+pada `Code.gs`.
 
 ## 🛠️ Local Development
 
