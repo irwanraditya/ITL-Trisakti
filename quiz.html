@@ -35,6 +35,15 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
 .note ul{margin:8px 0 0 18px}
 .q{font-weight:650;margin-bottom:12px;-webkit-user-select:none;user-select:none}
 .q [data-q]{white-space:pre-line}   /* baris baru di sel Soal (studi kasus, tabel data) ikut tampil */
+/* baris "a | b | c" di sel Soal ditampilkan sebagai tabel; baris pertama = judul kolom */
+.q .tabel{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0 12px;border:1px solid var(--line);border-radius:10px;white-space:normal}
+.q table{border-collapse:collapse;width:100%;font-size:14px;font-weight:500}
+.q th,.q td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+.q th:first-child,.q td:first-child{text-align:left}
+.q td{white-space:normal}
+.q th{background:#f5edcf;font-weight:700;font-size:12px;line-height:1.35}
+@media(max-width:520px){.card{padding:16px 14px}.q table{font-size:12px}.q th,.q td{padding:6px 4px}.q th{font-size:10.5px}}
+.q tr:last-child td{border-bottom:none}
 .qno{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:#f5edcf;color:var(--navy);
   font-weight:900;font-size:13px;margin-right:8px;vertical-align:1px}
 .count{font-size:12px;color:var(--muted);text-align:right;margin-top:6px}
@@ -221,12 +230,40 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     });
     $('daftarSoal').innerHTML = html;
     var spans = document.querySelectorAll('[data-q]');
-    CFG.soal.forEach(function (q, i) { spans[i].textContent = q.teks; });   // teks, bukan HTML
+    CFG.soal.forEach(function (q, i) { isiSoal(spans[i], q.teks); });
 
     CFG.soal.forEach(function (q) { pasang($('ta' + q.no), q.no); });
     muatDraf();
     pasangHalaman();
     detak(); S.iv = setInterval(detak, 1000);
+  }
+
+  /* Isi teks soal lewat DOM (bukan innerHTML). Baris berturut-turut yang memuat " | "
+     menjadi satu tabel: baris pertama judul kolom, sisanya isi. Awalan "• " dibuang. */
+  function isiSoal(el, teks) {
+    var buf = [], tbody = null;
+    function tulisTeks() {
+      if (buf.length) { el.appendChild(document.createTextNode(buf.join('\n'))); buf = []; }
+    }
+    String(teks || '').split('\n').forEach(function (baris) {
+      if (baris.indexOf(' | ') === -1) { tbody = null; buf.push(baris); return; }
+      var sel = baris.replace(/^\s*[•\-]\s*/, '').split('|').map(function (x) { return x.trim(); });
+      var tr = document.createElement('tr');
+      if (!tbody) {
+        tulisTeks();
+        var wadah = document.createElement('div'), tabel = document.createElement('table'),
+            thead = document.createElement('thead');
+        wadah.className = 'tabel';
+        sel.forEach(function (x) { var th = document.createElement('th'); th.textContent = x; tr.appendChild(th); });
+        thead.appendChild(tr); tabel.appendChild(thead);
+        tbody = document.createElement('tbody'); tabel.appendChild(tbody);
+        wadah.appendChild(tabel); el.appendChild(wadah);
+        return;
+      }
+      sel.forEach(function (x) { var td = document.createElement('td'); td.textContent = x; tr.appendChild(td); });
+      tbody.appendChild(tr);
+    });
+    tulisTeks();
   }
 
   function hitung(no) { $('ct' + no).textContent = $('ta' + no).value.length + ' karakter'; }
