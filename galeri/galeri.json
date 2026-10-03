@@ -1,0 +1,44 @@
+{
+ "diperbarui": "2026-10-03",
+ "mata_kuliah": [
+  {
+   "nama": "Analitika Bisnis",
+   "folder": "ab",
+   "semester": "Gasal 2026/2027",
+   "pengantar": "Karya mahasiswa S2 Analitika Bisnis semester sebelumnya, ditampilkan atas persetujuan mereka dan tanpa nama. Sebagian besar kasus diangkat dari pekerjaan di pelayaran, kepelabuhanan, logistik, dan instansi pemerintah.",
+   "tugas": [
+    {
+     "kode": "t1",
+     "label": "Tugas 1",
+     "judul": "Tugas 1 · SI ADI DEMEN BABI",
+     "tujuan": "Membingkai satu masalah nyata menjadi masalah yang dapat dibantu dengan data, sebelum masuk ke analisis yang lebih dalam.",
+     "komponen": [
+      "Siapa",
+      "Apa",
+      "Di mana",
+      "Dengan apa",
+      "Mengapa",
+      "Bagaimana",
+      "Bilamana"
+     ],
+     "karya": []
+    },
+    {
+     "kode": "t2",
+     "label": "Tugas 2",
+     "judul": "Tugas 2 · Data Storytelling 1 Halaman",
+     "tujuan": "Satu masalah, satu insight, satu rekomendasi dalam satu lembar deck yang dapat dipahami tanpa penjelasan tambahan.",
+     "komponen": [
+      "Topik",
+      "Konteks",
+      "Data / informasi",
+      "Cerita",
+      "Kesimpulan",
+      "Bahan diskusi"
+     ],
+     "karya": []
+    }
+   ]
+  }
+ ]
+}

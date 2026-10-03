@@ -170,6 +170,29 @@ Mahasiswa diberi tahu di awal. Semua tanda adalah **indikator** untuk ditindakla
 dengan pertanyaan lisan, bukan bukti kecurangan. Ambang dapat diubah di bagian `AMBANG`
 pada `Code.gs`.
 
+## 🖼️ Galeri Karya Mahasiswa
+
+`galeri.html` menampilkan karya mahasiswa semester sebelumnya sebagai contoh bagi angkatan berikutnya. Kartu mata kuliah di landing page otomatis menampilkan tautan **Galeri karya mahasiswa** bila mata kuliah itu punya karya yang tampil.
+
+**Aturan privasi (wajib):**
+
+- Hanya karya yang mahasiswanya menyatakan **setuju** (opt-in). Tidak menjawab = tidak tampil.
+- Tanpa nama: nama, NIM, email, dan nomor telepon ditutup. Setiap karya dirasterisasi ulang menjadi PDF gambar tanpa metadata, sehingga teks asli tidak dapat disalin kembali.
+- Berkas pemetaan ID karya ↔ nama/NIM **tidak pernah** masuk repo; disimpan dosen di PC.
+- Halaman diberi `noindex, nofollow`. Mahasiswa dapat meminta karyanya diturunkan kapan saja.
+
+**Struktur:**
+
+```text
+galeri.html                 halaman galeri (?mk=<nama mata kuliah>)
+galeri/galeri.json          daftar karya yang tampil, per mata kuliah dan tugas
+galeri/<folder>/<id>.pdf    PDF standar A4
+galeri/<folder>/<id>-p<n>.jpg   gambar halaman untuk penampil web
+galeri/<folder>/<id>-thumb.jpg  thumbnail kartu (720×540)
+```
+
+Setiap entri `karya` berisi `id`, `topik`, `bidang`, `halaman`, dan `pilihan` (lencana "Pilihan dosen"). Menambah atau menurunkan karya cukup dengan mengubah `galeri.json` dan berkasnya; halaman tidak perlu diubah.
+
 ## 🛠️ Local Development
 
 No build system or framework is required.
