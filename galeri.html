@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Galeri Karya Mahasiswa — ITL Trisakti</title>
-<meta name="description" content="Contoh karya mahasiswa ITL Trisakti dari semester sebelumnya, ditampilkan tanpa nama.">
+<meta name="description" content="Contoh karya mahasiswa ITL Trisakti, ditampilkan tanpa nama.">
 <!-- Karya mahasiswa: jangan diindeks mesin pencari -->
 <meta name="robots" content="noindex, nofollow">
 <style>
@@ -25,6 +25,7 @@ main{max-width:1240px;margin:auto;padding:36px 24px 72px}
 .eyebrow{color:#8a6d12;font-weight:800;letter-spacing:.14em;font-size:12px;text-transform:uppercase;margin-top:18px}
 h1{font-family:Georgia,serif;font-size:clamp(36px,5vw,60px);line-height:1.04;margin:10px 0 12px}
 .lead{max-width:760px;color:var(--muted);font-size:17px;line-height:1.7;margin:0}
+.privasi{max-width:760px;color:var(--muted);font-size:13px;line-height:1.6;margin:10px 0 0}
 .guide{margin:30px 0 34px;padding:20px 22px;background:var(--gold-soft);border:1px solid var(--gold-line);border-radius:14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .guide div{font-size:14px;line-height:1.6;color:#4a4220}
 .guide b{display:block;color:var(--navy);font-size:15px;margin-bottom:2px}
@@ -98,7 +99,7 @@ dialog::backdrop{background:rgba(7,15,28,.82)}
 </main>
 
 <footer>
-  Karya ditampilkan tanpa nama: nama, NIM, dan nama perusahaan telah disamarkan.
+  Karya ditampilkan tanpa nama mahasiswa; identitas pribadi telah disamarkan.
   Mahasiswa yang ingin karyanya diturunkan dapat menghubungi dosen pengampu.
 </footer>
 
@@ -155,6 +156,13 @@ dialog::backdrop{background:rgba(7,15,28,.82)}
       </article>`;
   }
 
+  // Panduan membaca galeri; mata kuliah dapat menimpanya lewat galeri.json (kunci 'panduan').
+  const PANDUAN_UMUM = [
+    {judul: 'Lihat cara berpikirnya', isi: 'Perhatikan alur penalarannya, bukan hanya tampilannya.'},
+    {judul: 'Bandingkan dengan instruksi', isi: 'Setiap bagian tugas diringkas di atas daftar karya. Cek mana yang dijawab kuat dan mana yang belum.'},
+    {judul: 'Bukan kunci jawaban', isi: 'Karya ini punya kelebihan dan kekurangan. Jadikan inspirasi, jangan disalin.'}
+  ];
+
   function renderCourse(mk){
     document.title = 'Galeri ' + mk.nama + ' — ITL Trisakti';
     const tugas = (mk.tugas || []).filter(t => (t.karya || []).length);
@@ -165,11 +173,10 @@ dialog::backdrop{background:rgba(7,15,28,.82)}
     app.innerHTML = `
       <div class="eyebrow">Galeri karya mahasiswa · ${esc(mk.semester || '')}</div>
       <h1>${esc(mk.nama)}</h1>
-      <p class="lead">${esc(mk.pengantar || 'Contoh karya mahasiswa semester sebelumnya, ditampilkan tanpa nama.')}</p>
+      <p class="lead">${esc(mk.pengantar || 'Contoh karya mahasiswa, ditampilkan tanpa nama.')}</p>
+      ${mk.privasi ? `<p class="privasi">${esc(mk.privasi)}</p>` : ''}
       <div class="guide" role="note">
-        <div><b>Lihat cara berpikirnya</b>Perhatikan bagaimana masalah dibingkai dan didukung data, bukan hanya tampilannya.</div>
-        <div><b>Bandingkan dengan instruksi</b>Setiap bagian tugas diringkas di atas daftar karya. Cek mana yang dijawab kuat dan mana yang belum.</div>
-        <div><b>Bukan kunci jawaban</b>Karya ini punya kelebihan dan kekurangan. Jadikan inspirasi, jangan disalin: topik Anda harus dari pengalaman Anda sendiri.</div>
+        ${(mk.panduan && mk.panduan.length ? mk.panduan : PANDUAN_UMUM).map(g => `<div><b>${esc(g.judul)}</b>${esc(g.isi)}</div>`).join('')}
       </div>
       ${tugas.length ? `
       <div class="tabs" role="group" aria-label="Saring menurut tugas">
@@ -210,7 +217,7 @@ dialog::backdrop{background:rgba(7,15,28,.82)}
     for (let i = 1; i <= n; i++){
       html += `<img src="${esc(base)}-p${i}.jpg" alt="Halaman ${i} dari ${n}" loading="${i === 1 ? 'eager' : 'lazy'}" decoding="async">`;
     }
-    vPages.innerHTML = html + '<div class="v-note">Nama, NIM, dan nama perusahaan disamarkan</div>';
+    vPages.innerHTML = html + `<div class="v-note">${esc(mk.catatan_penampil || 'Identitas mahasiswa disamarkan')}</div>`;
     setZoom(false);
     vPages.scrollTop = 0;
     if (typeof viewer.showModal === 'function') viewer.showModal(); else window.open(base + '.pdf', '_blank', 'noopener');
@@ -225,7 +232,7 @@ dialog::backdrop{background:rgba(7,15,28,.82)}
     app.innerHTML = `
       <div class="eyebrow">Galeri karya mahasiswa</div>
       <h1>Galeri Karya</h1>
-      <p class="lead">Contoh karya mahasiswa semester sebelumnya, ditampilkan tanpa nama.</p>
+      <p class="lead">Contoh karya mahasiswa, ditampilkan tanpa nama.</p>
       ${shown.length ? `<div class="courses">${shown.map(mk => {
         const n = mk.tugas.reduce((s, t) => s + (t.karya || []).length, 0);
         return `<a class="course" href="galeri.html?mk=${encodeURIComponent(mk.nama)}"><h3>${esc(mk.nama)}</h3><p>${n} karya · ${esc(mk.semester || '')}</p></a>`;

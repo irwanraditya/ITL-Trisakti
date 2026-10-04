@@ -172,11 +172,18 @@ pada `Code.gs`.
 
 ## 🖼️ Galeri Karya Mahasiswa
 
-`galeri.html` menampilkan karya mahasiswa semester sebelumnya sebagai contoh bagi angkatan berikutnya. Kartu mata kuliah di landing page otomatis menampilkan tautan **Galeri karya mahasiswa** bila mata kuliah itu punya karya yang tampil.
+`galeri.html` menampilkan karya mahasiswa sebagai contoh bagi mahasiswa lain dan angkatan berikutnya. Kartu mata kuliah di landing page otomatis menampilkan tautan **Galeri karya mahasiswa** bila mata kuliah itu punya karya yang tampil.
+
+| Mata kuliah | Karya yang tampil |
+|---|---|
+| Analitika Bisnis (S2) | Tugas 1 (SI ADI DEMEN BABI) dan Tugas 2 (Data Storytelling) |
+| Prinsip-Prinsip Manajemen (S1) | Tugas 1 (Career Planning 5–10 Tahun) |
 
 **Aturan privasi (wajib):**
 
-- Tanpa nama: nama, NIM, email, nomor telepon, dan **nama perusahaan** (nama badan usaha, logo, merek pada nama kapal, watermark foto) ditutup. Nama instansi pemerintah dan sumber data tetap terlihat.
+- Semua mata kuliah: nama, NIM, email, dan nomor telepon mahasiswa ditutup.
+- Analitika Bisnis: **nama perusahaan** juga ditutup (nama badan usaha, logo, merek pada nama kapal, watermark foto), karena kasus diangkat dari tempat kerja mahasiswa. Nama instansi pemerintah dan sumber data tetap terlihat.
+- Prinsip-Prinsip Manajemen: nama perusahaan pada lowongan LinkedIn **tetap terlihat** karena lowongan bersifat publik (keputusan dosen).
 - Setiap karya dirasterisasi ulang menjadi PDF gambar tanpa metadata, sehingga teks asli tidak dapat disalin kembali.
 - Berkas pemetaan ID karya ↔ nama/NIM **tidak pernah** masuk repo; disimpan dosen di PC.
 - Halaman diberi `noindex, nofollow`. Mahasiswa dapat meminta karyanya diturunkan kapan saja.
@@ -191,7 +198,7 @@ galeri/<folder>/<id>-p<n>.jpg   gambar halaman untuk penampil web
 galeri/<folder>/<id>-thumb.jpg  thumbnail kartu (720×540)
 ```
 
-Setiap entri `karya` berisi `id`, `topik`, `bidang`, `halaman`, dan `pilihan` (lencana "Pilihan dosen"). Menambah atau menurunkan karya cukup dengan mengubah `galeri.json` dan berkasnya; halaman tidak perlu diubah.
+Setiap mata kuliah di `galeri.json` dapat memuat `privasi` (catatan di bawah pengantar), `catatan_penampil` (teks kecil di penampil halaman), dan `panduan` (tiga kotak cara membaca galeri). Setiap entri `karya` berisi `id`, `topik`, `bidang`, `halaman`, dan `pilihan` (lencana "Pilihan dosen"). Menambah atau menurunkan karya cukup dengan mengubah `galeri.json` dan berkasnya; halaman tidak perlu diubah.
 
 ## 🛠️ Local Development
 

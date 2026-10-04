@@ -5,7 +5,23 @@
    "nama": "Analitika Bisnis",
    "folder": "ab",
    "semester": "Gasal 2026/2027",
-   "pengantar": "Karya mahasiswa S2 Analitika Bisnis semester sebelumnya, ditampilkan tanpa nama. Sebagian besar kasus diangkat dari pekerjaan di pelayaran, kepelabuhanan, logistik, dan instansi pemerintah.",
+   "pengantar": "Karya mahasiswa S2 Analitika Bisnis angkatan 2026, ditampilkan tanpa nama. Sebagian besar kasus diangkat dari pekerjaan di pelayaran, kepelabuhanan, logistik, dan instansi pemerintah.",
+   "privasi": "Nama, NIM, kontak, dan nama perusahaan (termasuk logo) disamarkan.",
+   "catatan_penampil": "Nama, NIM, dan nama perusahaan disamarkan",
+   "panduan": [
+    {
+     "judul": "Lihat cara berpikirnya",
+     "isi": "Perhatikan bagaimana masalah dibingkai dan didukung data, bukan hanya tampilannya."
+    },
+    {
+     "judul": "Bandingkan dengan instruksi",
+     "isi": "Setiap bagian tugas diringkas di atas daftar karya. Cek mana yang dijawab kuat dan mana yang belum."
+    },
+    {
+     "judul": "Bukan kunci jawaban",
+     "isi": "Karya ini punya kelebihan dan kekurangan. Jadikan inspirasi, jangan disalin: topik Anda harus dari pengalaman Anda sendiri."
+    }
+   ],
    "tugas": [
     {
      "kode": "t1",
@@ -358,6 +374,285 @@
        "topik": "Kapasitas diklat pelaut tertinggal dari pendaftar",
        "bidang": "Pendidikan maritim",
        "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-21",
+       "topik": "Hilirisasi nikel: logistik ore harus mengejar",
+       "bidang": "Logistik tambang",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-22",
+       "topik": "Barang sudah sampai, dokumen POD belum kembali",
+       "bidang": "Logistik darat",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-23",
+       "topik": "Turnaround time kereta api batubara di Sumatera Selatan",
+       "bidang": "Perkeretaapian",
+       "halaman": 4,
+       "pilihan": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nama": "Prinsip-Prinsip Manajemen",
+   "folder": "ppm",
+   "semester": "Gasal 2026/2027",
+   "pengantar": "Karya mahasiswa S1 Manajemen Logistik angkatan 2026 untuk mata kuliah Prinsip-Prinsip Manajemen, ditampilkan tanpa nama. Setiap mahasiswa memilih satu lowongan impian di LinkedIn lalu menyusun rencana karier strategis dan taktikal untuk 5–10 tahun ke depan.",
+   "privasi": "Nama, NIM, dan kontak mahasiswa disamarkan. Nama perusahaan pada lowongan tetap terlihat karena lowongan LinkedIn bersifat publik.",
+   "catatan_penampil": "Nama, NIM, dan kontak mahasiswa disamarkan",
+   "panduan": [
+    {
+     "judul": "Lihat cara berpikirnya",
+     "isi": "Perhatikan bagaimana job requirement diterjemahkan menjadi tahapan, bukti, dan rencana menutup gap, bukan hanya tampilannya."
+    },
+    {
+     "judul": "Bandingkan dengan instruksi",
+     "isi": "Komponen tugas diringkas di atas daftar karya. Cek mana yang dijawab kuat dan mana yang belum."
+    },
+    {
+     "judul": "Bukan kunci jawaban",
+     "isi": "Karya ini punya kelebihan dan kekurangan. Jadikan inspirasi, jangan disalin: rencana karier harus berangkat dari kondisi Anda sendiri."
+    }
+   ],
+   "tugas": [
+    {
+     "kode": "t1",
+     "label": "Tugas 1",
+     "judul": "Tugas 1 · Career Planning 5–10 Tahun",
+     "tujuan": "Dari pekerjaan impian ke langkah nyata: memakai job requirement sebagai dasar rencana strategis, rencana taktikal, dan pengembangan skill.",
+     "komponen": [
+      "Screenshot lowongan",
+      "Sumber & tanggal",
+      "Alasan memilih",
+      "Rencana strategis",
+      "Taktikal 0–2 / 3–5 / 6–10 tahun",
+      "Matriks skill & bukti",
+      "Rencana menutup gap"
+     ],
+     "karya": [
+      {
+       "id": "ppm-t1-03",
+       "topik": "Brand Channel Strategist – ParagonCorp",
+       "bidang": "Pemasaran",
+       "halaman": 3,
+       "pilihan": true
+      },
+      {
+       "id": "ppm-t1-08",
+       "topik": "Distribution & Logistics Specialist – Maersk Contract Logistics",
+       "bidang": "Distribusi & logistik",
+       "halaman": 7,
+       "pilihan": true
+      },
+      {
+       "id": "ppm-t1-28",
+       "topik": "Supply Chain Management Manager – Yokogawa",
+       "bidang": "Supply chain",
+       "halaman": 7,
+       "pilihan": true
+      },
+      {
+       "id": "ppm-t1-01",
+       "topik": "Production Planning Manager – Michelin",
+       "bidang": "Supply chain",
+       "halaman": 6,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-02",
+       "topik": "Head of Supply & Distribution – BP AKR Fuels Retail",
+       "bidang": "Distribusi & logistik",
+       "halaman": 3,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-04",
+       "topik": "Logistics Operation Excellence Graduate – TikTok/GTL Logistics",
+       "bidang": "Logistik e-commerce",
+       "halaman": 3,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-05",
+       "topik": "Operations Manager – TikTok Shop GTL Logistics",
+       "bidang": "Logistik e-commerce",
+       "halaman": 3,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-06",
+       "topik": "Distribution & Logistics Specialist – A.P. Moller-Maersk",
+       "bidang": "Distribusi & logistik",
+       "halaman": 3,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-07",
+       "topik": "Distribution & Logistic Specialist – A.P. Moller-Maersk",
+       "bidang": "Distribusi & logistik",
+       "halaman": 3,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-09",
+       "topik": "Head of Logistic Excellence – PT Sewu Segar Nusantara",
+       "bidang": "Distribusi & logistik",
+       "halaman": 2,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-10",
+       "topik": "Distribution & Logistics Specialist – A.P. Moller-Maersk",
+       "bidang": "Distribusi & logistik",
+       "halaman": 4,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-11",
+       "topik": "Business Consultant Ship Repair – PT Astra International Tbk",
+       "bidang": "Konsultan bisnis",
+       "halaman": 2,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-12",
+       "topik": "Customer Service International Liner – Meratus Group",
+       "bidang": "Pelayaran & forwarding",
+       "halaman": 4,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-13",
+       "topik": "Shift Lead – Warehouse, Shopee",
+       "bidang": "Pergudangan & fulfillment",
+       "halaman": 5,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-14",
+       "topik": "Senior Manager Warehouse & System Implementation – DHL Supply Chain",
+       "bidang": "Pergudangan & fulfillment",
+       "halaman": 3,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-15",
+       "topik": "Supply Chain Management Analyst – JAPFA",
+       "bidang": "Supply chain",
+       "halaman": 6,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-16",
+       "topik": "Account Manager – DSV",
+       "bidang": "Pelayaran & forwarding",
+       "halaman": 6,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-17",
+       "topik": "Supply Chain Product & Development – A.P. Moller-Maersk",
+       "bidang": "Supply chain",
+       "halaman": 3,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-18",
+       "topik": "Distribution Center Manager – PT Tempo Scan Pacific Tbk",
+       "bidang": "Distribusi & logistik",
+       "halaman": 5,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-19",
+       "topik": "Logistics Officer – AMODA",
+       "bidang": "Distribusi & logistik",
+       "halaman": 3,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-20",
+       "topik": "Logistic Inventory Supervisor – PT Astra International Tbk",
+       "bidang": "Pergudangan & fulfillment",
+       "halaman": 4,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-21",
+       "topik": "Operations Manager – TikTok Shop GTL Logistics",
+       "bidang": "Logistik e-commerce",
+       "halaman": 3,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-22",
+       "topik": "Logistic Inventory Supervisor – PT Astra International Tbk",
+       "bidang": "Pergudangan & fulfillment",
+       "halaman": 2,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-23",
+       "topik": "LCL Station Manager – A.P. Moller-Maersk",
+       "bidang": "Pelayaran & forwarding",
+       "halaman": 3,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-24",
+       "topik": "Logistics & Inventory Staff – Hebe Beauty Indonesia",
+       "bidang": "Pergudangan & fulfillment",
+       "halaman": 3,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-25",
+       "topik": "Logistic Manager – DHL Supply Chain",
+       "bidang": "Distribusi & logistik",
+       "halaman": 3,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-26",
+       "topik": "Fulfillment Operation Management – ParagonCorp",
+       "bidang": "Pergudangan & fulfillment",
+       "halaman": 10,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-27",
+       "topik": "Logistics Officer – SCG Indonesia",
+       "bidang": "Distribusi & logistik",
+       "halaman": 9,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-29",
+       "topik": "Supply Chain – AOP, PT Astra International Tbk",
+       "bidang": "Supply chain",
+       "halaman": 6,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-30",
+       "topik": "Inventory & Area Manager – Amazon Fulfillment Center",
+       "bidang": "Pergudangan & fulfillment",
+       "halaman": 2,
+       "pilihan": false
+      },
+      {
+       "id": "ppm-t1-31",
+       "topik": "Manager Operasional Trucking – PT Handal Guna Sarana",
+       "bidang": "Transportasi darat",
+       "halaman": 4,
        "pilihan": false
       }
      ]
