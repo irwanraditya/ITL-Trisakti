@@ -176,8 +176,8 @@ pada `Code.gs`.
 
 **Aturan privasi (wajib):**
 
-- Hanya karya yang mahasiswanya menyatakan **setuju** (opt-in). Tidak menjawab = tidak tampil.
-- Tanpa nama: nama, NIM, email, dan nomor telepon ditutup. Setiap karya dirasterisasi ulang menjadi PDF gambar tanpa metadata, sehingga teks asli tidak dapat disalin kembali.
+- Tanpa nama: nama, NIM, email, nomor telepon, dan **nama perusahaan** (nama badan usaha, logo, merek pada nama kapal, watermark foto) ditutup. Nama instansi pemerintah dan sumber data tetap terlihat.
+- Setiap karya dirasterisasi ulang menjadi PDF gambar tanpa metadata, sehingga teks asli tidak dapat disalin kembali.
 - Berkas pemetaan ID karya ↔ nama/NIM **tidak pernah** masuk repo; disimpan dosen di PC.
 - Halaman diberi `noindex, nofollow`. Mahasiswa dapat meminta karyanya diturunkan kapan saja.
 

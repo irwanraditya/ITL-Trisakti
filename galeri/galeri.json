@@ -1,11 +1,11 @@
 {
- "diperbarui": "2026-10-03",
+ "diperbarui": "2026-10-04",
  "mata_kuliah": [
   {
    "nama": "Analitika Bisnis",
    "folder": "ab",
    "semester": "Gasal 2026/2027",
-   "pengantar": "Karya mahasiswa S2 Analitika Bisnis semester sebelumnya, ditampilkan atas persetujuan mereka dan tanpa nama. Sebagian besar kasus diangkat dari pekerjaan di pelayaran, kepelabuhanan, logistik, dan instansi pemerintah.",
+   "pengantar": "Karya mahasiswa S2 Analitika Bisnis semester sebelumnya, ditampilkan tanpa nama. Sebagian besar kasus diangkat dari pekerjaan di pelayaran, kepelabuhanan, logistik, dan instansi pemerintah.",
    "tugas": [
     {
      "kode": "t1",
@@ -21,7 +21,190 @@
       "Bagaimana",
       "Bilamana"
      ],
-     "karya": []
+     "karya": [
+      {
+       "id": "ab-t1-01",
+       "topik": "Keterlambatan kapal dalam pengiriman barang antarpulau",
+       "bidang": "Logistik maritim",
+       "halaman": 2,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-02",
+       "topik": "Antrean panjang kasir supermarket di akhir pekan",
+       "bidang": "Ritel",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-03",
+       "topik": "Penyaluran bantuan pangan ke Papua dan Papua Barat yang terhambat",
+       "bidang": "Distribusi bantuan pemerintah",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-04",
+       "topik": "Evaluasi tarif penggunaan alur pelayaran sungai",
+       "bidang": "Kepelabuhanan",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-05",
+       "topik": "Minimum order dan minimum charge pada pengadaan barang impor",
+       "bidang": "Pengadaan & impor",
+       "halaman": 2,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-06",
+       "topik": "Tingginya emisi karbon pengiriman jalur darat (green logistics)",
+       "bidang": "Logistik darat",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-07",
+       "topik": "Tubrukan kapal di alur sempit: pola human error",
+       "bidang": "Keselamatan pelayaran",
+       "halaman": 2,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-08",
+       "topik": "Keterlambatan penyelesaian docking kapal tanker",
+       "bidang": "Perawatan kapal",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-09",
+       "topik": "Kecelakaan berulang di tikungan jalan nasional",
+       "bidang": "Keselamatan jalan",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-10",
+       "topik": "Keterlambatan pembayaran billing PIB barang impor",
+       "bidang": "Kepabeanan & impor",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-11",
+       "topik": "Kemacetan ruas jalan di kawasan pasar induk",
+       "bidang": "Transportasi darat",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-12",
+       "topik": "Antrean truk kontainer di gate in terminal pelabuhan",
+       "bidang": "Terminal peti kemas",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-13",
+       "topik": "Keterlambatan crew change awak kapal akibat karhutla",
+       "bidang": "Crewing kapal",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-14",
+       "topik": "Evaluasi sistem operasional terminal setelah integrasi ERP",
+       "bidang": "Sistem informasi pelabuhan",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-15",
+       "topik": "Kemacetan simpang bersinyal pada jam sibuk",
+       "bidang": "Transportasi darat",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-16",
+       "topik": "Antrean truk di gate pelabuhan saat pengambilan kontainer",
+       "bidang": "Terminal peti kemas",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-17",
+       "topik": "Keterlambatan bongkar muat kapal di pelabuhan",
+       "bidang": "Operasional pelabuhan",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-18",
+       "topik": "Keterlambatan pengiriman trucking (OTIF)",
+       "bidang": "Logistik darat",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-19",
+       "topik": "Kesesuaian tarif pas penumpang dengan fasilitas pelabuhan",
+       "bidang": "Angkutan laut penumpang",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-20",
+       "topik": "Keterlambatan customs clearance barang impor",
+       "bidang": "Kepabeanan & impor",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-21",
+       "topik": "Evaluasi penyelenggaraan diklat pelaut",
+       "bidang": "Pendidikan maritim",
+       "halaman": 2,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-22",
+       "topik": "BBM boros dan keterlambatan kurir pengiriman paket",
+       "bidang": "Logistik last-mile",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-23",
+       "topik": "Keterlambatan keberangkatan kapal",
+       "bidang": "Operasional pelayaran",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-24",
+       "topik": "Insiden tongkang kandas: kerugian operasional dan voyage delay",
+       "bidang": "Operasional kapal",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-25",
+       "topik": "Ketidakwajaran isian pendapatan perusahaan pada survei",
+       "bidang": "Statistik pemerintah",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t1-26",
+       "topik": "Keterlambatan pengiriman spare part kapal",
+       "bidang": "Pengadaan suku cadang kapal",
+       "halaman": 1,
+       "pilihan": false
+      }
+     ]
     },
     {
      "kode": "t2",
@@ -36,7 +219,148 @@
       "Kesimpulan",
       "Bahan diskusi"
      ],
-     "karya": []
+     "karya": [
+      {
+       "id": "ab-t2-02",
+       "topik": "Zero ODOL: muatan turun, biaya logistik naik?",
+       "bidang": "Kebijakan logistik",
+       "halaman": 1,
+       "pilihan": true
+      },
+      {
+       "id": "ab-t2-03",
+       "topik": "Peringkat logistik Indonesia turun dari 46 ke 61",
+       "bidang": "Kinerja logistik nasional",
+       "halaman": 1,
+       "pilihan": true
+      },
+      {
+       "id": "ab-t2-16",
+       "topik": "Kapal gagal sandar: bukan cuaca, tapi koordinasi",
+       "bidang": "Operasional terminal",
+       "halaman": 1,
+       "pilihan": true
+      },
+      {
+       "id": "ab-t2-01",
+       "topik": "Transportasi berkelanjutan yang belum merata",
+       "bidang": "Transportasi perkotaan",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-04",
+       "topik": "Integritas rantai pasok halal berbasis IoT",
+       "bidang": "Rantai pasok halal",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-05",
+       "topik": "Penyaluran bantuan pangan di Papua Barat terlambat",
+       "bidang": "Distribusi bantuan pemerintah",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-06",
+       "topik": "Dilema logistik darat: truk ODOL vs kereta api",
+       "bidang": "Transportasi barang",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-07",
+       "topik": "Volume peti kemas Tanjung Priok naik 18,4%",
+       "bidang": "Kepelabuhanan",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-08",
+       "topik": "Konsumsi BBM kapal: muatan isi vs muatan kosong",
+       "bidang": "Operasional kapal",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-09",
+       "topik": "Transportasi laut: tulang punggung logistik yang belum seimbang",
+       "bidang": "Angkutan laut",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-10",
+       "topik": "Penyebab antrean sandar kapal asing di terminal",
+       "bidang": "Kepelabuhanan",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-11",
+       "topik": "Keterlambatan kapal memasuki alur akibat pasang surut",
+       "bidang": "Navigasi & alur pelayaran",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-12",
+       "topik": "Trafik kapal di alur sungai turun 19%",
+       "bidang": "Kepelabuhanan",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-13",
+       "topik": "Penurunan penumpang kapal Tol Laut di Batam",
+       "bidang": "Angkutan laut penumpang",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-14",
+       "topik": "Strategi menangani minimum order value barang impor",
+       "bidang": "Pengadaan & impor",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-15",
+       "topik": "Mengurai penumpukan KRL Jabodetabek di jam sibuk",
+       "bidang": "Perkeretaapian",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-17",
+       "topik": "Kecelakaan lalu lintas menghambat rantai pasok",
+       "bidang": "Transportasi barang",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-18",
+       "topik": "Optimasi rute dan kapasitas hub untuk menekan delay",
+       "bidang": "Logistik e-commerce",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-19",
+       "topik": "Penurunan penyandaran kapal di pelabuhan Cilegon",
+       "bidang": "Kepelabuhanan",
+       "halaman": 1,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-20",
+       "topik": "Kapasitas diklat pelaut tertinggal dari pendaftar",
+       "bidang": "Pendidikan maritim",
+       "halaman": 1,
+       "pilihan": false
+      }
+     ]
     }
    ]
   }

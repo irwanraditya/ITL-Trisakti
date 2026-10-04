@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Galeri Karya Mahasiswa — ITL Trisakti</title>
-<meta name="description" content="Contoh karya mahasiswa ITL Trisakti dari semester sebelumnya, ditampilkan atas persetujuan dan tanpa nama.">
+<meta name="description" content="Contoh karya mahasiswa ITL Trisakti dari semester sebelumnya, ditampilkan tanpa nama.">
 <!-- Karya mahasiswa: jangan diindeks mesin pencari -->
 <meta name="robots" content="noindex, nofollow">
 <style>
@@ -98,7 +98,7 @@ dialog::backdrop{background:rgba(7,15,28,.82)}
 </main>
 
 <footer>
-  Karya ditampilkan atas persetujuan mahasiswa dan tanpa nama. Identitas penulis telah disamarkan.
+  Karya ditampilkan tanpa nama: nama, NIM, dan nama perusahaan telah disamarkan.
   Mahasiswa yang ingin karyanya diturunkan dapat menghubungi dosen pengampu.
 </footer>
 
@@ -165,7 +165,7 @@ dialog::backdrop{background:rgba(7,15,28,.82)}
     app.innerHTML = `
       <div class="eyebrow">Galeri karya mahasiswa · ${esc(mk.semester || '')}</div>
       <h1>${esc(mk.nama)}</h1>
-      <p class="lead">${esc(mk.pengantar || 'Contoh karya mahasiswa semester sebelumnya, ditampilkan atas persetujuan mereka dan tanpa nama.')}</p>
+      <p class="lead">${esc(mk.pengantar || 'Contoh karya mahasiswa semester sebelumnya, ditampilkan tanpa nama.')}</p>
       <div class="guide" role="note">
         <div><b>Lihat cara berpikirnya</b>Perhatikan bagaimana masalah dibingkai dan didukung data, bukan hanya tampilannya.</div>
         <div><b>Bandingkan dengan instruksi</b>Setiap bagian tugas diringkas di atas daftar karya. Cek mana yang dijawab kuat dan mana yang belum.</div>
@@ -210,7 +210,7 @@ dialog::backdrop{background:rgba(7,15,28,.82)}
     for (let i = 1; i <= n; i++){
       html += `<img src="${esc(base)}-p${i}.jpg" alt="Halaman ${i} dari ${n}" loading="${i === 1 ? 'eager' : 'lazy'}" decoding="async">`;
     }
-    vPages.innerHTML = html + '<div class="v-note">Identitas penulis disamarkan · ditampilkan atas persetujuan mahasiswa</div>';
+    vPages.innerHTML = html + '<div class="v-note">Nama, NIM, dan nama perusahaan disamarkan</div>';
     setZoom(false);
     vPages.scrollTop = 0;
     if (typeof viewer.showModal === 'function') viewer.showModal(); else window.open(base + '.pdf', '_blank', 'noopener');
@@ -225,7 +225,7 @@ dialog::backdrop{background:rgba(7,15,28,.82)}
     app.innerHTML = `
       <div class="eyebrow">Galeri karya mahasiswa</div>
       <h1>Galeri Karya</h1>
-      <p class="lead">Contoh karya mahasiswa semester sebelumnya, ditampilkan atas persetujuan mereka dan tanpa nama.</p>
+      <p class="lead">Contoh karya mahasiswa semester sebelumnya, ditampilkan tanpa nama.</p>
       ${shown.length ? `<div class="courses">${shown.map(mk => {
         const n = mk.tugas.reduce((s, t) => s + (t.karya || []).length, 0);
         return `<a class="course" href="galeri.html?mk=${encodeURIComponent(mk.nama)}"><h3>${esc(mk.nama)}</h3><p>${n} karya · ${esc(mk.semester || '')}</p></a>`;
