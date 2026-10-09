@@ -46,6 +46,18 @@ input{width:min(380px,100%);padding:13px 16px;border:1px solid var(--line);borde
 .gallery small{color:var(--muted);font-weight:600}
 .empty{padding:40px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px}
 .quiz{margin:0 0 18px;padding:14px 14px 10px;border:1px solid #ecdba6;background:#fbf6e6;border-radius:12px}
+.materi{margin:0 0 18px;padding:12px 14px 8px;border:1px solid var(--line);border-radius:12px;background:#f7f9fb}
+.materi-label{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.mat{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.mat:first-of-type{border-top:0}
+.mat .tag{flex:0 0 auto;font-size:11px;font-weight:800;letter-spacing:.06em;color:#fff;background:var(--navy);border-radius:5px;padding:3px 7px;margin-top:2px}
+.mat .tag.excel{background:#1d6f42}.mat .tag.pdf{background:#a63d2f}
+.mat .txt{flex:1;min-width:0}
+.mat .txt a{color:var(--navy);font-weight:700;text-decoration:none}
+.mat .txt a:hover{text-decoration:underline}
+.mat .txt small{display:block;color:var(--muted);font-size:12px;line-height:1.4}
+.mat .dl{flex:0 0 auto;font-size:12px;font-weight:700;color:var(--navy);text-decoration:none;border:1px solid var(--line);border-radius:7px;padding:4px 9px;background:#fff}
+.mat .dl:hover{border-color:var(--navy)}
 .quiz-label{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#7a6213;margin-bottom:8px}
 .quiz-dot{width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.18)}
 .quiz-item{display:flex;justify-content:space-between;align-items:center;gap:12px;text-decoration:none;color:var(--navy);
@@ -130,6 +142,26 @@ function quizBlock(p){
     </div>`;
 }
 
+function materiBlock(p){
+  const list=Array.isArray(p.materi)?p.materi:[];
+  if(!list.length) return '';
+  return `
+    <div class="materi">
+      <div class="materi-label">Materi &amp; tugas</div>
+      ${list.map(m=>{
+        const jenis=String(m.jenis||'File');
+        const cls=jenis.toLowerCase()==='excel'?'excel':jenis.toLowerCase()==='pdf'?'pdf':'';
+        const href=encodeURI(m.file);
+        const isExcel=cls==='excel';
+        const main=isExcel
+          ? `<a href="${href}" download="${esc(m.unduh||'')}">${esc(m.judul)}</a>`
+          : `<a href="${href}" target="_blank" rel="noopener">${esc(m.judul)}</a>`;
+        const dl=m.unduh?`<a class="dl" href="${href}" download="${esc(m.unduh)}">Unduh ↓</a>`:'';
+        return `<div class="mat"><span class="tag ${cls}">${esc(jenis)}</span><span class="txt">${main}${m.keterangan?`<small>${esc(m.keterangan)}</small>`:''}</span>${dl}</div>`;
+      }).join('')}
+    </div>`;
+}
+
 function galleryLink(p){
   const n=galleries[norm(p.title)]||0;
   if(!n) return '';
@@ -140,6 +172,7 @@ function render(){
   const q=search.value.toLowerCase().trim();
   const rows=projects.filter(p =>
     [p.title,p.category,p.type,p.description,p.filename,
+     ...(Array.isArray(p.materi)?p.materi.map(m=>m.judul+' '+(m.keterangan||'')):[]),
      ...quizzes.filter(z=>norm(z.mata_kuliah)===norm(p.title)).map(z=>z.judul)]
       .join(' ').toLowerCase().includes(q)
   );
@@ -152,6 +185,7 @@ function render(){
         <h3>${esc(p.title)}</h3>
         <p class="desc">${esc(p.description||'Academic Digital Resource at ITL Trisakti.')}</p>
         ${quizBlock(p)}
+        ${materiBlock(p)}
         <div class="actions">
           <a class="open" href="${encodeURI(p.filename)}">Open Resource →</a>
           ${galleryLink(p)}

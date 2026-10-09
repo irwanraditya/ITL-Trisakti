@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Misteri OTD Nusantara Kargo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet">
+<style>
+/* Layout: ruang kendali dosen. Satu slide 16:9 di tengah, kendali di bawahnya, catatan dosen di bawah lagi.
+   Slide memakai palet deck Analitika Bisnis yang tetap (dirancang untuk proyektor);
+   bingkai di sekitarnya mengikuti tema terang/gelap. Tanpa JavaScript: semua slide tampil berurutan. */
+:root{
+  --bg:#E4EAEC;--surface:#FFFFFF;--fg:#0E2430;--muted:#536873;--line:#C9D5D9;
+  --accent:#1D6F63;--accent-fg:#FFFFFF;--soft:#EDF3F2;--warn:#9A5A12;--track:#D3DDE0;
+  --s-ink:#0E2430;--s-ink2:#3D5561;--s-paper:#FBFCFC;--s-panel:#EBF0F1;--s-rule:#C3D0D4;
+  --s-pine:#1D6F63;--s-sage:#7FA8A0;--s-ochre:#C0791F;--s-wrong:#A63D2F;--s-slate:#6B818B;
+  --s-dark:#0E2430;--s-dark2:#17323E;--s-dline:#2B4A57;--s-ondark:#EAF2F4;--s-lit:#F6E4C8;
+  --s-pos:#00806A;--s-neg:#B83A22;
+  --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,monospace;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A1519;--surface:#12232A;--fg:#E2ECEF;--muted:#94AAB2;--line:#26404A;
+  --accent:#62B5A5;--accent-fg:#06211C;--soft:#16302F;--warn:#E3A35A;--track:#20363F;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1519;--surface:#12232A;--fg:#E2ECEF;--muted:#94AAB2;--line:#26404A;
+  --accent:#62B5A5;--accent-fg:#06211C;--soft:#16302F;--warn:#E3A35A;--track:#20363F;color-scheme:dark}
+
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.5;font-size:15px}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+html:not(.js) .js-only{display:none!important}
+.js .nojs-only{display:none!important}
+.artifact .local-only{display:none!important}
+
+/* ---------- bilah atas ---------- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--surface);border-bottom:1px solid var(--line);
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:8px 16px}
+.bar .name{font-weight:600;flex:1 1 220px;min-width:0;line-height:1.25}
+.bar .name small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.tb{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--fg);
+  padding:6px 10px;border-radius:6px;font-size:13px;font-weight:500;white-space:nowrap}
+.tb:hover{border-color:var(--accent)}
+.tb.primary{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.tb kbd{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:3px;padding:0 4px}
+.tb.primary kbd{color:inherit;border-color:currentColor;opacity:.7}
+#hn:checked ~ .bar label[for="hn"] .on-txt{display:none}
+#hn:not(:checked) ~ .bar label[for="hn"] .off-txt{display:none}
+#hn:focus-visible ~ .bar label[for="hn"]{outline:2px solid var(--accent);outline-offset:2px}
+.clock{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px}
+.clock .el{font-weight:600;font-variant-numeric:tabular-nums}
+.clock .tb{font-family:var(--sans)}
+.badge{font-family:var(--sans);font-size:12px;padding:2px 8px;border-radius:20px;background:var(--soft);color:var(--accent);font-weight:600}
+.badge.late{background:rgba(192,121,31,.16);color:var(--warn)}
+
+/* ---------- peta waktu ---------- */
+.strip{display:flex;gap:3px;padding:8px 16px 0;max-width:1200px;margin:0 auto}
+.strip button{flex:1 1 0;min-width:0;border:0;background:var(--track);color:var(--muted);text-align:left;
+  padding:5px 8px;border-radius:4px;font-size:12px;line-height:1.25;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;position:relative}
+.strip button b{display:block;color:var(--fg);font-weight:600;overflow:hidden;text-overflow:ellipsis}
+.strip button.cur{background:var(--accent);color:var(--accent-fg)}
+.strip button.cur b{color:var(--accent-fg)}
+.strip button .fill{position:absolute;left:0;bottom:0;height:3px;background:var(--accent-fg);opacity:.75}
+
+/* ---------- panggung ---------- */
+main#deck{max-width:1200px;margin:0 auto;padding-block:14px 40px;padding-inline:16px}
+.unit{margin-bottom:28px}
+.js #deck .unit{display:none;margin:0}
+.js #deck .unit.cur{display:block}
+.frame{position:relative;width:100%;margin:0 auto;aspect-ratio:16/9;max-width:100%;box-shadow:0 10px 30px rgba(8,22,28,.22)}
+.slide{position:absolute;inset:0;background:var(--s-paper);color:var(--s-ink);overflow:hidden;
+  font-size:min(23.36px,calc((100vw - 32px)/50));line-height:1.45;padding:2.4em 3em 2.1em;display:flex;flex-direction:column}
+.js .slide{cursor:pointer}
+.slide.dark{background:var(--s-dark);color:var(--s-ondark)}
+.slide.pine{background:var(--s-pine);color:#fff}
+.slide .num{position:absolute;right:3em;bottom:1.3em;font-family:var(--mono);font-size:.6em;letter-spacing:.12em;color:var(--s-slate)}
+.slide.dark .num,.slide.pine .num{color:rgba(255,255,255,.5)}
+
+/* langkah yang muncul bertahap */
+.js .unit [data-step]{transition:opacity .35s ease}
+.js .unit [data-step].hid{visibility:hidden;opacity:0}
+.js .unit [data-until].gone{visibility:hidden;opacity:0}
+[data-hl]{transition:background-color .3s ease}
+[data-hl].lit,html:not(.js) [data-hl]{background:var(--s-lit)}
+@media (prefers-reduced-motion:reduce){.js .unit [data-step],[data-hl]{transition:none}}
+
+/* kendali di bawah slide */
+#ctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:12px auto 0;padding:10px 12px;background:var(--surface);
+  border:1px solid var(--line);border-radius:8px}
+#ctl .stepinfo{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+#ctl .dots{display:flex;gap:4px}
+#ctl .dots i{width:9px;height:9px;border-radius:50%;background:var(--track);display:block}
+#ctl .dots i.on{background:var(--accent)}
+#ctl .nextup{flex:1 1 240px;min-width:0;font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#ctl .nextup b{color:var(--fg);font-weight:600}
+#ctl .pos{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+
+/* catatan dosen */
+.notes{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);padding:14px 18px 16px;
+  font-size:15.5px;color:var(--fg);margin-top:12px;border-radius:0 0 8px 8px}
+#hn:checked ~ #deck .notes{display:none}
+.notes .nh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-bottom:8px}
+.notes .nh b{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.notes .nh .min{font-family:var(--mono);font-size:12px;color:var(--warn);font-weight:600}
+.notes p{margin:.4em 0;max-width:80ch}
+.notes ul,.notes ol{margin:.4em 0 .4em 1.3em;max-width:78ch}
+.notes li{margin:.15em 0}
+.notes .say{font-style:italic;border-left:3px solid var(--accent);padding-left:10px}
+.notes .tip{background:var(--soft);padding:8px 10px;border-radius:6px}
+.notes table{border-collapse:collapse;margin:.5em 0;font-size:14px;width:100%;max-width:760px}
+.notes th,.notes td{border-bottom:1px solid var(--line);padding:5px 8px 5px 0;text-align:left;vertical-align:top}
+.notes th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+
+.intro{background:var(--surface);border:1px solid var(--line);padding:14px 16px;margin-bottom:20px;border-radius:8px;font-size:15px}
+.intro b{color:var(--accent)}
+
+/* daftar slide */
+#outline{position:fixed;z-index:40;top:0;right:0;bottom:0;width:min(380px,100%);background:var(--surface);border-left:1px solid var(--line);
+  overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 14px) 16px 24px;box-shadow:-10px 0 30px rgba(0,0,0,.18)}
+#outline h3{font-size:15px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+#outline .blk{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:14px 0 4px}
+#outline button.it{display:flex;gap:10px;width:100%;text-align:left;background:none;border:0;color:var(--fg);padding:6px 8px;border-radius:5px;font-size:14px}
+#outline button.it:hover{background:var(--soft)}
+#outline button.it.cur{background:var(--accent);color:var(--accent-fg)}
+#outline button.it span{font-family:var(--mono);font-size:12px;min-width:3.6em;opacity:.75}
+#help{position:fixed;z-index:45;left:50%;top:50%;transform:translate(-50%,-50%);width:min(520px,calc(100% - 32px));background:var(--surface);
+  border:1px solid var(--line);border-radius:10px;padding:18px 20px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+#help h3{font-size:16px;margin-bottom:8px}
+#help table{width:100%;border-collapse:collapse;font-size:14px}
+#help td{padding:5px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+#help td:first-child{font-family:var(--mono);white-space:nowrap;color:var(--accent);width:9em}
+#toast{position:fixed;z-index:50;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 20px);transform:translateX(-50%);background:var(--fg);color:var(--bg);
+  padding:8px 14px;border-radius:6px;font-size:14px;max-width:calc(100% - 32px)}
+
+/* ---------- tipografi slide ---------- */
+.eyebrow{font-family:var(--mono);font-size:.66em;letter-spacing:.16em;text-transform:uppercase;color:var(--s-pine);margin-bottom:.8em}
+.dark .eyebrow{color:var(--s-sage)}
+.pine .eyebrow{color:#BFE0D8}
+h1.display{font-family:var(--serif);font-weight:400;font-size:2.6em;line-height:1.12;letter-spacing:-.01em;text-wrap:balance}
+.slide h2{font-size:1.62em;line-height:1.2;font-weight:600;margin-bottom:.65em;text-wrap:balance}
+.slide h3{font-size:1em;font-weight:600;margin-bottom:.25em}
+.lede{font-size:1.04em;color:#B9CDD4;margin-top:.8em;max-width:52ch}
+.center{justify-content:center}
+.muted{color:var(--s-slate)}
+.small{font-size:.78em}
+.mono{font-family:var(--mono)}
+.grid{display:grid;gap:.85em}
+.g2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.card{background:#fff;border:1px solid var(--s-rule);padding:.85em 1em}
+.card.tint{background:var(--s-panel);border-color:transparent}
+.card .n{font-family:var(--mono);font-size:.62em;letter-spacing:.12em;text-transform:uppercase;color:var(--s-pine);display:block;margin-bottom:.45em}
+.card p{font-size:.86em;color:var(--s-ink2);margin:0}
+.card.hot{border:2px solid var(--s-ochre)}
+.dark .card{background:var(--s-dark2);border-color:var(--s-dline)}
+.dark .card p{color:#C8D9DF}
+.dark .card .n{color:var(--s-sage)}
+.divider{flex-direction:row;align-items:center;gap:1.4em}
+.divider .big{font-size:7.5em;font-weight:700;color:#24414D;line-height:.8}
+.rule-note{margin-top:1.2em;font-size:.86em;padding:.6em .9em;border:1px dashed var(--s-dline);color:#C8D9DF;max-width:46em}
+
+/* SIAP + agenda */
+.siap{display:grid;grid-template-columns:2.2em minmax(0,1fr);gap:.5em 1em;align-items:start}
+.siap .k{font-family:var(--mono);font-weight:600;color:#fff;background:var(--s-pine);text-align:center;padding:.22em 0}
+.siap p{margin:0;font-size:.96em;padding-top:.12em}
+.siap p b{color:var(--s-pine)}
+.agenda{display:grid;grid-template-columns:6fr 1fr 3fr 2fr;gap:3px;margin-top:1.2em}
+.agenda div{background:var(--s-panel);padding:.5em .7em;font-size:.72em}
+.agenda div b{display:block;font-size:1.05em}
+.agenda div span{font-family:var(--mono);color:var(--s-pine)}
+.agenda .brk{background:#F3F5F5;color:var(--s-slate)}
+.promise{margin-top:1em;font-size:.86em;background:#fff;border-left:4px solid var(--s-ochre);padding:.55em .9em}
+
+/* kalimat pembuka */
+.quote{font-family:var(--serif);font-size:1.7em;line-height:1.3;max-width:34ch;text-wrap:balance}
+.choices{display:flex;gap:.7em;margin-top:1.3em;flex-wrap:wrap}
+.choice{border:1px solid var(--s-rule);padding:.35em .9em;font-size:.8em;color:var(--s-ink2);background:#fff}
+.choice b{font-family:var(--mono);color:var(--s-pine);margin-right:.35em}
+.verdict{margin-top:1em;padding:.65em 1em;border-left:4px solid var(--s-pine);background:var(--s-panel);font-size:.9em;max-width:60ch}
+.verdict b{color:var(--s-pine)}
+.verdict.fake{border-color:var(--s-wrong)}.verdict.fake b{color:var(--s-wrong)}
+.verdict.data{border-color:var(--s-slate)}.verdict.data b{color:var(--s-ink2)}
+.legend3{display:flex;gap:1.1em;margin-top:1.3em;flex-wrap:wrap}
+.legend3 div{border:1px solid var(--s-dline);padding:.55em 1em;min-width:8.5em}
+.legend3 div b{display:block;font-size:1.5em;font-family:var(--mono);color:var(--s-sage);line-height:1.1}
+
+/* tabel data */
+table.dt{border-collapse:collapse;width:100%;font-size:.86em}
+table.dt th{font-family:var(--mono);font-size:.7em;letter-spacing:.1em;text-transform:uppercase;color:var(--s-slate);
+  font-weight:500;text-align:right;padding:0 .8em .45em;border-bottom:2px solid var(--s-ink)}
+table.dt th:first-child,table.dt td:first-child{text-align:left;padding-left:.3em}
+table.dt td{padding:.45em .8em;border-bottom:1px solid var(--s-rule);text-align:right;font-variant-numeric:tabular-nums}
+table.dt tr.tot td{font-weight:700;border-bottom:2px solid var(--s-ink)}
+.up{color:var(--s-pos);font-weight:700}.down{color:var(--s-neg);font-weight:700}
+.tag{font-family:var(--mono);font-size:.62em;letter-spacing:.08em;text-transform:uppercase;background:var(--s-ochre);color:#fff;padding:.1em .45em;margin-left:.5em;vertical-align:middle}
+.say-line{margin-top:.9em;font-size:.95em;font-weight:600;max-width:52ch}
+.say-line.big{font-family:var(--serif);font-weight:400;font-size:1.3em;line-height:1.3}
+.memo{border:1px solid var(--s-rule);border-left:5px solid var(--s-ochre);background:#fff;padding:1em 1.3em;max-width:46em}
+.memo .from{font-family:var(--mono);font-size:.64em;letter-spacing:.12em;text-transform:uppercase;color:var(--s-ochre);margin-bottom:.5em}
+.memo p{margin-bottom:.45em}
+.memo ol{margin:.2em 0 0 1.3em}
+.vote{margin-top:1em;display:inline-flex;align-items:center;gap:.7em;background:var(--s-pine);color:#fff;padding:.5em 1em;font-size:.92em;font-weight:600}
+.vote .h{font-size:1.3em}
+.fnotes{font-size:.82em;color:var(--s-ink2);border-top:1px solid var(--s-rule);padding-top:.6em;max-width:52em}
+.fnotes p{margin:.25em 0;padding:.2em .4em}
+
+/* angka besar */
+.stat{background:#fff;border:1px solid var(--s-rule);padding:.85em 1em}
+.stat .v{font-size:2.2em;font-weight:700;line-height:1.05;color:var(--s-ink);font-variant-numeric:tabular-nums}
+.stat .v.neg{color:var(--s-neg)}
+.stat .l{font-size:.78em;color:var(--s-ink2);margin-top:.3em}
+
+/* langkah bernomor */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.6em}
+.flow .card h3{font-size:.95em}
+.flow .card .t{font-family:var(--mono);font-size:.6em;color:var(--s-ochre);display:block;margin-top:.55em}
+.qa{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.55em 1.3em}
+.qa div{font-size:.84em}
+.qa b{display:block}
+.qa span{display:block;color:var(--s-pine);margin-top:.15em}
+.versions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1em}
+.versions .card p{font-size:.8em;line-height:1.45}
+.versions .card .n{font-size:.66em}
+
+/* jebakan grafik */
+.trap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2em;flex:1;min-height:0}
+.panel{display:flex;flex-direction:column;min-width:0}
+.ptitle{font-family:var(--mono);font-size:.6em;letter-spacing:.1em;text-transform:uppercase;color:var(--s-slate);margin-bottom:.3em}
+.ptitle b{color:var(--s-wrong);font-weight:600}
+.ptitle b.ok{color:var(--s-pine)}
+.chart svg{width:100%;height:auto;display:block}
+.stack{display:grid}
+.stack > *{grid-area:1/1}
+.guess{border:2px dashed var(--s-rule);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1em;gap:.5em}
+.guess .q{font-family:var(--serif);font-size:1.5em;line-height:1.2;max-width:14em}
+.pcap{font-size:.74em;color:var(--s-ink2);margin-top:.3em}
+.pq{font-size:.74em;margin-top:.35em;font-weight:600;color:var(--s-pine)}
+.claim{font-family:var(--serif);font-weight:400}
+.checklist{display:grid;gap:.45em;max-width:46em}
+.checklist div{display:grid;grid-template-columns:2em minmax(0,1fr);gap:.8em;align-items:baseline;font-size:.95em;border-bottom:1px solid var(--s-rule);padding-bottom:.4em}
+.checklist div i{font-style:normal;font-family:var(--mono);font-weight:600;color:var(--s-pine)}
+.checklist div small{color:var(--s-slate);font-size:.8em;display:block}
+
+/* project */
+.ex{display:grid;grid-template-columns:9em minmax(0,1fr);gap:.3em 1em;font-size:.84em}
+.ex dt{font-family:var(--mono);font-size:.76em;letter-spacing:.06em;text-transform:uppercase;color:var(--s-pine);padding-top:.25em}
+.ex dd{margin:0;color:var(--s-ink2);border-bottom:1px solid var(--s-rule);padding-bottom:.3em}
+.ex dd.lead{color:var(--s-ink);font-weight:600}
+[contenteditable]{outline:none;border-bottom:1px dashed var(--s-sage);min-width:3em;display:inline-block;cursor:text}
+[contenteditable]:focus{background:rgba(192,121,31,.12)}
+.ph{color:var(--s-ochre)}
+.blank{display:block;min-height:1.4em}
+
+/* timer */
+.tchips{display:flex;gap:.6em;flex-wrap:wrap;margin-top:.9em}
+.tchip{font-family:var(--mono);font-size:.74em;font-weight:600;border:1px solid var(--s-pine);color:var(--s-pine);background:#fff;padding:.3em .8em;border-radius:2em}
+.dark .tchip,.pine .tchip{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.tchip:hover{background:var(--s-pine);color:#fff}
+html:not(.js) .tchip{display:none}
+#timer{position:fixed;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:35;display:flex;align-items:center;gap:10px;
+  background:#0E2430;color:#fff;padding:10px 14px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-family:var(--mono);cursor:pointer;user-select:none}
+#timer .clk{font-size:30px;font-weight:600;min-width:3.2em;text-align:center;font-variant-numeric:tabular-nums}
+#timer .lbl{font-size:11px;color:#A9C0C8;max-width:9em;line-height:1.3}
+#timer.paused .clk{opacity:.55}
+#timer.done{background:#B4701D}
+#timer .x{background:none;border:0;color:#fff;font-size:20px;padding:0 0 0 4px}
+.proj #timer .clk,.aud #timer .clk{font-size:46px}
+
+/* ---------- layar proyektor ---------- */
+.proj,.aud{background:#000}
+.proj .bar,.proj .strip,.proj #ctl,.proj .notes,.proj .intro,.proj #lampiran,.proj #outline,
+.aud .bar,.aud .strip,.aud #ctl,.aud .notes,.aud .intro,.aud #lampiran,.aud #outline{display:none!important}
+.proj main#deck,.aud main#deck{max-width:none;padding:0}
+.proj #deck .unit.cur,.aud #deck .unit.cur{display:flex;align-items:center;justify-content:center;height:100vh}
+.proj .frame,.aud .frame{box-shadow:none}
+
+/* ---------- lampiran cetak ---------- */
+#lampiran{max-width:1200px;margin:0 auto;padding:0 16px 60px}
+.js #lampiran{display:none}
+#lampiran h2{font-size:20px;margin:10px 0 6px}
+.page{background:#fff;color:#0E2430;width:210mm;max-width:100%;min-height:297mm;margin:0 auto 22px;padding:14mm 15mm;
+  box-shadow:0 6px 20px rgba(14,36,48,.15);font-size:11pt;overflow:hidden}
+.page h3{font-size:15pt;margin-bottom:4mm}
+.page .ey{font-family:var(--mono);font-size:8pt;letter-spacing:.14em;text-transform:uppercase;color:#1D6F63;margin-bottom:2mm}
+.page table.dt{font-size:10.5pt;margin:2mm 0 5mm}
+.page .memo{max-width:none;margin-bottom:5mm}
+.page .lines div{border-bottom:1px solid #B9C6CA;height:8mm}
+.cuts{display:grid;grid-template-rows:1fr 1fr;height:269mm}
+.cut{border:1px dashed #9AAAB0;padding:6mm 7mm;font-size:10.5pt;overflow:hidden}
+.cut .field{font-weight:600;margin-top:3mm;font-size:10pt}
+.cut .hint{font-weight:400;color:#6B818B;font-size:8.5pt}
+.cut .line{border-bottom:1px solid #B9C6CA;height:8mm}
+.rolemap{width:100%;border-collapse:collapse;font-size:8.5pt;margin:2mm 0}
+.rolemap td{border:1px solid #C9D3D6;padding:1mm 1.5mm;text-align:center}
+.roles td,.roles th{text-align:left!important;vertical-align:top}
+.roles td:first-child{white-space:nowrap;font-family:var(--mono)}
+
+@media (max-width:700px){.bar .name{flex-basis:100%}.tb .lbl-long{display:none}}
+@media print{
+  @page{size:A4;margin:0}
+  body{background:#fff;color:#000}
+  .bar,.strip,#ctl,#timer,#outline,#help,#toast,.intro{display:none!important}
+  main#deck{max-width:none;padding:8mm 10mm}
+  .js #deck .unit{display:block!important;margin-bottom:6mm;break-inside:avoid;page-break-inside:avoid}
+  .js .unit [data-step].hid,.js .unit [data-until].gone{visibility:visible;opacity:1}
+  .js .unit [data-until]{display:none}
+  .frame{box-shadow:none;border:1px solid #ccc;width:100%!important}
+  .slide{font-size:10.8px!important}
+  .notes{display:block!important;font-size:10pt}
+  .page{box-shadow:none;margin:0;break-after:page;page-break-after:always}
+  body.print-handout main#deck{display:none}
+  body.print-handout #lampiran{display:block!important;padding:0;max-width:none}
+  body:not(.print-handout) #lampiran{display:none}
+  #lampiran h2,#lampiran .lp{display:none}
+}
+</style>
+</head>
+<body>
+<input type="checkbox" id="hn" class="sr" aria-label="Sembunyikan catatan dosen">
+
+<header class="bar">
+  <div class="name">Misteri OTD Nusantara Kargo<small>Analitika Bisnis · tatap muka Sabtu, 10 Oktober 2026 · 120 menit</small></div>
+  <button class="tb js-only" type="button" id="b-prev" aria-label="Langkah sebelumnya">◀</button>
+  <button class="tb primary js-only" type="button" id="b-next">Lanjut <kbd>→</kbd></button>
+  <label class="tb" for="hn"><span class="on-txt">Sembunyikan catatan</span><span class="off-txt">Tampilkan catatan</span> <kbd class="js-only">N</kbd></label>
+  <button class="tb js-only" type="button" id="b-outline"><span class="lbl-long">Daftar slide</span><span aria-hidden="true">☰</span> <kbd>O</kbd></button>
+  <button class="tb js-only" type="button" id="b-proj">Layar penuh <kbd>F</kbd></button>
+  <button class="tb js-only local-only" type="button" id="b-aud">Jendela proyektor</button>
+  <span class="clock js-only"><button class="tb" type="button" id="b-class">Mulai jam kelas</button><span class="el" id="c-el" hidden></span><span class="badge" id="c-badge" hidden></span><button class="tb" type="button" id="b-class-x" hidden aria-label="Reset jam kelas">×</button></span>
+  <button class="tb local-only js-only" type="button" id="b-print">Cetak lampiran</button>
+  <button class="tb js-only" type="button" id="b-help" aria-label="Pintasan keyboard">?</button>
+</header>
+<nav class="strip js-only" id="strip" aria-label="Peta waktu pertemuan"></nav>
+
+<main id="deck">
+  <div class="intro nojs-only">
+    <b>Tampilan statis.</b> Skrip tidak berjalan di pratinjau ini, jadi semua slide dan catatan tampil berurutan.
+    Buka file ini di Chrome atau Edge (klik dua kali file .html di folder) untuk mode interaktif: slide satu per satu,
+    jawaban muncul bertahap, timer, jam kelas, dan layar proyektor.
+  </div>
+
+<!-- ============================ PEMBUKA ============================ -->
+<article class="unit" data-title="Sampul" data-block="Pembuka" data-at="0">
+  <div class="frame"><section class="slide dark center">
+    <div class="eyebrow">Analitika Bisnis · Tatap muka · 10 Oktober 2026</div>
+    <h1 class="display">Satu misteri,<br>lima jebakan grafik,<br>satu project.</h1>
+    <p class="lede">Hari ini saya yang bercerita. Anda cukup menebak dalam hati dan sesekali angkat tangan.</p>
+    <span class="num">01</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 0–1</span></div>
+    <p class="say">“Hari ini tidak ada yang saya minta maju ke depan. Saya yang bercerita, Anda cukup menebak. Kalau saya minta angkat tangan, kita lakukan bersamaan di hitungan ketiga.”</p>
+    <p class="tip">Alasan desain: kelas cenderung pasif, jadi semua partisipasi dibuat tanpa risiko. Tidak ada yang ditunjuk, tidak ada yang bicara sendirian, dan angkat tangan selalu serentak sehingga tidak ada yang merasa disorot.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Peta pertemuan" data-block="Pembuka" data-at="1">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Rangka sesi · SIAP</div>
+    <div class="siap">
+      <div class="k">S</div><p>Materi sampai Pertemuan 7, termasuk menggali insight dan presentation skills, sudah Anda pegang.</p>
+      <div class="k">I</div><p>Menemukan insight berbeda dengan membuat direksi percaya pada insight itu.</p>
+      <div class="k">A</div><p><b>Hari ini kita membedah keduanya langsung, dari satu kasus dan lima grafik.</b></p>
+      <div class="k">P</div><p>Anda pulang membawa peran dan tebakan project yang sudah tertulis.</p>
+    </div>
+    <div class="agenda">
+      <div><b>Sesi 1 · Misteri OTD</b><span>60 menit</span> · pembuka, kasus, cara menyampaikan</div>
+      <div class="brk"><b>Istirahat</b><span>10</span></div>
+      <div><b>Sesi 2 · Jebakan grafik</b><span>30 menit</span></div>
+      <div><b>Project</b><span>20 menit</span></div>
+    </div>
+    <div class="promise">Aturan main: tidak ada yang ditunjuk. Saat saya bilang “angkat tangan”, semua mengangkat bersamaan di hitungan ketiga.</div>
+    <span class="num">02</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 1–3</span></div>
+    <p>Bacakan cepat. Kalimat aturan main penting untuk kelas pasif: orang lebih mau terlibat ketika tahu tidak akan disorot.</p>
+    <table>
+      <tr><th>Menit</th><th>Blok</th><th>Gaya</th></tr>
+      <tr><td>0–10</td><td>Pembuka: data, insight, atau insight palsu?</td><td>Tebakan serentak</td></tr>
+      <tr><td>10–34</td><td>Misteri OTD Nusantara Kargo (5 babak)</td><td>Dosen bercerita, kelas menebak</td></tr>
+      <tr><td>34–60</td><td>Cara menyampaikan temuan + tanya jawab</td><td>Dosen membacakan dan berperan</td></tr>
+      <tr><td>60–70</td><td>Istirahat</td><td>—</td></tr>
+      <tr><td>70–100</td><td>Lima jebakan grafik</td><td>Tebak 10 detik, lalu dibuka</td></tr>
+      <tr><td>100–120</td><td>Project dataset dan kartu tebakan</td><td>Menulis sendiri, tanpa bicara</td></tr>
+    </table>
+    <p>Klik <b>Mulai jam kelas</b> di bilah atas saat kelas dimulai. Lencana di sebelahnya memberi tahu apakah Anda lebih cepat atau terlambat dari rencana.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Data, insight, atau insight palsu?" data-block="Pembuka" data-at="3">
+  <div class="frame"><section class="slide dark divider">
+    <div class="big">01</div>
+    <div>
+      <div class="eyebrow">Pembuka · 7 menit</div>
+      <h1 class="display">Data, insight, atau insight palsu?</h1>
+      <div class="legend3">
+        <div><b>1 jari</b>Data</div>
+        <div><b>2 jari</b>Insight</div>
+        <div><b>3 jari</b>Insight palsu</div>
+      </div>
+      <p class="lede">Enam kalimat. Tebak, lalu angkat jari bersamaan di hitungan ketiga.</p>
+    </div>
+    <span class="num">03</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 3–4</span></div>
+    <p class="say">“Saya bacakan satu kalimat. Tebak dalam hati: data, insight, atau insight palsu. Di hitungan ketiga, angkat satu, dua, atau tiga jari. Satu… dua… tiga!”</p>
+    <p>Kategori ketiga dipakai untuk S2: mereka sudah bisa membedakan data dan insight, jadi tantangannya mengenali kesimpulan yang terdengar meyakinkan tetapi tidak lolos pengecekan.</p>
+    <p>Di setiap kalimat: bacakan, hitung sampai tiga, lihat sebaran jari, lalu tekan <b>Lanjut</b> untuk membuka kunci dan jelaskan sendiri. Tidak perlu meminta siapa pun bicara.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Kalimat 1 · waiting time" data-block="Pembuka" data-at="4">
+  <div class="frame"><section class="slide center">
+    <div class="eyebrow">Kalimat 1 dari 6</div>
+    <p class="quote">“Rata-rata waiting time kapal di Terminal X pada September adalah 18 jam.”</p>
+    <div class="choices"><span class="choice"><b>1</b>Data</span><span class="choice"><b>2</b>Insight</span><span class="choice"><b>3</b>Insight palsu</span></div>
+    <div class="verdict data" data-step="1"><b>Data.</b> Angka tanpa pembanding dan tanpa kaitan ke keputusan apa pun.</div>
+    <span class="num">04</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Pemanasan</span></div>
+    <p class="say">“18 jam itu baik atau buruk? Kita tidak tahu, karena tidak ada pembandingnya. Itu tanda pertama sebuah angka masih berupa data.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Kalimat 2 · crane akhir pekan" data-block="Pembuka" data-at="5">
+  <div class="frame"><section class="slide center">
+    <div class="eyebrow">Kalimat 2 dari 6</div>
+    <p class="quote">“Waiting time naik 6 jam sejak Juli. 80% kenaikannya terjadi pada kapal yang tiba Jumat–Minggu, saat hanya 2 dari 4 crane beroperasi. Menambah satu shift akhir pekan kemungkinan memangkas antrean lebih cepat daripada membeli crane baru.”</p>
+    <div class="choices"><span class="choice"><b>1</b>Data</span><span class="choice"><b>2</b>Insight</span><span class="choice"><b>3</b>Insight palsu</span></div>
+    <div class="verdict" data-step="1"><b>Insight.</b> Ada yang berubah, penyebab yang bisa diuji, tindakan, dan kata “kemungkinan” yang jujur.</div>
+    <span class="num">05</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Contoh yang baik</span></div>
+    <p>Tunjukkan tiga pertanyaan dari Pertemuan 7 di kalimat ini: <b>apa yang berubah</b> (naik 6 jam, terkumpul di akhir pekan), <b>mengapa penting</b> (kapasitas crane), <b>apa yang dilakukan</b> (shift akhir pekan dibanding membeli crane).</p>
+    <p class="say">“Perhatikan kata ‘kemungkinan’. Itu bukan kelemahan. Itu tanda penulisnya tahu batas datanya.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Kalimat 3 · Pelayaran A" data-block="Pembuka" data-at="6">
+  <div class="frame"><section class="slide center">
+    <div class="eyebrow">Kalimat 3 dari 6</div>
+    <p class="quote">“Kapal dengan waiting time tertinggi bulan ini milik Pelayaran A: 42 jam.”</p>
+    <div class="choices"><span class="choice"><b>1</b>Data</span><span class="choice"><b>2</b>Insight</span><span class="choice"><b>3</b>Insight palsu</span></div>
+    <div class="verdict data" data-step="1"><b>Data.</b> Satu kasus ekstrem. Belum ada pola, belum ada pembanding.</div>
+    <span class="num">06</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Persiapan jebakan</span></div>
+    <p>Jangan berlama-lama. Kalimat ini menyiapkan jebakan di kalimat berikutnya.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Kalimat 4 · “selalu bermasalah”" data-block="Pembuka" data-at="7">
+  <div class="frame"><section class="slide center">
+    <div class="eyebrow">Kalimat 4 dari 6</div>
+    <p class="quote">“Pelayaran A selalu bermasalah, jadi jatah slot sandarnya perlu dikurangi.”</p>
+    <div class="choices"><span class="choice"><b>1</b>Data</span><span class="choice"><b>2</b>Insight</span><span class="choice"><b>3</b>Insight palsu</span></div>
+    <div class="verdict fake" data-step="1"><b>Insight palsu.</b> “Selalu” disimpulkan dari satu kapal dalam satu bulan. Tidak ada pembanding dengan pelayaran lain.</div>
+    <span class="num">07</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Jebakan 1: generalisasi</span></div>
+    <p>Bentuknya sudah seperti insight (ada kesimpulan dan tindakan), jadi biasanya banyak yang mengangkat dua jari. Itu bahan cerita yang bagus.</p>
+    <p class="say">“Berapa kapal Pelayaran A yang datang bulan ini? Bagaimana rata-ratanya dibanding pelayaran lain? Kalau kita tidak tahu, kata ‘selalu’ belum boleh dipakai. Di kantor, kalimat seperti ini bisa membuat mitra kehilangan slot.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Kalimat 5 · transshipment" data-block="Pembuka" data-at="8">
+  <div class="frame"><section class="slide center">
+    <div class="eyebrow">Kalimat 5 dari 6</div>
+    <p class="quote">“Throughput naik 12%, tetapi pendapatan per TEU turun 9% karena porsi transshipment bertarif rendah naik dari 20% ke 35%. Target pendapatan tidak akan tercapai hanya dengan mengejar volume.”</p>
+    <div class="choices"><span class="choice"><b>1</b>Data</span><span class="choice"><b>2</b>Insight</span><span class="choice"><b>3</b>Insight palsu</span></div>
+    <div class="verdict" data-step="1"><b>Insight.</b> Menjelaskan mengapa dua angka bergerak berlawanan arah dan apa artinya bagi target.</div>
+    <span class="num">08</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Benih misteri</span></div>
+    <p>Jangan menyebut istilah “efek komposisi” dulu. Cukup katakan:</p>
+    <p class="say">“Ingat kalimat ini. Angka total bisa bergerak karena porsinya berubah, bukan karena kinerjanya berubah. Sebentar lagi pola ini muncul lagi dalam bentuk yang lebih licik.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Kalimat 6 · aplikasi booking" data-block="Pembuka" data-at="9">
+  <div class="frame"><section class="slide center">
+    <div class="eyebrow">Kalimat 6 dari 6</div>
+    <p class="quote">“Setelah aplikasi booking online diluncurkan pada Juli, keluhan pelanggan turun 30%. Aplikasinya berhasil.”</p>
+    <div class="choices"><span class="choice"><b>1</b>Data</span><span class="choice"><b>2</b>Insight</span><span class="choice"><b>3</b>Insight palsu</span></div>
+    <div class="verdict fake" data-step="1"><b>Insight palsu.</b> Urutan waktu bukan bukti sebab. Bisa jadi keluhan pindah ke kanal di dalam aplikasi dan tidak ikut terhitung.</div>
+    <span class="num">09</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Jebakan 2: sebab-akibat · menit 9–10</span></div>
+    <p class="say">“Pertanyaan pentingnya: apakah cara menghitung keluhan sama sebelum dan sesudah Juli? Simpan pertanyaan itu. Di babak terakhir misteri nanti, pertanyaan inilah yang membongkar petunjuk terakhir.”</p>
+    <p>Penutup pembuka: <span class="say">“Insight palsu biasanya bukan bohong. Ia hanya belum diuji. Sekarang saya tunjukkan cara mengujinya, lewat satu kasus.”</span></p>
+  </div>
+</article>
+
+<!-- ============================ MISTERI OTD ============================ -->
+<article class="unit" data-title="Misteri OTD yang turun" data-block="Misteri OTD" data-at="10">
+  <div class="frame"><section class="slide dark divider">
+    <div class="big">02</div>
+    <div>
+      <div class="eyebrow">Misteri · 24 menit · lima babak</div>
+      <h1 class="display">Misteri OTD yang turun.</h1>
+      <p class="lede">Kasus berjalan Nusantara Kargo (fiktif). Saya yang membedah datanya. Anda cukup menebak siapa “pelakunya” sebelum saya membukanya.</p>
+    </div>
+    <span class="num">10</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 10–11</span></div>
+    <p>Bawakan seperti cerita detektif: setiap babak berakhir dengan satu pertanyaan, lalu Anda yang membuka jawabannya. Biarkan jeda 3–5 detik sebelum menekan Lanjut supaya mahasiswa sempat menebak dalam hati.</p>
+    <p>Struktur cerita: (1) semua layanan membaik, (2) komposisi bergeser, (3) tersangka palsu Merauke, (4) pelaku utama Sorong, (5) petunjuk di catatan kaki. Penutup: jawaban untuk direksi.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Memo direksi" data-block="Misteri OTD" data-at="11">
+  <div class="frame"><section class="slide center">
+    <div class="eyebrow">Senin pagi, ruang direksi Nusantara Kargo</div>
+    <div class="memo">
+      <div class="from">Memo direksi</div>
+      <p>Ketepatan waktu pengiriman (OTD) nasional turun dari <b>87,4%</b> pada Q2 menjadi <b>85,0%</b> pada Q3 2026.</p>
+      <p>Rencana yang akan diputuskan besok pagi:</p>
+      <ol><li>Teguran tertulis kepada seluruh kepala hub.</li><li>Target OTD 90% untuk semua layanan pada Q4.</li></ol>
+    </div>
+    <div data-step="1"><div class="vote"><span class="h" aria-hidden="true">✋</span> Angkat tangan di hitungan ketiga: siapa yang setuju dengan rencana ini?</div></div>
+    <span class="num">11</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 11–13</span></div>
+    <p class="say">“Anda tim analitik. Rapat direksi besok pagi. Rencananya terdengar wajar, bukan? OTD turun, kepala hub ditegur, target dinaikkan.”</p>
+    <p>Tekan Lanjut untuk memunculkan ajakan voting. Hitung sampai tiga, lihat berapa tangan yang naik, lalu ucapkan jumlahnya keras-keras (“kira-kira separuh kelas setuju”). Ingat angkanya: di akhir misteri voting diulang.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Babak 1 · pecah per layanan" data-block="Misteri OTD" data-at="13">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Babak 1 · pecah angka nasional</div>
+    <h2>Kalau angka nasional turun, layanan mana yang memburuk?</h2>
+    <table class="dt">
+      <tr><th>Layanan</th><th>OTD Q2</th><th>OTD Q3</th><th>Perubahan</th></tr>
+      <tr><td>Darat Jawa</td><td>93,0%</td><td>94,0%</td><td data-step="1" class="up">▲ +1,0 poin</td></tr>
+      <tr><td>Laut antarpulau (Kalimantan, Sulawesi)</td><td>82,0%</td><td>83,0%</td><td data-step="1" class="up">▲ +1,0 poin</td></tr>
+      <tr><td>Laut Kawasan Timur (Maluku, Papua)</td><td>70,3%</td><td>71,2%</td><td data-step="1" class="up">▲ +0,9 poin</td></tr>
+      <tr class="tot"><td>Total nasional</td><td>87,4%</td><td>85,0%</td><td data-step="1" class="down">▼ −2,4 poin</td></tr>
+    </table>
+    <p class="say-line big" data-step="2">Tidak ada satu pun layanan yang memburuk. Lalu bagaimana totalnya bisa turun?</p>
+    <span class="num">12</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 13–15</span></div>
+    <p class="say">“Langkah pertama detektif: jangan percaya angka total. Pecah. Tebak dalam hati: layanan mana yang turun?”</p>
+    <p>Tekan Lanjut (kolom perubahan muncul): semuanya naik. Biarkan hening sebentar. Tekan Lanjut lagi untuk kalimat penutup babak.</p>
+    <p class="say">“Ini bagian yang membuat banyak laporan salah. Semua bagian membaik, tetapi totalnya memburuk. Kalau direksi menegur kepala hub, yang ditegur justru orang-orang yang kinerjanya naik.”</p>
+    <p class="tip">Wajar kalau slide ini terasa janggal: semua layanan naik, tetapi total turun. Jangan jelaskan di sini. Biarkan menjadi teka-teki, lalu jelaskan dengan contoh 100 kiriman di slide berikutnya.</p>
+  </div>
+</article>
+<article class="unit" data-title="Versi sederhana · 100 kiriman" data-block="Misteri OTD" data-at="15">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Sebelum lanjut · versi sederhana</div>
+    <h2>Bayangkan perusahaan kecil yang hanya punya 100 kiriman.</h2>
+    <div class="grid g2">
+      <div><div class="ptitle">Q2</div>
+        <table class="dt">
+          <tr><th>Rute</th><th>Kiriman</th><th>Tepat waktu</th><th>OTD</th></tr>
+          <tr><td>Rute mudah</td><td>90</td><td>81</td><td>90%</td></tr>
+          <tr data-hl="2"><td>Rute sulit</td><td>10</td><td>5</td><td>50%</td></tr>
+          <tr class="tot" data-hl="3"><td>Total</td><td>100</td><td>86</td><td>86%</td></tr>
+        </table></div>
+      <div data-step="1"><div class="ptitle">Q3</div>
+        <table class="dt">
+          <tr><th>Rute</th><th>Kiriman</th><th>Tepat waktu</th><th>OTD</th></tr>
+          <tr><td>Rute mudah</td><td>50</td><td>46</td><td>92% <span class="up">▲</span></td></tr>
+          <tr data-hl="2"><td>Rute sulit</td><td>50</td><td>26</td><td>52% <span class="up">▲</span></td></tr>
+          <tr class="tot" data-hl="3"><td>Total</td><td>100</td><td>72</td><td>72% <span class="down">▼</span></td></tr>
+        </table></div>
+    </div>
+    <p class="say-line" data-step="2" style="max-width:none">Kedua rute membaik 2 poin: rute mudah 90% → 92%, rute sulit 50% → 52%.</p>
+    <p class="say-line" data-step="3" style="margin-top:.3em;max-width:none">Tetapi total turun dari 86% ke 72%.</p>
+    <p class="say-line" data-step="4" style="margin-top:.3em;font-weight:400;max-width:none">Penyebabnya: kiriman lewat rute sulit naik dari 10 menjadi 50. Makin banyak kiriman sulit, makin rendah rata-ratanya, walaupun setiap rute bekerja lebih baik.</p>
+    <span class="num">13</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 15–17</span></div>
+    <p>Slide ini menjawab pertanyaan di slide sebelumnya dengan angka yang bisa dihitung di kepala. Bacakan pelan-pelan, satu langkah per klik:</p>
+    <ol>
+      <li>Q2: 90 kiriman rute mudah, 81 tepat waktu (90%). 10 kiriman rute sulit, 5 tepat waktu (50%). Total 86 dari 100 = 86%.</li>
+      <li>Q3: perusahaan mendapat banyak order ke rute sulit. Sekarang 50 mudah dan 50 sulit.</li>
+      <li>Rute mudah: 46 dari 50 = 92%. Rute sulit: 26 dari 50 = 52%. Keduanya naik 2 poin.</li>
+      <li>Total: 46 + 26 = 72 dari 100 = 72%. Turun 14 poin.</li>
+    </ol>
+    <p class="say">“Tidak ada yang bekerja lebih buruk. Yang berubah adalah campurannya: makin banyak kiriman sulit, makin rendah rata-ratanya. Seperti rata-rata nilai kelas yang turun karena banyak murid pindahan masuk, walaupun nilai setiap murid naik.”</p>
+    <p>Lalu jembatani ke kasus: <span class="say">“Di Nusantara Kargo, ‘rute sulit’-nya adalah Kawasan Timur. Kirimannya naik dari 1.000 menjadi 3.000 karena kontrak baru. Mari kita buktikan di slide berikutnya.”</span></p>
+    <p class="tip">Istilahnya: efek komposisi (dalam statistik disebut paradoks Simpson). Tidak perlu menyebut istilah statistiknya bila kelas terlihat lelah; cukup “campurannya berubah”.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Babak 2 · lihat porsinya" data-block="Misteri OTD" data-at="17">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Babak 2 · kolom yang jarang dibaca</div>
+    <h2>Petunjuknya ada di jumlah kiriman, bukan di persentase.</h2>
+    <table class="dt">
+      <tr><th>Layanan</th><th>Kiriman Q2</th><th>Porsi Q2</th><th>Kiriman Q3</th><th>Porsi Q3</th><th>OTD Q3</th></tr>
+      <tr><td>Darat Jawa</td><td>6.000</td><td data-step="1">60%</td><td>5.400</td><td data-step="1">45%</td><td>94,0%</td></tr>
+      <tr><td>Laut antarpulau</td><td>3.000</td><td data-step="1">30%</td><td>3.600</td><td data-step="1">30%</td><td>83,0%</td></tr>
+      <tr data-hl="2"><td>Laut Kawasan Timur</td><td>1.000</td><td data-step="1">10%</td><td>3.000</td><td data-step="1">25%</td><td>71,2%</td></tr>
+      <tr class="tot"><td>Total</td><td>10.000</td><td data-step="1">100%</td><td>12.000</td><td data-step="1">100%</td><td>85,0%</td></tr>
+    </table>
+    <p class="say-line" data-step="2">Layanan dengan OTD paling rendah tumbuh dari 10% ke 25% kiriman. Rata-rata ikut turun walau setiap layanan membaik. Namanya <b>efek komposisi</b>.</p>
+    <span class="num">14</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 17–19</span></div>
+    <p class="say">“Sekarang kasus aslinya. Ingat rute sulit di contoh 100 kiriman tadi? Lihat kolom kiriman: tambahan kirimannya pergi ke mana?”</p>
+    <p>Lanjut 1: kolom porsi muncul. Lanjut 2: baris Kawasan Timur menyala dan kesimpulan babak muncul.</p>
+    <p class="say">“Ingat kalimat kelima di pembuka? Transshipment bertarif rendah. Mekanismenya sama: totalnya berubah karena porsinya bergeser.”</p>
+    <p>Perhitungan porsi: 6.000/10.000, 3.000/10.000, 1.000/10.000 untuk Q2; 5.400/12.000, 3.600/12.000, 3.000/12.000 untuk Q3.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Jembatan 87,4% → 85,0%" data-block="Misteri OTD" data-at="19">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Babak 2 · berapa besar masing-masing efek</div>
+    <h2>Kinerja menambah 1,0 poin. Pergeseran komposisi mengurangi 3,4 poin.</h2>
+    <div class="chart" style="width:66%"><svg viewBox="0 0 560 330" role="img" aria-label="Jembatan OTD nasional: Q2 87,4 persen, kinerja tiap layanan plus 1,0 poin, pergeseran komposisi minus 3,4 poin, Q3 85,0 persen." font-family="IBM Plex Sans,Arial,sans-serif"><line x1="74" x2="540" y1="264.0" y2="264.0" stroke="#E3E9EB"/><text x="66" y="270.0" text-anchor="end" font-size="17" fill="#6B818B">82%</text><line x1="74" x2="540" y1="206.5" y2="206.5" stroke="#E3E9EB"/><text x="66" y="212.5" text-anchor="end" font-size="17" fill="#6B818B">84%</text><line x1="74" x2="540" y1="149.0" y2="149.0" stroke="#E3E9EB"/><text x="66" y="155.0" text-anchor="end" font-size="17" fill="#6B818B">86%</text><line x1="74" x2="540" y1="91.5" y2="91.5" stroke="#E3E9EB"/><text x="66" y="97.5" text-anchor="end" font-size="17" fill="#6B818B">88%</text><line x1="74" x2="540" y1="34.0" y2="34.0" stroke="#E3E9EB"/><text x="66" y="40.0" text-anchor="end" font-size="17" fill="#6B818B">90%</text><g><title>OTD Q2: 87,4%</title><line x1="64.0" x2="156.0" y1="107.9" y2="107.9" stroke="#0E2430" stroke-width="4" stroke-linecap="round"/></g><text x="110" y="97.9" text-anchor="middle" font-size="19" font-weight="700" fill="#0E2430">87,4%</text><g data-step="1"><line x1="156.0" x2="184.0" y1="107.9" y2="107.9" stroke="#9AAAB0" stroke-dasharray="4 4"/><g><title>Kinerja tiap layanan: +1,0 poin (88,4% bila komposisi tetap seperti Q2)</title><path d="M184.0,107.9 V83.4 Q184.0,79.4 188.0,79.4 H272.0 Q276.0,79.4 276.0,83.4 V107.9 Z" fill="#00806A"/></g><text x="230" y="69.4" text-anchor="middle" font-size="18" font-weight="700" fill="#0E2430">+1,0 poin</text></g><g data-step="2"><line x1="276.0" x2="304.0" y1="79.4" y2="79.4" stroke="#9AAAB0" stroke-dasharray="4 4"/><g><title>Pergeseran komposisi: −3,4 poin (porsi Kawasan Timur 10% → 25%)</title><path d="M304.0,79.4 V173.8 Q304.0,177.8 308.0,177.8 H392.0 Q396.0,177.8 396.0,173.8 V79.4 Z" fill="#B83A22"/></g><text x="350" y="201.8" text-anchor="middle" font-size="18" font-weight="700" fill="#0E2430">−3,4 poin</text><line x1="396.0" x2="424.0" y1="177.8" y2="177.8" stroke="#9AAAB0" stroke-dasharray="4 4"/><g><title>OTD Q3: 85,0%</title><line x1="424.0" x2="516.0" y1="177.8" y2="177.8" stroke="#0E2430" stroke-width="4" stroke-linecap="round"/></g><text x="470" y="167.8" text-anchor="middle" font-size="19" font-weight="700" fill="#0E2430">85,0%</text></g><text x="110" y="292" text-anchor="middle" font-size="18" fill="#3D5561">OTD Q2</text><text x="230" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Kinerja layanan</text><text x="350" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Komposisi</text><text x="470" y="292" text-anchor="middle" font-size="18" fill="#3D5561">OTD Q3</text><line x1="74" x2="540" y1="264" y2="264" stroke="#C3D0D4"/></svg></div>
+    <span class="num">15</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 19–21</span></div>
+    <p>Grafik muncul bertahap: mula-mula hanya OTD Q2. Lanjut 1: batang hijau (efek kinerja). Lanjut 2: batang merah (efek komposisi) dan OTD Q3.</p>
+    <p>Cara menghitung, bila ada yang bertanya: OTD Q3 bila komposisinya tetap seperti Q2 = 0,6 × 94,0 + 0,3 × 83,0 + 0,1 × 71,2 = <b>88,4%</b>.</p>
+    <ul><li>Efek kinerja = 88,4 − 87,4 = <b>+1,0 poin</b>.</li><li>Efek komposisi = 85,0 − 88,4 = <b>−3,4 poin</b>.</li></ul>
+    <p class="say">“Kalau direksi hanya melihat 85,0%, mereka akan menghukum kinerja. Padahal yang menurunkan angka adalah keputusan bisnis yang bagus: kontrak baru di Kawasan Timur.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Babak 3 · tersangka pertama" data-block="Misteri OTD" data-at="21">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Babak 3 · masuk ke Kawasan Timur</div>
+    <h2>Di Kawasan Timur, pelabuhan tujuan mana yang paling bermasalah?</h2>
+    <table class="dt">
+      <tr><th>Tujuan</th><th>Kiriman Q2</th><th>OTD Q2</th><th>Kiriman Q3</th><th>OTD Q3</th></tr>
+      <tr><td>Ambon</td><td>400</td><td>72,0%</td><td>900</td><td>80,0%</td></tr>
+      <tr><td>Jayapura</td><td>350</td><td>70,0%</td><td>1.000</td><td>72,0%</td></tr>
+      <tr data-hl="3"><td>Sorong <span class="tag" data-step="3">pelaku?</span></td><td>200</td><td>70,0%</td><td>1.060</td><td>64,0%</td></tr>
+      <tr data-hl="1"><td>Merauke <span class="tag" data-step="1">tersangka?</span></td><td>50</td><td>60,0%</td><td>40</td><td>45,0%</td></tr>
+      <tr class="tot"><td>Total Kawasan Timur</td><td>1.000</td><td>70,3%</td><td>3.000</td><td>71,2%</td></tr>
+    </table>
+    <p class="say-line" data-step="2">Merauke memang paling rendah (45%), tetapi hanya 40 kiriman: 22 terlambat, 1% dari semua keterlambatan. Bukan dia.</p>
+    <span class="num">16</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 21–23</span></div>
+    <p class="say">“Tebak dalam hati: siapa yang paling bermasalah?”</p>
+    <p>Lanjut 1: Merauke menyala sebagai tersangka (hampir semua orang akan menebak Merauke karena angkanya paling rendah). Lanjut 2: tersangka dibebaskan. Lanjut 3: Sorong menyala.</p>
+    <p class="say">“Persentase terburuk belum tentu masalah terbesar. Prioritas ditentukan oleh berapa banyak kiriman yang terdampak.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Babak 4 · pelaku utama: Sorong" data-block="Misteri OTD" data-at="23">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Babak 4 · pelaku utama</div>
+    <h2>Sorong: 9% volume nasional, 21% dari semua keterlambatan.</h2>
+    <div class="grid" style="grid-template-columns:minmax(0,1fr) minmax(0,1.35fr) minmax(0,1fr)">
+      <div class="stat" data-step="1"><div class="v">5×</div><div class="l">kiriman ke Sorong dalam satu kuartal: dari 200 menjadi 1.060</div></div>
+      <div class="stat" data-step="2"><div class="v neg">70% → 64%</div><div class="l">OTD Sorong, satu-satunya tujuan besar yang memburuk</div></div>
+      <div class="stat" data-step="3"><div class="v">382</div><div class="l">kiriman terlambat, dari 1.800 keterlambatan nasional di Q3</div></div>
+    </div>
+    <p class="say-line big" data-step="4">Satu pelabuhan tujuan menjelaskan seperlima keterlambatan perusahaan. Di sinilah tindakan dimulai, bukan di semua hub.</p>
+    <span class="num">17</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 23–26</span></div>
+    <p>Buka angka satu per satu, dengan jeda. Perhitungan: terlambat nasional Q3 = 12.000 − 10.200 = 1.800. Sorong = 1.060 − 678 = 382 (21%). Seluruh Kawasan Timur = 864 keterlambatan (48%) dari 25% volume.</p>
+    <p>Cerita untuk praktisi pelayaran (Anda yang menjawab sendiri, tidak perlu bertanya ke kelas):</p>
+    <p class="say">“Apa yang biasanya terjadi di pelabuhan tujuan ketika volume naik lima kali dalam satu kuartal? Kapasitas bongkar, jadwal kapal, gudang, truk lanjutan. Itu semua hipotesis untuk diinvestigasi, belum kesimpulan.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Babak 5 · catatan kaki" data-block="Misteri OTD" data-at="26">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Babak 5 · petunjuk terakhir</div>
+    <h2>Petunjuk terakhir tersembunyi di baris paling kecil laporan.</h2>
+    <div class="fnotes">
+      <p>¹ OTD = persentase kiriman yang diterima pelanggan paling lambat pada tanggal SLA.</p>
+      <p>² Kenaikan volume Kawasan Timur pada Q3 berasal dari kontrak baru distribusi material proyek yang mulai Juli 2026.</p>
+      <p data-hl="1">³ Sejak 1 Agustus 2026, kiriman kontrak baru diukur terhadap SLA 14 hari. Kiriman laut lainnya tetap 10 hari.</p>
+    </div>
+    <div class="grid g2" style="margin-top:1em">
+      <div class="card hot" data-step="2"><span class="n">Artinya</span><p>Patokan “tepat waktu” di Kawasan Timur dilonggarkan dari 10 ke 14 hari. Kenaikan 70,3% → 71,2% belum bisa dibandingkan dengan Q2.</p></div>
+      <div class="card hot" data-step="3"><span class="n">Dampaknya</span><p>Dengan SLA yang sama, OTD Kawasan Timur dan Sorong kemungkinan lebih rendah lagi. Masalah Sorong bisa lebih besar dari yang terlihat.</p></div>
+    </div>
+    <span class="num">18</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 26–29</span></div>
+    <p class="say">“Ingat kalimat keenam di pembuka: apakah cara menghitungnya sama sebelum dan sesudah? Pertanyaan yang sama berlaku di sini.”</p>
+    <p>Lanjut 1: catatan kaki ketiga menyala. Lanjut 2 dan 3: artinya dan dampaknya. Hubungkan dengan Pertemuan 3 (tata kelola dan definisi data): definisi yang berubah di tengah periode adalah salah satu sumber insight palsu yang paling sering terjadi di kantor.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Jawaban untuk direksi" data-block="Misteri OTD" data-at="29">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kasus ditutup · jawaban untuk direksi</div>
+    <h2>Jangan menegur semua kepala hub. Ubah cara mengukur, lalu fokus ke Sorong.</h2>
+    <div class="grid g3">
+      <div class="card tint" data-step="1"><span class="n">01</span><h3>Laporkan per layanan</h3><p>Satu angka nasional menyembunyikan pergeseran komposisi. Target 90% untuk semua layanan juga tidak realistis untuk Kawasan Timur (71%).</p></div>
+      <div class="card tint" data-step="2"><span class="n">02</span><h3>Investigasi Sorong</h3><p>Volume 5× dan OTD turun. Cari penyebabnya: kapasitas bongkar, jadwal kapal, atau angkutan lanjutan.</p></div>
+      <div class="card tint" data-step="3"><span class="n">03</span><h3>Samakan definisi SLA</h3><p>Hitung ulang OTD Kawasan Timur dengan SLA yang sama sebelum membandingkan periode.</p></div>
+    </div>
+    <div data-step="4"><div class="vote"><span class="h" aria-hidden="true">✋</span> Angkat tangan lagi: siapa yang masih setuju dengan rencana awal direksi?</div></div>
+    <span class="num">19</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 29–32</span></div>
+    <p>Buka tiga rekomendasi satu per satu, lalu ulangi voting. Biasanya hampir tidak ada tangan yang naik. Bandingkan dengan voting pertama:</p>
+    <p class="say">“Tadi sekitar [jumlah] orang setuju. Sekarang hampir tidak ada. Datanya tidak berubah. Yang berubah adalah cara kita membacanya.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Lima langkah detektif" data-block="Misteri OTD" data-at="32">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Yang barusan kita lakukan</div>
+    <h2>Lima langkah yang bisa Anda pakai di data kantor Anda minggu depan.</h2>
+    <div class="flow">
+      <div class="card" data-step="1"><span class="n">Langkah 1</span><h3>Pecah angka total</h3><p>Per layanan, wilayah, atau pelanggan.</p></div>
+      <div class="card" data-step="2"><span class="n">Langkah 2</span><h3>Cek porsinya</h3><p>Apakah komposisinya bergeser antarperiode?</p></div>
+      <div class="card" data-step="3"><span class="n">Langkah 3</span><h3>Hitung kontribusi</h3><p>Berapa kasus, bukan hanya berapa persen.</p></div>
+      <div class="card" data-step="4"><span class="n">Langkah 4</span><h3>Baca definisinya</h3><p>Catatan kaki, perubahan SLA, cara hitung.</p></div>
+      <div class="card tint" data-step="5"><span class="n">Langkah 5</span><h3>Ubah keputusannya</h3><p>Rekomendasi yang mengganti rencana, bukan sekadar komentar.</p></div>
+    </div>
+    <span class="num">20</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 32–34</span></div>
+    <p>Langkah 1–4 adalah validasi dari Pertemuan 7 dalam bentuk praktis. Langkah 5 adalah pertanyaan ketiga: “apa yang perlu dilakukan?”</p>
+    <p class="say">“Kalau Anda hanya mengingat satu hal dari misteri tadi: jangan percaya angka total sebelum Anda memecahnya.”</p>
+  </div>
+</article>
+
+<!-- ============================ CARA MENYAMPAIKAN ============================ -->
+<article class="unit" data-title="Dua cara menyampaikan" data-block="Cara menyampaikan" data-at="34">
+  <div class="frame"><section class="slide dark divider">
+    <div class="big">03</div>
+    <div>
+      <div class="eyebrow">Cara menyampaikan · 20 menit</div>
+      <h1 class="display">Temuan yang sama, dua cara menyampaikan.</h1>
+      <p class="lede">Saya bacakan dua versi laporan ke direksi. Anda cukup memilih: mana yang akan didanai?</p>
+    </div>
+    <span class="num">21</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 34–35</span></div>
+    <p>Jembatan dari materi presentation skills: isi yang benar bisa gagal karena urutannya salah.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Versi A vs versi B" data-block="Cara menyampaikan" data-at="35">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Dibacakan dosen · masing-masing ± 40 detik</div>
+    <h2>Versi mana yang membuat direksi mengubah rencananya?</h2>
+    <div class="versions">
+      <div class="card"><span class="n">Versi A · kronologis</span><p>Pada Q2 kami mengirim 10.000 kiriman dengan OTD 87,4%. Pada Q3 volume naik menjadi 12.000. Darat Jawa naik ke 94%, laut antarpulau ke 83%, Kawasan Timur ke 71,2%. Di Kawasan Timur, Ambon 80%, Jayapura 72%, Sorong 64%, Merauke 45%. Secara nasional OTD menjadi 85,0%. Sejak Agustus ada perubahan SLA pada kontrak baru.</p></div>
+      <div class="card tint" data-step="1"><span class="n">Versi B · kesimpulan dulu</span><p><b>OTD nasional turun bukan karena hub bekerja lebih buruk; semua layanan justru membaik.</b> Angkanya turun karena porsi Kawasan Timur naik dari 10% ke 25%. Masalah nyata ada di Sorong: 21% dari semua keterlambatan. Usul kami: laporkan OTD per layanan dan kirim tim ke Sorong minggu depan. Catatan: SLA kontrak baru berbeda, jadi angka Kawasan Timur perlu dihitung ulang.</p></div>
+    </div>
+    <div data-step="2"><div class="vote"><span class="h" aria-hidden="true">✋</span> Hitungan ketiga: satu jari untuk A, dua jari untuk B.</div></div>
+    <span class="num">22</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 35–40</span></div>
+    <p>Bacakan versi A dengan nada laporan biasa. Lanjut 1, bacakan versi B dengan tegas. Lanjut 2, voting.</p>
+    <p class="say">“Isinya sama persis. Angkanya sama. Bedanya: versi A membuat direksi menyimpulkan sendiri, dan mereka akan menyimpulkan ‘OTD turun, tegur hub’. Versi B memberi kesimpulannya di kalimat pertama.”</p>
+    <p>Tunjukkan bahwa kalimat pertama versi B langsung membantah rencana direksi. Itu yang membuat rapat berubah arah.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Format lima langkah" data-block="Cara menyampaikan" data-at="40">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Membedah versi B</div>
+    <h2>Kesimpulan di kalimat pertama, batasan di kalimat terakhir.</h2>
+    <div class="flow">
+      <div class="card tint" data-step="1"><span class="n">01</span><h3>Kesimpulan</h3><p>“Turun bukan karena hub bekerja lebih buruk.”</p><span class="t">± 15 detik</span></div>
+      <div class="card" data-step="2"><span class="n">02</span><h3>Yang berubah</h3><p>Porsi Kawasan Timur 10% → 25%.</p><span class="t">± 30 detik</span></div>
+      <div class="card" data-step="3"><span class="n">03</span><h3>Mengapa penting</h3><p>Sorong = 21% dari semua keterlambatan.</p><span class="t">± 30 detik</span></div>
+      <div class="card" data-step="4"><span class="n">04</span><h3>Tindakan</h3><p>Laporan per layanan, tim ke Sorong.</p><span class="t">± 30 detik</span></div>
+      <div class="card" data-step="5"><span class="n">05</span><h3>Batasan</h3><p>SLA kontrak baru berbeda, perlu dihitung ulang.</p><span class="t">± 15 detik</span></div>
+    </div>
+    <span class="num">23</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 40–43</span></div>
+    <p>Langkah 1–4 adalah tiga pertanyaan insight dari Pertemuan 7, dibungkus prinsip presentation skills: kesimpulan dulu. Langkah 5 untuk tingkat S2: menyebut batasan membuat Anda lebih dipercaya, bukan kurang.</p>
+    <p class="say">“Di rapat, orang paling senior biasanya hanya mendengar 15 detik pertama dengan serius. Jadi kalimat pertama Anda adalah kesimpulannya.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Direktur skeptis" data-block="Cara menyampaikan" data-at="43">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Saya berperan sebagai direktur · jawaban yang kuat</div>
+    <h2>Enam pertanyaan yang pasti muncul, dan jawaban yang menenangkan direksi.</h2>
+    <div class="qa">
+      <div><b>1 · So what?</b><span data-step="1">382 kiriman terlambat per kuartal, seperlima masalah perusahaan.</span></div>
+      <div><b>2 · Dibanding apa?</b><span data-step="2">Sorong Q2 70%; tujuan lain di Kawasan Timur justru membaik.</span></div>
+      <div><b>3 · Dari mana Anda tahu?</b><span data-step="3">Data kiriman Q2–Q3: 1.060 kiriman ke Sorong di Q3.</span></div>
+      <div><b>4 · Apa penjelasan lain?</b><span data-step="4">Bisa jadi jadwal kapal kontrak baru, bukan pelabuhannya. Itu yang diinvestigasi.</span></div>
+      <div><b>5 · Definisinya sama?</b><span data-step="5">Belum: SLA kontrak baru 14 hari. Angka Sorong mungkin lebih buruk.</span></div>
+      <div><b>6 · Satu hal untuk besok?</b><span data-step="6">Rapat dengan kepala hub Sorong dan pemilik kontrak baru.</span></div>
+    </div>
+    <span class="num">24</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 43–50</span></div>
+    <p>Mainkan dua peran sendiri: bacakan pertanyaan dengan nada direktur yang skeptis, tekan Lanjut, lalu jawab dengan nada analis yang tenang. Ini bagian yang paling menghibur bagi kelas pasif karena mereka hanya menonton “rapat” berlangsung.</p>
+    <p>Setelah keenamnya terbuka:</p>
+    <p class="say">“Pertanyaan nomor 5 yang paling jarang disiapkan, padahal paling sering menjatuhkan presentasi di kantor. Siapkan jawabannya sebelum rapat.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Tiga hal dari Sesi 1" data-block="Cara menyampaikan" data-at="50">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Penutup Sesi 1</div>
+    <h2>Tiga hal yang dibawa pulang dari Sesi 1.</h2>
+    <div class="grid g3">
+      <div class="card" data-step="1"><span class="n">Membaca</span><p>Angka total bisa turun walaupun semua bagiannya membaik. Cek porsinya.</p></div>
+      <div class="card" data-step="2"><span class="n">Memprioritaskan</span><p>Masalah terbesar ditentukan jumlah kasus, bukan persentase terburuk.</p></div>
+      <div class="card" data-step="3"><span class="n">Menyampaikan</span><p>Kesimpulan di kalimat pertama, batasan di kalimat terakhir.</p></div>
+    </div>
+    <p class="muted small" data-step="4" style="margin-top:1.2em">Lima menit berikutnya: tanya jawab. Pertanyaan boleh ditulis di kertas dan dititipkan saat istirahat.</p>
+    <span class="num">25</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 50–60</span></div>
+    <p>Menit 50–55: buka tiga kartu. Menit 55–60: tanya jawab. Untuk kelas pasif, tawarkan jalur tanpa bicara: pertanyaan ditulis di kertas kecil dan diserahkan saat istirahat; jawab di awal Sesi 2.</p>
+    <p>Bila tidak ada pertanyaan sama sekali, pakai cadangan ini dan jawab sendiri: <i>“Bagaimana kalau data saya di kantor tidak bisa dipecah per segmen?”</i> (jawaban: mulai dari segmen yang tersedia, sebutkan sebagai batasan).</p>
+  </div>
+</article>
+
+<!-- ============================ ISTIRAHAT ============================ -->
+<article class="unit" data-title="Istirahat" data-block="Istirahat" data-at="60">
+  <div class="frame"><section class="slide pine center" data-timer="600" data-tlabel="Istirahat">
+    <div class="eyebrow">Istirahat · 10 menit</div>
+    <h1 class="display">Kembali pukul <span contenteditable="true" data-key="back">__.__</span></h1>
+    <p class="lede" style="color:#D6EDE7">Setelah istirahat: lima grafik yang menipu tanpa satu angka pun salah.</p>
+    <div class="tchips"><button class="tchip" type="button" data-sec="600" data-label="Istirahat">10:00 istirahat</button></div>
+    <span class="num">26</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 60–70</span></div>
+    <p>Klik jam di slide untuk mengetik jam kembali, lalu klik tombol 10:00 (atau tekan T). Kumpulkan kertas pertanyaan bila ada.</p>
+  </div>
+</article>
+
+<!-- ============================ JEBAKAN GRAFIK ============================ -->
+<article class="unit" data-title="Lima jebakan grafik" data-block="Jebakan grafik" data-at="70">
+  <div class="frame"><section class="slide dark divider">
+    <div class="big">04</div>
+    <div>
+      <div class="eyebrow">Sesi 2 · 30 menit</div>
+      <h1 class="display">Lima grafik yang menipu tanpa satu angka pun salah.</h1>
+      <p class="lede">Setiap grafik: tebak dalam hati selama 10 detik, lalu saya buka versi jujurnya.</p>
+    </div>
+    <span class="num">27</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 70–71</span></div>
+    <p>Bila ada kertas pertanyaan dari istirahat, jawab dulu (maksimal 3 menit, ambil dari waktu slide terakhir sesi ini).</p>
+    <p class="say">“Semua grafik ini memakai angka yang benar. Yang menipu adalah cara menggambarnya. Grafik seperti ini muncul setiap minggu di laporan kantor.”</p>
+    <p>Pola tiap jebakan: tampilkan grafik kiri dan klaimnya → Lanjut 1: kotak “tebak 10 detik” (klik 0:10 atau tekan T) → Lanjut 2: versi jujur dan pertanyaan pembongkarnya.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Jebakan 1 · sumbu dipotong" data-block="Jebakan grafik" data-at="71">
+  <div class="frame"><section class="slide" data-timer="10" data-tlabel="Tebak">
+    <div class="eyebrow">Jebakan 1 dari 5 · sumbu dipotong</div>
+    <h2>Laporan: <span class="claim">“OTD anjlok drastis di Q3.”</span></h2>
+    <div class="trap">
+      <div class="panel"><div class="ptitle"><b>Grafik di laporan</b> · OTD nasional</div><div class="chart"><svg viewBox="0 0 560 330" role="img" aria-label="Grafik dengan sumbu mulai 84 persen: batang Q3 tampak kurang dari separuh Q2." font-family="IBM Plex Sans,Arial,sans-serif"><line x1="74" x2="540" y1="264.0" y2="264.0" stroke="#E3E9EB"/><text x="66" y="270.0" text-anchor="end" font-size="17" fill="#6B818B">84%</text><line x1="74" x2="540" y1="206.5" y2="206.5" stroke="#E3E9EB"/><text x="66" y="212.5" text-anchor="end" font-size="17" fill="#6B818B">85%</text><line x1="74" x2="540" y1="149.0" y2="149.0" stroke="#E3E9EB"/><text x="66" y="155.0" text-anchor="end" font-size="17" fill="#6B818B">86%</text><line x1="74" x2="540" y1="91.5" y2="91.5" stroke="#E3E9EB"/><text x="66" y="97.5" text-anchor="end" font-size="17" fill="#6B818B">87%</text><line x1="74" x2="540" y1="34.0" y2="34.0" stroke="#E3E9EB"/><text x="66" y="40.0" text-anchor="end" font-size="17" fill="#6B818B">88%</text><g><title>Q2: 87,4%</title><path d="M130.5,264.0 V72.5 Q130.5,68.5 134.5,68.5 H246.5 Q250.5,68.5 250.5,72.5 V264.0 Z" fill="#0E2430"/></g><text x="190.5" y="59.5" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">87,4%</text><text x="190.5" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Q2</text><g><title>Q3: 85,0%</title><path d="M363.5,264.0 V210.5 Q363.5,206.5 367.5,206.5 H479.5 Q483.5,206.5 483.5,210.5 V264.0 Z" fill="#0E2430"/></g><text x="423.5" y="197.5" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">85,0%</text><text x="423.5" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Q3</text><line x1="74" x2="540" y1="264.0" y2="264.0" stroke="#C3D0D4" stroke-width="1"/></svg></div></div>
+      <div class="stack">
+        <div class="guess" data-step="1" data-until="2"><div class="q">Apa yang membuat grafik kiri menipu?</div><div class="tchips"><button class="tchip" type="button" data-sec="10" data-label="Tebak">0:10 tebak</button></div></div>
+        <div class="panel" data-step="2"><div class="ptitle"><b class="ok">Grafik jujur</b> · sumbu dari nol</div><div class="chart"><svg viewBox="0 0 560 330" role="img" aria-label="Grafik dengan sumbu mulai nol: Q2 87,4 persen dan Q3 85,0 persen hampir sama tinggi." font-family="IBM Plex Sans,Arial,sans-serif"><line x1="74" x2="540" y1="264.0" y2="264.0" stroke="#E3E9EB"/><text x="66" y="270.0" text-anchor="end" font-size="17" fill="#6B818B">0%</text><line x1="74" x2="540" y1="206.5" y2="206.5" stroke="#E3E9EB"/><text x="66" y="212.5" text-anchor="end" font-size="17" fill="#6B818B">25%</text><line x1="74" x2="540" y1="149.0" y2="149.0" stroke="#E3E9EB"/><text x="66" y="155.0" text-anchor="end" font-size="17" fill="#6B818B">50%</text><line x1="74" x2="540" y1="91.5" y2="91.5" stroke="#E3E9EB"/><text x="66" y="97.5" text-anchor="end" font-size="17" fill="#6B818B">75%</text><line x1="74" x2="540" y1="34.0" y2="34.0" stroke="#E3E9EB"/><text x="66" y="40.0" text-anchor="end" font-size="17" fill="#6B818B">100%</text><g><title>Q2: 87,4%</title><path d="M130.5,264.0 V67.0 Q130.5,63.0 134.5,63.0 H246.5 Q250.5,63.0 250.5,67.0 V264.0 Z" fill="#0E2430"/></g><text x="190.5" y="54.0" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">87,4%</text><text x="190.5" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Q2</text><g><title>Q3: 85,0%</title><path d="M363.5,264.0 V72.5 Q363.5,68.5 367.5,68.5 H479.5 Q483.5,68.5 483.5,72.5 V264.0 Z" fill="#0E2430"/></g><text x="423.5" y="59.5" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">85,0%</text><text x="423.5" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Q3</text><line x1="74" x2="540" y1="264.0" y2="264.0" stroke="#C3D0D4" stroke-width="1"/></svg></div>
+          <p class="pcap">Turun 2,4 poin, dari 87,4% ke 85,0%. Nyata, tetapi bukan “anjlok”.</p>
+          <p class="pq">Pertanyaan pembongkar: dari angka berapa sumbunya dimulai?</p></div>
+      </div>
+    </div>
+    <span class="num">28</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 71–76</span></div>
+    <p>Hubungkan dengan misteri: angka OTD yang sama bisa dibuat terlihat seperti bencana. Grafik kiri memulai sumbu dari 84%, sehingga batang Q3 tampak kurang dari separuh batang Q2.</p>
+    <p class="say">“Grafik batang wajib mulai dari nol, karena mata kita membandingkan panjang batang. Kalau ingin menunjukkan perubahan kecil, tulis angkanya: turun 2,4 poin.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Jebakan 2 · persen dari angka kecil" data-block="Jebakan grafik" data-at="76">
+  <div class="frame"><section class="slide" data-timer="10" data-tlabel="Tebak">
+    <div class="eyebrow">Jebakan 2 dari 5 · persen dari angka kecil</div>
+    <h2>Laporan: <span class="claim">“Klaim kerusakan Gudang B melonjak 200%.”</span></h2>
+    <div class="trap">
+      <div class="panel"><div class="ptitle"><b>Grafik di laporan</b> · perubahan klaim Q2 → Q3</div><div class="chart"><svg viewBox="0 0 560 330" role="img" aria-label="Perubahan klaim dalam persen: Gudang A minus 10 persen, Gudang B plus 200 persen." font-family="IBM Plex Sans,Arial,sans-serif"><line x1="74" x2="540" y1="264.0" y2="264.0" stroke="#E3E9EB"/><text x="66" y="270.0" text-anchor="end" font-size="17" fill="#6B818B">−50%</text><line x1="74" x2="540" y1="218.0" y2="218.0" stroke="#E3E9EB"/><text x="66" y="224.0" text-anchor="end" font-size="17" fill="#6B818B">0%</text><line x1="74" x2="540" y1="172.0" y2="172.0" stroke="#E3E9EB"/><text x="66" y="178.0" text-anchor="end" font-size="17" fill="#6B818B">50%</text><line x1="74" x2="540" y1="126.0" y2="126.0" stroke="#E3E9EB"/><text x="66" y="132.0" text-anchor="end" font-size="17" fill="#6B818B">100%</text><line x1="74" x2="540" y1="80.0" y2="80.0" stroke="#E3E9EB"/><text x="66" y="86.0" text-anchor="end" font-size="17" fill="#6B818B">150%</text><line x1="74" x2="540" y1="34.0" y2="34.0" stroke="#E3E9EB"/><text x="66" y="40.0" text-anchor="end" font-size="17" fill="#6B818B">200%</text><g><title>Gudang A: −10%</title><path d="M130.5,218.0 V223.2 Q130.5,227.2 134.5,227.2 H246.5 Q250.5,227.2 250.5,223.2 V218.0 Z" fill="#00806A"/></g><text x="190.5" y="249.2" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">−10%</text><text x="190.5" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Gudang A</text><g><title>Gudang B: 200%</title><path d="M363.5,218.0 V38.0 Q363.5,34.0 367.5,34.0 H479.5 Q483.5,34.0 483.5,38.0 V218.0 Z" fill="#B83A22"/></g><text x="423.5" y="25.0" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">+200%</text><text x="423.5" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Gudang B</text><line x1="74" x2="540" y1="218.0" y2="218.0" stroke="#0E2430" stroke-width="1.5"/></svg></div></div>
+      <div class="stack">
+        <div class="guess" data-step="1" data-until="2"><div class="q">Gudang mana yang sebenarnya perlu diperbaiki?</div><div class="tchips"><button class="tchip" type="button" data-sec="10" data-label="Tebak">0:10 tebak</button></div></div>
+        <div class="panel" data-step="2"><div class="ptitle"><b class="ok">Grafik jujur</b> · perubahan jumlah klaim</div><div class="chart"><svg viewBox="0 0 560 330" role="img" aria-label="Perubahan jumlah klaim: Gudang A berkurang 12 klaim, Gudang B bertambah 4 klaim." font-family="IBM Plex Sans,Arial,sans-serif"><line x1="74" x2="540" y1="264.0" y2="264.0" stroke="#E3E9EB"/><text x="66" y="270.0" text-anchor="end" font-size="17" fill="#6B818B">−15</text><line x1="74" x2="540" y1="225.7" y2="225.7" stroke="#E3E9EB"/><text x="66" y="231.7" text-anchor="end" font-size="17" fill="#6B818B">−10</text><line x1="74" x2="540" y1="187.3" y2="187.3" stroke="#E3E9EB"/><text x="66" y="193.3" text-anchor="end" font-size="17" fill="#6B818B">−5</text><line x1="74" x2="540" y1="149.0" y2="149.0" stroke="#E3E9EB"/><text x="66" y="155.0" text-anchor="end" font-size="17" fill="#6B818B">0</text><line x1="74" x2="540" y1="110.7" y2="110.7" stroke="#E3E9EB"/><text x="66" y="116.7" text-anchor="end" font-size="17" fill="#6B818B">5</text><line x1="74" x2="540" y1="72.3" y2="72.3" stroke="#E3E9EB"/><text x="66" y="78.3" text-anchor="end" font-size="17" fill="#6B818B">10</text><line x1="74" x2="540" y1="34.0" y2="34.0" stroke="#E3E9EB"/><text x="66" y="40.0" text-anchor="end" font-size="17" fill="#6B818B">15</text><g><title>Gudang A: −12 klaim</title><path d="M130.5,149.0 V237.0 Q130.5,241.0 134.5,241.0 H246.5 Q250.5,241.0 250.5,237.0 V149.0 Z" fill="#00806A"/></g><text x="190.5" y="263.0" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">−12 klaim</text><text x="190.5" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Gudang A</text><g><title>Gudang B: 4 klaim</title><path d="M363.5,149.0 V122.3 Q363.5,118.3 367.5,118.3 H479.5 Q483.5,118.3 483.5,122.3 V149.0 Z" fill="#B83A22"/></g><text x="423.5" y="109.3" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">+4 klaim</text><text x="423.5" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Gudang B</text><line x1="74" x2="540" y1="149.0" y2="149.0" stroke="#0E2430" stroke-width="1.5"/></svg></div>
+          <p class="pcap">Gudang B: 2 → 6 klaim. Gudang A: 120 → 108 klaim. Masalah besarnya tetap di Gudang A.</p>
+          <p class="pq">Pertanyaan pembongkar: persen dari berapa?</p></div>
+      </div>
+    </div>
+    <span class="num">29</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 76–81</span></div>
+    <p>Sama dengan Merauke di misteri: persentase besar dari angka kecil terlihat dramatis. Gudang A masih menghasilkan 108 klaim per kuartal walaupun “turun 10%”.</p>
+    <p class="say">“Setiap kali melihat persen yang mengejutkan, tanyakan angka aslinya. Dua ke enam itu naik 200%, tetapi hanya empat klaim.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Jebakan 3 · periode dipilih" data-block="Jebakan grafik" data-at="81">
+  <div class="frame"><section class="slide" data-timer="10" data-tlabel="Tebak">
+    <div class="eyebrow">Jebakan 3 dari 5 · periode yang dipilih</div>
+    <h2>Laporan: <span class="claim">“Throughput terminal naik 19% dalam lima bulan.”</span></h2>
+    <div class="trap">
+      <div class="panel"><div class="ptitle"><b>Grafik di laporan</b> · ribu TEU, Apr–Sep 2026</div><div class="chart"><svg viewBox="0 0 560 330" role="img" aria-label="Throughput April sampai September 2026 naik dari 84 ke 100 ribu TEU." font-family="IBM Plex Sans,Arial,sans-serif"><line x1="74" x2="540" y1="264.0" y2="264.0" stroke="#E3E9EB"/><text x="66" y="270.0" text-anchor="end" font-size="17" fill="#6B818B">80</text><line x1="74" x2="540" y1="216.1" y2="216.1" stroke="#E3E9EB"/><text x="66" y="222.1" text-anchor="end" font-size="17" fill="#6B818B">85</text><line x1="74" x2="540" y1="168.2" y2="168.2" stroke="#E3E9EB"/><text x="66" y="174.2" text-anchor="end" font-size="17" fill="#6B818B">90</text><line x1="74" x2="540" y1="120.2" y2="120.2" stroke="#E3E9EB"/><text x="66" y="126.2" text-anchor="end" font-size="17" fill="#6B818B">95</text><line x1="74" x2="540" y1="72.3" y2="72.3" stroke="#E3E9EB"/><text x="66" y="78.3" text-anchor="end" font-size="17" fill="#6B818B">100</text><text x="88.0" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Apr</text><text x="175.6" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Mei</text><text x="263.2" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Jun</text><text x="350.8" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Jul</text><text x="438.4" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Agu</text><text x="526.0" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Sep</text><line x1="74" x2="540" y1="264" y2="264" stroke="#C3D0D4"/><polyline points="88.0,225.7 175.6,158.6 263.2,110.7 350.8,91.5 438.4,81.9 526.0,72.3" fill="none" stroke="#0E2430" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><g><title>Throughput, Apr: 84</title><circle cx="88.0" cy="225.7" r="11" fill="transparent"/><circle cx="88.0" cy="225.7" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Throughput, Mei: 91</title><circle cx="175.6" cy="158.6" r="11" fill="transparent"/><circle cx="175.6" cy="158.6" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Throughput, Jun: 96</title><circle cx="263.2" cy="110.7" r="11" fill="transparent"/><circle cx="263.2" cy="110.7" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Throughput, Jul: 98</title><circle cx="350.8" cy="91.5" r="11" fill="transparent"/><circle cx="350.8" cy="91.5" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Throughput, Agu: 99</title><circle cx="438.4" cy="81.9" r="11" fill="transparent"/><circle cx="438.4" cy="81.9" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Throughput, Sep: 100</title><circle cx="526.0" cy="72.3" r="11" fill="transparent"/><circle cx="526.0" cy="72.3" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><text x="90" y="66" font-size="17" font-weight="700" fill="#0E2430">+19% dalam 5 bulan</text></svg></div></div>
+      <div class="stack">
+        <div class="guess" data-step="1" data-until="2"><div class="q">Kenapa grafiknya dimulai dari bulan April?</div><div class="tchips"><button class="tchip" type="button" data-sec="10" data-label="Tebak">0:10 tebak</button></div></div>
+        <div class="panel" data-step="2"><div class="ptitle"><b class="ok">Grafik jujur</b> · ribu TEU, 24 bulan</div><div class="chart"><svg viewBox="0 0 560 330" role="img" aria-label="Throughput 24 bulan: pola musiman yang sama tiap tahun, turun saat Lebaran lalu pulih." font-family="IBM Plex Sans,Arial,sans-serif"><rect x="175.2" y="34" width="35.0" height="230" fill="#F1E6D6"/><text x="192.7" y="50" text-anchor="middle" font-size="13" fill="#8A5A16">Lebaran</text><rect x="403.7" y="34" width="35.0" height="230" fill="#F1E6D6"/><text x="421.3" y="50" text-anchor="middle" font-size="13" fill="#8A5A16">Lebaran</text><line x1="74" x2="540" y1="264.0" y2="264.0" stroke="#E3E9EB"/><text x="66" y="270.0" text-anchor="end" font-size="17" fill="#6B818B">80</text><line x1="74" x2="540" y1="216.1" y2="216.1" stroke="#E3E9EB"/><text x="66" y="222.1" text-anchor="end" font-size="17" fill="#6B818B">85</text><line x1="74" x2="540" y1="168.2" y2="168.2" stroke="#E3E9EB"/><text x="66" y="174.2" text-anchor="end" font-size="17" fill="#6B818B">90</text><line x1="74" x2="540" y1="120.2" y2="120.2" stroke="#E3E9EB"/><text x="66" y="126.2" text-anchor="end" font-size="17" fill="#6B818B">95</text><line x1="74" x2="540" y1="72.3" y2="72.3" stroke="#E3E9EB"/><text x="66" y="78.3" text-anchor="end" font-size="17" fill="#6B818B">100</text><text x="88.0" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Okt '24</text><text x="202.3" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Apr '25</text><text x="316.5" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Okt '25</text><text x="430.8" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Apr '26</text><text x="526.0" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Sep '26</text><line x1="74" x2="540" y1="264" y2="264" stroke="#C3D0D4"/><polyline points="88.0,91.5 107.0,81.9 126.1,43.6 145.1,110.7 164.2,120.2 183.2,225.7 202.3,244.8 221.3,168.2 240.3,120.2 259.4,101.1 278.4,91.5 297.5,91.5 316.5,81.9 335.6,72.3 354.6,34.0 373.7,101.1 392.7,110.7 411.7,216.1 430.8,225.7 449.8,158.6 468.9,110.7 487.9,91.5 507.0,81.9 526.0,72.3" fill="none" stroke="#0E2430" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><g><title>Throughput, Okt '24: 98</title><circle cx="88.0" cy="91.5" r="11" fill="transparent"/><circle cx="88.0" cy="91.5" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Throughput, : 99</title><circle cx="107.0" cy="81.9" r="11" fill="transparent"/></g><g><title>Throughput, : 103</title><circle cx="126.1" cy="43.6" r="11" fill="transparent"/></g><g><title>Throughput, : 96</title><circle cx="145.1" cy="110.7" r="11" fill="transparent"/></g><g><title>Throughput, : 95</title><circle cx="164.2" cy="120.2" r="11" fill="transparent"/></g><g><title>Throughput, : 84</title><circle cx="183.2" cy="225.7" r="11" fill="transparent"/></g><g><title>Throughput, Apr '25: 82</title><circle cx="202.3" cy="244.8" r="11" fill="transparent"/></g><g><title>Throughput, : 90</title><circle cx="221.3" cy="168.2" r="11" fill="transparent"/></g><g><title>Throughput, : 95</title><circle cx="240.3" cy="120.2" r="11" fill="transparent"/></g><g><title>Throughput, : 97</title><circle cx="259.4" cy="101.1" r="11" fill="transparent"/></g><g><title>Throughput, : 98</title><circle cx="278.4" cy="91.5" r="11" fill="transparent"/></g><g><title>Throughput, : 98</title><circle cx="297.5" cy="91.5" r="11" fill="transparent"/></g><g><title>Throughput, Okt '25: 99</title><circle cx="316.5" cy="81.9" r="11" fill="transparent"/></g><g><title>Throughput, : 100</title><circle cx="335.6" cy="72.3" r="11" fill="transparent"/></g><g><title>Throughput, : 104</title><circle cx="354.6" cy="34.0" r="11" fill="transparent"/></g><g><title>Throughput, : 97</title><circle cx="373.7" cy="101.1" r="11" fill="transparent"/></g><g><title>Throughput, : 96</title><circle cx="392.7" cy="110.7" r="11" fill="transparent"/></g><g><title>Throughput, : 85</title><circle cx="411.7" cy="216.1" r="11" fill="transparent"/></g><g><title>Throughput, Apr '26: 84</title><circle cx="430.8" cy="225.7" r="11" fill="transparent"/></g><g><title>Throughput, : 91</title><circle cx="449.8" cy="158.6" r="11" fill="transparent"/></g><g><title>Throughput, : 96</title><circle cx="468.9" cy="110.7" r="11" fill="transparent"/></g><g><title>Throughput, : 98</title><circle cx="487.9" cy="91.5" r="11" fill="transparent"/></g><g><title>Throughput, : 99</title><circle cx="507.0" cy="81.9" r="11" fill="transparent"/></g><g><title>Throughput, Sep '26: 100</title><circle cx="526.0" cy="72.3" r="11" fill="transparent"/><circle cx="526.0" cy="72.3" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g></svg></div>
+          <p class="pcap">Pola yang sama setiap tahun: turun saat Lebaran, lalu pulih. September 2025 ke September 2026 hanya naik 2% (98 → 100).</p>
+          <p class="pq">Pertanyaan pembongkar: kenapa grafiknya dimulai dari bulan itu?</p></div>
+      </div>
+    </div>
+    <span class="num">30</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 81–86</span></div>
+    <p>Sangat relevan untuk pelabuhan dan logistik di Indonesia: April adalah titik rendah setelah Lebaran. Memulai grafik dari titik rendah membuat pemulihan musiman terlihat seperti pertumbuhan.</p>
+    <p class="say">“Untuk data musiman, bandingkan dengan bulan yang sama tahun lalu, bukan dengan bulan lalu.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Jebakan 4 · dua sumbu" data-block="Jebakan grafik" data-at="86">
+  <div class="frame"><section class="slide" data-timer="10" data-tlabel="Tebak">
+    <div class="eyebrow">Jebakan 4 dari 5 · dua sumbu</div>
+    <h2>Laporan: <span class="claim">“Biaya BBM menyebabkan keterlambatan truk.”</span></h2>
+    <div class="trap">
+      <div class="panel"><div class="ptitle"><b>Grafik di laporan</b> · Okt 2025–Sep 2026</div><div class="chart"><svg viewBox="0 0 560 330" role="img" aria-label="Dua sumbu: biaya BBM per km dan persentase keterlambatan tampak bergerak berimpit." font-family="IBM Plex Sans,Arial,sans-serif"><line x1="74" x2="496" y1="238.4" y2="238.4" stroke="#E3E9EB"/><text x="66" y="244.4" text-anchor="end" font-size="17" fill="#2A62B0">2.400</text><line x1="74" x2="496" y1="187.3" y2="187.3" stroke="#E3E9EB"/><text x="66" y="193.3" text-anchor="end" font-size="17" fill="#2A62B0">2.420</text><line x1="74" x2="496" y1="136.2" y2="136.2" stroke="#E3E9EB"/><text x="66" y="142.2" text-anchor="end" font-size="17" fill="#2A62B0">2.440</text><line x1="74" x2="496" y1="85.1" y2="85.1" stroke="#E3E9EB"/><text x="66" y="91.1" text-anchor="end" font-size="17" fill="#2A62B0">2.460</text><line x1="74" x2="496" y1="34.0" y2="34.0" stroke="#E3E9EB"/><text x="66" y="40.0" text-anchor="end" font-size="17" fill="#2A62B0">2.480</text><text x="504" y="250.8" font-size="17" fill="#C0791F">8%</text><text x="504" y="186.9" font-size="17" fill="#C0791F">10%</text><text x="504" y="123.1" font-size="17" fill="#C0791F">12%</text><text x="504" y="59.2" font-size="17" fill="#C0791F">14%</text><text x="88.0" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Okt</text><text x="195.5" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Jan</text><text x="302.9" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Apr</text><text x="410.4" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Jul</text><text x="482.0" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Sep</text><line x1="74" x2="496" y1="264" y2="264" stroke="#C3D0D4"/><polyline points="88.0,238.4 123.8,225.7 159.6,212.9 195.5,200.1 231.3,187.3 267.1,174.6 302.9,161.8 338.7,136.2 374.5,123.4 410.4,97.9 446.2,85.1 482.0,59.6" fill="none" stroke="#2A62B0" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><g><title>Biaya BBM/km, Okt: 2.400</title><circle cx="88.0" cy="238.4" r="11" fill="transparent"/><circle cx="88.0" cy="238.4" r="5" fill="#2A62B0" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Biaya BBM/km, : 2.405</title><circle cx="123.8" cy="225.7" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, : 2.410</title><circle cx="159.6" cy="212.9" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, Jan: 2.415</title><circle cx="195.5" cy="200.1" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, : 2.420</title><circle cx="231.3" cy="187.3" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, : 2.425</title><circle cx="267.1" cy="174.6" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, Apr: 2.430</title><circle cx="302.9" cy="161.8" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, : 2.440</title><circle cx="338.7" cy="136.2" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, : 2.445</title><circle cx="374.5" cy="123.4" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, Jul: 2.455</title><circle cx="410.4" cy="97.9" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, : 2.460</title><circle cx="446.2" cy="85.1" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, Sep: 2.470</title><circle cx="482.0" cy="59.6" r="11" fill="transparent"/><circle cx="482.0" cy="59.6" r="5" fill="#2A62B0" stroke="#FBFCFC" stroke-width="2"/></g><polyline points="88.0,244.8 123.8,235.2 159.6,216.1 195.5,200.1 231.3,184.1 267.1,168.2 302.9,149.0 338.7,129.8 374.5,110.7 410.4,91.5 446.2,72.3 482.0,53.2" fill="none" stroke="#C0791F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><g><title>Keterlambatan, Okt: 8</title><circle cx="88.0" cy="244.8" r="11" fill="transparent"/><circle cx="88.0" cy="244.8" r="5" fill="#C0791F" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Keterlambatan, : 8,3</title><circle cx="123.8" cy="235.2" r="11" fill="transparent"/></g><g><title>Keterlambatan, : 8,9</title><circle cx="159.6" cy="216.1" r="11" fill="transparent"/></g><g><title>Keterlambatan, Jan: 9,4</title><circle cx="195.5" cy="200.1" r="11" fill="transparent"/></g><g><title>Keterlambatan, : 9,9</title><circle cx="231.3" cy="184.1" r="11" fill="transparent"/></g><g><title>Keterlambatan, : 10,4</title><circle cx="267.1" cy="168.2" r="11" fill="transparent"/></g><g><title>Keterlambatan, Apr: 11</title><circle cx="302.9" cy="149.0" r="11" fill="transparent"/></g><g><title>Keterlambatan, : 11,6</title><circle cx="338.7" cy="129.8" r="11" fill="transparent"/></g><g><title>Keterlambatan, : 12,2</title><circle cx="374.5" cy="110.7" r="11" fill="transparent"/></g><g><title>Keterlambatan, Jul: 12,8</title><circle cx="410.4" cy="91.5" r="11" fill="transparent"/></g><g><title>Keterlambatan, : 13,4</title><circle cx="446.2" cy="72.3" r="11" fill="transparent"/></g><g><title>Keterlambatan, Sep: 14</title><circle cx="482.0" cy="53.2" r="11" fill="transparent"/><circle cx="482.0" cy="53.2" r="5" fill="#C0791F" stroke="#FBFCFC" stroke-width="2"/></g><text x="84" y="58" font-size="17" font-weight="700" fill="#2A62B0">Biaya BBM/km (Rp)</text><text x="300" y="58" font-size="17" font-weight="700" fill="#C0791F">Keterlambatan (%)</text></svg></div></div>
+      <div class="stack">
+        <div class="guess" data-step="1" data-until="2"><div class="q">Apakah kedua garis benar-benar bergerak bersama?</div><div class="tchips"><button class="tchip" type="button" data-sec="10" data-label="Tebak">0:10 tebak</button></div></div>
+        <div class="panel" data-step="2"><div class="ptitle"><b class="ok">Grafik jujur</b> · satu sumbu, indeks Okt = 100</div><div class="chart"><svg viewBox="0 0 560 330" role="img" aria-label="Satu sumbu, indeks Oktober 2025 sama dengan 100: biaya BBM naik ke 103, keterlambatan naik ke 175." font-family="IBM Plex Sans,Arial,sans-serif"><line x1="74" x2="540" y1="238.4" y2="238.4" stroke="#E3E9EB"/><text x="66" y="244.4" text-anchor="end" font-size="17" fill="#6B818B">100</text><line x1="74" x2="540" y1="187.3" y2="187.3" stroke="#E3E9EB"/><text x="66" y="193.3" text-anchor="end" font-size="17" fill="#6B818B">120</text><line x1="74" x2="540" y1="136.2" y2="136.2" stroke="#E3E9EB"/><text x="66" y="142.2" text-anchor="end" font-size="17" fill="#6B818B">140</text><line x1="74" x2="540" y1="85.1" y2="85.1" stroke="#E3E9EB"/><text x="66" y="91.1" text-anchor="end" font-size="17" fill="#6B818B">160</text><line x1="74" x2="540" y1="34.0" y2="34.0" stroke="#E3E9EB"/><text x="66" y="40.0" text-anchor="end" font-size="17" fill="#6B818B">180</text><text x="88.0" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Okt</text><text x="207.5" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Jan</text><text x="326.9" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Apr</text><text x="446.4" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Jul</text><text x="526.0" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Sep</text><line x1="74" x2="540" y1="264" y2="264" stroke="#C3D0D4"/><polyline points="88.0,238.4 127.8,228.7 167.6,209.8 207.5,193.7 247.3,177.6 287.1,161.8 326.9,142.6 366.7,123.4 406.5,104.3 446.4,85.1 486.2,65.9 526.0,46.8" fill="none" stroke="#C0791F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><g><title>Keterlambatan, Okt: 100</title><circle cx="88.0" cy="238.4" r="11" fill="transparent"/><circle cx="88.0" cy="238.4" r="5" fill="#C0791F" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Keterlambatan, : 103,8</title><circle cx="127.8" cy="228.7" r="11" fill="transparent"/></g><g><title>Keterlambatan, : 111,2</title><circle cx="167.6" cy="209.8" r="11" fill="transparent"/></g><g><title>Keterlambatan, Jan: 117,5</title><circle cx="207.5" cy="193.7" r="11" fill="transparent"/></g><g><title>Keterlambatan, : 123,8</title><circle cx="247.3" cy="177.6" r="11" fill="transparent"/></g><g><title>Keterlambatan, : 130</title><circle cx="287.1" cy="161.8" r="11" fill="transparent"/></g><g><title>Keterlambatan, Apr: 137,5</title><circle cx="326.9" cy="142.6" r="11" fill="transparent"/></g><g><title>Keterlambatan, : 145</title><circle cx="366.7" cy="123.4" r="11" fill="transparent"/></g><g><title>Keterlambatan, : 152,5</title><circle cx="406.5" cy="104.3" r="11" fill="transparent"/></g><g><title>Keterlambatan, Jul: 160</title><circle cx="446.4" cy="85.1" r="11" fill="transparent"/></g><g><title>Keterlambatan, : 167,5</title><circle cx="486.2" cy="65.9" r="11" fill="transparent"/></g><g><title>Keterlambatan, Sep: 175</title><circle cx="526.0" cy="46.8" r="11" fill="transparent"/><circle cx="526.0" cy="46.8" r="5" fill="#C0791F" stroke="#FBFCFC" stroke-width="2"/></g><text x="526.0" y="34.8" text-anchor="end" font-size="17" font-weight="600" fill="#0E2430">Keterlambatan</text><polyline points="88.0,238.4 127.8,237.9 167.6,237.4 207.5,236.9 247.3,236.4 287.1,235.9 326.9,235.4 366.7,234.1 406.5,233.6 446.4,232.6 486.2,232.1 526.0,231.0" fill="none" stroke="#2A62B0" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><g><title>Biaya BBM/km, Okt: 100</title><circle cx="88.0" cy="238.4" r="11" fill="transparent"/><circle cx="88.0" cy="238.4" r="5" fill="#2A62B0" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Biaya BBM/km, : 100,2</title><circle cx="127.8" cy="237.9" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, : 100,4</title><circle cx="167.6" cy="237.4" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, Jan: 100,6</title><circle cx="207.5" cy="236.9" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, : 100,8</title><circle cx="247.3" cy="236.4" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, : 101</title><circle cx="287.1" cy="235.9" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, Apr: 101,2</title><circle cx="326.9" cy="235.4" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, : 101,7</title><circle cx="366.7" cy="234.1" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, : 101,9</title><circle cx="406.5" cy="233.6" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, Jul: 102,3</title><circle cx="446.4" cy="232.6" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, : 102,5</title><circle cx="486.2" cy="232.1" r="11" fill="transparent"/></g><g><title>Biaya BBM/km, Sep: 102,9</title><circle cx="526.0" cy="231.0" r="11" fill="transparent"/><circle cx="526.0" cy="231.0" r="5" fill="#2A62B0" stroke="#FBFCFC" stroke-width="2"/></g><text x="526.0" y="219.0" text-anchor="end" font-size="17" font-weight="600" fill="#0E2430">Biaya BBM/km</text></svg></div>
+          <p class="pcap">Biaya BBM naik 3%, keterlambatan naik 75%. Garisnya berimpit hanya karena skala dua sumbu diatur berbeda.</p>
+          <p class="pq">Pertanyaan pembongkar: apakah kedua garis memakai skala yang sama?</p></div>
+      </div>
+    </div>
+    <span class="num">31</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 86–91</span></div>
+    <p>Grafik dua sumbu bisa membuat dua garis apa pun terlihat berimpit, cukup dengan mengatur skala kiri dan kanan. Ditambah kalimat “menyebabkan”, jadilah insight palsu (ingat kalimat 6 di pembuka).</p>
+    <p class="say">“Kalau dua ukuran berbeda satuannya, ubah keduanya menjadi indeks di satu sumbu, atau gambar dua grafik terpisah. Dan bergerak bersama tetap belum berarti sebab-akibat.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Jebakan 5 · grafik kumulatif" data-block="Jebakan grafik" data-at="91">
+  <div class="frame"><section class="slide" data-timer="10" data-tlabel="Tebak">
+    <div class="eyebrow">Jebakan 5 dari 5 · grafik kumulatif</div>
+    <h2>Laporan: <span class="claim">“Kiriman 2026 terus tumbuh setiap bulan.”</span></h2>
+    <div class="trap">
+      <div class="panel"><div class="ptitle"><b>Grafik di laporan</b> · ribu kiriman, kumulatif</div><div class="chart"><svg viewBox="0 0 560 330" role="img" aria-label="Kiriman kumulatif 2026 naik terus dari 4,2 ke 39,5 ribu." font-family="IBM Plex Sans,Arial,sans-serif"><line x1="74" x2="540" y1="264.0" y2="264.0" stroke="#E3E9EB"/><text x="66" y="270.0" text-anchor="end" font-size="17" fill="#6B818B">0</text><line x1="74" x2="540" y1="206.5" y2="206.5" stroke="#E3E9EB"/><text x="66" y="212.5" text-anchor="end" font-size="17" fill="#6B818B">10</text><line x1="74" x2="540" y1="149.0" y2="149.0" stroke="#E3E9EB"/><text x="66" y="155.0" text-anchor="end" font-size="17" fill="#6B818B">20</text><line x1="74" x2="540" y1="91.5" y2="91.5" stroke="#E3E9EB"/><text x="66" y="97.5" text-anchor="end" font-size="17" fill="#6B818B">30</text><line x1="74" x2="540" y1="34.0" y2="34.0" stroke="#E3E9EB"/><text x="66" y="40.0" text-anchor="end" font-size="17" fill="#6B818B">40</text><text x="88.0" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Jan</text><text x="142.8" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Feb</text><text x="197.5" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Mar</text><text x="252.2" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Apr</text><text x="307.0" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Mei</text><text x="361.8" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Jun</text><text x="416.5" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Jul</text><text x="471.2" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Agu</text><text x="526.0" y="291" text-anchor="middle" font-size="16" fill="#6B818B">Sep</text><line x1="74" x2="540" y1="264" y2="264" stroke="#C3D0D4"/><polyline points="88.0,239.8 142.8,214.6 197.5,188.1 252.2,160.5 307.0,132.3 361.8,105.9 416.5,81.1 471.2,58.2 526.0,36.9" fill="none" stroke="#0E2430" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><g><title>Kumulatif, Jan: 4,2</title><circle cx="88.0" cy="239.8" r="11" fill="transparent"/><circle cx="88.0" cy="239.8" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Kumulatif, Feb: 8,6</title><circle cx="142.8" cy="214.6" r="11" fill="transparent"/><circle cx="142.8" cy="214.6" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Kumulatif, Mar: 13,2</title><circle cx="197.5" cy="188.1" r="11" fill="transparent"/><circle cx="197.5" cy="188.1" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Kumulatif, Apr: 18</title><circle cx="252.2" cy="160.5" r="11" fill="transparent"/><circle cx="252.2" cy="160.5" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Kumulatif, Mei: 22,9</title><circle cx="307.0" cy="132.3" r="11" fill="transparent"/><circle cx="307.0" cy="132.3" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Kumulatif, Jun: 27,5</title><circle cx="361.8" cy="105.9" r="11" fill="transparent"/><circle cx="361.8" cy="105.9" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Kumulatif, Jul: 31,8</title><circle cx="416.5" cy="81.1" r="11" fill="transparent"/><circle cx="416.5" cy="81.1" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Kumulatif, Agu: 35,8</title><circle cx="471.2" cy="58.2" r="11" fill="transparent"/><circle cx="471.2" cy="58.2" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><g><title>Kumulatif, Sep: 39,5</title><circle cx="526.0" cy="36.9" r="11" fill="transparent"/><circle cx="526.0" cy="36.9" r="5" fill="#0E2430" stroke="#FBFCFC" stroke-width="2"/></g><text x="424" y="44" font-size="17" font-weight="700" fill="#0E2430">39,5 ribu</text></svg></div></div>
+      <div class="stack">
+        <div class="guess" data-step="1" data-until="2"><div class="q">Bisakah grafik ini pernah turun?</div><div class="tchips"><button class="tchip" type="button" data-sec="10" data-label="Tebak">0:10 tebak</button></div></div>
+        <div class="panel" data-step="2"><div class="ptitle"><b class="ok">Grafik jujur</b> · ribu kiriman per bulan</div><div class="chart"><svg viewBox="0 0 560 330" role="img" aria-label="Kiriman per bulan: naik sampai Mei 4,9 ribu, lalu turun empat bulan berturut-turut ke 3,7 ribu." font-family="IBM Plex Sans,Arial,sans-serif"><line x1="74" x2="540" y1="264.0" y2="264.0" stroke="#E3E9EB"/><text x="66" y="270.0" text-anchor="end" font-size="17" fill="#6B818B">0</text><line x1="74" x2="540" y1="222.2" y2="222.2" stroke="#E3E9EB"/><text x="66" y="228.2" text-anchor="end" font-size="17" fill="#6B818B">1</text><line x1="74" x2="540" y1="180.4" y2="180.4" stroke="#E3E9EB"/><text x="66" y="186.4" text-anchor="end" font-size="17" fill="#6B818B">2</text><line x1="74" x2="540" y1="138.5" y2="138.5" stroke="#E3E9EB"/><text x="66" y="144.5" text-anchor="end" font-size="17" fill="#6B818B">3</text><line x1="74" x2="540" y1="96.7" y2="96.7" stroke="#E3E9EB"/><text x="66" y="102.7" text-anchor="end" font-size="17" fill="#6B818B">4</text><line x1="74" x2="540" y1="54.9" y2="54.9" stroke="#E3E9EB"/><text x="66" y="60.9" text-anchor="end" font-size="17" fill="#6B818B">5</text><g><title>Jan: 4,2</title><path d="M80.9,264.0 V92.4 Q80.9,88.4 84.9,88.4 H114.9 Q118.9,88.4 118.9,92.4 V264.0 Z" fill="#0E2430"/></g><text x="99.9" y="79.4" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">4,2</text><text x="99.9" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Jan</text><g><title>Feb: 4,4</title><path d="M132.7,264.0 V84.0 Q132.7,80.0 136.7,80.0 H166.7 Q170.7,80.0 170.7,84.0 V264.0 Z" fill="#0E2430"/></g><text x="151.7" y="71.0" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">4,4</text><text x="151.7" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Feb</text><g><title>Mar: 4,6</title><path d="M184.4,264.0 V75.6 Q184.4,71.6 188.4,71.6 H218.4 Q222.4,71.6 222.4,75.6 V264.0 Z" fill="#0E2430"/></g><text x="203.4" y="62.6" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">4,6</text><text x="203.4" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Mar</text><g><title>Apr: 4,8</title><path d="M236.2,264.0 V67.3 Q236.2,63.3 240.2,63.3 H270.2 Q274.2,63.3 274.2,67.3 V264.0 Z" fill="#0E2430"/></g><text x="255.2" y="54.3" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">4,8</text><text x="255.2" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Apr</text><g><title>Mei: 4,9</title><path d="M288.0,264.0 V63.1 Q288.0,59.1 292.0,59.1 H322.0 Q326.0,59.1 326.0,63.1 V264.0 Z" fill="#0E2430"/></g><text x="307.0" y="50.1" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">4,9</text><text x="307.0" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Mei</text><g><title>Jun: 4,6</title><path d="M339.8,264.0 V75.6 Q339.8,71.6 343.8,71.6 H373.8 Q377.8,71.6 377.8,75.6 V264.0 Z" fill="#B83A22"/></g><text x="358.8" y="62.6" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">4,6</text><text x="358.8" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Jun</text><g><title>Jul: 4,3</title><path d="M391.6,264.0 V88.2 Q391.6,84.2 395.6,84.2 H425.6 Q429.6,84.2 429.6,88.2 V264.0 Z" fill="#B83A22"/></g><text x="410.6" y="75.2" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">4,3</text><text x="410.6" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Jul</text><g><title>Agu: 4,0</title><path d="M443.3,264.0 V100.7 Q443.3,96.7 447.3,96.7 H477.3 Q481.3,96.7 481.3,100.7 V264.0 Z" fill="#B83A22"/></g><text x="462.3" y="87.7" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">4,0</text><text x="462.3" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Agu</text><g><title>Sep: 3,7</title><path d="M495.1,264.0 V113.3 Q495.1,109.3 499.1,109.3 H529.1 Q533.1,109.3 533.1,113.3 V264.0 Z" fill="#B83A22"/></g><text x="514.1" y="100.3" text-anchor="middle" font-size="20" font-weight="700" fill="#0E2430">3,7</text><text x="514.1" y="292" text-anchor="middle" font-size="18" fill="#3D5561">Sep</text><line x1="74" x2="540" y1="264.0" y2="264.0" stroke="#C3D0D4" stroke-width="1"/></svg></div>
+          <p class="pcap">Kiriman per bulan turun empat bulan berturut-turut: 4,9 ribu (Mei) menjadi 3,7 ribu (September).</p>
+          <p class="pq">Pertanyaan pembongkar: ini angka per periode atau angka kumulatif?</p></div>
+      </div>
+    </div>
+    <span class="num">32</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 91–96</span></div>
+    <p>Grafik kumulatif tidak pernah turun selama nilainya tidak negatif, jadi selalu terlihat seperti pertumbuhan. Penurunan 24% sejak Mei tersembunyi di dalam garis yang terus naik.</p>
+    <p class="say">“Grafik kumulatif cocok untuk melacak target tahunan. Untuk melihat tren, pakai angka per periode.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Lima pertanyaan sebelum percaya grafik" data-block="Jebakan grafik" data-at="96">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Penutup Sesi 2 · simpan di ponsel Anda</div>
+    <h2>Lima pertanyaan sebelum memercayai grafik, termasuk grafik Anda sendiri.</h2>
+    <div class="checklist">
+      <div data-step="1"><i>1</i><span>Dari angka berapa sumbunya dimulai?<small>Sumbu dipotong</small></span></div>
+      <div data-step="2"><i>2</i><span>Persen dari berapa?<small>Persen dari angka kecil</small></span></div>
+      <div data-step="3"><i>3</i><span>Kenapa periodenya dimulai dari situ?<small>Periode yang dipilih</small></span></div>
+      <div data-step="4"><i>4</i><span>Apakah kedua garis memakai skala yang sama?<small>Dua sumbu</small></span></div>
+      <div data-step="5"><i>5</i><span>Ini angka per periode atau kumulatif?<small>Grafik kumulatif</small></span></div>
+    </div>
+    <span class="num">33</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 96–100</span></div>
+    <p class="say">“Silakan foto slide ini. Pakai lima pertanyaan ini untuk project Anda: sebelum mengumpulkan, periksa setiap grafik Anda sendiri dengan daftar ini.”</p>
+    <p>Mengajak memotret slide adalah partisipasi tanpa risiko yang biasanya diikuti hampir semua mahasiswa.</p>
+  </div>
+</article>
+
+<!-- ============================ PROJECT ============================ -->
+<article class="unit" data-title="Giliran Anda" data-block="Project" data-at="100">
+  <div class="frame"><section class="slide dark divider">
+    <div class="big">05</div>
+    <div>
+      <div class="eyebrow">Project · 20 menit</div>
+      <h1 class="display">Giliran Anda: satu dataset, lima peran, satu tebakan.</h1>
+      <p class="lede">Anda pulang membawa peran dan tebakan yang sudah ditulis di kartu.</p>
+    </div>
+    <span class="num">34</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 100–101</span></div>
+    <p>Alur 20 menit: dataset dan tugas (3) → lima peran (4) → isi laporan dan penilaian (3) → menulis kartu tebakan dalam diam (7) → penutup (3).</p>
+    <p class="say">“Tadi Anda melihat saya membedah satu data. Sekarang giliran Anda, dengan data yang lebih besar dan lebih berantakan.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Project: dataset Nusantara Kargo 2025" data-block="Project" data-at="101">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Project dibawa pulang</div>
+    <h2>Membaca data Nusantara Kargo 2025: lima sheet, beberapa cerita tersembunyi.</h2>
+    <div class="grid g2">
+      <div class="card tint"><span class="n">Isi dataset (fiktif)</span>
+        <p><b>Kiriman</b> · ± 11 ribu transaksi 2025<br><b>Pelanggan</b> · 120 pelanggan<br><b>Armada</b> · 36 truk × 12 bulan<br><b>Gudang</b> · 5 gudang × 12 bulan<br><b>Terminal</b> · 2 terminal peti kemas, 2022–2025</p></div>
+      <div class="grid" style="gap:.6em">
+        <div class="card"><span class="n">Unduh</span><p>irwanraditya.github.io/ITL-Trisakti → kartu Analitika Bisnis → <b>Dataset project</b></p></div>
+        <div class="card"><span class="n">Bentuk</span><p contenteditable="true" data-key="pbentuk" class="ph blank">[Individu / kelompok; jumlah halaman atau slide]</p></div>
+        <div class="card"><span class="n">Tenggat</span><p contenteditable="true" data-key="ptenggat" class="ph blank">[Tanggal dan kanal pengumpulan]</p></div>
+      </div>
+    </div>
+    <p class="muted small" style="margin-top:.9em">Tidak ada jawaban tunggal. Data menyimpan beberapa cerita, dan tidak semuanya penting untuk peran Anda.</p>
+    <span class="num">35</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 101–104</span></div>
+    <p><b>Isi teks oranye malam ini</b> (bentuk dan tenggat). Isian yang sama juga perlu diisi di sheet “Petunjuk” pada file dataset (sel kuning).</p>
+    <p>Dataset fiktif tetapi dibuat menyerupai data operasional: setiap peran punya 2–4 cerita tersembunyi dan satu jebakan. Kuncinya ada di file <i>Kunci Project AB 2026 (dosen).xlsx</i> di PC (privat, tidak diunggah).</p>
+    <p class="say">“AI boleh membantu mengolah data. Tetapi di pertemuan berikutnya ada pengecekan 10 menit tanpa membuka laporan: angka utama Anda, dari mana angka itu, dan satu pertanyaan ‘bagaimana jika’.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Lima peran" data-block="Project" data-at="104">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Peran ditentukan angka terakhir NIM</div>
+    <h2>Lima peran, lima pertanyaan dari direksi.</h2>
+    <table class="dt roles">
+      <tr><th>NIM</th><th>Peran</th><th>Pertanyaan direksi</th></tr>
+      <tr data-step="1"><td>0 · 1</td><td><b>Manajer Operasional</b></td><td>OTD naik-turun sepanjang 2025. Kapan dan di mana masalahnya, dan mana yang bisa kita kendalikan?</td></tr>
+      <tr data-step="2"><td>2 · 3</td><td><b>Manajer Komersial</b></td><td>Pendapatan semester 2 naik tajam. Apakah kualitas pendapatan ikut membaik?</td></tr>
+      <tr data-step="3"><td>4 · 5</td><td><b>Manajer Armada</b></td><td>Biaya solar semester 2 naik. Apa penyebabnya, dan truk mana yang perlu diganti?</td></tr>
+      <tr data-step="4"><td>6 · 7</td><td><b>Manajer Gudang</b></td><td>Gudang mana yang benar-benar bermasalah soal klaim kerusakan, dan kenapa?</td></tr>
+      <tr data-step="5"><td>8 · 9</td><td><b>Analis Terminal</b></td><td>Direksi terminal ingin menambah dermaga di TPK Selatan. Apakah datanya mendukung?</td></tr>
+    </table>
+    <span class="num">36</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 104–108</span></div>
+    <p>Buka satu baris per klik. Contoh: NIM 26C606001013 berakhir angka 3, jadi perannya Manajer Komersial.</p>
+    <p>Jangan membocorkan ceritanya. Cukup katakan: <span class="say">“Setiap pertanyaan punya jawaban yang terlihat jelas, dan jawaban yang benar. Keduanya tidak selalu sama. Ingat lima langkah detektif dan lima pertanyaan grafik tadi.”</span></p>
+    <p>Peran yang berbeda membuat jawaban antarmahasiswa sulit disalin, karena pertanyaan dan sheet utamanya berbeda.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Isi laporan dan penilaian" data-block="Project" data-at="108">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Isi laporan dan yang akan saya nilai</div>
+    <h2>Lima bagian laporan, empat kriteria penilaian.</h2>
+    <div class="flow">
+      <div class="card tint" data-step="1"><span class="n">a</span><h3>Tebakan vs temuan</h3><p>Benar, salah, atau meleset seberapa jauh?</p></div>
+      <div class="card" data-step="2"><span class="n">b</span><h3>Maks. 3 insight</h3><p>Apa yang berubah, mengapa penting, apa yang dilakukan.</p></div>
+      <div class="card" data-step="3"><span class="n">c</span><h3>1 pengecekan</h3><p>Definisi, porsi, ukuran sampel, atau outlier.</p></div>
+      <div class="card" data-step="4"><span class="n">d</span><h3>1 jebakan grafik</h3><p>Dari data Anda: versi menipu dan versi jujur.</p></div>
+      <div class="card" data-step="5"><span class="n">e</span><h3>1 rekomendasi</h3><p>Untuk direksi, beserta batasannya.</p></div>
+    </div>
+    <p class="say-line" data-step="6" style="max-width:none;font-weight:400">Dinilai: <b>pembingkaian masalah</b> · <b>ketepatan analisis</b> (angka bisa ditelusuri ke file Excel) · <b>kualitas insight</b> · <b>validasi</b>.</p>
+    <span class="num">37</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 108–111</span></div>
+    <p>Kriteria sama dengan fokus UTS di deck AB: problem framing, ketepatan analisis, kualitas insight, validasi. Yang dikumpulkan: laporan PDF dan file Excel kerja (pivot, rumus, grafik).</p>
+    <p>Bagian (a) membuat tebakan di kartu malam ini punya fungsi: tebakan yang salah tidak mengurangi nilai, justru sering menghasilkan insight terbaik.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Kartu tebakan" data-block="Project" data-at="111">
+  <div class="frame"><section class="slide" data-timer="420" data-tlabel="Kartu tebakan">
+    <div class="eyebrow">Ditulis sendiri, tanpa bicara · 7 menit</div>
+    <h2>Sebelum membuka data: tulis tebakan Anda. Contoh dari kasus hari ini:</h2>
+    <dl class="ex">
+      <dt>Peran</dt><dd class="lead">Analis OTD Nusantara Kargo 2026 (kasus di kelas)</dd>
+      <dt>Tebakan</dt><dd>“OTD turun karena kepala hub kurang disiplin.”</dd>
+      <dt>Angka pertama</dt><dd>OTD per layanan, Q2 dibanding Q3.</dd>
+      <dt>Ingin dibuktikan</dt><dd>Apakah semua layanan memang memburuk?</dd>
+    </dl>
+    <p class="say-line" style="max-width:none;font-weight:400">Tebakan ini ternyata salah, dan justru dari situ insight terbaiknya muncul. Tebakan tidak dinilai benar atau salah.</p>
+    <div class="tchips"><button class="tchip" type="button" data-sec="420" data-label="Kartu tebakan">7:00 menulis</button></div>
+    <span class="num">38</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 111–118</span></div>
+    <p>Bagikan kartu tebakan (lampiran cetak, dua kartu per A4; tabel peran tercetak di kartu). Jalankan timer 7:00. Menulis dalam diam adalah partisipasi yang nyaman bagi kelas pasif.</p>
+    <p>Kenapa kartu ini penting: tebakan ditulis tangan sebelum data dibuka dan Anda simpan. Di laporan, mahasiswa harus membandingkan tebakan dengan temuan. Bagian ini tidak bisa dibuat ulang oleh AI setelah analisis selesai.</p>
+    <p>Sambil menunggu, baca sekilas: kartu tanpa peran yang benar (salah membaca angka NIM) diluruskan saat itu juga.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Penutup" data-block="Project" data-at="118">
+  <div class="frame"><section class="slide dark center">
+    <div class="eyebrow">Sebelum pulang</div>
+    <h1 class="display">Serahkan kartu tebakan Anda.</h1>
+    <p class="lede">Dataset: irwanraditya.github.io/ITL-Trisakti → kartu Analitika Bisnis → Dataset project. Tenggat: <span contenteditable="true" data-key="ptenggat2">[tanggal]</span>.</p>
+    <span class="num">39</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 118–120</span></div>
+    <p class="say">“Hari ini Anda melihat satu angka nasional yang hampir membuat direksi menghukum orang yang salah. Di project ini, giliran Anda mencegah hal yang sama.”</p>
+    <p>Setelah kelas: foto kartu tebakan untuk arsip, dan kirim slide 33 (lima pertanyaan grafik) serta tautan dataset ke grup kelas.</p>
+  </div>
+</article>
+</main>
+
+<!-- ============================ LAMPIRAN CETAK ============================ -->
+<section id="lampiran" aria-label="Lampiran cetak">
+  <h2>Lampiran cetak (A4)</h2>
+  <p class="lp">Lembar pegangan bersifat opsional (agar mahasiswa bisa mengikuti angka). Kartu tebakan: dua kartu per A4.</p>
+  <div class="page">
+    <div class="ey">Analitika Bisnis · lembar pegangan · Nusantara Kargo (kasus fiktif)</div>
+    <h3>Misteri OTD yang turun</h3>
+    <div class="memo"><div class="from">Memo direksi</div>
+      <p>Ketepatan waktu pengiriman (OTD) nasional turun dari <b>87,4%</b> pada Q2 menjadi <b>85,0%</b> pada Q3 2026. Rencana: (1) teguran tertulis kepada seluruh kepala hub; (2) target OTD 90% untuk semua layanan pada Q4.</p></div>
+    <b>Tabel 1. OTD per layanan</b>
+    <table class="dt">
+      <tr><th>Layanan</th><th>Kiriman Q2</th><th>OTD Q2</th><th>Kiriman Q3</th><th>OTD Q3</th></tr>
+      <tr><td>Darat Jawa</td><td>6.000</td><td>93,0%</td><td>5.400</td><td>94,0%</td></tr>
+      <tr><td>Laut antarpulau (Kalimantan, Sulawesi)</td><td>3.000</td><td>82,0%</td><td>3.600</td><td>83,0%</td></tr>
+      <tr><td>Laut Kawasan Timur (Maluku, Papua)</td><td>1.000</td><td>70,3%</td><td>3.000</td><td>71,2%</td></tr>
+      <tr class="tot"><td>Total nasional</td><td>10.000</td><td>87,4%</td><td>12.000</td><td>85,0%</td></tr>
+    </table>
+    <b>Tabel 2. Laut Kawasan Timur per pelabuhan tujuan</b>
+    <table class="dt">
+      <tr><th>Tujuan</th><th>Kiriman Q2</th><th>OTD Q2</th><th>Kiriman Q3</th><th>OTD Q3</th></tr>
+      <tr><td>Ambon</td><td>400</td><td>72,0%</td><td>900</td><td>80,0%</td></tr>
+      <tr><td>Jayapura</td><td>350</td><td>70,0%</td><td>1.000</td><td>72,0%</td></tr>
+      <tr><td>Sorong</td><td>200</td><td>70,0%</td><td>1.060</td><td>64,0%</td></tr>
+      <tr><td>Merauke</td><td>50</td><td>60,0%</td><td>40</td><td>45,0%</td></tr>
+      <tr class="tot"><td>Total Kawasan Timur</td><td>1.000</td><td>70,3%</td><td>3.000</td><td>71,2%</td></tr>
+    </table>
+    <div class="fnotes" style="font-size:9.5pt">
+      <p>¹ OTD = persentase kiriman yang diterima pelanggan paling lambat pada tanggal SLA.</p>
+      <p>² Kenaikan volume Kawasan Timur pada Q3 berasal dari kontrak baru distribusi material proyek yang mulai Juli 2026.</p>
+      <p>³ Sejak 1 Agustus 2026, kiriman kontrak baru diukur terhadap SLA 14 hari. Kiriman laut lainnya tetap 10 hari.</p>
+    </div>
+    <p style="margin-top:5mm"><b>Tebakan saya: siapa “pelakunya”, dan apa yang seharusnya diputuskan direksi?</b></p>
+    <div class="lines"><div></div><div></div><div></div><div></div></div>
+  </div>
+  <div class="page"><div class="cuts" id="kt-cards"></div></div>
+</section>
+
+<div id="ctl" class="js-only">
+  <button class="tb" type="button" data-act="prev" aria-label="Sebelumnya">◀</button>
+  <span class="pos" id="c-pos">1 / 38</span>
+  <span class="stepinfo"><span class="dots" id="c-dots"></span><span id="c-step"></span></span>
+  <button class="tb primary" type="button" data-act="next">Lanjut ▶</button>
+  <span class="nextup" id="c-next"></span>
+</div>
+
+<aside id="outline" hidden aria-label="Daftar slide">
+  <h3>Daftar slide <button class="tb" type="button" id="b-outline-x" aria-label="Tutup daftar">×</button></h3>
+  <div id="outline-list"></div>
+</aside>
+<div id="help" hidden role="dialog" aria-label="Pintasan keyboard">
+  <h3>Pintasan keyboard</h3>
+  <table>
+    <tr><td>→ · Spasi · klik slide</td><td>Lanjut (munculkan langkah berikutnya, lalu pindah slide)</td></tr>
+    <tr><td>← · Backspace</td><td>Mundur satu langkah</td></tr>
+    <tr><td>N</td><td>Tampilkan / sembunyikan catatan</td></tr>
+    <tr><td>F</td><td>Layar penuh (tampilan untuk mahasiswa); Esc untuk keluar</td></tr>
+    <tr><td>T · R</td><td>Mulai/jeda timer slide ini · ulang timer</td></tr>
+    <tr><td>O</td><td>Daftar slide</td></tr>
+    <tr><td>Home · End</td><td>Slide pertama · terakhir</td></tr>
+  </table>
+  <p style="margin-top:10px;font-size:13px;color:var(--muted)">Clicker presentasi (tombol Page Down / Page Up) juga bisa dipakai.</p>
+  <p style="margin-top:10px"><button class="tb" type="button" id="b-help-x">Tutup</button></p>
+</div>
+<div id="timer" role="timer" hidden title="Klik untuk jeda / lanjut"><div class="clk">0:00</div><div class="lbl"></div><button class="x" type="button" aria-label="Tutup timer">×</button></div>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+
+<template id="tpl-kt">
+  <div class="cut">
+    <div class="ey">Kartu tebakan project · Analitika Bisnis · ditulis sebelum membuka data</div>
+    <p>Nama / NIM: ____________________________________________</p>
+    <table class="rolemap"><tr><td>NIM 0·1 Operasional</td><td>2·3 Komersial</td><td>4·5 Armada</td><td>6·7 Gudang</td><td>8·9 Terminal</td></tr></table>
+    <p class="field">1. Peran saya <span class="hint">(angka terakhir NIM)</span></p><div class="line"></div>
+    <p class="field">2. Tebakan saya <span class="hint">(satu kalimat jawaban untuk pertanyaan peran saya)</span></p><div class="line"></div><div class="line"></div>
+    <p class="field">3. Angka pertama yang akan saya cek</p><div class="line"></div>
+    <p class="field">4. Yang ingin saya buktikan, atau yang belum saya pahami</p><div class="line"></div><div class="line"></div>
+  </div>
+</template>
+
+<script>
+(function(){
+  'use strict';
+  var D=document, root=D.documentElement, body=D.body;
+  root.classList.add('js');
+  if(window.__ARTIFACT__) root.classList.add('artifact');
+  var AUD=(location.hash==='#proyektor');
+  if(AUD) body.classList.add('aud');
+  var $=function(s,c){return (c||D).querySelector(s);}, $$=function(s,c){return [].slice.call((c||D).querySelectorAll(s));};
+  var units=$$('#deck .unit'), N=units.length, cur=0, step=0;
+  var KEY='ab-tm-20261010:';
+  function sget(k){try{return window.localStorage.getItem(KEY+k);}catch(e){return null;}}
+  function sset(k,v){try{window.localStorage.setItem(KEY+k,v);}catch(e){}}
+  function sdel(k){try{window.localStorage.removeItem(KEY+k);}catch(e){}}
+  var toastEl=$('#toast'),toastT;
+  function toast(m){toastEl.textContent=m;toastEl.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){toastEl.hidden=true;},3200);}
+
+  /* kartu cetak */
+  (function(){var box=$('#kt-cards'),t=$('#tpl-kt');if(box&&t){for(var i=0;i<2;i++)box.appendChild(t.content.cloneNode(true));}})();
+
+  /* ---------- blok waktu ---------- */
+  var blocks=[];
+  units.forEach(function(u,i){
+    var b=u.getAttribute('data-block');
+    if(!blocks.length||blocks[blocks.length-1].name!==b) blocks.push({name:b,first:i,last:i,from:+u.getAttribute('data-at')});
+    else blocks[blocks.length-1].last=i;
+  });
+  blocks.forEach(function(b,i){b.to=(i<blocks.length-1)?blocks[i+1].from:120;});
+  var strip=$('#strip');
+  blocks.forEach(function(b,i){
+    var el=D.createElement('button');el.type='button';el.style.flexGrow=String(b.to-b.from);
+    el.innerHTML='<b></b><span></span><i class="fill"></i>';
+    el.querySelector('b').textContent=b.name;
+    el.querySelector('span').textContent=b.from+'–'+b.to+'′';
+    el.title=b.name+' · menit '+b.from+'–'+b.to;
+    el.addEventListener('click',function(){go(b.first,0);});
+    b.el=el;strip.appendChild(el);
+  });
+
+  /* ---------- daftar slide ---------- */
+  var olist=$('#outline-list'), oitems=[];
+  blocks.forEach(function(b){
+    var h=D.createElement('div');h.className='blk';h.textContent=b.name+' · '+b.from+'–'+b.to+'′';olist.appendChild(h);
+    for(var i=b.first;i<=b.last;i++){(function(i){
+      var it=D.createElement('button');it.type='button';it.className='it';
+      it.innerHTML='<span></span><em></em>';
+      it.querySelector('span').textContent=(i+1)+' · '+units[i].getAttribute('data-at')+'′';
+      it.querySelector('em').textContent=units[i].getAttribute('data-title');
+      it.querySelector('em').style.fontStyle='normal';
+      it.addEventListener('click',function(){go(i,0);toggleOutline(false);});
+      olist.appendChild(it);oitems[i]=it;
+    })(i);}
+  });
+  function toggleOutline(v){var o=$('#outline');o.hidden=(v===undefined)?!o.hidden:!v;}
+  $('#b-outline').addEventListener('click',function(){toggleOutline();});
+  $('#b-outline-x').addEventListener('click',function(){toggleOutline(false);});
+  function toggleHelp(v){var h=$('#help');h.hidden=(v===undefined)?!h.hidden:!v;}
+  $('#b-help').addEventListener('click',function(){toggleHelp();});
+  $('#b-help-x').addEventListener('click',function(){toggleHelp(false);});
+
+  /* ---------- langkah ---------- */
+  function maxStep(u){var m=0;$$('[data-step],[data-hl]',u).forEach(function(el){m=Math.max(m,+(el.getAttribute('data-step')||el.getAttribute('data-hl'))||0);});return m;}
+  var ctl=$('#ctl');
+  function render(){
+    units.forEach(function(u,k){u.classList.toggle('cur',k===cur);});
+    var u=units[cur], mx=maxStep(u);
+    $$('[data-step]',u).forEach(function(el){el.classList.toggle('hid',+el.getAttribute('data-step')>step);});
+    $$('[data-until]',u).forEach(function(el){el.classList.toggle('gone',step>=+el.getAttribute('data-until'));});
+    $$('[data-hl]',u).forEach(function(el){el.classList.toggle('lit',step>=+el.getAttribute('data-hl'));});
+    if(!AUD){
+      var notes=$('.notes',u); u.insertBefore(ctl,notes);
+      $('#c-pos').textContent=(cur+1)+' / '+N;
+      var dots=$('#c-dots'); dots.innerHTML='';
+      for(var i=1;i<=mx;i++){var d=D.createElement('i');if(i<=step)d.className='on';dots.appendChild(d);}
+      $('#c-step').textContent=mx?('Langkah '+step+' dari '+mx+(step<mx?' · klik Lanjut untuk membuka berikutnya':' · semua terbuka')):'Tidak ada langkah tersembunyi';
+      var nx=$('#c-next'); nx.innerHTML='';
+      if(cur<N-1){nx.appendChild(D.createTextNode('Slide berikutnya: '));var b=D.createElement('b');b.textContent=units[cur+1].getAttribute('data-title');nx.appendChild(b);}
+      else nx.textContent='Slide terakhir';
+      blocks.forEach(function(bk){var on=cur>=bk.first&&cur<=bk.last;bk.el.classList.toggle('cur',on);
+        bk.el.querySelector('.fill').style.width=on?(((cur-bk.first+1)/(bk.last-bk.first+1))*100+'%'):'0';});
+      oitems.forEach(function(it,k){it.classList.toggle('cur',k===cur);});
+      sset('pos',cur+':'+step);
+      try{history.replaceState(null,'','#s'+(cur+1));}catch(e){}
+      updateClock(); send();
+    }
+    size();
+  }
+  function go(i,s){cur=Math.max(0,Math.min(N-1,i));step=(s==='max')?maxStep(units[cur]):(s||0);render();}
+  function next(){var mx=maxStep(units[cur]);if(step<mx){step++;render();}else if(cur<N-1){go(cur+1,0);}}
+  function prev(){if(step>0){step--;render();}else if(cur>0){go(cur-1,'max');}}
+  $('#b-next').addEventListener('click',next);$('#b-prev').addEventListener('click',prev);
+  $$('[data-act]',ctl).forEach(function(b){b.addEventListener('click',function(){b.getAttribute('data-act')==='next'?next():prev();});});
+
+  /* ---------- ukuran slide ---------- */
+  function size(){
+    var u=units[cur], f=$('.frame',u), s=$('.slide',u), W;
+    if(body.classList.contains('proj')||AUD){W=Math.min(window.innerWidth,window.innerHeight*16/9);}
+    else{
+      var avail=$('#deck').clientWidth-32, top=$('.bar').offsetHeight+(strip.offsetHeight||0);
+      var maxH=window.innerHeight-top-150;
+      W=Math.max(280,Math.min(avail,maxH*16/9));
+    }
+    f.style.width=W+'px'; s.style.fontSize=(W/50)+'px';
+  }
+  window.addEventListener('resize',size);
+
+  /* ---------- catatan ---------- */
+  var hn=$('#hn');
+  if(sget('hideNotes')==='1') hn.checked=true;
+  hn.addEventListener('change',function(){sset('hideNotes',hn.checked?'1':'0');size();});
+
+  /* ---------- layar penuh (tampilan mahasiswa) ---------- */
+  function enterProj(){body.classList.add('proj');try{var r=root.requestFullscreen&&root.requestFullscreen();if(r&&r.catch)r.catch(function(){});}catch(e){}size();}
+  function exitProj(){body.classList.remove('proj');try{if(D.fullscreenElement)D.exitFullscreen();}catch(e){}size();}
+  $('#b-proj').addEventListener('click',enterProj);
+  D.addEventListener('fullscreenchange',function(){if(!D.fullscreenElement&&body.classList.contains('proj')){body.classList.remove('proj');size();}});
+
+  /* ---------- jendela proyektor (file lokal) ---------- */
+  var aud=null;
+  function edits(){var o={};$$('[contenteditable][data-key]').forEach(function(el){o[el.getAttribute('data-key')]=el.textContent;});return o;}
+  function send(){if(aud&&!aud.closed){try{aud.postMessage({t:'state',i:cur,s:step,ed:edits()},'*');}catch(e){}}}
+  $('#b-aud').addEventListener('click',function(){
+    try{aud=window.open(location.href.split('#')[0]+'#proyektor','ab_proyektor','width=1280,height=720');}catch(e){aud=null;}
+    if(!aud){toast('Browser memblokir jendela baru. Izinkan pop-up, atau pakai tombol Layar penuh.');return;}
+    toast('Seret jendela proyektor ke layar proyektor, klik di dalamnya, lalu tekan F.');
+    setTimeout(function(){send();sendTimer();},800);
+  });
+  window.addEventListener('message',function(e){
+    var d=e.data||{};
+    if(AUD){
+      if(d.t==='state'){cur=d.i;step=d.s;
+        if(d.ed)$$('[contenteditable][data-key]').forEach(function(el){var v=d.ed[el.getAttribute('data-key')];if(v!=null){el.textContent=v;}});
+        render();}
+      if(d.t==='timer')paintRemote(d);
+    }else{
+      if(d.t==='key')handleKey({key:d.k,preventDefault:function(){}});
+      if(d.t==='hello'){if(!aud)aud=e.source;send();sendTimer();}
+    }
+  });
+
+  /* ---------- timer kegiatan ---------- */
+  var tEl=$('#timer'),tClk=$('.clk',tEl),tLbl=$('.lbl',tEl);
+  var T={total:0,left:0,label:'',on:false,done:false,iv:null,end:0};
+  function fmt(s){s=Math.max(0,Math.ceil(s));return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2);}
+  function paint(){tClk.textContent=T.done?'Waktu':fmt(T.left);tLbl.textContent=T.done?(T.label+' selesai'):T.label;
+    tEl.classList.toggle('paused',!T.on&&!T.done);tEl.classList.toggle('done',T.done);sendTimer();}
+  function sendTimer(){if(aud&&!aud.closed){try{aud.postMessage({t:'timer',vis:!tEl.hidden,clk:tClk.textContent,lbl:tLbl.textContent,paused:!T.on&&!T.done,done:T.done},'*');}catch(e){}}}
+  function paintRemote(d){tEl.hidden=!d.vis;tClk.textContent=d.clk;tLbl.textContent=d.lbl;tEl.classList.toggle('paused',d.paused);tEl.classList.toggle('done',d.done);}
+  function beep(){try{var C=window.AudioContext||window.webkitAudioContext;if(!C)return;var c=new C();
+    [0,.35,.7].forEach(function(t){var o=c.createOscillator(),g=c.createGain();o.frequency.value=880;g.gain.value=.12;o.connect(g);g.connect(c.destination);o.start(c.currentTime+t);o.stop(c.currentTime+t+.2);});}catch(e){}}
+  function tick(){T.left=(T.end-Date.now())/1000;if(T.left<=0){T.left=0;T.on=false;T.done=true;clearInterval(T.iv);beep();}paint();}
+  function start(sec,label){clearInterval(T.iv);T.total=sec;T.left=sec;T.label=label||'';T.on=true;T.done=false;T.end=Date.now()+sec*1000;tEl.hidden=false;T.iv=setInterval(tick,250);paint();}
+  function toggleT(){if(T.done||!T.total)return;if(T.on){T.on=false;clearInterval(T.iv);T.left=(T.end-Date.now())/1000;}else{T.on=true;T.end=Date.now()+T.left*1000;T.iv=setInterval(tick,250);}paint();}
+  $$('.tchip').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();if(AUD)return;start(+b.getAttribute('data-sec'),b.getAttribute('data-label'));});});
+  tEl.addEventListener('click',function(e){if(e.target.classList.contains('x')||AUD)return;toggleT();});
+  $('.x',tEl).addEventListener('click',function(e){e.stopPropagation();clearInterval(T.iv);T.on=false;T.total=0;tEl.hidden=true;sendTimer();});
+  function slideTimer(){var s=$('[data-timer]',units[cur]);
+    if(T.total&&!T.done&&!tEl.hidden){toggleT();return;}
+    if(s)start(+s.getAttribute('data-timer'),s.getAttribute('data-tlabel')||'');
+    else{var c=$('.tchip',units[cur]);if(c)c.click();else toast('Slide ini tidak punya timer.');}}
+
+  /* ---------- jam kelas ---------- */
+  var cStart=+(sget('classStart')||0), cIv=null;
+  function updateClock(){
+    var el=$('#c-el'),bd=$('#c-badge'),bs=$('#b-class'),bx=$('#b-class-x');
+    if(!cStart){el.hidden=true;bd.hidden=true;bx.hidden=true;bs.hidden=false;return;}
+    bs.hidden=true;el.hidden=false;bd.hidden=false;bx.hidden=false;
+    var m=(Date.now()-cStart)/60000; el.textContent='Menit '+Math.floor(m)+':'+('0'+Math.floor((m%1)*60)).slice(-2);
+    var u=units[cur], plan=+u.getAttribute('data-at'), nxt=(cur<N-1)?+units[cur+1].getAttribute('data-at'):120;
+    var diff=0; if(m<plan)diff=m-plan; else if(m>nxt)diff=m-nxt;
+    if(Math.abs(diff)<1){bd.textContent='sesuai rencana';bd.classList.remove('late');}
+    else if(diff>0){bd.textContent='terlambat '+Math.round(diff)+' mnt';bd.classList.add('late');}
+    else{bd.textContent='lebih cepat '+Math.round(-diff)+' mnt';bd.classList.remove('late');}
+  }
+  function runClock(){clearInterval(cIv);if(cStart)cIv=setInterval(updateClock,1000);updateClock();}
+  $('#b-class').addEventListener('click',function(){cStart=Date.now();sset('classStart',String(cStart));runClock();toast('Jam kelas berjalan. Lencana membandingkan menit sekarang dengan rencana slide ini.');});
+  $('#b-class-x').addEventListener('click',function(){cStart=0;sdel('classStart');runClock();});
+  if(cStart&&Date.now()-cStart>4*3600000){cStart=0;sdel('classStart');}
+
+  /* ---------- isian yang bisa diketik ---------- */
+  $$('[contenteditable][data-key]').forEach(function(el){
+    var v=sget('ed:'+el.getAttribute('data-key'));
+    if(v){el.textContent=v;el.classList.remove('ph');}
+    if(AUD){el.removeAttribute('contenteditable');return;}
+    el.addEventListener('focus',function(){if(/^\[|^__/.test(el.textContent)){el.dataset.orig=el.textContent;el.textContent='';}});
+    el.addEventListener('blur',function(){if(!el.textContent.trim()&&el.dataset.orig){el.textContent=el.dataset.orig;el.classList.add('ph');}send();});
+    el.addEventListener('input',function(){sset('ed:'+el.getAttribute('data-key'),el.textContent);el.classList.remove('ph');});
+    el.addEventListener('keydown',function(e){e.stopPropagation();if(e.key==='Enter'){e.preventDefault();el.blur();}});
+    el.addEventListener('click',function(e){e.stopPropagation();});
+  });
+
+  /* ---------- klik slide & keyboard ---------- */
+  units.forEach(function(u){$('.slide',u).addEventListener('click',function(e){
+    if(e.target.closest('.tchip,[contenteditable]'))return;
+    if(AUD){try{window.opener.postMessage({t:'key',k:'ArrowRight'},'*');}catch(x){}return;}
+    next();});});
+  function handleKey(e){
+    var k=e.key;
+    if(k==='ArrowRight'||k==='PageDown'||k===' '||k==='Enter'||k==='ArrowDown'){e.preventDefault();next();}
+    else if(k==='ArrowLeft'||k==='PageUp'||k==='ArrowUp'||k==='Backspace'){e.preventDefault();prev();}
+    else if(k==='Home'){go(0,0);}else if(k==='End'){go(N-1,0);}
+    else if(k==='n'||k==='N'){hn.checked=!hn.checked;hn.dispatchEvent(new Event('change'));}
+    else if(k==='f'||k==='F'){body.classList.contains('proj')?exitProj():enterProj();}
+    else if(k==='Escape'){if(body.classList.contains('proj'))exitProj();toggleOutline(false);toggleHelp(false);}
+    else if(k==='t'||k==='T'){slideTimer();}
+    else if(k==='r'||k==='R'){if(T.total)start(T.total,T.label);}
+    else if(k==='o'||k==='O'){toggleOutline();}
+    else if(k==='?'){toggleHelp();}
+  }
+  D.addEventListener('keydown',function(e){
+    if(e.target&&(e.target.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&e.target.id!=='hn'))return;
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    if(AUD){
+      if(e.key==='f'||e.key==='F'){try{if(!D.fullscreenElement)root.requestFullscreen();else D.exitFullscreen();}catch(x){}return;}
+      try{window.opener.postMessage({t:'key',k:e.key},'*');}catch(x){}e.preventDefault();return;
+    }
+    handleKey(e);
+  });
+
+  /* ---------- cetak (file lokal) ---------- */
+  $('#b-print').addEventListener('click',function(){body.classList.add('print-handout');window.print();});
+  window.addEventListener('afterprint',function(){body.classList.remove('print-handout');});
+
+  /* ---------- mulai ---------- */
+  var h=/^#s(\d+)$/.exec(location.hash||''), pos=(sget('pos')||'').split(':');
+  if(h&&+h[1]>=1&&+h[1]<=N)go(+h[1]-1,0);
+  else if(!AUD&&pos.length===2&&+pos[0]<N)go(+pos[0],Math.min(+pos[1]||0,maxStep(units[+pos[0]])));
+  else go(0,0);
+  runClock();
+  if(AUD){try{window.opener&&window.opener.postMessage({t:'hello'},'*');}catch(e){}}
+})();
+</script>
+</body>
+</html>

@@ -5,7 +5,22 @@
     "type": "Course Deck",
     "description": "Deck satu semester untuk mata kuliah Analitika Bisnis, dari data operasional hingga keputusan.",
     "icon": "∑",
-    "filename": "Analitika Bisnis.html"
+    "filename": "Analitika Bisnis.html",
+    "materi": [
+      {
+        "judul": "Slide tatap muka · 10 Oktober 2026",
+        "keterangan": "Misteri OTD, lima jebakan grafik, peluncuran project",
+        "jenis": "Slide",
+        "file": "materi/ab/tatap-muka-10-okt-2026.html"
+      },
+      {
+        "judul": "Dataset project · Nusantara Kargo 2025",
+        "keterangan": "Excel, 8 sheet: petunjuk, peran, kamus data, dan data mentah",
+        "jenis": "Excel",
+        "file": "materi/ab/dataset-project-ab-2026.xlsx",
+        "unduh": "Dataset Project AB 2026 - Nusantara Kargo.xlsx"
+      }
+    ]
   },
   {
     "title": "Pengantar Manajemen",
@@ -21,7 +36,16 @@
     "type": "Course Deck",
     "description": "Deck satu semester untuk mata kuliah Prinsip-Prinsip Manajemen dengan pendekatan kasus berjalan.",
     "icon": "M",
-    "filename": "Prinsip-Prinsip Manajemen.html"
+    "filename": "Prinsip-Prinsip Manajemen.html",
+    "materi": [
+      {
+        "judul": "Tugas Kelompok Organizing & Actuating",
+        "keterangan": "Aturan grup, peran, delapan topik, pembagian kelompok, penilaian",
+        "jenis": "PDF",
+        "file": "materi/ppm/tugas-kelompok-organizing-actuating.pdf",
+        "unduh": "Tugas Kelompok Organizing & Actuating.pdf"
+      }
+    ]
   },
   {
     "title": "Presentation Skills",
