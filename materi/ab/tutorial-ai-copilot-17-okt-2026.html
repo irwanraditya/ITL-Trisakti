@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AI Copilot Project AB</title>
-<meta name="description" content="Tutorial Analitika Bisnis: AI sebagai copilot untuk project, file markdown, hemat usage, serta etika, risiko, dan tata kelola data & AI.">
+<title>Project AB dengan AI</title>
+<meta name="description" content="Tutorial Analitika Bisnis untuk pemula: mengerjakan project dengan bantuan AI, file markdown, hemat kuota, serta etika, risiko, dan aturan data & AI.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet">
@@ -474,13 +474,82 @@ table.dt.cls td{padding:.45em .6em .45em 0}
 .tb2{font-family:var(--sans);font-size:.62em;font-weight:600;border:1px solid var(--s-pine);color:var(--s-pine);background:#fff;padding:.25em .7em;border-radius:2em}
 .tb2:hover{background:var(--s-pine);color:#fff}
 html:not(.js) .tb2{display:none}
+
+/* ================= tambahan: versi pemula ================= */
+.goals{display:flex;flex-direction:column;gap:.55em;margin:.1em 0 .4em}
+.goals div{display:grid;grid-template-columns:2em minmax(0,1fr);column-gap:.8em;align-items:baseline;background:#fff;border:1px solid var(--s-rule);padding:.55em .9em}
+.goals i{font-style:normal;font-family:var(--serif);font-size:1.5em;color:var(--s-pine);grid-row:span 2;line-height:1}
+.goals b{font-size:.92em}
+.goals span{font-size:.76em;color:var(--s-ink2)}
+.gloss{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.55em}
+.gloss div{background:#fff;border-top:3px solid var(--s-pine);padding:.6em .75em .7em}
+.gloss b{display:block;font-size:.9em;margin-bottom:.25em}
+.gloss span{font-size:.72em;line-height:1.4;color:var(--s-ink2);display:block}
+.eva.big{margin-top:.4em;gap:.8em}
+.eva.big div{background:#fff;border-top:4px solid var(--s-pine);padding:.7em .9em .8em}
+.eva.big b{font-family:var(--serif);font-size:1.25em;font-weight:500}
+.eva.big em{display:block;font-style:normal;font-family:var(--mono);font-size:.58em;letter-spacing:.12em;text-transform:uppercase;color:var(--s-slate);margin:.1em 0 .45em}
+.eva.big span{font-size:.8em}
+.howto{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:1.3em;align-items:start}
+.steps4v{display:flex;flex-direction:column;gap:.5em}
+.steps4v div{display:grid;grid-template-columns:1.9em minmax(0,1fr);gap:.7em;align-items:start;border-bottom:1px solid var(--s-rule);padding-bottom:.45em}
+.steps4v i{font-style:normal;font-family:var(--mono);font-weight:600;background:var(--s-pine);color:#fff;text-align:center;font-size:.8em;padding:.1em 0}
+.steps4v span{font-size:.82em;line-height:1.4}
+.steps4v code{font-family:var(--mono);font-size:.9em;background:var(--s-panel);padding:0 .25em}
+.mock{background:#F3F5F6;border:1px solid #AEBBC0;box-shadow:0 .3em .9em rgba(14,36,48,.12);font-family:var(--sans)}
+.mock .mbar{background:#DCE3E6;font-size:.7em;font-weight:600;padding:.35em .7em;border-bottom:1px solid #AEBBC0}
+.mock .mrow{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:.5em;align-items:center;padding:.45em .8em 0;font-size:.72em}
+.mock .mrow span{color:var(--s-ink2);text-align:right}
+.mock .mrow b{background:#fff;border:1px solid #AEBBC0;padding:.2em .45em;font-weight:500;font-family:var(--mono);font-size:.95em}
+.mock .mrow.hot b{border:2px solid var(--s-ochre);background:#FFF6EA}
+.mock .mbtn{text-align:right;padding:.6em .8em .2em}
+.mock .mbtn em{font-style:normal;font-size:.7em;background:var(--s-pine);color:#fff;padding:.25em 1.2em}
+.mock .mnote{font-size:.66em;color:var(--s-ink2);padding:.5em .8em .65em;line-height:1.4}
+.mock .mnote code{font-family:var(--mono);background:#fff;padding:0 .2em}
+.mock.pv .pvq{display:grid;grid-template-columns:5em minmax(0,1fr);gap:.5em;align-items:center;padding:.45em .8em 0;font-size:.74em}
+.mock.pv .pvq span{color:var(--s-ink2)}
+.mock.pv .pvq b{background:#fff;border:1px solid #AEBBC0;border-left:4px solid var(--s-pine);padding:.25em .5em;font-weight:500}
+.f5s{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.5em}
+.f5{background:#fff;border:1px solid var(--s-rule);padding:.6em .7em .7em;display:flex;flex-direction:column;gap:.35em}
+.f5 .st{align-self:flex-start;font-family:var(--mono);font-size:.54em;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.15em .45em}
+.f5.ok .st{background:#E2F0EC;color:var(--s-pine)}
+.f5.mid .st{background:#F8EBD8;color:#8A5410}
+.f5.end .st{background:var(--s-panel);color:var(--s-ink2)}
+.f5 code{font-family:var(--mono);font-size:.62em;font-weight:600;color:var(--s-ink)}
+.f5 p{font-size:.7em;line-height:1.38;color:var(--s-ink2);flex:1}
+.f5 em{font-style:normal;font-size:.62em;color:var(--s-pine);font-weight:600;border-top:1px solid var(--s-rule);padding-top:.3em}
+pre.md .mf{color:#0E2430;background:#F0B566;padding:0 .2em}
+.ol{margin:.25em 0 0 1.2em;display:flex;flex-direction:column;gap:.3em}
+.ol li{font-size:.76em;line-height:1.4;color:var(--s-ink2)}
+.ol code,.card p code,.memo code{font-family:var(--mono);font-size:.92em;background:var(--s-panel);padding:0 .25em;color:var(--s-ink)}
+.ba1{display:flex;flex-direction:column;gap:.6em}
+.ba1 .ttl{font-family:var(--serif);font-size:1.02em;line-height:1.25;color:var(--s-ink);margin-top:.2em}
+.plain{font-size:.82em;line-height:1.45;margin-bottom:.7em}
+.plain b{color:var(--s-pine)}
+.r6{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.45em .8em}
+.r6 div{display:grid;grid-template-columns:1.6em minmax(0,1fr);column-gap:.45em;border-bottom:1px solid var(--s-rule);padding-bottom:.35em}
+.r6 i{font-style:normal;font-family:var(--serif);font-size:1.15em;color:var(--s-pine);grid-row:span 2;line-height:1.1}
+.r6 b{font-size:.78em;line-height:1.28}
+.r6 span{font-size:.66em;color:var(--s-ink2);line-height:1.32}
+.lights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7em;margin-top:.2em}
+.lt{background:#fff;border:1px solid var(--s-rule);padding:.75em .9em .85em;border-top-width:5px}
+.lt .dot{display:inline-block;width:1.1em;height:1.1em;border-radius:50%;vertical-align:-.15em;margin-right:.45em}
+.lt b{font-size:.86em}
+.lt p{font-size:.76em;line-height:1.42;color:var(--s-ink2);margin-top:.45em}
+.lt.g{border-top-color:#2E8B57}.lt.g .dot{background:#2E8B57}
+.lt.y{border-top-color:#D9A21B}.lt.y .dot{background:#D9A21B}
+.lt.r{border-top-color:var(--s-wrong)}.lt.r .dot{background:var(--s-wrong)}
+.rgs.one{grid-template-columns:1fr;gap:.55em}
+.rgs.one .rg b{font-size:.9em}
+.rgs.one .rg p{font-size:.78em}
+.chart svg .vl{font-family:var(--mono);font-size:10.5px;fill:#0E2430;font-weight:600}
 </style>
 </head>
 <body>
 <input type="checkbox" id="hn" class="sr" aria-label="Sembunyikan catatan dosen">
 
 <header class="bar">
-  <div class="name">AI sebagai copilot project · etika &amp; tata kelola<small>Analitika Bisnis · Sabtu, 17 Oktober 2026 · 45 + 15 + 45 menit</small></div>
+  <div class="name">Mengerjakan project dengan bantuan AI<small>Analitika Bisnis · Sabtu, 17 Oktober 2026 · 45 + 15 + 45 menit</small></div>
   <button class="tb js-only" type="button" id="b-prev" aria-label="Langkah sebelumnya">◀</button>
   <button class="tb primary js-only" type="button" id="b-next">Lanjut <kbd>→</kbd></button>
   <label class="tb" for="hn"><span class="on-txt">Sembunyikan catatan</span><span class="off-txt">Tampilkan catatan</span> <kbd class="js-only">N</kbd></label>
@@ -497,556 +566,595 @@ html:not(.js) .tb2{display:none}
     <b>Tampilan statis.</b> Skrip tidak berjalan di pratinjau ini, jadi semua slide dan catatan tampil berurutan.
     Buka file ini di Chrome atau Edge untuk mode interaktif: slide satu per satu, pertanyaan muncul bertahap, timer per kelompok, jam kelas, dan layar penuh.
   </div>
-<article class="unit" data-title="Sampul" data-block="Sesi 1 · Copilot" data-at="0">
+<article class="unit" data-title="Sampul" data-block="Sesi 1 · Kenalan dengan AI" data-at="0">
   <div class="frame"><section class="slide dark center">
-    <div class="eyebrow">Analitika Bisnis · Pertemuan 11 + 14 · Sabtu, 17 Oktober 2026</div>
-    <h1 class="display">AI sebagai copilot project Anda,<br>dan aturan main yang menyertainya</h1>
-    <p class="lede">Satu alur kerja, lima file markdown, satu latihan utuh dari tebakan sampai laporan, lalu etika, risiko, dan tata kelolanya.</p>
+    <div class="eyebrow">Analitika Bisnis · Sabtu, 17 Oktober 2026</div>
+    <h1 class="display">Mengerjakan project<br>dengan bantuan AI</h1>
+    <p class="lede">Cara yang benar, hemat kuota, dan bisa Anda pertanggungjawabkan. Tidak perlu latar belakang IT.</p>
     <span class="num">01</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 0–1</span></div>
-    <p class="say">“Sebagian besar dari Anda akan memakai AI untuk project ini, dan itu boleh. Hari ini saya tunjukkan cara memakainya yang benar: hemat, bisa dipertanggungjawabkan, dan tetap mengikuti standar presentasi yang sudah kita pelajari.”</p>
-    <p class="tip">Pertemuan ini menggabungkan Pertemuan 11 (AI sebagai copilot) dan Pertemuan 14 (etika, risiko, tata kelola) dari RPS, ditempelkan langsung ke project 10 Oktober.</p>
+    <p class="say">“Sebagian besar dari Anda akan memakai ChatGPT, Gemini, atau yang sejenis untuk project ini. Itu boleh. Hari ini saya tunjukkan caranya supaya hasilnya benar, kuotanya hemat, dan Anda tetap bisa menjelaskan setiap angka.”</p>
+    <p class="tip">Sesi ini menggabungkan Pertemuan 11 (AI sebagai copilot) dan Pertemuan 14 (etika, risiko, tata kelola) dari RPS, langsung dipraktikkan dengan dataset project 10 Oktober.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Rangka sesi" data-block="Sesi 1 · Copilot" data-at="1">
+<article class="unit" data-title="Hari ini" data-block="Sesi 1 · Kenalan dengan AI" data-at="1">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Rangka sesi · SIAP</div>
-    <div class="siap">
-      <div class="k">S</div><p>Anda sudah memegang dataset project, dan sebagian besar akan memakai AI untuk mengerjakannya.</p>
-      <div class="k">I</div><p>Tanpa aturan, AI mulai dari nol di setiap chat, boros kuota, dan bisa memberi angka yang meyakinkan tetapi salah.</p>
-      <div class="k">A</div><p><b>Pasang konteks dan standar Anda sekali dalam file markdown, lalu jalankan Ask → Check → Explain.</b></p>
-      <div class="k">P</div><p>Anda pulang dengan lima file .md dan satu latihan utuh, dari tebakan sampai pernyataan penggunaan AI.</p>
+    <div class="eyebrow">Hari ini</div>
+    <h2>Setelah sesi ini, Anda bisa melakukan tiga hal</h2>
+    <div class="goals">
+      <div><i>1</i><b>Memberi AI “briefing” tertulis, cukup sekali</b><span>supaya AI tahu peran Anda, arti kolom data, dan cara presentasi yang kita pakai</span></div>
+      <div><i>2</i><b>Mengerjakan project langkah demi langkah dengan AI</b><span>memakai dataset Nusantara Kargo, dari tebakan sampai judul slide</span></div>
+      <div><i>3</i><b>Tahu batasnya</b><span>data apa yang tidak boleh ditempel ke AI, dan cara mengecek jawabannya</span></div>
     </div>
     <div class="agenda a3">
-      <div><b>Sesi 1 · Menyiapkan copilot</b><span>45 menit</span> · alur kerja, markdown, hemat usage</div>
+      <div><b>Sesi 1 · Kenalan dengan AI</b><span>45 menit</span></div>
       <div class="brk"><b>Istirahat</b><span>15</span></div>
-      <div><b>Sesi 2 · Mengeksekusi dan mempertanggungjawabkan</b><span>45 menit</span> · demo, etika, tata kelola</div>
+      <div><b>Sesi 2 · Praktik dengan dataset, lalu etika dan aturan</b><span>45 menit</span></div>
     </div>
     <span class="num">02</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 1–3</span></div>
     <div class="tablewrap"><table>
-      <tr><th>Menit</th><th>Blok</th><th>Gaya</th></tr>
-      <tr><td>0–14</td><td>Copilot vs oracle, kekuatan dan kelemahan AI, alur 6 langkah</td><td>Dosen bercerita, satu tebakan serentak</td></tr>
-      <tr><td>14–36</td><td>Markdown dan lima file .md</td><td>Dosen menunjukkan isi file</td></tr>
-      <tr><td>36–45</td><td>Cara memasang dan hemat usage</td><td>Tebakan serentak: prompt mana yang hemat</td></tr>
-      <tr><td>45–60</td><td>Istirahat</td><td>Mahasiswa mengunduh file .md dari hub</td></tr>
-      <tr><td>60–85</td><td>Demo di data latihan: 6 prompt, laporan a–e</td><td>Prompt → keluaran → apa yang dicek</td></tr>
-      <tr><td>85–100</td><td>Etika, risiko, tata kelola, aturan AI project</td><td>Dosen bercerita, contoh dari demo</td></tr>
-      <tr><td>100–105</td><td>Daftar cek dan penutup</td><td>—</td></tr>
+      <tr><th>Menit</th><th>Isi</th></tr>
+      <tr><td>0–12</td><td>Istilah dasar, AI sebagai staf baru, aturan emas, enam langkah</td></tr>
+      <tr><td>12–33</td><td>File .md: apa itu, cara membuat di Notepad, apa yang diisi</td></tr>
+      <tr><td>33–45</td><td>Cara memasang di AI, kuota, kebiasaan hemat</td></tr>
+      <tr><td>45–60</td><td>Istirahat (mahasiswa mengunduh file dari hub)</td></tr>
+      <tr><td>60–86</td><td>Praktik: peran contoh Kepala Hub Jakarta, dari tebakan sampai laporan</td></tr>
+      <tr><td>86–100</td><td>Data apa yang boleh ke AI, risiko, aturan kantor dan hukum, aturan AI project</td></tr>
+      <tr><td>100–105</td><td>Daftar cek dan penutup</td></tr>
     </table></div>
-    <p>Klik <b>Mulai jam kelas</b> saat kelas dimulai. Lencana di bilah atas membandingkan menit sekarang dengan rencana slide.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Oracle atau copilot" data-block="Sesi 1 · Copilot" data-at="3">
+<article class="unit" data-title="Delapan istilah" data-block="Sesi 1 · Kenalan dengan AI" data-at="3">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Ingat Pertemuan 11</div>
-    <h2>AI yang dipercaya karena fasih adalah oracle; AI yang diperiksa adalah copilot</h2>
-    <div class="grid g2">
-      <div class="card wrongc"><span class="n">AI sebagai oracle</span><p>Jawaban diterima karena terdengar meyakinkan. Tidak ada pengecekan. Ketika angkanya salah, tidak ada yang bisa menjelaskan dari mana asalnya.</p></div>
-      <div class="card tint"><span class="n">AI sebagai copilot</span><p>AI mempercepat eksplorasi dan drafting. Anda memeriksa, memilih, dan menjelaskan. Penilaian akhir tetap di tangan Anda.</p></div>
-    </div>
-    <div class="eva">
-      <div><b>Explain</b><span>Anda bisa menjelaskan metode, asumsi, dan keluaran yang dipakai.</span></div>
-      <div><b>Validate</b><span>Angka, sumber, dan logika diperiksa terhadap data asli.</span></div>
-      <div><b>Account</b><span>Anda mempertanggungjawabkan keputusan dan menyatakan penggunaan AI.</span></div>
-    </div>
+    <div class="eyebrow">Istilah dasar</div>
+    <h2>Delapan istilah yang akan sering muncul hari ini</h2>
+    <div class="gloss"><div><b>AI</b><span>Asisten seperti ChatGPT, Gemini, Claude, atau Copilot.</span></div><div><b>Prompt</b><span>Pesan atau perintah yang Anda ketik ke AI.</span></div><div><b>Kuota (token)</b><span>“Bensin” AI. Setiap kata yang dibaca dan ditulis AI memakainya.</span></div><div><b>File .md</b><span>File teks biasa berisi briefing untuk AI. Dibuat di Notepad.</span></div><div><b>Pivot</b><span>Fitur Excel untuk meringkas data, misalnya jumlah kiriman per hari.</span></div><div><b>Median</b><span>Nilai tengah. Tidak ikut terseret oleh data yang ekstrem.</span></div><div><b>Outlier</b><span>Data ekstrem yang jauh dari yang lain, misalnya kiriman 1,7 ton.</span></div><div><b>Halusinasi</b><span>AI mengarang jawaban yang terdengar benar padahal salah.</span></div></div>
     <span class="num">03</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 3–6</span></div>
-    <p class="say">“Ingat analogi kopilot: kopilot membantu membaca instrumen, tetapi pilot tetap yang bertanggung jawab. Bedanya, AI generatif bisa mengarang jawaban baru yang salah. Karena itu langkah Validate tidak boleh dilewati.”</p>
-    <p>Tiga kata di bawah (Explain, Validate, Account) akan muncul lagi di akhir sesi sebagai isi pernyataan penggunaan AI yang dilampirkan di laporan.</p>
+    <p class="say">“Tidak perlu dihafal. Kalau nanti ada kata yang asing, kembali ke slide ini.”</p>
+    <p>Bacakan cepat. Yang paling penting dipahami: prompt, kuota, dan file .md, karena tiga ini dipakai sepanjang Sesi 1.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Kuat dan lemah" data-block="Sesi 1 · Copilot" data-at="6">
+<article class="unit" data-title="AI itu seperti staf baru" data-block="Sesi 1 · Kenalan dengan AI" data-at="6">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Bagi kerja yang jujur</div>
-    <h2>Minta AI menulis rumusnya, jangan memintanya menghitung di kepala</h2>
+    <div class="eyebrow">Memahami AI</div>
+    <h2>Anggap AI sebagai staf baru yang pintar, tetapi belum kenal kantor Anda</h2>
     <div class="grid g2 kl">
-      <div class="card tint"><span class="n">Serahkan ke AI</span><ul class="ul">
-        <li>Menyusun rencana analisis dan dugaan penyebab</li>
-        <li>Menulis rumus Excel, langkah pivot, atau kode Python</li>
-        <li>Menghitung dengan <i>menjalankan kode</i> pada file yang Anda unggah</li>
-        <li>Mengkritik judul slide dan alur cerita</li>
-        <li>Merapikan bahasa laporan</li></ul></div>
-      <div class="card"><span class="n wr">Jangan serahkan ke AI</span><ul class="ul">
-        <li>Menghitung ribuan baris tanpa menjalankan kode</li>
-        <li>Menebak arti kolom yang tidak tertulis</li>
-        <li>Mengetahui konteks bisnis yang tidak Anda ceritakan</li>
-        <li>Memutuskan pertanyaan mana yang penting</li>
-        <li>Bertanggung jawab atas angka di laporan Anda</li></ul></div>
+      <div class="card tint"><span class="n">Serahkan kepadanya</span><ul class="ul">
+        <li>Menyusun rencana: apa saja yang perlu dihitung</li>
+        <li>Membuatkan rumus Excel dan langkah pivot</li>
+        <li>Memberi ide kemungkinan penyebab</li>
+        <li>Mengoreksi judul slide dan kalimat laporan</li></ul></div>
+      <div class="card"><span class="n wr">Jangan serahkan kepadanya</span><ul class="ul">
+        <li>Menghitung ribuan baris “di kepala” tanpa alat hitung</li>
+        <li>Menebak arti kolom yang tidak dijelaskan</li>
+        <li>Tahu kondisi lapangan yang tidak Anda ceritakan</li>
+        <li>Mengambil keputusan dan menanggung akibatnya</li></ul></div>
     </div>
-    <p class="say-line">AI menjawab pertanyaan yang Anda ajukan, bukan pertanyaan yang seharusnya diajukan.</p>
+    <p class="say-line">AI menjawab yang Anda tanyakan, bukan yang seharusnya Anda tanyakan.</p>
     <span class="num">04</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 6–9</span></div>
-    <p class="say">“Kalau AI tidak menjalankan kode, angka yang ia sebut bisa saja hanya kalimat yang terdengar seperti angka. Biasakan bertanya: ‘Tunjukkan rumus atau kodenya.’”</p>
-    <p>Kalimat terakhir di slide akan dibuktikan di Sesi 2: AI menjawab “apakah respons membaik?” dengan rata-rata yang menyesatkan.</p>
+    <p class="say">“Bayangkan Anda kedatangan staf magang lulusan terbaik. Cepat, rajin, bahasanya bagus. Tetapi ia belum pernah ke gudang Anda, belum tahu istilah kantor, dan kadang terlalu percaya diri. Anda tetap perlu memberi arahan dan mengecek hasilnya.”</p>
+    <p class="tip">Tebakan serentak (ketik di chat atau angkat tangan): “Siapa yang pernah mendapat jawaban AI yang ternyata salah?” Biasanya banyak yang mengangkat tangan; itu pintu masuk ke slide berikutnya.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Alur project dengan AI" data-block="Sesi 1 · Copilot" data-at="9">
+<article class="unit" data-title="Aturan emas" data-block="Sesi 1 · Kenalan dengan AI" data-at="9">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Aturan emas · Pertemuan 11</div>
+    <h2>AI boleh membantu, tetapi Anda yang tanda tangan</h2>
+    <div class="eva big">
+      <div><b>Bisa menjelaskan</b><em>Explain</em><span>Anda bisa menjelaskan dari mana angka itu dan bagaimana dihitung.</span></div>
+      <div><b>Sudah dicek</b><em>Validate</em><span>Angka dari AI dicocokkan dengan Excel Anda, seperti mencocokkan manifest dengan barang di gudang.</span></div>
+      <div><b>Berani tanda tangan</b><em>Account</em><span>Anda menyebut bagian mana yang dibantu AI, dan bertanggung jawab atas isinya.</span></div>
+    </div>
+    <p class="say-line">Kalau satu dari tiga belum terpenuhi, angka itu belum boleh masuk laporan.</p>
+    <span class="num">05</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 9–12</span></div>
+    <p class="say">“Di Pertemuan 11 kita menyebutnya Explain, Validate, Account. Bahasa sederhananya: bisa menjelaskan, sudah dicek, berani tanda tangan.”</p>
+    <p>Ketiga kata ini nanti menjadi isi pernyataan penggunaan AI yang dilampirkan di laporan.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Enam langkah" data-block="Sesi 1 · Kenalan dengan AI" data-at="12">
   <div class="frame"><section class="slide">
     <div class="eyebrow">Alur kerja project</div>
     <h2>Enam langkah: AI membantu di tengah, Anda memegang awal dan akhir</h2>
-    <div class="steps6"><div class="st6 me"><span class="no">1</span><h3>Tebak</h3><p>Tulis jawaban satu kalimat untuk pertanyaan peran Anda.</p><span class="who">tanpa AI</span><span class=rep>laporan a</span></div><div class="st6"><span class="no">2</span><h3>Pasang konteks</h3><p>Lima file .md di asisten AI Anda: peran, kamus data, standar.</p><span class="who">sekali saja</span></div><div class="st6"><span class="no">3</span><h3>Rencanakan</h3><p>AI mengusulkan dugaan, pembanding, dan pivot yang perlu dibuat.</p><span class="who">AI membantu</span></div><div class="st6 me"><span class="no">4</span><h3>Hitung</h3><p>Anda membuat pivot dan rumus di Excel. Angka AI dicocokkan, bukan disalin.</p><span class="who">Anda memegang</span><span class=rep>laporan c</span></div><div class="st6"><span class="no">5</span><h3>Maknai</h3><p>AI memberi kandidat insight dan jebakan grafik. Anda memilih dan menguji.</p><span class="who">AI membantu</span><span class=rep>laporan b · d</span></div><div class="st6 me"><span class="no">6</span><h3>Sampaikan</h3><p>SIAP, action title, uji 6 detik, lalu pernyataan penggunaan AI.</p><span class="who">Anda memegang</span><span class=rep>laporan e</span></div></div>
-    <p class="say-line">Langkah 1 sengaja tanpa AI: tebakan Anda adalah bagian (a) laporan, dan tebakan yang salah tidak mengurangi nilai.</p>
-    <span class="num">05</span>
-  </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 9–14</span></div>
-    <p class="say">“Perhatikan warnanya. Kotak gelap dipegang Anda: menebak, menghitung di Excel, dan menyampaikan. AI membantu di langkah 3 dan 5. Kalau urutannya dibalik, yang terjadi adalah AI sebagai oracle.”</p>
-    <p>Hubungkan dengan sheet Petunjuk di dataset: laporan a–e, file Excel kerja yang menunjukkan asal angka, dan pengecekan 10 menit tanpa membuka laporan.</p>
-    <p class="tip">Tebakan serentak (ketik di chat atau angkat tangan): “Langkah mana yang paling sering dilewati mahasiswa yang memakai AI?” Jawaban yang dicari: langkah 4, mencocokkan angka.</p>
-  </div>
-</article>
-
-<article class="unit" data-title="Kenapa file markdown" data-block="Sesi 1 · Copilot" data-at="14">
-  <div class="frame"><section class="slide">
-    <div class="eyebrow">Masalahnya</div>
-    <h2>Setiap chat baru, AI seperti konsultan di hari pertama: tidak tahu apa-apa tentang Anda</h2>
-    <div class="grid g2">
-      <div class="card"><span class="n wr">Tanpa brief</span><p>Setiap kali Anda mengetik ulang: peran saya apa, kolom ini artinya apa, judul slide harus seperti apa, jawab dalam bahasa apa. Yang lupa diketik, tidak dipakai AI.</p></div>
-      <div class="card tint"><span class="n">Dengan file .md</span><p>Brief tertulis yang dibaca AI setiap kali Anda bertanya. Ditulis sekali, dipakai di semua chat project, dan bisa diperbaiki seperti dokumen biasa.</p></div>
-    </div>
-    <div class="grid g3 why">
-      <div><b>Teks biasa</b><span>Dibuat di Notepad, dibaca manusia dan AI sama baiknya.</span></div>
-      <div><b>Ringan</b><span>Tidak membawa format Word atau PDF yang ikut memakan kuota.</span></div>
-      <div><b>Terstruktur</b><span>Judul, daftar, dan tabel membantu AI tahu mana aturan, mana data.</span></div>
-    </div>
+    <div class="steps6"><div class="st6 me"><span class="no">1</span><h3>Tebak dulu</h3><p>Tulis satu kalimat jawaban versi Anda.</p><span class="who">tanpa AI</span></div><div class="st6"><span class="no">2</span><h3>Beri briefing</h3><p>Pasang file .md di AI. Cukup sekali.</p><span class="who">sekali saja</span></div><div class="st6"><span class="no">3</span><h3>Minta rencana</h3><p>AI mengusulkan apa saja yang perlu dihitung.</p><span class="who">AI membantu</span></div><div class="st6 me"><span class="no">4</span><h3>Hitung sendiri</h3><p>Buat pivot di Excel. Cocokkan dengan angka AI.</p><span class="who">Anda</span></div><div class="st6"><span class="no">5</span><h3>Cari maknanya</h3><p>AI memberi ide. Anda memilih yang terbukti.</p><span class="who">AI membantu</span></div><div class="st6 me"><span class="no">6</span><h3>Sampaikan</h3><p>Susun slide dan laporan, lampirkan pernyataan AI.</p><span class="who">Anda</span></div></div>
+    <p class="say-line">Kotak gelap dikerjakan Anda sendiri. Langkah 1 sengaja tanpa AI: tebakan yang salah tidak mengurangi nilai.</p>
     <span class="num">06</span>
   </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 14–17</span></div>
-    <p class="say">“Bayangkan Anda menyewa konsultan, tetapi setiap pagi ia lupa semuanya. Anda punya dua pilihan: menjelaskan ulang setiap pagi, atau memberinya satu map brief. File markdown adalah map itu.”</p>
-    <p>Markdown (.md) adalah teks biasa dengan beberapa tanda untuk struktur. Banyak asisten AI juga menulis jawabannya dalam markdown, jadi formatnya sudah akrab bagi model.</p>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 12–16</span></div>
+    <p class="say">“Yang paling sering dilewati adalah langkah 4. Orang menyalin angka dari AI langsung ke slide. Padahal di laporan Anda wajib melampirkan file Excel yang menunjukkan dari mana angka itu.”</p>
+    <p>Hubungkan dengan sheet Petunjuk di dataset: tebakan di halaman pertama laporan, file Excel kerja, dan pengecekan 10 menit tanpa membuka laporan.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Markdown dalam lima tanda" data-block="Sesi 1 · Copilot" data-at="17">
+<article class="unit" data-title="AI lupa di setiap chat" data-block="Sesi 1 · Kenalan dengan AI" data-at="16">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Markdown dasar</div>
-    <h2>Lima tanda sudah cukup untuk semua file project Anda</h2>
+    <div class="eyebrow">Masalahnya</div>
+    <h2>Setiap chat baru, AI lupa semua yang sudah Anda jelaskan</h2>
+    <div class="grid g2">
+      <div class="card"><span class="n wr">Tanpa briefing</span><p>Seperti kru baru di setiap shift tanpa serah terima. Setiap kali Anda mengetik ulang: peran saya apa, kolom ini artinya apa, judul slide harus seperti apa. Yang lupa diketik, tidak dipakai AI.</p></div>
+      <div class="card tint"><span class="n">Dengan briefing tertulis</span><p>Seperti SOP: ditulis sekali, dibaca setiap kali. Briefing itu berupa file .md yang Anda pasang di AI. Prompt Anda jadi pendek: “Buatkan rencana analisis untuk peran saya.”</p></div>
+    </div>
+    <p class="say-line">File .md adalah briefing tertulis untuk AI.</p>
+    <span class="num">07</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 16–19</span></div>
+    <p class="say">“Di lapangan, Anda tidak akan melepas kru baru tanpa briefing. Perlakukan AI sama: beri briefing tertulis sekali, lalu pakai berulang.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Apa itu file .md" data-block="Sesi 1 · Kenalan dengan AI" data-at="19">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">File .md</div>
+    <h2>File .md hanyalah catatan teks biasa dengan beberapa tanda</h2>
     <div class="grid g2 mdv">
       <pre class="md"><span class="mh"># Instruksi Project</span>
 <span class="mh">## Konteks saya</span>
 <span class="mb">-</span> Peran saya: Manajer Gudang
-<span class="mb">-</span> Pembaca: direksi, waktu baca ±5 menit
+<span class="mb">-</span> Pembaca: direksi
 <span class="mh">## Cara bekerja</span>
 <span class="mb">1.</span> Jangan menebak angka.
-<span class="mb">2.</span> Setiap angka disertai <span class="mk">**rumus atau pivot**</span>.
+<span class="mb">2.</span> Beri rumus atau langkah pivot.
 <span class="mt">| Kolom | Arti |</span>
 <span class="mt">|---|---|</span>
-<span class="mt">| Klaim_per_1000 | Klaim ÷ kiriman × 1.000 |</span></pre>
+<span class="mt">| Klaim_Rusak | jumlah klaim |</span></pre>
       <div class="mdkey">
-        <div><code>#</code><span>Judul. <code>##</code> untuk subjudul.</span></div>
-        <div><code>-</code><span>Daftar poin.</span></div>
+        <div><code>#</code><span>Judul. Dua tanda <code>##</code> untuk subjudul.</span></div>
+        <div><code>-</code><span>Poin-poin.</span></div>
         <div><code>1.</code><span>Langkah berurutan.</span></div>
-        <div><code>**…**</code><span>Penekanan. Pakai hemat.</span></div>
-        <div><code>| |</code><span>Tabel. Baris kedua <code>|---|</code> memisahkan judul kolom.</span></div>
-        <p class="tipline">Simpan dari Notepad: <b>Save as type: All files</b>, nama <code>instruksi-project.md</code>, encoding UTF-8.</p>
+        <div><code>| |</code><span>Tabel. Baris <code>|---|</code> memisahkan judul kolom.</span></div>
+        <p class="tipline">Itu saja. Tidak perlu aplikasi khusus; Notepad sudah cukup. AI membaca tanda-tanda ini untuk tahu mana judul, mana aturan, mana tabel.</p>
       </div>
     </div>
-    <span class="num">07</span>
-  </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 17–19</span></div>
-    <p>Tidak perlu menghafal sintaks lain. Yang penting: satu file satu tujuan, judul jelas, kalimat pendek, dan tanda kurung siku <code>[ ]</code> untuk bagian yang diisi sendiri.</p>
-    <p class="tip">Di Mac: TextEdit → Format → Make Plain Text, lalu simpan dengan akhiran .md. Atau tulis di Google Docs, lalu unduh sebagai Markdown (.md) bila menu itu tersedia.</p>
-  </div>
-</article>
-
-<article class="unit" data-title="Lima file, satu folder" data-block="Sesi 1 · Copilot" data-at="19">
-  <div class="frame"><section class="slide">
-    <div class="eyebrow">Paket file project</div>
-    <h2>Lima file, ±1.200 kata: lebih pendek dari satu halaman laporan Anda</h2>
-    <table class="dt files"><tr><th>File</th><th>Isi</th><th>Dipakai</th><th>Dipasang di</th></tr><tr><td><code>instruksi-project.md</code></td><td>Peran Anda, pertanyaan direksi, aturan kerja AI, format jawaban, struktur laporan</td><td>setiap prompt</td><td>kolom instruksi project</td></tr><tr><td><code>kamus-data.md</code></td><td>Arti setiap kolom di lima sheet, satuan, dan kolom berumus</td><td>saat menghitung</td><td>file pengetahuan project</td></tr><tr><td><code>standar-presentasi.md</code></td><td>SIAP, tiga alur cerita, action title, 8 aturan deck, uji 6 detik</td><td>saat menyusun slide</td><td>file pengetahuan project</td></tr><tr><td><code>catatan-progres.md</code></td><td>Angka yang sudah Anda verifikasi, keputusan, langkah berikutnya</td><td>saat memulai chat baru</td><td>Anda isi; dikirim di pesan pertama</td></tr><tr><td><code>pernyataan-ai.md</code></td><td>Explain · Validate · Account dalam enam baris</td><td>saat mengumpulkan</td><td>lampiran laporan</td></tr></table>
-    <p class="pcap">Unduh kelimanya di hub: kartu Analitika Bisnis → Template markdown project. Kamus data sudah terisi dari dataset; tiga file lain tinggal Anda lengkapi.</p>
     <span class="num">08</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 19–22</span></div>
-    <p class="say">“Satu file satu tujuan. Yang selalu dipakai hanya instruksi-project.md, dan itu sengaja dibuat pendek: sekitar 256 kata. Yang lain diambil AI hanya ketika relevan.”</p>
-    <p>Memisahkan file juga hemat usage: standar presentasi tidak perlu ikut dibaca ketika Anda hanya bertanya rumus pivot.</p>
+    <p>Kenapa tidak Word atau PDF? File teks lebih ringan (hemat kuota), dan bisa ditempel langsung ke kotak chat AI mana pun.</p>
   </div>
 </article>
 
-<article class="unit" data-title="instruksi-project.md" data-block="Sesi 1 · Copilot" data-at="22">
+<article class="unit" data-title="Membuat file .md di Notepad" data-block="Sesi 1 · Kenalan dengan AI" data-at="22">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">File 1 · instruksi-project.md</div>
-    <h2>Dua aturan di file ini yang paling sering menyelamatkan nilai Anda</h2>
-    <div class="grid mdsplit">
-      <pre class="md sm"><span class="mh"># Instruksi Project · Analitika Bisnis · Nusantara Kargo 2025</span>
-<span class="mh">## Konteks saya</span>
-<span class="mb">-</span> Peran saya: <span class="mp">[Manajer Operasional / Manajer Komersial / Manajer Armada / Manajer Gudang / Analis Terminal]</span>
-<span class="mb">-</span> Pertanyaan direksi: <span class="mp">[salin dari sheet Peran]</span>
-<span class="mb">-</span> Tebakan awal saya, ditulis sebelum memakai AI: <span class="mp">[satu kalimat]</span>
-<span class="mh">## Cara bekerja</span>
-<span class="mb">1.</span> Jangan menebak angka. Hitung dengan menjalankan kode pada file yang saya unggah, atau beri saya rumus dan langkah pivot. Tanpa file, jawab &quot;perlu data&quot;.
-<span class="mb">2.</span> Setiap angka disertai cara mendapatkannya di Excel: rumus, atau pivot (baris · kolom · nilai · filter).
-<span class="mb">4.</span> Sebelum menyimpulkan, cek definisi, porsi/komposisi, ukuran sampel, dan outlier. Bila ada nilai ekstrem, laporkan median di samping rata-rata.
-<span class="mh">## Format jawaban</span>
-<span class="mb">-</span> Bahasa Indonesia, ringkas: tabel untuk angka, maksimal 150 kata kecuali saya minta lebih.</pre>
-      <div class="annot">
-        <div class="an"><b>Isi bagian bertanda [ ]</b><p>Peran, pertanyaan direksi, sheet utama, dan tebakan awal Anda.</p></div>
-        <div class="an hot"><b>Aturan 1 dan 2: anti-halusinasi</b><p>AI tidak boleh menebak angka. Setiap angka datang bersama rumus atau pivot, jadi bisa Anda cocokkan di Excel.</p></div>
-        <div class="an"><b>Aturan 4: validasi otomatis</b><p>Definisi, porsi, ukuran sampel, outlier. Median ikut dilaporkan bila ada nilai ekstrem.</p></div>
-        <div class="an"><b>Format jawaban: hemat kuota</b><p>Tabel, maksimal 150 kata, revisi hanya bagian yang berubah.</p></div>
+    <div class="eyebrow">Praktik · dua menit</div>
+    <h2>Membuat file .md di Notepad: empat langkah</h2>
+    <div class="grid howto">
+      <div class="steps4v">
+        <div><i>1</i><span><b>Buka Notepad.</b> Di Mac: TextEdit, lalu menu Format → Make Plain Text.</span></div>
+        <div><i>2</i><span><b>Tempel isi template</b> dari hub, atau salin dari slide lampiran di akhir.</span></div>
+        <div><i>3</i><span><b>Isi bagian dalam kurung siku</b> <code>[ ... ]</code>. Bagian lain biarkan.</span></div>
+        <div><i>4</i><span><b>File → Save As.</b> Isi seperti gambar di kanan, lalu Save.</span></div>
+      </div>
+      <div class="mock">
+        <div class="mbar">Save As</div>
+        <div class="mrow"><span>File name:</span><b>instruksi-project.md</b></div>
+        <div class="mrow hot"><span>Save as type:</span><b>All files (*.*)</b></div>
+        <div class="mrow"><span>Encoding:</span><b>UTF-8</b></div>
+        <div class="mbtn"><em>Save</em></div>
+        <p class="mnote">Kalau tersimpan sebagai <code>.md.txt</code>, ganti nama filenya dan hapus <code>.txt</code>.</p>
       </div>
     </div>
     <span class="num">09</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 22–26</span></div>
-    <p>Di slide, beberapa baris disembunyikan agar terbaca; file lengkapnya ada di hub.</p>
-    <p class="say">“Kalau Anda hanya sempat menulis dua aturan, tulis aturan 1 dan 2. Itu yang membuat angka AI bisa ditelusuri, dan itu yang saya nilai di kriteria ketepatan analisis.”</p>
+    <p class="say">“Kesalahan paling umum: lupa mengganti Save as type menjadi All files, sehingga filenya menjadi instruksi-project.md.txt. AI tetap bisa membacanya, tetapi rapikan supaya tidak bingung.”</p>
+    <p class="tip">Sebenarnya file .md tidak wajib. Isi template bisa juga langsung disalin-tempel ke kotak chat. File hanya memudahkan dipakai ulang.</p>
   </div>
 </article>
 
-<article class="unit" data-title="standar-presentasi.md" data-block="Sesi 1 · Copilot" data-at="26">
+<article class="unit" data-title="Lima file" data-block="Sesi 1 · Kenalan dengan AI" data-at="26">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">File 2 · standar-presentasi.md</div>
-    <h2>Framework yang sudah Anda pelajari, ditulis ulang sebagai perintah</h2>
-    <table class="dt std"><tr><th>Yang dipelajari di kelas</th><th>Yang tertulis di file</th></tr><tr><td>SIAP: empat kalimat sebelum membuka aplikasi presentasi</td><td><code>## 1. SIAP</code> · “Jika keempat kalimat belum jelas, jangan membuat slide dulu.”</td></tr><tr><td>Tiga alur: Performance Review, Proposal, Problem Solving</td><td><code>## 2. Pilih satu alur cerita</code> · tabel tiga baris</td></tr><tr><td>Anatomi action title: subjek, arah, bukti, so what</td><td><code>## 3. Action title</code> · satu contoh</td></tr><tr><td>Delapan aturan standar deck</td><td><code>## 4.</code> · ditulis apa adanya</td></tr><tr><td>Uji 6 detik: pesan, bukti, langkah berikutnya</td><td><code>## 5.</code> · tiga pertanyaan per slide</td></tr></table>
-    <div class="grid g2 ba">
-      <div class="card"><span class="n wr">Tanpa file · “buatkan judul slide”</span><p class="ttl">Analisis Tiket Pelanggan 2025</p></div>
-      <div class="card tint"><span class="n">Dengan file · prompt yang sama</span><p class="ttl">Tiket naik 42%, tetapi 89% tambahannya hanya pertanyaan status kiriman</p></div>
-    </div>
+    <div class="eyebrow">Paket file project</div>
+    <h2>Anda tidak menulis dari nol: dua file sudah jadi, satu diisi lima menit</h2>
+    <div class="f5s"><div class="f5 ok"><span class="st">Sudah jadi</span><code>kamus-<wbr>data.md</code><p>Arti setiap kolom di lima sheet dataset.</p><em>Tinggal unggah</em></div><div class="f5 ok"><span class="st">Sudah jadi</span><code>standar-<wbr>presentasi.md</code><p>SIAP, judul temuan, 8 aturan deck, uji 6 detik.</p><em>Tinggal unggah</em></div><div class="f5 mid"><span class="st">Diisi 5 menit</span><code>instruksi-<wbr>project.md</code><p>Peran Anda, pertanyaan direksi, tebakan awal.</p><em>Isi bagian [ ]</em></div><div class="f5 mid"><span class="st">Diisi sambil jalan</span><code>catatan-<wbr>progres.md</code><p>Angka yang sudah Anda cek di Excel.</p><em>Diperbarui terus</em></div><div class="f5 end"><span class="st">Diisi di akhir</span><code>pernyataan-<wbr>ai.md</code><p>Bagian mana yang dibantu AI dan cara Anda mengecek.</p><em>Lampiran laporan</em></div></div>
+    <p class="pcap">Unduh kelimanya di hub: kartu Analitika Bisnis → Template markdown project (ZIP). Total ±1.100 kata, lebih pendek dari satu halaman laporan.</p>
     <span class="num">10</span>
   </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 26–30</span></div>
-    <p class="say">“Anda tidak perlu mengingatkan AI setiap kali: ‘judulnya temuan ya, satu pesan per slide ya’. Itu sudah tertulis. Prompt Anda cukup pendek.”</p>
-    <p>Contoh di bawah diambil dari data latihan yang dibedah di Sesi 2. Perhatikan bagian 6 file: AI dilarang memakai angka yang belum tercatat di catatan-progres.md, supaya slide tidak berisi angka yang belum Anda cek.</p>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 26–29</span></div>
+    <p class="say">“Dua file pertama saya siapkan untuk Anda. Kamus data disalin dari sheet Kamus Data di dataset; standar presentasi adalah yang sudah kita pelajari. Yang Anda tulis hanya beberapa baris di file ketiga.”</p>
   </div>
 </article>
 
-<article class="unit" data-title="kamus-data.md dan catatan-progres.md" data-block="Sesi 1 · Copilot" data-at="30">
+<article class="unit" data-title="Mengisi instruksi-project.md" data-block="Sesi 1 · Kenalan dengan AI" data-at="29">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">File 3 dan 4</div>
-    <h2>Kamus data membuat AI paham kolom; catatan progres membuat Anda bisa mulai chat baru</h2>
-    <div class="grid g2">
-      <div><div class="flab">kamus-data.md · sudah terisi, 5 sheet</div><pre class="md sm"><span class="mh">## Kiriman · transaksi kiriman 2025, satu baris per resi (±11 ribu baris)</span>
-<span class="mt">| Kolom | Arti | Satuan |</span>
-<span class="mt">|---|---|---|</span>
-<span class="mt">| Tepat_Waktu | Rumus: &quot;Ya&quot; bila Lama_Kirim_hari ≤ SLA_hari. OTD = porsi kiriman &quot;Ya&quot; | Ya / Tidak |</span>
-<span class="mt">| Ongkir_Rp | Pendapatan dari kiriman, sudah dikurangi diskon pelanggan | Rupiah |</span>
-…
-<span class="mh">## Gudang · 5 gudang × 12 bulan 2025</span>
-<span class="mt">| Klaim_per_1000 | Rumus: Klaim_Rusak ÷ Kiriman_Keluar × 1.000 | klaim per 1.000 kiriman |</span></pre>
-        <p class="pcap">Tanpa kamus, AI menebak arti kolom dari namanya. Kamus memberi definisi resmi, misalnya OTD = porsi kiriman dengan Tepat_Waktu “Ya”.</p></div>
-      <div><div class="flab">catatan-progres.md · Anda yang mengisi</div><pre class="md sm"><span class="mh"># Catatan Progres · <span class="mp">[Peran saya]</span></span>
-<span class="mh">## Tebakan awal (ditulis tanpa AI)</span>
-<span class="mh">## Angka yang sudah saya verifikasi</span>
-<span class="mt">| Angka | Nilai | Cara mendapat (sheet · pivot/rumus) | Dicek di Excel? |</span>
-<span class="mt">|---|---|---|---|</span>
-<span class="mh">## Dugaan yang belum terbukti</span>
-<span class="mh">## Keputusan yang sudah saya ambil</span>
-<span class="mh">## Langkah berikutnya</span></pre>
-        <p class="pcap">Hanya angka yang sudah Anda cocokkan di Excel yang masuk tabel ini.</p></div>
+    <div class="eyebrow">File 3 · instruksi-project.md</div>
+    <h2>Yang Anda isi hanya empat baris; sisanya aturan kerja untuk AI</h2>
+    <div class="grid mdsplit">
+      <pre class="md"><span class="mh"># Instruksi Project</span>
+<span class="mh">## Konteks saya (isi bagian dalam <span class="mp">[ ]</span>)</span>
+<span class="mb">-</span> Peran saya: <span class="mf">Kepala Hub Jakarta (peran contoh)</span>
+<span class="mb">-</span> Pertanyaan direksi: <span class="mf">Berapa kurir pickup dan kendaraan apa yang perlu disiapkan tiap hari?</span>
+<span class="mb">-</span> Sheet utama: <span class="mf">Kiriman</span>
+<span class="mb">-</span> Tebakan awal saya: <span class="mf">Jumat paling sibuk.</span>
+<span class="mh">## Cara bekerja</span>
+<span class="mb">1.</span> Jangan menebak angka. ...
+<span class="mb">2.</span> Setiap angka disertai rumus atau pivot.
+...</pre>
+      <div class="annot">
+        <div class="an hot"><b>Empat baris yang Anda isi</b><p>Peran, pertanyaan direksi, sheet utama (salin dari sheet Peran), dan tebakan Anda.</p></div>
+        <div class="an"><b>Aturan 1: AI dilarang menebak angka</b><p>AI harus menghitung dari file, atau memberi Anda rumus.</p></div>
+        <div class="an"><b>Aturan 2: setiap angka ada asalnya</b><p>Rumus atau langkah pivot selalu disertakan, jadi bisa Anda cocokkan di Excel.</p></div>
+        <div class="an"><b>Sisanya: biarkan</b><p>Cara mengecek data, format jawaban yang ringkas, dan struktur laporan a–e.</p></div>
+      </div>
     </div>
     <span class="num">11</span>
   </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 30–33</span></div>
-    <p>Kamus data disalin dari sheet Kamus Data di file dataset, jadi tidak ada informasi baru di dalamnya. Gunanya agar AI bisa menulis rumus dan langkah pivot tanpa Anda mengunggah seluruh data.</p>
-    <p class="say">“Catatan progres adalah memori Anda, bukan memori AI. Ketika percakapan sudah panjang, buka chat baru, kirim file ini, dan katakan: lanjutkan dari langkah berikutnya nomor 1.”</p>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 29–33</span></div>
+    <p>Contoh di slide memakai peran contoh yang akan dipraktikkan di Sesi 2: Kepala Hub Jakarta. Peran ini tidak ada di daftar lima peran project, jadi tidak membocorkan jawaban siapa pun.</p>
+    <p class="say">“Kalau Anda hanya ingat dua aturan, ingat aturan 1 dan 2. Itulah yang membuat angka Anda bisa ditelusuri, dan itu yang saya nilai.”</p>
   </div>
 </article>
 
-<article class="unit" data-title="Cara memasang" data-block="Sesi 1 · Copilot" data-at="33">
+<article class="unit" data-title="Mengapa standar-presentasi.md" data-block="Sesi 1 · Kenalan dengan AI" data-at="33">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Memasang file di asisten AI Anda</div>
-    <h2>Pasang sekali di project, lalu buka chat baru di dalamnya untuk setiap tugas</h2>
-    <div class="grid g3 inst">
-      <div class="card tint"><span class="n">A · Ada fitur project</span><p>Project, Gem, atau GPT kustom. Tempel isi <code>instruksi-project.md</code> di kolom instruksi. Unggah <code>kamus-data.md</code> dan <code>standar-presentasi.md</code> sebagai file pengetahuan.</p></div>
-      <div class="card"><span class="n">B · Akun gratis tanpa project</span><p>Pesan pertama setiap chat: isi <code>instruksi-project.md</code> + lampiran <code>kamus-data.md</code>. Lampirkan <code>standar-presentasi.md</code> hanya saat menyusun slide.</p></div>
-      <div class="card"><span class="n">C · Agen koding (lanjutan)</span><p>Claude Code, Cursor, Codex, dan sejenisnya membaca file instruksi dari folder kerja, misalnya <code>CLAUDE.md</code> atau <code>AGENTS.md</code>. Ganti nama file instruksi Anda.</p></div>
+    <div class="eyebrow">File 2 · standar-presentasi.md</div>
+    <h2>Supaya AI langsung mengikuti cara presentasi yang sudah Anda pelajari</h2>
+    <div class="grid g2">
+      <div class="card tint"><span class="n">Isinya</span><ul class="ul">
+        <li>SIAP: empat kalimat sebelum membuat slide</li>
+        <li>Judul slide berupa temuan, bukan topik</li>
+        <li>Satu pesan per slide</li>
+        <li>Delapan aturan deck dan uji 6 detik</li></ul></div>
+      <div class="ba1">
+        <div class="card"><span class="n wr">Tanpa file · “buatkan judul slide”</span><p class="ttl">Analisis Volume Pickup Hub Jakarta</p></div>
+        <div class="card tint"><span class="n">Dengan file · prompt yang sama</span><p class="ttl">Hub Jakarta stabil ±21 pickup per hari kerja; Sabtu tinggal 13, Minggu 3</p></div>
+      </div>
     </div>
-    <p class="pcap">Nama menu berbeda di tiap aplikasi dan sering berubah. Cari kata <b>Instructions</b>, <b>Instruksi</b>, atau <b>Knowledge</b>.</p>
     <span class="num">12</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 33–36</span></div>
-    <p>Saya sengaja tidak menunjuk satu merek. Mahasiswa memakai asisten AI yang berbeda, dan polanya sama: instruksi permanen, file rujukan, lalu chat terpisah per tugas.</p>
-    <p class="tip">Kalau kelas daring, minta mahasiswa membuka asisten AI masing-masing dan menunjukkan di mana kolom instruksinya. Cukup satu menit; yang belum menemukannya pakai cara B.</p>
+    <p class="say">“Judul pertama hanya memberi tahu topiknya. Judul kedua langsung memberi tahu temuannya. Anda tidak perlu mengingatkan AI setiap kali; aturannya sudah tertulis di file.”</p>
   </div>
 </article>
 
-<article class="unit" data-title="Kenapa boros" data-block="Sesi 1 · Copilot" data-at="36">
+<article class="unit" data-title="Memasang di AI" data-block="Sesi 1 · Kenalan dengan AI" data-at="36">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Hemat usage · mengapa</div>
-    <h2>Setiap balasan membaca ulang seluruh percakapan, jadi pesan ke-12 membayar sebelas pesan sebelumnya</h2>
-    <div class="grid tokg">
-      <div class="chart"><svg viewBox="0 0 560 250" role="img" aria-label="Token yang dibaca per balasan: satu percakapan panjang dibanding percakapan baru setelah pesan ke-6"><line x1="46" x2="554" y1="216.0" y2="216.0" stroke="#C3D0D4" stroke-width="1"/><text x="40" y="220.0" text-anchor="end" class="ax">0</text><line x1="46" x2="554" y1="124.2" y2="124.2" stroke="#C3D0D4" stroke-width="1"/><text x="40" y="128.2" text-anchor="end" class="ax">5.000</text><line x1="46" x2="554" y1="32.4" y2="32.4" stroke="#C3D0D4" stroke-width="1"/><text x="40" y="36.4" text-anchor="end" class="ax">10.000</text><rect x="49.0" y="170.1" width="17.6" height="45.9" fill="#B9C6CA"/><text x="67.1" y="231" text-anchor="middle" class="ax">1</text><rect x="91.0" y="157.2" width="17.6" height="58.8" fill="#B9C6CA"/><text x="109.1" y="231" text-anchor="middle" class="ax">2</text><rect x="133.0" y="144.4" width="17.6" height="71.6" fill="#B9C6CA"/><text x="151.1" y="231" text-anchor="middle" class="ax">3</text><rect x="175.0" y="131.5" width="17.6" height="84.5" fill="#B9C6CA"/><text x="193.1" y="231" text-anchor="middle" class="ax">4</text><rect x="217.0" y="118.7" width="17.6" height="97.3" fill="#B9C6CA"/><text x="235.1" y="231" text-anchor="middle" class="ax">5</text><rect x="259.0" y="105.8" width="17.6" height="110.2" fill="#B9C6CA"/><text x="277.1" y="231" text-anchor="middle" class="ax">6</text><rect x="301.0" y="93.0" width="17.6" height="123.0" fill="#B9C6CA"/><rect x="319.5" y="153.6" width="17.6" height="62.4" fill="#1D6F63"/><text x="319.1" y="231" text-anchor="middle" class="ax">7</text><rect x="343.0" y="80.1" width="17.6" height="135.9" fill="#B9C6CA"/><rect x="361.5" y="140.7" width="17.6" height="75.3" fill="#1D6F63"/><text x="361.1" y="231" text-anchor="middle" class="ax">8</text><rect x="385.0" y="67.3" width="17.6" height="148.7" fill="#B9C6CA"/><rect x="403.5" y="127.9" width="17.6" height="88.1" fill="#1D6F63"/><text x="403.1" y="231" text-anchor="middle" class="ax">9</text><rect x="427.0" y="54.4" width="17.6" height="161.6" fill="#B9C6CA"/><rect x="445.5" y="115.0" width="17.6" height="101.0" fill="#1D6F63"/><text x="445.1" y="231" text-anchor="middle" class="ax">10</text><rect x="469.0" y="41.5" width="17.6" height="174.5" fill="#B9C6CA"/><rect x="487.5" y="102.1" width="17.6" height="113.9" fill="#1D6F63"/><text x="487.1" y="231" text-anchor="middle" class="ax">11</text><rect x="511.0" y="28.7" width="17.6" height="187.3" fill="#B9C6CA"/><rect x="529.5" y="89.3" width="17.6" height="126.7" fill="#1D6F63"/><text x="529.1" y="231" text-anchor="middle" class="ax">12</text><text x="301.0" y="22" class="lb" fill="#1D6F63">← chat baru + catatan-progres.md</text><text x="46" y="246" class="ax">pesan ke-</text></svg></div>
-      <div class="side">
-        <div class="stat"><div class="v">26%</div><div class="l">lebih sedikit token untuk 12 pesan bila Anda pindah ke chat baru setelah pesan ke-6, membawa catatan-progres.md</div></div>
-        <p class="pcap"><span class="sw g"></span>satu percakapan panjang &nbsp; <span class="sw p"></span>chat baru + catatan</p>
-        <p class="pcap">Ilustrasi: file konteks ±2.500 token, setiap tanya-jawab menambah ±700 token.</p>
-      </div>
+    <div class="eyebrow">Memasang briefing di AI Anda</div>
+    <h2>Pilih cara yang tersedia di AI Anda; cara A selalu bisa</h2>
+    <div class="grid g2 inst">
+      <div class="card tint"><span class="n">A · Paling mudah, semua AI termasuk gratis</span>
+        <ol class="ol">
+          <li>Buka chat baru.</li>
+          <li>Tempel isi <code>instruksi-project.md</code> sebagai pesan pertama.</li>
+          <li>Lampirkan <code>kamus-data.md</code> (ikon klip/+).</li>
+          <li>Saat menyusun slide, lampirkan juga <code>standar-presentasi.md</code>.</li></ol></div>
+      <div class="card"><span class="n">B · Kalau ada menu Project, Gem, atau GPT</span>
+        <ol class="ol">
+          <li>Buat project baru, misalnya “Project AB”.</li>
+          <li>Tempel isi <code>instruksi-project.md</code> di kolom Instructions.</li>
+          <li>Unggah dua file lain di bagian Files atau Knowledge.</li>
+          <li>Setiap tugas: buka chat baru di dalam project itu.</li></ol></div>
     </div>
+    <p class="pcap">Nama menu berbeda di tiap aplikasi dan sering berubah. Cari kata <b>Instructions</b> atau <b>Instruksi</b>.</p>
     <span class="num">13</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 36–39</span></div>
-    <p class="say">“Di kebanyakan asisten AI, setiap kali Anda mengirim pesan, model membaca ulang seluruh percakapan dan file yang terlampir. Percakapan panjang bukan hanya boros; AI juga mulai kurang memperhatikan bagian awal.”</p>
-    <p>Angka di grafik ilustrasi, bukan pengukuran satu aplikasi tertentu: total 76.200 token untuk satu percakapan panjang dibanding 56.400 token bila dipecah.</p>
+    <p>Saya sengaja tidak menunjuk satu merek. Polanya sama di semua asisten AI.</p>
+    <p class="tip">Untuk mahasiswa yang memakai agen koding (Claude Code, Cursor, Codex): simpan file instruksi sebagai CLAUDE.md atau AGENTS.md di folder kerja. Cukup disebut lisan bila ada yang bertanya.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Delapan kebiasaan hemat" data-block="Sesi 1 · Copilot" data-at="39">
+<article class="unit" data-title="Kuota seperti BBM" data-block="Sesi 1 · Kenalan dengan AI" data-at="39">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Hemat usage · bagaimana</div>
-    <h2>Delapan kebiasaan yang memangkas kuota tanpa mengurangi mutu jawaban</h2>
-    <div class="grid r8w">
-      <div class="r8"><div><i>01</i><b>Konteks tetap di file .md</b><span>bukan diketik ulang di setiap chat</span></div><div><i>02</i><b>Satu chat, satu tugas</b><span>ganti tugas → chat baru + catatan-progres.md</span></div><div><i>03</i><b>Jangan tempel ribuan baris</b><span>unggah file sekali, atau beri kamus data dan minta rumus</span></div><div><i>04</i><b>Minta rumus atau kode</b><span>bukan meminta AI membaca semua baris</span></div><div><i>05</i><b>Tentukan bentuk dan panjang</b><span>“tabel, maksimal 120 kata”</span></div><div><i>06</i><b>Revisi yang spesifik</b><span>“perbaiki judul slide 3”, bukan “buat ulang semua”</span></div><div><i>07</i><b>Perbaiki prompt, jangan regenerate</b><span>jawaban buruk biasanya karena perintahnya kabur</span></div><div><i>08</i><b>Lampirkan file sesuai keperluan</b><span>standar presentasi hanya saat menyusun slide</span></div></div>
-      <div class="vs2">
-        <div class="pr bad"><span class="lab">Boros</span><p>ini datanya [tempel 11.000 baris]. tolong analisis semuanya dan buatkan ppt lengkap</p></div>
-        <div class="pr"><span class="lab">Hemat</span><p>Pakai kamus-data.md. Beri rencana analisis 3 langkah untuk pertanyaan peran saya, lalu langkah pivot untuk langkah 1 saja. Tabel, maks. 120 kata.</p></div>
+    <div class="eyebrow">Kuota AI</div>
+    <h2>Kuota AI seperti BBM: chat yang panjang terus mengangkut muatan lama</h2>
+    <div class="grid tokg">
+      <div class="chart"><svg viewBox="0 0 560 250" role="img" aria-label="Kuota yang terpakai per pesan: satu chat panjang dibanding chat baru setelah pesan ke-6"><line x1="46" x2="554" y1="216.0" y2="216.0" stroke="#C3D0D4"/><text x="40" y="220.0" text-anchor="end" class="ax">0</text><line x1="46" x2="554" y1="124.2" y2="124.2" stroke="#C3D0D4"/><text x="40" y="128.2" text-anchor="end" class="ax">5.000</text><line x1="46" x2="554" y1="32.4" y2="32.4" stroke="#C3D0D4"/><text x="40" y="36.4" text-anchor="end" class="ax">10.000</text><rect x="49.0" y="170.1" width="17.6" height="45.9" fill="#B9C6CA"/><text x="67.1" y="231" text-anchor="middle" class="ax">1</text><rect x="91.0" y="157.2" width="17.6" height="58.8" fill="#B9C6CA"/><text x="109.1" y="231" text-anchor="middle" class="ax">2</text><rect x="133.0" y="144.4" width="17.6" height="71.6" fill="#B9C6CA"/><text x="151.1" y="231" text-anchor="middle" class="ax">3</text><rect x="175.0" y="131.5" width="17.6" height="84.5" fill="#B9C6CA"/><text x="193.1" y="231" text-anchor="middle" class="ax">4</text><rect x="217.0" y="118.7" width="17.6" height="97.3" fill="#B9C6CA"/><text x="235.1" y="231" text-anchor="middle" class="ax">5</text><rect x="259.0" y="105.8" width="17.6" height="110.2" fill="#B9C6CA"/><text x="277.1" y="231" text-anchor="middle" class="ax">6</text><rect x="301.0" y="93.0" width="17.6" height="123.0" fill="#B9C6CA"/><rect x="319.5" y="153.6" width="17.6" height="62.4" fill="#1D6F63"/><text x="319.1" y="231" text-anchor="middle" class="ax">7</text><rect x="343.0" y="80.1" width="17.6" height="135.9" fill="#B9C6CA"/><rect x="361.5" y="140.7" width="17.6" height="75.3" fill="#1D6F63"/><text x="361.1" y="231" text-anchor="middle" class="ax">8</text><rect x="385.0" y="67.3" width="17.6" height="148.7" fill="#B9C6CA"/><rect x="403.5" y="127.9" width="17.6" height="88.1" fill="#1D6F63"/><text x="403.1" y="231" text-anchor="middle" class="ax">9</text><rect x="427.0" y="54.4" width="17.6" height="161.6" fill="#B9C6CA"/><rect x="445.5" y="115.0" width="17.6" height="101.0" fill="#1D6F63"/><text x="445.1" y="231" text-anchor="middle" class="ax">10</text><rect x="469.0" y="41.5" width="17.6" height="174.5" fill="#B9C6CA"/><rect x="487.5" y="102.1" width="17.6" height="113.9" fill="#1D6F63"/><text x="487.1" y="231" text-anchor="middle" class="ax">11</text><rect x="511.0" y="28.7" width="17.6" height="187.3" fill="#B9C6CA"/><rect x="529.5" y="89.3" width="17.6" height="126.7" fill="#1D6F63"/><text x="529.1" y="231" text-anchor="middle" class="ax">12</text><text x="301.0" y="22" class="lb" fill="#1D6F63">← mulai chat baru, bawa catatan</text><text x="46" y="246" class="ax">pesan ke-</text></svg></div>
+      <div class="side">
+        <p class="plain">Setiap kali Anda mengirim pesan, AI membaca ulang <b>seluruh</b> percakapan dari awal. Pesan ke-12 ikut “membayar” 11 pesan sebelumnya.</p>
+        <div class="stat"><div class="v">26%</div><div class="l">lebih hemat bila Anda pindah ke chat baru setelah ±6 pesan dan membawa catatan-progres.md</div></div>
+        <p class="pcap"><span class="sw g"></span>satu chat panjang &nbsp; <span class="sw p"></span>chat baru + catatan</p>
       </div>
     </div>
     <span class="num">14</span>
   </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 39–45</span></div>
-    <p class="tip">Tebakan serentak sebelum membuka kotak kanan: “Prompt mana yang menghasilkan jawaban lebih baik?” Jawabannya keduanya berbeda di dua hal: yang hemat juga lebih baik, karena AI tahu konteks, langkah, dan bentuk jawabannya.</p>
-    <p>Prompt boros di kiri gagal tiga kali: menempel data mentah (mahal), meminta “semuanya” (kabur), dan meminta PPT sebelum ada temuan yang diverifikasi.</p>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 39–42</span></div>
+    <p class="say">“Bayangkan truk yang tidak pernah membongkar muatan lama. Setiap rit, muatannya makin berat dan BBM-nya makin boros. Chat yang terlalu panjang sama: makin boros, dan AI mulai kurang memperhatikan bagian awal.”</p>
+    <p>Angka di grafik ilustrasi: file briefing ±2.500 token, setiap tanya-jawab ±700 token. Total 76.200 token untuk satu chat panjang dibanding 56.400 token bila dipecah.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Enam kebiasaan hemat" data-block="Sesi 1 · Kenalan dengan AI" data-at="42">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Hemat kuota</div>
+    <h2>Enam kebiasaan yang menghemat kuota sekaligus membuat jawaban lebih baik</h2>
+    <div class="grid r8w">
+      <div class="r6"><div><i>1</i><b>Briefing di file, bukan diketik ulang</b><span>dipasang sekali</span></div><div><i>2</i><b>Satu chat untuk satu tugas</b><span>ganti tugas → chat baru + catatan-progres.md</span></div><div><i>3</i><b>Jangan tempel ribuan baris ke chat</b><span>lampirkan file, atau minta rumusnya</span></div><div><i>4</i><b>Minta rumus atau langkah pivot</b><span>bukan meminta AI membaca semua baris</span></div><div><i>5</i><b>Sebut bentuk dan panjang jawaban</b><span>“tabel, maksimal 120 kata”</span></div><div><i>6</i><b>Minta perbaikan yang spesifik</b><span>“perbaiki judul slide 3”, bukan “ulang semua”</span></div></div>
+      <div class="vs2">
+        <div class="pr bad"><span class="lab">Boros</span><p>ini datanya [tempel 11.000 baris]. tolong analisis semuanya dan buatkan ppt lengkap</p></div>
+        <div class="pr"><span class="lab">Hemat</span><p>Pakai kamus-data.md. Apa saja yang perlu saya hitung untuk pertanyaan peran saya? Beri langkah pivot untuk yang pertama saja. Tabel, maks. 120 kata.</p></div>
+      </div>
+    </div>
+    <span class="num">15</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 42–45</span></div>
+    <p class="tip">Tebakan serentak: “Prompt mana yang jawabannya lebih bagus?” Jawabannya yang hemat, karena AI tahu konteksnya, langkahnya, dan bentuk jawaban yang diminta.</p>
+    <p>Sebelum istirahat, minta mahasiswa mengunduh ZIP template dari hub supaya bisa mengikuti praktik di Sesi 2.</p>
   </div>
 </article>
 
 <article class="unit" data-title="Istirahat" data-block="Istirahat" data-at="45">
   <div class="frame"><section class="slide dark center">
     <div class="eyebrow">Istirahat · 15 menit</div>
-    <h1 class="display">Sambil istirahat, unduh lima file .md dan data latihan dari hub.</h1>
+    <h1 class="display">Sambil istirahat: unduh template markdown dan dataset project dari hub.</h1>
     <p class="lede">irwanraditya.github.io/ITL-Trisakti → kartu Analitika Bisnis → Materi &amp; tugas.</p>
     <div style="margin-top:1.2em"><button class="tchip" type="button" data-sec="900" data-label="Istirahat">▶ Timer 15 menit</button></div>
-    <span class="num">15</span>
+    <span class="num">16</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 45–60</span></div>
-    <p>Sesi 2 dimulai dengan data latihan. Mahasiswa yang sudah mengunduh bisa mengikuti setiap prompt di asisten AI masing-masing.</p>
+    <p>Sesi 2 memakai dataset project yang sudah dibagikan 10 Oktober. Mahasiswa yang membuka file itu bisa mengikuti setiap langkah.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Data latihan" data-block="Sesi 2 · Demo" data-at="60">
+<article class="unit" data-title="Peran contoh" data-block="Sesi 2 · Praktik" data-at="60">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Sesi 2 · demo di data latihan</div>
-    <h2>Kita bedah data latihan, bukan dataset project, supaya cerita peran Anda tetap milik Anda</h2>
+    <div class="eyebrow">Sesi 2 · praktik dengan dataset project</div>
+    <h2>Contoh hari ini: Kepala Hub Jakarta, peran yang tidak ada di daftar Anda</h2>
     <div class="grid g2">
-      <div class="memo"><div class="from">Pertanyaan direksi · latihan</div>
-        <p>Tiket keluhan pelanggan semester 2 naik sekitar 40%. Apakah layanan kita memburuk, dan apa yang harus dilakukan tim layanan pelanggan?</p></div>
-      <div class="card tint"><span class="n">Data Latihan · Tiket Layanan Pelanggan 2025</span>
-        <p>6.525 tiket, satu baris per tiket. Kolom: tanggal, hari, kanal, kategori, hub, menit respons, selesai sekali kontak, skor kepuasan. Chat Aplikasi baru dibuka 1 Agustus 2025.</p></div>
+      <div class="memo"><div class="from">Pertanyaan · peran contoh</div>
+        <p>Berapa kurir pickup dan kendaraan apa yang perlu disiapkan tiap hari di Hub Jakarta?</p></div>
+      <div class="card tint"><span class="n">Data yang dipakai</span>
+        <p>Dataset Project AB 2026, sheet <b>Kiriman</b>. Hanya tiga kolom: <code>Hub_Asal</code>, <code>Tgl_Pickup</code>, <code>Berat_kg</code>. Hub Jakarta: 6.410 kiriman sepanjang 2025, 57% dari seluruh kiriman.</p></div>
     </div>
-    <p class="say-line">Alurnya sama persis dengan project Anda: tebakan → rencana → hitung → maknai → sampaikan.</p>
-    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">16</span>
+    <p class="say-line">Caranya sama persis dengan peran Anda. Bedanya, jawaban peran Anda tetap jadi temuan Anda sendiri.</p>
+    <span class="foot">Data: Dataset Project AB 2026 · sheet Kiriman · Hub Jakarta · 2025 (fiktif) · peran contoh, tidak dinilai</span><span class="num">17</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 60–62</span></div>
-    <p class="say">“Kalau saya membedah salah satu peran project di depan kelas, separuh dari Anda kehilangan kesempatan menemukan ceritanya sendiri. Jadi saya pakai data latihan dari perusahaan yang sama, dengan cerita yang berbeda.”</p>
-    <p>Data latihan tersedia di hub. Prompt di slide berikutnya bisa ditiru persis oleh mahasiswa.</p>
+    <p class="say">“Kita pakai dataset yang sama dengan project Anda. Tetapi saya memilih pertanyaan yang tidak dimiliki siapa pun, supaya tidak ada peran yang jawabannya terbuka di depan kelas.”</p>
+    <p class="tip">Pertanyaan contoh sengaja hanya memakai hari pickup dan berat kiriman Hub Jakarta. Tidak memakai bulan, ketepatan waktu, pendapatan, klaim, armada, atau terminal, sehingga cerita kelima peran tetap tertutup.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Langkah 1: tebakan" data-block="Sesi 2 · Demo" data-at="62">
+<article class="unit" data-title="Langkah 1: tebakan" data-block="Sesi 2 · Praktik" data-at="62">
   <div class="frame"><section class="slide center">
     <div class="eyebrow">Langkah 1 · tanpa AI</div>
-    <div class="quote">“Keluhan naik karena keterlambatan pengiriman memburuk di semester 2.”</div>
-    <p class="pcap" style="margin-top:1.1em;font-size:.8em">Tebakan saya, ditulis sebelum membuka data. Kita lihat di akhir: benar, salah, atau meleset seberapa jauh.</p>
-    <span class="num">17</span>
+    <div class="quote">“Jumat paling sibuk, karena pelanggan mengirim sebelum akhir pekan.”</div>
+    <p class="pcap" style="margin-top:1.1em;font-size:.8em">Tebakan saya, ditulis sebelum membuka data. Di akhir kita lihat: benar, salah, atau meleset seberapa jauh.</p>
+    <span class="num">18</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 62–64</span></div>
-    <p class="tip">Tebakan serentak: “Setuju atau tidak dengan tebakan ini?” Minta jawaban di chat atau angkat tangan bersamaan. Jangan beri petunjuk.</p>
-    <p>Tebakan sengaja dibuat masuk akal tetapi salah, supaya bagian (a) laporan terlihat fungsinya.</p>
+    <p class="tip">Tebakan serentak: “Menurut Anda, hari apa paling sibuk di hub?” Minta jawaban di chat. Banyak praktisi akan menjawab Senin atau Jumat; keduanya masuk akal.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Prompt 1: rencana" data-block="Sesi 2 · Demo" data-at="64">
+<article class="unit" data-title="Prompt 1: minta rencana" data-block="Sesi 2 · Praktik" data-at="64">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Langkah 3 · rencanakan</div>
-    <h2>Prompt pertama meminta rencana, bukan jawaban</h2>
-    <div class="pr"><span class="lab">Prompt</span><p>Pakai instruksi-project.md dan kamus-data-latihan.md. <b>Jangan hitung dulu.</b> Beri 3 dugaan penyebab kenaikan tiket, pembanding untuk masing-masing, dan pivot yang perlu saya buat. Tabel, maks. 120 kata.</p></div>
-    <div class="ai"><span class="lab">Keluaran AI · diringkas</span><table class="dt sm"><tr><th>Dugaan</th><th>Pembanding</th><th>Pivot di Excel</th></tr><tr><td>Keterlambatan memburuk</td><td>Kategori Keterlambatan S1 vs S2</td><td>Baris Kategori · Kolom Semester · Nilai Count No_Tiket</td></tr><tr><td>Kanal baru menambah tiket</td><td>Kanal × bulan, sebelum dan sesudah 1 Agustus</td><td>Baris Bulan · Kolom Kanal · Nilai Count</td></tr><tr><td>Satu hub bermasalah</td><td>Hub S1 vs S2</td><td>Baris Hub · Kolom Semester · Nilai Count</td></tr></table><p class="hint">Tambahkan kolom Semester: <code>=IF(MONTH(B2)&lt;=6;"S1";"S2")</code></p></div>
-    <div class="chk"><span class="lab">Yang perlu dicek</span><p>Apakah tebakan saya ikut diuji? Ya, dugaan 1. Apakah ada dugaan yang belum terpikir? Dua lainnya justru dari AI.</p></div>
-    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">18</span>
+    <div class="eyebrow">Langkah 3 · minta rencana</div>
+    <h2>Prompt pertama meminta rencana, belum meminta jawaban</h2>
+    <div class="pr"><span class="lab">Prompt yang diketik</span><p>Pakai instruksi-project.md dan kamus-data.md. <b>Jangan hitung dulu.</b> Apa saja yang perlu saya hitung, dan pivot apa yang harus saya buat di Excel? Tabel, maks. 120 kata.</p></div>
+    <div class="ai"><span class="lab">Jawaban AI · diringkas</span><table class="dt sm"><tr><th>Yang dihitung</th><th>Kolom</th><th>Pivot di Excel</th></tr><tr><td>Pickup per hari dalam seminggu</td><td>Tgl_Pickup → kolom baru <b>Hari</b></td><td>Baris: Hari · Nilai: jumlah No_Resi · Filter: Hub_Asal = Jakarta</td></tr><tr><td>Rata-rata pickup per hari</td><td>dibagi jumlah Senin, Selasa, … di 2025</td><td>Tambah satu kolom di samping pivot</td></tr><tr><td>Sebaran berat kiriman</td><td>Berat_kg → kolom baru <b>Kelas_Berat</b></td><td>Baris: Kelas_Berat · Nilai: jumlah No_Resi</td></tr></table><p class="hint">Rumus kolom baru · Hari: <code>=TEXT(B2;"dddd")</code> · Kelas_Berat: <code>=IF(H2&lt;=50;"s.d. 50 kg";IF(H2&lt;=200;"50–200 kg";"di atas 200 kg"))</code></p></div>
+    <div class="chk"><span class="lab">Yang Anda cek</span><p>Apakah tebakan saya ikut diuji? Ya, di baris pertama. Ada yang terlewat? Berat kiriman, yang menentukan jenis kendaraan.</p></div>
+    <span class="foot">Data: Dataset Project AB 2026 · sheet Kiriman · Hub Jakarta · 2025 (fiktif) · peran contoh, tidak dinilai</span><span class="num">19</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 64–67</span></div>
-    <p class="say">“Ini peran AI yang paling berguna: memperluas dugaan. Tebakan saya hanya satu; AI menambah dua yang belum saya pikirkan. Tetapi belum ada satu angka pun yang keluar.”</p>
-    <p>Pemisah argumen rumus memakai titik koma untuk Excel berbahasa Indonesia; di Excel berbahasa Inggris memakai koma.</p>
+    <p class="say">“Belum ada satu angka pun dari AI. Ia hanya membuat daftar kerja. Itu bagian AI yang paling berguna dan paling aman.”</p>
+    <p>Pemisah rumus memakai titik koma untuk Excel berbahasa Indonesia; Excel berbahasa Inggris memakai koma. Fungsi TEXT dengan "dddd" menghasilkan nama hari sesuai bahasa Excel.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Prompt 2: hitung" data-block="Sesi 2 · Demo" data-at="67">
+<article class="unit" data-title="Membuat pivot di Excel" data-block="Sesi 2 · Praktik" data-at="67">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Langkah 4 · hitung</div>
-    <h2>AI menghitung dengan kode; Anda mencocokkannya dengan pivot sendiri</h2>
+    <div class="eyebrow">Langkah 4 · hitung sendiri</div>
+    <h2>Membuat pivot di Excel: lima klik</h2>
+    <div class="grid howto">
+      <div class="steps4v">
+        <div><i>1</i><span><b>Klik satu sel</b> di sheet Kiriman (setelah kolom Hari dibuat).</span></div>
+        <div><i>2</i><span><b>Insert → PivotTable → OK.</b> Sheet baru terbuka.</span></div>
+        <div><i>3</i><span><b>Seret Hari</b> ke kotak Rows.</span></div>
+        <div><i>4</i><span><b>Seret No_Resi</b> ke kotak Values. Pastikan tertulis <i>Count</i>.</span></div>
+        <div><i>5</i><span><b>Seret Hub_Asal</b> ke kotak Filters, lalu pilih Jakarta.</span></div>
+      </div>
+      <div class="mock pv">
+        <div class="mbar">PivotTable Fields</div>
+        <div class="pvq"><span>Filters</span><b>Hub_Asal</b></div>
+        <div class="pvq"><span>Rows</span><b>Hari</b></div>
+        <div class="pvq"><span>Values</span><b>Count of No_Resi</b></div>
+        <p class="mnote">Hasilnya tabel: Senin, Selasa, … dengan jumlah kiriman masing-masing.</p>
+      </div>
+    </div>
+    <span class="num">20</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 67–70</span></div>
+    <p class="say">“Ini satu-satunya keterampilan Excel yang benar-benar wajib untuk project ini. Kalau Anda belum pernah membuat pivot, minta AI menjelaskan langkahnya sambil Anda mempraktikkannya. Itu penggunaan AI yang sangat baik.”</p>
+    <p class="tip">Bila kelas daring, bagikan layar Excel dan buat pivotnya langsung. Dua menit sudah cukup.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Hasil pivot dicocokkan" data-block="Sesi 2 · Praktik" data-at="70">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Langkah 4 · cocokkan angka AI dengan pivot Anda</div>
+    <h2>AI dan pivot menunjukkan angka yang sama; baru sekarang angka itu boleh dipakai</h2>
     <div class="grid calc">
-      <div><div class="pr"><span class="lab">Prompt</span><p>File data latihan sudah saya unggah. Hitung tabel dugaan 1 dan 2 dengan menjalankan kode, lalu tulis langkah pivot yang sama untuk Excel supaya bisa saya cocokkan.</p></div>
-        <div class="chk"><span class="lab">Yang perlu dicek</span><p>Total 2.693 + 3.832 = 6.525 = jumlah baris sheet Tiket. Pivot saya menunjukkan angka yang sama. Masuk catatan-progres.md.</p></div></div>
-      <div class="ai"><span class="lab">Keluaran AI · diringkas</span><table class="dt sm rnum"><tr><th>Kategori</th><th>S1</th><th>S2</th><th>Selisih</th></tr><tr><td>Status kiriman</td><td>791</td><td>1.802</td><td>+1.011</td></tr><tr><td>Keterlambatan</td><td>712</td><td>737</td><td>+25</td></tr><tr><td>Barang rusak</td><td>325</td><td>355</td><td>+30</td></tr><tr><td>Ubah alamat</td><td>343</td><td>351</td><td>+8</td></tr><tr><td>Tagihan</td><td>96</td><td>132</td><td>+36</td></tr><tr><td>Lainnya</td><td>426</td><td>455</td><td>+29</td></tr><tr><td><b>Total</b></td><td><b>2.693</b></td><td><b>3.832</b></td><td><b>+1.139</b></td></tr></table><p class="hint">Chat Aplikasi (mulai 1 Agustus): 1.502 tiket di S2, 72% di antaranya Status kiriman.</p></div>
+      <div><div class="pr"><span class="lab">Prompt yang diketik</span><p>Sudah saya unggah file dataset. Hitung pickup Hub Jakarta per hari dengan menjalankan kode, lalu bagi dengan jumlah hari itu di 2025.</p></div>
+        <div class="chk"><span class="lab">Yang Anda cek</span><p>Total 6.410 sama dengan jumlah baris Jakarta di filter Excel. Pivot saya menunjukkan angka yang sama. Masuk catatan-progres.md.</p></div>
+        <p class="pcap">Kenapa dibagi jumlah hari? Tahun 2025 punya 53 hari Rabu dan 52 hari lainnya. Membandingkan total saja kurang adil.</p></div>
+      <div class="ai"><span class="lab">Jawaban AI · diringkas</span><table class="dt sm rnum"><tr><th>Hari</th><th>Kiriman 2025</th><th>Jumlah hari</th><th>Rata-rata per hari</th></tr><tr><td>Senin</td><td>1.163</td><td>52</td><td><b>22,4</b></td></tr><tr><td>Selasa</td><td>1.117</td><td>52</td><td><b>21,5</b></td></tr><tr><td>Rabu</td><td>1.129</td><td>53</td><td><b>21,3</b></td></tr><tr><td>Kamis</td><td>1.079</td><td>52</td><td><b>20,8</b></td></tr><tr><td>Jumat</td><td>1.071</td><td>52</td><td><b>20,6</b></td></tr><tr><td>Sabtu</td><td>691</td><td>52</td><td><b>13,3</b></td></tr><tr><td>Minggu</td><td>160</td><td>52</td><td><b>3,1</b></td></tr><tr><td><b>Total</b></td><td><b>6.410</b></td><td><b>365</b></td><td></td></tr></table></div>
     </div>
-    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">19</span>
+    <span class="foot">Data: Dataset Project AB 2026 · sheet Kiriman · Hub Jakarta · 2025 (fiktif) · peran contoh, tidak dinilai</span><span class="num">21</span>
   </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 67–71</span></div>
-    <p class="say">“Lihat baris Keterlambatan: 712 menjadi 737, naik 4%. Tebakan saya mulai goyah. Hampir seluruh tambahan ada di Status kiriman.”</p>
-    <p>Kebiasaan yang ditekankan: cek total terhadap jumlah baris. Ini pengecekan paling murah dan menangkap banyak kesalahan, termasuk AI yang lupa sebagian data.</p>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 70–73</span></div>
+    <p class="say">“Tebakan saya mulai goyah. Senin sampai Jumat hampir sama, sekitar 21 pickup per hari. Senin malah sedikit lebih tinggi dari Jumat. Yang turun tajam justru Sabtu dan Minggu.”</p>
+    <p>Kebiasaan yang ditekankan: cocokkan total dengan jumlah baris. Ini pengecekan paling murah dan menangkap banyak kesalahan, termasuk AI yang lupa sebagian data.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Jawaban AI yang menyesatkan" data-block="Sesi 2 · Demo" data-at="71">
+<article class="unit" data-title="Jawaban AI yang menyesatkan" data-block="Sesi 2 · Praktik" data-at="73">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Langkah 4 · ketika AI benar tetapi menyesatkan</div>
-    <h2>“Respons membaik 41%” benar secara hitungan, salah secara makna</h2>
+    <div class="eyebrow">Hati-hati · AI benar menghitung, keliru menyimpulkan</div>
+    <h2>“Rata-rata kiriman 63 kg, pakai mobil boks” terdengar wajar, tetapi menyesatkan</h2>
     <div class="grid g2">
-      <div><div class="pr"><span class="lab">Prompt · tanpa file instruksi</span><p>Apakah waktu respons kita membaik di semester 2?</p></div>
-        <div class="ai"><span class="lab">Keluaran AI</span><p>Ya. Rata-rata waktu respons turun dari <b>61 menit</b> menjadi <b>36 menit</b> (41%). Tim layanan pelanggan layak diapresiasi.</p></div></div>
-      <div><div class="chk bad"><span class="lab">Hasil pengecekan</span><p><b>Median</b> 13 → 12 menit: praktis tidak berubah.<br><b>Outlier:</b> gangguan sistem 11–13 Juni, 23 tiket dibalas ≥600 menit. Tanpa tiga hari itu, rata-rata S1 48 menit.<br><b>Komposisi:</b> Chat Aplikasi yang cepat menambah banyak tiket di S2. Per kanal, waktu respons tidak berubah.</p></div>
-        <p class="say-line sm">Aturan 4 di instruksi-project.md (laporkan median bila ada nilai ekstrem) mencegah jawaban ini.</p></div>
+      <div><div class="pr"><span class="lab">Prompt · tanpa file briefing</span><p>Berapa rata-rata berat kiriman Jakarta, dan kendaraan apa yang cocok untuk pickup?</p></div>
+        <div class="ai"><span class="lab">Jawaban AI</span><p>Rata-rata berat kiriman Hub Jakarta <b>63 kg</b>. Disarankan memakai mobil boks untuk semua pickup.</p></div></div>
+      <div><div class="chk"><span class="lab">Hasil pengecekan</span><p><b>Nilai tengah (median): 32 kg</b>, setengah dari rata-rata.<br><b>6 dari 10 kiriman</b> beratnya 50 kg atau kurang; hanya 7% di atas 200 kg.<br><b>Ada 51 kiriman di atas 500 kg</b> (paling berat 1,7 ton). Segelintir kiriman ekstrem ini menarik rata-rata ke atas.</p></div>
+        <p class="say-line sm">Aturan 4 di briefing (laporkan median bila ada data ekstrem) mencegah jawaban seperti ini.</p></div>
     </div>
-    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">20</span>
+    <span class="foot">Data: Dataset Project AB 2026 · sheet Kiriman · Hub Jakarta · 2025 (fiktif) · peran contoh, tidak dinilai</span><span class="num">22</span>
   </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 71–74</span></div>
-    <p class="say">“Angka AI tidak salah: rata-ratanya memang turun. Yang salah adalah kesimpulannya. Ini lebih berbahaya daripada angka yang dikarang, karena lolos ketika dicocokkan dengan Excel.”</p>
-    <p>Contoh ini disengaja: prompt tanpa file instruksi. Dengan instruksi-project.md terpasang, AI diminta melaporkan median di samping rata-rata. Inilah bagian (c) laporan: satu pengecekan validasi.</p>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 73–76</span></div>
+    <p class="say">“Angka AI tidak salah: rata-ratanya memang segitu. Yang salah kesimpulannya. Kalau semua pickup memakai mobil boks, sebagian besar mobil itu jalan setengah kosong. Ini lebih berbahaya daripada angka yang dikarang, karena lolos ketika dicocokkan dengan Excel.”</p>
+    <p>Contoh ini sengaja tanpa file briefing. Inilah bagian (c) laporan: satu pengecekan validasi. Median di Excel: <code>=MEDIAN(...)</code>, atau Value Field Settings di pivot tidak menyediakan median, jadi pakai rumus.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Prompt 3: insight" data-block="Sesi 2 · Demo" data-at="74">
+<article class="unit" data-title="Prompt 3: cari maknanya" data-block="Sesi 2 · Praktik" data-at="76">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Langkah 5 · maknai</div>
-    <h2>AI mengusulkan insight dari angka terverifikasi; Anda memilih dan melabeli</h2>
-    <div class="pr"><span class="lab">Prompt</span><p>Dari tabel di catatan-progres.md, beri maksimal 3 kandidat insight: apa yang berubah · mengapa penting · apa yang dilakukan. Label FAKTA atau DUGAAN. <b>Jangan menambah angka baru.</b></p></div>
-    <div class="ai"><span class="lab">Keluaran AI · diringkas</span><div class="ins"><span class="tag2 ">FAKTA</span><p><b>Tiket naik 42%, tetapi 89% tambahannya pertanyaan Status kiriman, terutama lewat Chat Aplikasi.</b> Layanan tidak memburuk; pelanggan bertanya di kanal yang lebih mudah. <i>→ Notifikasi status otomatis di aplikasi.</i></p></div><div class="ins"><span class="tag2 ">FAKTA</span><p><b>Akhir pekan dibalas 5× lebih lambat (median 39 vs 8 menit); tiket akhir pekan naik 62% sejak Chat Aplikasi.</b> Respons di atas 60 menit diikuti skor kepuasan 3,2 vs 4,1. <i>→ Tambah satu agen chat akhir pekan.</i></p></div><div class="ins"><span class="tag2 d">DUGAAN</span><p><b>Pelanggan bertanya status karena tidak ada notifikasi saat kiriman bergerak.</b> Bila benar, sebagian besar tiket status bisa hilang. <i>→ Cek sampel isi chat sebelum memutuskan.</i></p></div></div>
-    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">21</span>
+    <div class="eyebrow">Langkah 5 · cari maknanya</div>
+    <h2>AI memberi ide dari angka yang sudah dicek; Anda memilih dan memberi label</h2>
+    <div class="pr"><span class="lab">Prompt yang diketik</span><p>Dari angka di catatan-progres.md, beri maksimal 3 temuan: apa artinya dan apa yang dilakukan. Label FAKTA atau ASUMSI. <b>Jangan menambah angka baru.</b></p></div>
+    <div class="ai"><span class="lab">Jawaban AI · diringkas</span><div class="ins"><span class="tag2 ">FAKTA</span><p><b>Senin–Jumat stabil ±21 pickup per hari (Senin hanya 9% di atas Jumat); Sabtu 13, Minggu 3.</b> <i>→ Jadwal kurir cukup satu pola untuk hari kerja, dikurangi di akhir pekan.</i></p></div><div class="ins"><span class="tag2 ">FAKTA</span><p><b>6 dari 10 kiriman beratnya 50 kg atau kurang; hanya 7% di atas 200 kg.</b> <i>→ Motor dan van cukup untuk sebagian besar pickup; truk dijadwalkan per pesanan.</i></p></div><div class="ins"><span class="tag2 d">ASUMSI</span><p><b>Satu kurir menangani ±8 pickup per hari (bukan dari data).</b> <i>→ Berarti ±3 kurir Senin–Jumat, 2 di hari Sabtu, 1 siaga hari Minggu (masih ada 14 kiriman Udara Kilat hari Minggu sepanjang 2025).</i></p></div></div>
+    <span class="foot">Data: Dataset Project AB 2026 · sheet Kiriman · Hub Jakarta · 2025 (fiktif) · peran contoh, tidak dinilai</span><span class="num">23</span>
   </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 74–77</span></div>
-    <p class="say">“Perhatikan insight ketiga berlabel DUGAAN. Data kita tidak memuat alasan pelanggan bertanya. AI yang baik menandainya; AI tanpa instruksi akan menulisnya seolah fakta.”</p>
-    <p>Angka insight kedua juga sudah dicek di Excel: median per hari (Sabtu/Minggu vs hari kerja, tanpa Email) dan rata-rata skor kepuasan per kelompok respons.</p>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 76–79</span></div>
+    <p class="say">“Lihat label ASUMSI. Data kita tidak mencatat berapa pickup yang sanggup ditangani satu kurir. Angka 8 itu asumsi yang harus dicek ke lapangan. AI yang diberi briefing akan menandainya; AI tanpa briefing menulisnya seolah fakta.”</p>
+    <p>Di sinilah pengalaman lapangan mahasiswa paling berharga: mereka tahu kapasitas kurir yang realistis. Ajak satu-dua orang menyebut angka dari kantornya.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Prompt 4: jebakan grafik" data-block="Sesi 2 · Demo" data-at="77">
+<article class="unit" data-title="Jebakan grafik" data-block="Sesi 2 · Praktik" data-at="79">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Langkah 5 · jebakan grafik (bagian d)</div>
-    <h2>Data yang sama: satu grafik berteriak “meledak”, satu menunjukkan apa yang naik</h2>
+    <div class="eyebrow">Langkah 5 · jebakan grafik (bagian d laporan)</div>
+    <h2>Angka yang sama: satu grafik berteriak “Senin padat”, satu menunjukkan kenyataannya</h2>
     <div class="grid trap2">
-      <div class="panel"><div class="ptitle"><b>Menipu</b> · sumbu mulai dari 400, total saja</div><div class="chart"><svg viewBox="0 0 400 230" role="img" aria-label="Versi menipu: total tiket per bulan dengan sumbu dimulai dari 400"><line x1="40" x2="396" y1="202.0" y2="202.0" stroke="#C3D0D4"/><text x="35" y="206.0" text-anchor="end" class="ax">400</text><line x1="40" x2="396" y1="122.3" y2="122.3" stroke="#C3D0D4"/><text x="35" y="126.3" text-anchor="end" class="ax">550</text><line x1="40" x2="396" y1="42.6" y2="42.6" stroke="#C3D0D4"/><text x="35" y="46.6" text-anchor="end" class="ax">700</text><polyline fill="none" stroke="#A63D2F" stroke-width="3" points="46.0,177.0 77.5,196.7 108.9,136.1 140.4,168.0 171.8,187.7 203.3,190.8 234.7,166.9 266.2,70.7 297.6,58.5 329.1,34.6 360.5,76.1 392.0,44.2"/><text x="46.0" y="217" text-anchor="middle" class="ax">Jan</text><text x="234.7" y="217" text-anchor="middle" class="ax">Jul</text><text x="266.2" y="217" text-anchor="middle" class="ax">Agu</text><text x="392.0" y="217" text-anchor="middle" class="ax">Des</text><text x="329.1" y="24.6" text-anchor="middle" class="lb" fill="#A63D2F">Tiket meledak!</text></svg></div></div>
-      <div class="panel"><div class="ptitle"><b class="ok">Jujur</b> · sumbu dari nol, status kiriman dipisahkan</div><div class="chart"><svg viewBox="0 0 400 230" role="img" aria-label="Versi jujur: tiket per bulan dari nol, pertanyaan status kiriman dipisahkan dari keluhan lain"><line x1="40" x2="396" y1="202.0" y2="202.0" stroke="#C3D0D4"/><text x="35" y="206.0" text-anchor="end" class="ax">0</text><line x1="40" x2="396" y1="109.0" y2="109.0" stroke="#C3D0D4"/><text x="35" y="113.0" text-anchor="end" class="ax">400</text><line x1="40" x2="396" y1="16.0" y2="16.0" stroke="#C3D0D4"/><text x="35" y="20.0" text-anchor="end" class="ax">800</text><rect x="43.0" y="129.9" width="24.2" height="72.1" fill="#B9C6CA"/><rect x="43.0" y="98.1" width="24.2" height="31.9" fill="#1D6F63"/><text x="55.1" y="217" text-anchor="middle" class="ax">Jan</text><rect x="72.2" y="133.6" width="24.2" height="68.4" fill="#B9C6CA"/><rect x="72.2" y="106.7" width="24.2" height="27.0" fill="#1D6F63"/><rect x="101.3" y="114.1" width="24.2" height="87.9" fill="#B9C6CA"/><rect x="101.3" y="80.2" width="24.2" height="33.9" fill="#1D6F63"/><rect x="130.5" y="126.0" width="24.2" height="76.0" fill="#B9C6CA"/><rect x="130.5" y="94.1" width="24.2" height="31.9" fill="#1D6F63"/><rect x="159.7" y="131.6" width="24.2" height="70.4" fill="#B9C6CA"/><rect x="159.7" y="102.7" width="24.2" height="28.8" fill="#1D6F63"/><rect x="188.8" y="134.6" width="24.2" height="67.4" fill="#B9C6CA"/><rect x="188.8" y="104.1" width="24.2" height="30.5" fill="#1D6F63"/><rect x="218.0" y="126.4" width="24.2" height="75.6" fill="#B9C6CA"/><rect x="218.0" y="93.7" width="24.2" height="32.8" fill="#1D6F63"/><text x="230.1" y="217" text-anchor="middle" class="ax">Jul</text><rect x="247.2" y="123.2" width="24.2" height="78.8" fill="#B9C6CA"/><rect x="247.2" y="51.6" width="24.2" height="71.6" fill="#1D6F63"/><text x="259.2" y="217" text-anchor="middle" class="ax">Agu</text><rect x="276.3" y="123.9" width="24.2" height="78.1" fill="#B9C6CA"/><rect x="276.3" y="46.2" width="24.2" height="77.7" fill="#1D6F63"/><rect x="305.5" y="114.3" width="24.2" height="87.7" fill="#B9C6CA"/><rect x="305.5" y="35.8" width="24.2" height="78.6" fill="#1D6F63"/><rect x="334.7" y="128.8" width="24.2" height="73.2" fill="#B9C6CA"/><rect x="334.7" y="53.9" width="24.2" height="74.9" fill="#1D6F63"/><rect x="363.8" y="123.4" width="24.2" height="78.6" fill="#B9C6CA"/><rect x="363.8" y="39.9" width="24.2" height="83.5" fill="#1D6F63"/><text x="375.9" y="217" text-anchor="middle" class="ax">Des</text><text x="247.2" y="18" class="lb" fill="#1D6F63">Status kiriman</text><text x="48.0" y="171.8" class="lb" fill="#0E2430">Keluhan lain: datar</text></svg></div></div>
+      <div class="panel"><div class="ptitle"><b>Menipu</b> · sumbu mulai dari 20, akhir pekan dibuang</div><div class="chart"><svg viewBox="0 0 400 230" role="img" aria-label="Versi menipu: rata-rata pickup per hari di Hub Jakarta"><line x1="40" x2="396" y1="202.0" y2="202.0" stroke="#C3D0D4"/><text x="35" y="206.0" text-anchor="end" class="ax">20</text><line x1="40" x2="396" y1="140.7" y2="140.7" stroke="#C3D0D4"/><text x="35" y="144.7" text-anchor="end" class="ax">21</text><line x1="40" x2="396" y1="79.3" y2="79.3" stroke="#C3D0D4"/><text x="35" y="83.3" text-anchor="end" class="ax">22</text><line x1="40" x2="396" y1="18.0" y2="18.0" stroke="#C3D0D4"/><text x="35" y="22.0" text-anchor="end" class="ax">23</text><rect x="44.0" y="54.8" width="62.0" height="147.2" fill="#A63D2F"/><text x="75.0" y="217" text-anchor="middle" class="ax">Sen</text><text x="75.0" y="49.8" text-anchor="middle" class="vl">22,4</text><rect x="114.0" y="110.0" width="62.0" height="92.0" fill="#A63D2F"/><text x="145.0" y="217" text-anchor="middle" class="ax">Sel</text><rect x="184.0" y="122.3" width="62.0" height="79.7" fill="#A63D2F"/><text x="215.0" y="217" text-anchor="middle" class="ax">Rab</text><rect x="254.0" y="152.9" width="62.0" height="49.1" fill="#A63D2F"/><text x="285.0" y="217" text-anchor="middle" class="ax">Kam</text><rect x="324.0" y="165.2" width="62.0" height="36.8" fill="#A63D2F"/><text x="355.0" y="217" text-anchor="middle" class="ax">Jum</text><text x="355.0" y="160.2" text-anchor="middle" class="vl">20,6</text><text x="219.0" y="14" text-anchor="middle" class="lb" fill="#A63D2F">Senin jauh lebih sibuk!</text></svg></div></div>
+      <div class="panel"><div class="ptitle"><b class="ok">Jujur</b> · sumbu dari nol, tujuh hari lengkap</div><div class="chart"><svg viewBox="0 0 400 230" role="img" aria-label="Versi jujur: rata-rata pickup per hari di Hub Jakarta"><line x1="40" x2="396" y1="202.0" y2="202.0" stroke="#C3D0D4"/><text x="35" y="206.0" text-anchor="end" class="ax">0</text><line x1="40" x2="396" y1="128.4" y2="128.4" stroke="#C3D0D4"/><text x="35" y="132.4" text-anchor="end" class="ax">10</text><line x1="40" x2="396" y1="54.8" y2="54.8" stroke="#C3D0D4"/><text x="35" y="58.8" text-anchor="end" class="ax">20</text><rect x="44.0" y="37.1" width="42.0" height="164.9" fill="#B9C6CA"/><text x="65.0" y="217" text-anchor="middle" class="ax">Sen</text><text x="65.0" y="32.1" text-anchor="middle" class="vl">22</text><rect x="94.0" y="43.8" width="42.0" height="158.2" fill="#B9C6CA"/><text x="115.0" y="217" text-anchor="middle" class="ax">Sel</text><text x="115.0" y="38.8" text-anchor="middle" class="vl">22</text><rect x="144.0" y="45.2" width="42.0" height="156.8" fill="#B9C6CA"/><text x="165.0" y="217" text-anchor="middle" class="ax">Rab</text><text x="165.0" y="40.2" text-anchor="middle" class="vl">21</text><rect x="194.0" y="48.9" width="42.0" height="153.1" fill="#B9C6CA"/><text x="215.0" y="217" text-anchor="middle" class="ax">Kam</text><text x="215.0" y="43.9" text-anchor="middle" class="vl">21</text><rect x="244.0" y="50.4" width="42.0" height="151.6" fill="#B9C6CA"/><text x="265.0" y="217" text-anchor="middle" class="ax">Jum</text><text x="265.0" y="45.4" text-anchor="middle" class="vl">21</text><rect x="294.0" y="104.1" width="42.0" height="97.9" fill="#1D6F63"/><text x="315.0" y="217" text-anchor="middle" class="ax">Sab</text><text x="315.0" y="99.1" text-anchor="middle" class="vl">13</text><rect x="344.0" y="179.2" width="42.0" height="22.8" fill="#1D6F63"/><text x="365.0" y="217" text-anchor="middle" class="ax">Min</text><text x="365.0" y="174.2" text-anchor="middle" class="vl">3</text></svg></div></div>
     </div>
-    <div class="pr"><span class="lab">Prompt</span><p>Buat dua versi grafik tiket per bulan: satu yang menipu seperti yang sering muncul di laporan, satu yang jujur. Jelaskan bedanya dalam 2 kalimat dan beri langkah membuatnya di Excel.</p></div>
-    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">22</span>
+    <div class="pr"><span class="lab">Prompt yang diketik</span><p>Buat dua versi grafik rata-rata pickup per hari: satu yang menipu, satu yang jujur. Jelaskan bedanya dalam 2 kalimat dan beri langkah membuatnya di Excel.</p></div>
+    <span class="foot">Data: Dataset Project AB 2026 · sheet Kiriman · Hub Jakarta · 2025 (fiktif) · peran contoh, tidak dinilai</span><span class="num">24</span>
   </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 77–80</span></div>
-    <p class="say">“Grafik kiri tidak berbohong soal angka. Ia berbohong lewat sumbu yang dipotong dan total yang menyembunyikan komposisi. Grafik kanan memakai satu warna aksen, sisanya abu, sesuai aturan 5 standar deck.”</p>
-    <p>Untuk project, mahasiswa membuat jebakan grafik dari data perannya sendiri. AI boleh membantu membuat versi menipu, karena tujuannya mengajarkan pembaca mengenalinya.</p>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 79–82</span></div>
+    <p class="say">“Grafik kiri tidak berbohong soal angka. Ia berbohong lewat sumbu yang tidak mulai dari nol: selisih 2 pickup terlihat seperti dua kali lipat. Grafik kanan memakai satu warna aksen untuk akhir pekan, sisanya abu, sesuai aturan 5 standar deck.”</p>
+    <p>Di Excel: klik kanan sumbu → Format Axis → Minimum. Versi menipu mengisi 20; versi jujur mengisi 0.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Prompt 5: SIAP dan judul" data-block="Sesi 2 · Demo" data-at="80">
+<article class="unit" data-title="Prompt 4: SIAP dan judul" data-block="Sesi 2 · Praktik" data-at="82">
   <div class="frame"><section class="slide">
     <div class="eyebrow">Langkah 6 · sampaikan</div>
     <h2>Dengan standar-presentasi.md, prompt pendek menghasilkan SIAP dan judul temuan</h2>
     <div class="grid sj">
-      <div><div class="pr"><span class="lab">Prompt</span><p>Pakai standar-presentasi.md. Tulis 4 kalimat SIAP, lalu draf 4 judul slide. Uji 6 detik setiap judul.</p></div>
-        <div class="siap sm"><div class="k">S</div><p>Tiket pelanggan semester 2 naik 42%, dari 2.693 menjadi 3.832.</p><div class="k">I</div><p>Kenaikan ini dibaca sebagai tanda layanan memburuk.</p><div class="k">A</div><p>89% tambahannya pertanyaan status lewat Chat Aplikasi; keluhan lain hanya naik 7%. Titik lemahnya akhir pekan: dibalas 5× lebih lambat.</p><div class="k">P</div><p>Setujui notifikasi status otomatis dan satu agen chat akhir pekan bulan ini; Kepala Layanan melapor hasilnya dalam 3 bulan.</p></div></div>
-      <div class="ai"><span class="lab">Keluaran AI · judul slide</span><ol class="tl4"><li>Tiket naik 42%, tetapi 89% tambahannya hanya pertanyaan status kiriman</li><li>Di luar pertanyaan status, keluhan hanya naik 7%: layanan tidak memburuk</li><li>Akhir pekan dibalas 5× lebih lambat, dan volumenya naik 62% sejak Chat Aplikasi</li><li>Notifikasi status + satu agen akhir pekan: keputusan direksi bulan ini</li></ol><p class="hint">Uji 6 detik: keempat judul menyebut pesan; judul 4 memuat permintaan dan tenggat.</p></div>
+      <div><div class="pr"><span class="lab">Prompt yang diketik</span><p>Pakai standar-presentasi.md. Tulis 4 kalimat SIAP, lalu 4 judul slide. Uji 6 detik setiap judul.</p></div>
+        <div class="siap sm"><div class="k">S</div><p>Hub Jakarta menangani 6.410 pickup sepanjang 2025, lebih dari separuh kiriman perusahaan.</p><div class="k">I</div><p>Jadwal kurir dan kendaraan pickup disusun sama untuk semua hari dan semua kiriman.</p><div class="k">A</div><p>Senin–Jumat stabil ±21 pickup per hari, Sabtu 13, Minggu 3; 6 dari 10 kiriman 50 kg atau kurang.</p><div class="k">P</div><p>Kepala Hub menyetujui jadwal kurir per hari dan pembagian motor, van, truk mulai bulan depan; dievaluasi setelah 4 minggu.</p></div></div>
+      <div class="ai"><span class="lab">Jawaban AI · judul slide</span><ol class="tl4"><li>Hub Jakarta stabil ±21 pickup per hari kerja; Sabtu tinggal 13, Minggu 3</li><li>Senin hanya 9% lebih padat dari Jumat: satu pola jadwal cukup untuk hari kerja</li><li>6 dari 10 kiriman di bawah 50 kg: motor dan van cukup untuk sebagian besar pickup</li><li>Usulan: 3 kurir hari kerja, 2 Sabtu, 1 siaga Minggu, mulai bulan depan</li></ol><p class="hint">Uji 6 detik: keempat judul menyebut pesannya; judul 4 memuat permintaan dan waktunya.</p></div>
     </div>
-    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">23</span>
+    <span class="foot">Data: Dataset Project AB 2026 · sheet Kiriman · Hub Jakarta · 2025 (fiktif) · peran contoh, tidak dinilai</span><span class="num">25</span>
   </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 80–83</span></div>
-    <p class="say">“Bandingkan dengan judul tanpa file tadi: ‘Analisis Tiket Pelanggan 2025’. Prompt-nya sama pendeknya; bedanya ada di file yang terpasang.”</p>
-    <p>Alur yang dipilih AI: Problem Solving (apa yang terjadi → akar masalah → perbaikan + pemilik). Push memiliki pemilik dan tenggat, sesuai aturan 8 standar deck.</p>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 82–84</span></div>
+    <p class="say">“Bandingkan dengan judul tanpa file tadi: ‘Analisis Volume Pickup Hub Jakarta’. Prompt-nya sama pendek; bedanya ada di briefing yang terpasang.”</p>
+    <p>Kalimat I (Issue) adalah situasi rekaan untuk peran contoh. Di project, Issue datang dari pertanyaan direksi di sheet Peran.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Laporan latihan a–e" data-block="Sesi 2 · Demo" data-at="83">
+<article class="unit" data-title="Hasil: laporan a–e" data-block="Sesi 2 · Praktik" data-at="84">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Hasil latihan · struktur laporan project</div>
-    <h2>Lima bagian laporan selesai; AI membantu di tiga, keputusan tetap di saya</h2>
+    <div class="eyebrow">Hasil praktik · struktur laporan project</div>
+    <h2>Lima bagian laporan selesai: AI membantu, keputusan tetap di saya</h2>
     <div class="grid repw">
-      <div class="rep"><div><i>a</i><b>Tebakan vs temuan</b><span>Salah. Keterlambatan hanya naik 4%; kenaikan datang dari pertanyaan status.</span></div><div><i>b</i><b>Insight</b><span>Status kiriman lewat Chat Aplikasi; akhir pekan lambat. Dugaan soal notifikasi ditandai sebagai dugaan.</span></div><div><i>c</i><b>Validasi</b><span>“Respons membaik 41%” ditolak: median 13 → 12 menit, ada gangguan 11–13 Juni.</span></div><div><i>d</i><b>Jebakan grafik</b><span>Sumbu dipotong dan total tanpa komposisi vs batang dari nol yang memisahkan status.</span></div><div><i>e</i><b>Rekomendasi</b><span>Notifikasi status + agen akhir pekan. Batasan: alasan bertanya tidak tercatat; skor kepuasan bias karena pelanggan kecewa lebih rajin mengisi (73% vs 46%).</span></div></div>
+      <div class="rep"><div><i>a</i><b>Tebakan vs temuan</b><span>Salah. Hari kerja hampir sama; Senin justru sedikit di atas Jumat.</span></div><div><i>b</i><b>Temuan</b><span>Pola harian kurir dan sebaran berat kiriman. Kapasitas kurir ditandai sebagai asumsi.</span></div><div><i>c</i><b>Pengecekan</b><span>“Rata-rata 63 kg” ditolak: median 32 kg, ada kiriman ekstrem.</span></div><div><i>d</i><b>Jebakan grafik</b><span>Sumbu mulai dari 20 vs sumbu dari nol dengan tujuh hari.</span></div><div><i>e</i><b>Rekomendasi</b><span>Jadwal kurir per hari + pembagian kendaraan. Batasan: data tidak mencatat jarak dan kapasitas kurir.</span></div></div>
       <div class="decl"><div class="flab">pernyataan-ai.md · terisi</div>
-        <p><b>Explain:</b> AI dipakai untuk rencana analisis, kode pengecekan, kandidat insight, dan draf judul. Tebakan dan rekomendasi saya tulis sendiri.</p>
-        <p><b>Validate:</b> semua angka dicocokkan dengan pivot; klaim “respons membaik” dari AI saya tolak setelah cek median.</p>
-        <p><b>Account:</b> hanya data latihan fiktif yang diunggah. Saya bertanggung jawab atas seluruh isi.</p></div>
+        <p><b>Bisa menjelaskan:</b> AI dipakai untuk rencana hitung, kode pengecekan, ide temuan, dan draf judul. Tebakan dan rekomendasi saya tulis sendiri.</p>
+        <p><b>Sudah dicek:</b> semua angka dicocokkan dengan pivot. Saran “mobil boks untuk semua” saya tolak setelah cek median.</p>
+        <p><b>Berani tanda tangan:</b> hanya dataset fiktif kuliah yang diunggah. Saya bertanggung jawab atas seluruh isi.</p></div>
     </div>
-    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">24</span>
+    <span class="foot">Data: Dataset Project AB 2026 · sheet Kiriman · Hub Jakarta · 2025 (fiktif) · peran contoh, tidak dinilai</span><span class="num">26</span>
   </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 83–85</span></div>
-    <p class="say">“Ini seluruh tugas dalam satu slide. Yang Anda kumpulkan nanti sama strukturnya, dengan data peran Anda dan file Excel yang menunjukkan asal setiap angka.”</p>
-    <p>Pernyataan penggunaan AI memakai tiga kata dari Pertemuan 11. Template-nya ada di paket file .md.</p>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 84–86</span></div>
+    <p class="say">“Ini seluruh tugas dalam satu slide. Yang Anda kumpulkan nanti sama strukturnya, dengan pertanyaan peran Anda dan file Excel yang menunjukkan asal setiap angka.”</p>
   </div>
 </article>
 
-<article class="unit" data-title="Sebelum menempel data" data-block="Sesi 2 · Etika &amp; tata kelola" data-at="85">
+<article class="unit" data-title="Data apa yang boleh ke AI" data-block="Sesi 2 · Etika &amp; aturan" data-at="86">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Etika · sebelum menempel data apa pun</div>
-    <h2>Pertanyaan pertama bukan “bisa dianalisis AI?”, melainkan “boleh keluar dari kantor?”</h2>
-    <table class="dt cls"><tr><th>Jenis data</th><th>Contoh di pelayaran dan logistik</th><th>Ke akun AI pribadi?</th><th>Syarat</th></tr><tr><td><b>Publik</b></td><td>laporan tahunan, siaran pers, dataset kuliah</td><td><span class="ok2">Boleh</span></td><td>sebut sumbernya</td></tr><tr><td><b>Internal</b></td><td>SOP, KPI internal, jadwal kapal</td><td><span class="mid2">Hanya alat resmi kantor</span></td><td>izin atasan atau TI</td></tr><tr><td><b>Rahasia</b></td><td>kontrak, tarif pelanggan, manifest</td><td><span class="no2">Tidak</span></td><td>hanya sistem AI yang disetujui perusahaan</td></tr><tr><td><b>Data pribadi</b></td><td>nama dan HP penerima, data kru, NIK</td><td><span class="no2">Tidak</span></td><td>anonimkan dulu; tunduk UU PDP</td></tr></table>
-    <div class="q4"><b>Empat pertanyaan Pertemuan 14:</b> siapa yang terdampak · data apa yang dipakai · bagaimana keputusan dibuat · siapa yang bertanggung jawab</div>
-    <span class="num">25</span>
-  </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 85–89</span></div>
-    <p class="say">“Banyak dari Anda bekerja di pelayaran. Manifest, tarif kontrak, atau data kru tidak boleh ditempel ke akun AI pribadi, sekalipun untuk tugas kuliah. Untuk project ini aman, karena datanya fiktif.”</p>
-    <p>Kebijakan penyimpanan dan pelatihan data berbeda di tiap layanan AI dan bisa berubah. Pegangan paling aman: perlakukan apa pun yang Anda tempel ke akun pribadi sebagai sudah keluar dari perusahaan.</p>
-  </div>
-</article>
-
-<article class="unit" data-title="Lima risiko" data-block="Sesi 2 · Etika &amp; tata kelola" data-at="89">
-  <div class="frame"><section class="slide">
-    <div class="eyebrow">Risiko · semuanya muncul di demo tadi</div>
-    <h2>Lima risiko saat AI ikut menganalisis, dan pengendalian untuk masing-masing</h2>
-    <div class="rks"><div class="rk"><h3>Halusinasi</h3><p>Angka atau sumber dikarang dengan yakin.</p><span>Minta rumus/kode; cocokkan dengan pivot.</span></div><div class="rk"><h3>Benar tetapi menyesatkan</h3><p>Rata-rata turun 41%, median tidak bergerak.</p><span>Median, outlier, komposisi.</span></div><div class="rk"><h3>Bias</h3><p>Pelanggan kecewa lebih rajin mengisi survei: 73% vs 46%.</p><span>Tanyakan siapa yang tidak terwakili.</span></div><div class="rk"><h3>Kebocoran data</h3><p>Data kantor atau pribadi masuk ke layanan pihak ketiga.</p><span>Klasifikasi data sebelum menempel.</span></div><div class="rk"><h3>Ketergantungan</h3><p>Laporan rapi, tetapi penulisnya tidak bisa menjelaskan angkanya.</p><span>Pengecekan 10 menit tanpa laporan.</span></div></div>
-    <span class="num">26</span>
-  </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 89–92</span></div>
-    <p class="say">“Risiko pertama paling sering dibicarakan. Risiko kedua dan ketiga lebih berbahaya, karena lolos dari pengecekan angka. Bias survei di data latihan tadi contohnya: rata-rata skor kepuasan terlihat lebih buruk dari kenyataan karena yang kecewa lebih rajin mengisi.”</p>
-    <p>Tiga risiko utama Pertemuan 14 (privasi, bias, akuntabilitas) tercakup: privasi = kebocoran data; akuntabilitas = ketergantungan dan halusinasi tanpa penanggung jawab.</p>
-  </div>
-</article>
-
-<article class="unit" data-title="Tata kelola" data-block="Sesi 2 · Etika &amp; tata kelola" data-at="92">
-  <div class="frame"><section class="slide">
-    <div class="eyebrow">Tata kelola · Pertemuan 3 bertemu Pertemuan 14</div>
-    <h2>Tiga pilar tata kelola data berlaku juga untuk AI</h2>
-    <div class="grid g3 gov">
-      <div class="card tint"><span class="n">01 · Definisi</span><h3>Aturan tertulis</h3><p>AI boleh dipakai untuk apa, dengan data kelas apa, di alat yang mana. Untuk project ini: slide berikutnya.</p></div>
-      <div class="card tint"><span class="n">02 · Kepemilikan</span><h3>Nama orang, bukan alat</h3><p>Siapa yang menyetujui keluaran AI sebelum dipakai untuk keputusan. “Kata AI” bukan pemilik.</p></div>
-      <div class="card tint"><span class="n">03 · Kualitas</span><h3>Jejak yang bisa diperiksa</h3><p>Prompt penting disimpan, versi file dicatat, angka diverifikasi, ada tinjauan manusia sebelum dipakai.</p></div>
+    <div class="eyebrow">Etika · sebelum menempel data</div>
+    <h2>Pertanyaan pertama: data ini boleh keluar dari kantor atau tidak?</h2>
+    <div class="lights">
+      <div class="lt g"><span class="dot"></span><b>Hijau · boleh</b><p>Data publik dan dataset kuliah ini: laporan tahunan, siaran pers, data Nusantara Kargo.</p></div>
+      <div class="lt y"><span class="dot"></span><b>Kuning · hanya alat AI resmi kantor</b><p>Data internal: SOP, KPI internal, jadwal kapal. Minta izin atasan atau bagian IT.</p></div>
+      <div class="lt r"><span class="dot"></span><b>Merah · jangan ke akun AI pribadi</b><p>Kontrak dan tarif pelanggan, manifest, data kru dan penerima (nama, nomor HP, NIK).</p></div>
     </div>
-    <p class="say-line">Di skala Anda, jejak itu sederhana: catatan-progres.md dan pernyataan-ai.md.</p>
+    <p class="say-line">Kalau ragu, anggap merah. Untuk project ini aman, karena datanya fiktif.</p>
     <span class="num">27</span>
   </section></div>
-  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 92–95</span></div>
-    <p class="say">“Di Pertemuan 3 kita bilang tata kelola data adalah kesepakatan tentang definisi dan kepemilikan, bukan perkara teknologi. Untuk AI sama saja. Perusahaan yang tidak punya aturan tertulis tentang AI sebenarnya sudah punya aturan: setiap orang memakai seleranya sendiri.”</p>
-    <p>Tanyakan ke kelas (ketik di chat): “Apakah kantor Anda sudah punya aturan tertulis penggunaan AI?” Jawaban ini sering membuka diskusi yang hidup di kelas pekerja.</p>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 86–89</span></div>
+    <p class="say">“Banyak dari Anda bekerja di pelayaran dan logistik. Manifest, tarif kontrak, atau data kru tidak boleh ditempel ke ChatGPT pribadi, sekalipun untuk membantu pekerjaan kantor. Begitu ditempel, data itu sudah keluar dari perusahaan.”</p>
+    <p>Empat pertanyaan Pertemuan 14 bisa disebut lisan: siapa yang terdampak, data apa yang dipakai, bagaimana keputusan dibuat, siapa yang bertanggung jawab.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Regulasi dan rujukan" data-block="Sesi 2 · Etika &amp; tata kelola" data-at="95">
+<article class="unit" data-title="Lima risiko" data-block="Sesi 2 · Etika &amp; aturan" data-at="89">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Regulasi dan rujukan · status per Oktober 2026</div>
-    <h2>Regulasi AI Indonesia sedang disusun; perlindungan data pribadi sudah berlaku</h2>
-    <div class="rgs"><div class="rg"><span class="where">Indonesia</span><b>UU 27/2022 tentang Pelindungan Data Pribadi</b><p>Berlaku penuh sejak Oktober 2024. Lembaga pengawasnya belum terbentuk per Februari 2026; pengawasan sementara oleh Komdigi.</p></div><div class="rg"><span class="where">Indonesia</span><b>SE Menkominfo 9/2023 tentang Etika Kecerdasan Artifisial</b><p>Pedoman etika bagi pelaku usaha dan penyelenggara sistem elektronik berbasis AI.</p></div><div class="rg"><span class="where">Indonesia</span><b>Rancangan Perpres Peta Jalan AI dan Perpres Etika AI</b><p>Per 4 September 2026 menunggu tanda tangan Presiden. Cek status terbaru sebelum mengutip.</p></div><div class="rg"><span class="where">Global</span><b>NIST AI RMF 1.0 (2023) · ISO/IEC 42001:2023 · EU AI Act (2024)</b><p>Rujukan manajemen risiko dan sistem manajemen AI yang banyak dipakai perusahaan multinasional.</p></div></div>
-    <span class="foot">Sumber: Selular.id (4 Sep 2026); CNBC Indonesia (4 Feb 2026); teks UU 27/2022. Status regulasi cepat berubah.</span><span class="num">28</span>
+    <div class="eyebrow">Risiko</div>
+    <h2>Lima risiko memakai AI, dan cara mencegah masing-masing</h2>
+    <div class="rks"><div class="rk"><h3>Mengarang</h3><p>AI menyebut angka atau sumber yang tidak ada.</p><span>Minta rumus; cocokkan dengan pivot.</span></div><div class="rk"><h3>Benar tapi menyesatkan</h3><p>Rata-rata 63 kg tadi: benar dihitung, keliru disimpulkan.</p><span>Cek median dan data ekstrem.</span></div><div class="rk"><h3>Bias</h3><p>Data hanya dari Jakarta, lalu disimpulkan untuk semua hub.</p><span>Tanyakan: siapa yang tidak terwakili?</span></div><div class="rk"><h3>Data bocor</h3><p>Data kantor atau data pribadi masuk ke layanan AI luar.</p><span>Lampu merah: jangan ditempel.</span></div><div class="rk"><h3>Ketergantungan</h3><p>Laporan rapi, tetapi penulisnya tidak bisa menjelaskan.</p><span>Pengecekan 10 menit tanpa laporan.</span></div></div>
+    <span class="num">28</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 89–92</span></div>
+    <p class="say">“Risiko pertama paling sering dibicarakan. Risiko kedua dan ketiga lebih berbahaya, karena lolos dari pengecekan angka. Contohnya sudah kita lihat sendiri tadi.”</p>
+    <p>Tiga risiko utama Pertemuan 14 (privasi, bias, akuntabilitas) tercakup: privasi = data bocor; akuntabilitas = mengarang dan ketergantungan.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Aturan AI di kantor" data-block="Sesi 2 · Etika &amp; aturan" data-at="92">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Tata kelola · di kantor Anda</div>
+    <h2>Di kantor, memakai AI butuh tiga kesepakatan tertulis</h2>
+    <div class="grid g3 gov">
+      <div class="card tint"><span class="n">01 · Aturan</span><h3>Boleh untuk apa</h3><p>AI boleh dipakai untuk pekerjaan apa, dengan data warna apa, di aplikasi yang mana.</p></div>
+      <div class="card tint"><span class="n">02 · Penanggung jawab</span><h3>Siapa yang menyetujui</h3><p>Nama orang yang memeriksa hasil AI sebelum dipakai untuk keputusan. “Kata AI” bukan penanggung jawab.</p></div>
+      <div class="card tint"><span class="n">03 · Catatan</span><h3>Apa yang disimpan</h3><p>Prompt penting, versi file, dan hasil pengecekan, supaya bisa ditelusuri bila ada masalah.</p></div>
+    </div>
+    <p class="say-line">Untuk project ini, catatan Anda cukup dua file: catatan-progres.md dan pernyataan-ai.md.</p>
+    <span class="num">29</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 92–95</span></div>
+    <p class="say">“Di Pertemuan 3 kita bilang tata kelola data itu soal definisi, pemilik, dan kualitas. Untuk AI sama saja. Kantor yang belum punya aturan tertulis sebenarnya punya aturan: setiap orang memakai seleranya sendiri.”</p>
+    <p class="tip">Tanyakan ke kelas (ketik di chat): “Apakah kantor Anda sudah punya aturan tertulis memakai AI?” Pertanyaan ini biasanya membuka diskusi yang hidup di kelas praktisi.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Aturan hukum" data-block="Sesi 2 · Etika &amp; aturan" data-at="95">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Aturan hukum di Indonesia · status per Oktober 2026</div>
+    <h2>Perlindungan data pribadi sudah berlaku; aturan khusus AI masih disusun</h2>
+    <div class="rgs one"><div class="rg"><b>Data pribadi sudah dilindungi undang-undang</b><p>UU 27/2022 tentang Pelindungan Data Pribadi berlaku penuh sejak Oktober 2024. Menempel data pelanggan atau kru ke AI bisa menjadi pelanggaran, bukan sekadar kurang etis.</p></div><div class="rg"><b>Pedoman etika AI sudah ada</b><p>Surat Edaran Menkominfo No. 9 Tahun 2023 tentang Etika Kecerdasan Artifisial menjadi pedoman bagi perusahaan pengguna AI.</p></div><div class="rg"><b>Aturan khusus AI masih disusun</b><p>Per 4 September 2026, Perpres Peta Jalan AI dan Perpres Etika AI masih menunggu tanda tangan Presiden. Sementara itu, kebijakan internal perusahaan yang berlaku.</p></div></div>
+    <span class="foot">Sumber: UU 27/2022; SE Menkominfo 9/2023; Selular.id (4 Sep 2026); CNBC Indonesia (4 Feb 2026). Status regulasi cepat berubah.</span><span class="num">30</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 95–97</span></div>
-    <p>Tekankan dua hal saja: (1) data pribadi sudah dilindungi undang-undang, jadi menempel data pelanggan atau kru ke AI bisa menjadi pelanggaran, bukan sekadar kurang etis; (2) aturan khusus AI di Indonesia masih dalam proses, jadi untuk sekarang perusahaan bergantung pada kebijakan internal.</p>
+    <p>Cukup tekankan satu hal: data pribadi sudah dilindungi undang-undang. Lembaga pengawas PDP belum terbentuk per Februari 2026; pengawasan sementara dijalankan Komdigi.</p>
+    <p>Rujukan global untuk yang bertanya (tidak perlu dibahas): NIST AI RMF 1.0 (2023), ISO/IEC 42001:2023, EU AI Act (2024).</p>
     <h4>Sumber</h4>
     <ul>
       <li>Selular.id, “Dua Perpres AI tunggu tanda tangan Presiden Prabowo”, 4 September 2026.</li>
       <li>CNBC Indonesia, “Telat 2 tahun, Komdigi janji badan penjaga data warga RI berdiri 2026”, 4 Februari 2026.</li>
-      <li>UU Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (masa transisi dua tahun sejak diundangkan 17 Oktober 2022).</li>
+      <li>UU Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (masa transisi dua tahun sejak 17 Oktober 2022).</li>
     </ul>
-    <p class="tip">Status Perpres dan lembaga PDP dapat berubah setelah slide ini dibuat. Periksa berita terbaru sebelum kelas bila ingin menyebut statusnya.</p>
+    <p class="tip">Status Perpres dan lembaga PDP dapat berubah setelah slide ini dibuat. Periksa berita terbaru sebelum menyebut statusnya.</p>
   </div>
 </article>
 
-<article class="unit" data-title="Aturan AI project ini" data-block="Sesi 2 · Etika &amp; tata kelola" data-at="97">
+<article class="unit" data-title="Aturan AI project ini" data-block="Sesi 2 · Etika &amp; aturan" data-at="97">
   <div class="frame"><section class="slide">
     <div class="eyebrow">Aturan AI · project Analitika Bisnis</div>
-    <h2>AI boleh membantu di mana pun, selama setiap angka bisa Anda tunjukkan asalnya</h2>
+    <h2>AI boleh membantu di mana pun, asalkan setiap angka bisa Anda tunjukkan asalnya</h2>
     <div class="grid g3 bwt">
       <div class="card tint"><span class="n">Boleh</span><ul class="ul">
-        <li>Merencanakan analisis dan dugaan</li><li>Menulis rumus, pivot, atau kode</li><li>Mengkritik judul dan alur</li><li>Merapikan bahasa</li></ul></div>
+        <li>Minta rencana hitung</li><li>Minta rumus dan langkah pivot</li><li>Minta koreksi judul dan alur</li><li>Merapikan bahasa</li></ul></div>
       <div class="card hot"><span class="n oc">Wajib</span><ul class="ul">
-        <li>Tebakan awal ditulis tanpa AI</li><li>File Excel kerja yang menunjukkan asal angka</li><li>Pernyataan penggunaan AI di lampiran</li><li>Siap pengecekan 10 menit tanpa laporan</li></ul></div>
+        <li>Tebakan awal ditulis tanpa AI</li><li>File Excel yang menunjukkan asal angka</li><li>Pernyataan penggunaan AI di lampiran</li><li>Siap ditanya 10 menit tanpa membuka laporan</li></ul></div>
       <div class="card"><span class="n wr">Tidak boleh</span><ul class="ul">
-        <li>Angka yang tidak bisa Anda tunjukkan asalnya</li><li>Mengunggah data kantor atau data pribadi</li><li>Menyerahkan keluaran AI atau laporan teman tanpa verifikasi</li></ul></div>
+        <li>Angka yang tidak bisa Anda tunjukkan asalnya</li><li>Mengunggah data kantor atau data pribadi</li><li>Menyerahkan jawaban AI atau laporan teman tanpa dicek</li></ul></div>
     </div>
-    <span class="num">29</span>
+    <span class="num">31</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 97–100</span></div>
     <p>Kolom Boleh dan Wajib sejalan dengan sheet Petunjuk di dataset (“AI boleh membantu… Anda tetap bertanggung jawab atas setiap angka”) dan dengan langkah Account di Pertemuan 11. Sesuaikan bila kebijakan program studi berbeda.</p>
@@ -1054,12 +1162,12 @@ html:not(.js) .tb2{display:none}
   </div>
 </article>
 
-<article class="unit" data-title="Daftar cek sebelum mengumpulkan" data-block="Penutup" data-at="100">
+<article class="unit" data-title="Daftar cek" data-block="Penutup" data-at="100">
   <div class="frame"><section class="slide">
     <div class="eyebrow">Sebelum mengumpulkan</div>
     <h2>Enam cek sebelum laporan dan file Excel Anda dikirim</h2>
-    <div class="checklist"><div><i>01</i><span>Tebakan awal tercantum apa adanya<small>bagian (a), ditulis sebelum memakai AI</small></span></div><div><i>02</i><span>Setiap angka di laporan ada di catatan-progres.md<small>lengkap dengan sheet dan pivot atau rumusnya</small></span></div><div><i>03</i><span>Minimal satu pengecekan validasi ditulis<small>definisi, porsi, ukuran sampel, atau outlier</small></span></div><div><i>04</i><span>Setiap judul lulus uji 6 detik<small>pesan, bukti, langkah berikutnya</small></span></div><div><i>05</i><span>Pernyataan penggunaan AI terlampir<small>Explain · Validate · Account</small></span></div><div><i>06</i><span>Anda bisa menjelaskan angka utama tanpa membuka laporan<small>latihan untuk pengecekan 10 menit</small></span></div></div>
-    <span class="num">30</span>
+    <div class="checklist"><div><i>01</i><span>Tebakan awal tercantum apa adanya<small>bagian (a), ditulis sebelum memakai AI</small></span></div><div><i>02</i><span>Setiap angka ada di catatan-progres.md<small>lengkap dengan sheet dan pivot atau rumusnya</small></span></div><div><i>03</i><span>Minimal satu pengecekan ditulis<small>misalnya rata-rata vs median, atau data ekstrem</small></span></div><div><i>04</i><span>Setiap judul slide lulus uji 6 detik<small>pesan, bukti, langkah berikutnya</small></span></div><div><i>05</i><span>Pernyataan penggunaan AI terlampir<small>bisa menjelaskan · sudah dicek · berani tanda tangan</small></span></div><div><i>06</i><span>Anda bisa menjelaskan angka utama tanpa membuka laporan<small>latihan untuk pengecekan 10 menit</small></span></div></div>
+    <span class="num">32</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 100–103</span></div>
     <p class="say">“Kalau nomor 6 belum bisa, berarti AI yang mengerjakan dan Anda yang mengetik. Kembali ke langkah 4.”</p>
@@ -1071,27 +1179,27 @@ html:not(.js) .tb2{display:none}
   <div class="frame"><section class="slide dark center">
     <div class="eyebrow">Penutup</div>
     <h1 class="display">AI mempercepat pekerjaan Anda.<br>Yang menjawab direksi tetap Anda.</h1>
-    <p class="lede">Minggu ini: pasang lima file .md, tulis tebakan peran Anda tanpa AI, lalu mulai catatan-progres.md.</p>
-    <span class="num">31</span>
+    <p class="lede">Minggu ini: tulis tebakan peran Anda tanpa AI, isi empat baris di instruksi-project.md, lalu mulai dengan prompt rencana.</p>
+    <span class="num">33</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 103–105</span></div>
-    <p>Arahkan ke hub untuk unduhan: tutorial ini, template markdown (ZIP), dan data latihan. Slide terakhir (lampiran) berisi kelima file yang bisa disalin langsung.</p>
+    <p>Arahkan ke hub untuk unduhan: tutorial ini dan template markdown (ZIP). Slide terakhir (lampiran) berisi kelima file yang bisa disalin langsung.</p>
   </div>
 </article>
 
 <article class="unit" data-title="Lampiran: file .md" data-block="Penutup" data-at="104">
   <div class="frame"><section class="slide">
-    <div class="eyebrow">Lampiran · enam file siap pakai</div>
+    <div class="eyebrow">Lampiran · lima file siap pakai</div>
     <h2>Salin atau unduh file markdown untuk project Anda</h2>
-    <div class="dlg"><div class="dlc"><code>instruksi-project.md</code><span>256 kata</span><button class="tb2 js-only" type="button" data-copy="instruksi-project.md">Salin</button><button class="tb2 js-only local-only" type="button" data-dl="instruksi-project.md">Unduh</button></div><div class="dlc"><code>kamus-data.md</code><span>457 kata</span><button class="tb2 js-only" type="button" data-copy="kamus-data.md">Salin</button><button class="tb2 js-only local-only" type="button" data-dl="kamus-data.md">Unduh</button></div><div class="dlc"><code>standar-presentasi.md</code><span>277 kata</span><button class="tb2 js-only" type="button" data-copy="standar-presentasi.md">Salin</button><button class="tb2 js-only local-only" type="button" data-dl="standar-presentasi.md">Unduh</button></div><div class="dlc"><code>catatan-progres.md</code><span>67 kata</span><button class="tb2 js-only" type="button" data-copy="catatan-progres.md">Salin</button><button class="tb2 js-only local-only" type="button" data-dl="catatan-progres.md">Unduh</button></div><div class="dlc"><code>pernyataan-ai.md</code><span>96 kata</span><button class="tb2 js-only" type="button" data-copy="pernyataan-ai.md">Salin</button><button class="tb2 js-only local-only" type="button" data-dl="pernyataan-ai.md">Unduh</button></div><div class="dlc"><code>kamus-data-latihan.md</code><span>148 kata</span><button class="tb2 js-only" type="button" data-copy="kamus-data-latihan.md">Salin</button><button class="tb2 js-only local-only" type="button" data-dl="kamus-data-latihan.md">Unduh</button></div></div>
+    <div class="dlg"><div class="dlc"><code>instruksi-project.md</code><span>252 kata</span><button class="tb2 js-only" type="button" data-copy="instruksi-project.md">Salin</button><button class="tb2 js-only local-only" type="button" data-dl="instruksi-project.md">Unduh</button></div><div class="dlc"><code>kamus-data.md</code><span>457 kata</span><button class="tb2 js-only" type="button" data-copy="kamus-data.md">Salin</button><button class="tb2 js-only local-only" type="button" data-dl="kamus-data.md">Unduh</button></div><div class="dlc"><code>standar-presentasi.md</code><span>277 kata</span><button class="tb2 js-only" type="button" data-copy="standar-presentasi.md">Salin</button><button class="tb2 js-only local-only" type="button" data-dl="standar-presentasi.md">Unduh</button></div><div class="dlc"><code>catatan-progres.md</code><span>67 kata</span><button class="tb2 js-only" type="button" data-copy="catatan-progres.md">Salin</button><button class="tb2 js-only local-only" type="button" data-dl="catatan-progres.md">Unduh</button></div><div class="dlc"><code>pernyataan-ai.md</code><span>96 kata</span><button class="tb2 js-only" type="button" data-copy="pernyataan-ai.md">Salin</button><button class="tb2 js-only local-only" type="button" data-dl="pernyataan-ai.md">Unduh</button></div></div>
     <p class="pcap">Semua file juga ada di hub dalam satu ZIP: kartu Analitika Bisnis → Template markdown project. Isi lengkap tiap file ada di catatan di bawah slide ini.</p>
     <script type="text/plain" id="md-instruksi-project.md"># Instruksi Project · Analitika Bisnis · Nusantara Kargo 2025
 
 ## Peran Anda (AI)
-Anda copilot analisis data saya. Saya yang memutuskan dan bertanggung jawab atas setiap angka dan kesimpulan.
+Anda asisten analisis data saya. Saya yang memutuskan dan bertanggung jawab atas setiap angka dan kesimpulan.
 
-## Konteks saya
-- Peran saya: [Manajer Operasional / Manajer Komersial / Manajer Armada / Manajer Gudang / Analis Terminal]
+## Konteks saya (isi bagian dalam [ ])
+- Peran saya: [contoh: Manajer Gudang]
 - Pertanyaan direksi: [salin dari sheet Peran]
 - Sheet utama: [salin dari sheet Peran]
 - Tebakan awal saya, ditulis sebelum memakai AI: [satu kalimat]
@@ -1248,35 +1356,18 @@ Cara pakai: saat percakapan dengan AI sudah panjang, mulai percakapan baru dan k
 - **Validate · cara saya memeriksa**: [mis. setiap angka dicocokkan dengan pivot di file Excel saya; AI menyebut X, pivot menunjukkan Y, saya pakai Y]
 - **Data yang saya unggah ke AI**: [mis. hanya dataset fiktif mata kuliah; tidak ada data kantor atau data pribadi]
 - **Account**: Saya memahami dan bertanggung jawab atas setiap angka dan kesimpulan dalam laporan ini.
-</script><script type="text/plain" id="md-kamus-data-latihan.md"># Kamus Data · Data Latihan · Tiket Layanan Pelanggan Nusantara Kargo 2025
-
-Data fiktif untuk latihan, tidak dinilai. Sheet Tiket: satu baris per tiket, 6.525 baris.
-
-| Kolom | Arti | Satuan |
-|---|---|---|
-| No_Tiket | Nomor tiket | teks |
-| Tgl_Masuk | Tanggal tiket masuk | tanggal |
-| Hari | Nama hari dari Tgl_Masuk | teks |
-| Kanal | Telepon (hanya hari kerja), WhatsApp, Email, Chat Aplikasi (mulai 1 Agustus 2025) | teks |
-| Kategori | Status kiriman, Keterlambatan, Barang rusak, Ubah alamat, Tagihan, Lainnya | teks |
-| Hub | Hub yang menangani kiriman: Jakarta, Surabaya, Medan, Makassar | teks |
-| Respons_menit | Menit dari tiket masuk sampai balasan pertama agen | menit |
-| Selesai_Sekali_Kontak | Ya bila masalah selesai tanpa pelanggan menghubungi lagi | Ya / Tidak |
-| Skor_Kepuasan | Survei setelah tiket ditutup, 1 (buruk) sampai 5 (sangat baik). Kosong bila pelanggan tidak mengisi | skor 1–5 |
-
-Pertanyaan direksi (latihan): Tiket keluhan pelanggan semester 2 naik sekitar 40%. Apakah layanan kita memburuk, dan apa yang harus dilakukan tim layanan pelanggan?
 </script>
-    <span class="num">32</span>
+    <span class="num">34</span>
   </section></div>
   <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Lampiran</span></div>
     <p>Isi lengkap setiap file, untuk disalin bila tombol Salin atau Unduh diblokir browser:</p>
 <h4>instruksi-project.md</h4><pre class="mdn"># Instruksi Project · Analitika Bisnis · Nusantara Kargo 2025
 
 ## Peran Anda (AI)
-Anda copilot analisis data saya. Saya yang memutuskan dan bertanggung jawab atas setiap angka dan kesimpulan.
+Anda asisten analisis data saya. Saya yang memutuskan dan bertanggung jawab atas setiap angka dan kesimpulan.
 
-## Konteks saya
-- Peran saya: [Manajer Operasional / Manajer Komersial / Manajer Armada / Manajer Gudang / Analis Terminal]
+## Konteks saya (isi bagian dalam [ ])
+- Peran saya: [contoh: Manajer Gudang]
 - Pertanyaan direksi: [salin dari sheet Peran]
 - Sheet utama: [salin dari sheet Peran]
 - Tebakan awal saya, ditulis sebelum memakai AI: [satu kalimat]
@@ -1433,23 +1524,6 @@ Cara pakai: saat percakapan dengan AI sudah panjang, mulai percakapan baru dan k
 - **Validate · cara saya memeriksa**: [mis. setiap angka dicocokkan dengan pivot di file Excel saya; AI menyebut X, pivot menunjukkan Y, saya pakai Y]
 - **Data yang saya unggah ke AI**: [mis. hanya dataset fiktif mata kuliah; tidak ada data kantor atau data pribadi]
 - **Account**: Saya memahami dan bertanggung jawab atas setiap angka dan kesimpulan dalam laporan ini.
-</pre><h4>kamus-data-latihan.md</h4><pre class="mdn"># Kamus Data · Data Latihan · Tiket Layanan Pelanggan Nusantara Kargo 2025
-
-Data fiktif untuk latihan, tidak dinilai. Sheet Tiket: satu baris per tiket, 6.525 baris.
-
-| Kolom | Arti | Satuan |
-|---|---|---|
-| No_Tiket | Nomor tiket | teks |
-| Tgl_Masuk | Tanggal tiket masuk | tanggal |
-| Hari | Nama hari dari Tgl_Masuk | teks |
-| Kanal | Telepon (hanya hari kerja), WhatsApp, Email, Chat Aplikasi (mulai 1 Agustus 2025) | teks |
-| Kategori | Status kiriman, Keterlambatan, Barang rusak, Ubah alamat, Tagihan, Lainnya | teks |
-| Hub | Hub yang menangani kiriman: Jakarta, Surabaya, Medan, Makassar | teks |
-| Respons_menit | Menit dari tiket masuk sampai balasan pertama agen | menit |
-| Selesai_Sekali_Kontak | Ya bila masalah selesai tanpa pelanggan menghubungi lagi | Ya / Tidak |
-| Skor_Kepuasan | Survei setelah tiket ditutup, 1 (buruk) sampai 5 (sangat baik). Kosong bila pelanggan tidak mengisi | skor 1–5 |
-
-Pertanyaan direksi (latihan): Tiket keluhan pelanggan semester 2 naik sekitar 40%. Apakah layanan kita memburuk, dan apa yang harus dilakukan tim layanan pelanggan?
 </pre>
   </div>
 </article>
@@ -1495,7 +1569,7 @@ Pertanyaan direksi (latihan): Tiket keluhan pelanggan semester 2 naik sekitar 40
   if(AUD) body.classList.add('aud');
   var $=function(s,c){return (c||D).querySelector(s);}, $$=function(s,c){return [].slice.call((c||D).querySelectorAll(s));};
   var units=$$('#deck .unit'), N=units.length, cur=0, step=0, TOTAL=105;
-  var KEY='ab-ai-20261017:';
+  var KEY='ab-ai2-20261017:';
   function sget(k){try{return window.localStorage.getItem(KEY+k);}catch(e){return null;}}
   function sset(k,v){try{window.localStorage.setItem(KEY+k,v);}catch(e){}}
   function sdel(k){try{window.localStorage.removeItem(KEY+k);}catch(e){}}
