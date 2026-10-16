@@ -179,8 +179,11 @@ Kartu mata kuliah menampilkan blok **Materi & tugas** dari kunci `materi` di `pr
 | Analitika Bisnis | Slide tatap muka 10 Oktober 2026 | `materi/ab/tatap-muka-10-okt-2026.html` |
 | Analitika Bisnis | Dataset project Nusantara Kargo 2025 (fiktif) | `materi/ab/dataset-project-ab-2026.xlsx` |
 | Prinsip-Prinsip Manajemen | Tugas Kelompok Organizing & Actuating | `materi/ppm/tugas-kelompok-organizing-actuating.pdf` |
+| Prinsip-Prinsip Manajemen | Pembahasan progres minggu 1 (17 Oktober 2026) | `materi/ppm/progres-minggu-1-17-okt-2026.html` |
 
 Kunci jawaban dataset project **tidak** diunggah ke repo; disimpan dosen di PC.
+
+Slide pembahasan progres kelompok hanya memakai nomor kelompok dan nama peran (tanpa nama, NIM, atau nomor telepon) dan diberi `noindex`. Ekspor chat WhatsApp kelompok **tidak** diunggah ke repo.
 
 ## 🖼️ Galeri Karya Mahasiswa
 
