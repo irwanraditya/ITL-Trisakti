@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Copilot Project AB</title>
+<meta name="description" content="Tutorial Analitika Bisnis: AI sebagai copilot untuk project, file markdown, hemat usage, serta etika, risiko, dan tata kelola data & AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet">
+<style>
+/* Layout: ruang kendali dosen. Satu slide 16:9 di tengah, kendali di bawahnya, catatan dosen di bawah lagi.
+   Slide memakai palet deck Analitika Bisnis yang tetap (dirancang untuk proyektor);
+   bingkai di sekitarnya mengikuti tema terang/gelap. Tanpa JavaScript: semua slide tampil berurutan. */
+:root{
+  --bg:#E4EAEC;--surface:#FFFFFF;--fg:#0E2430;--muted:#536873;--line:#C9D5D9;
+  --accent:#1D6F63;--accent-fg:#FFFFFF;--soft:#EDF3F2;--warn:#9A5A12;--track:#D3DDE0;
+  --s-ink:#0E2430;--s-ink2:#3D5561;--s-paper:#FBFCFC;--s-panel:#EBF0F1;--s-rule:#C3D0D4;
+  --s-pine:#1D6F63;--s-sage:#7FA8A0;--s-ochre:#C0791F;--s-wrong:#A63D2F;--s-slate:#6B818B;
+  --s-dark:#0E2430;--s-dark2:#17323E;--s-dline:#2B4A57;--s-ondark:#EAF2F4;--s-lit:#F6E4C8;
+  --s-pos:#00806A;--s-neg:#B83A22;
+  --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,monospace;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A1519;--surface:#12232A;--fg:#E2ECEF;--muted:#94AAB2;--line:#26404A;
+  --accent:#62B5A5;--accent-fg:#06211C;--soft:#16302F;--warn:#E3A35A;--track:#20363F;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1519;--surface:#12232A;--fg:#E2ECEF;--muted:#94AAB2;--line:#26404A;
+  --accent:#62B5A5;--accent-fg:#06211C;--soft:#16302F;--warn:#E3A35A;--track:#20363F;color-scheme:dark}
+
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.5;font-size:15px}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+html:not(.js) .js-only{display:none!important}
+.js .nojs-only{display:none!important}
+.artifact .local-only{display:none!important}
+
+/* ---------- bilah atas ---------- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--surface);border-bottom:1px solid var(--line);
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:8px 16px}
+.bar .name{font-weight:600;flex:1 1 220px;min-width:0;line-height:1.25}
+.bar .name small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.tb{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--fg);
+  padding:6px 10px;border-radius:6px;font-size:13px;font-weight:500;white-space:nowrap}
+.tb:hover{border-color:var(--accent)}
+.tb.primary{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.tb kbd{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:3px;padding:0 4px}
+.tb.primary kbd{color:inherit;border-color:currentColor;opacity:.7}
+#hn:checked ~ .bar label[for="hn"] .on-txt{display:none}
+#hn:not(:checked) ~ .bar label[for="hn"] .off-txt{display:none}
+#hn:focus-visible ~ .bar label[for="hn"]{outline:2px solid var(--accent);outline-offset:2px}
+.clock{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px}
+.clock .el{font-weight:600;font-variant-numeric:tabular-nums}
+.clock .tb{font-family:var(--sans)}
+.badge{font-family:var(--sans);font-size:12px;padding:2px 8px;border-radius:20px;background:var(--soft);color:var(--accent);font-weight:600}
+.badge.late{background:rgba(192,121,31,.16);color:var(--warn)}
+
+/* ---------- peta waktu ---------- */
+.strip{display:flex;gap:3px;padding:8px 16px 0;max-width:1200px;margin:0 auto}
+.strip button{flex:1 1 0;min-width:0;border:0;background:var(--track);color:var(--muted);text-align:left;
+  padding:5px 8px;border-radius:4px;font-size:12px;line-height:1.25;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;position:relative}
+.strip button b{display:block;color:var(--fg);font-weight:600;overflow:hidden;text-overflow:ellipsis}
+.strip button.cur{background:var(--accent);color:var(--accent-fg)}
+.strip button.cur b{color:var(--accent-fg)}
+.strip button .fill{position:absolute;left:0;bottom:0;height:3px;background:var(--accent-fg);opacity:.75}
+
+/* ---------- panggung ---------- */
+main#deck{max-width:1200px;margin:0 auto;padding-block:14px 40px;padding-inline:16px}
+.unit{margin-bottom:28px}
+.js #deck .unit{display:none;margin:0}
+.js #deck .unit.cur{display:block}
+.frame{position:relative;width:100%;margin:0 auto;aspect-ratio:16/9;max-width:100%;box-shadow:0 10px 30px rgba(8,22,28,.22)}
+.slide{position:absolute;inset:0;background:var(--s-paper);color:var(--s-ink);overflow:hidden;
+  font-size:min(23.36px,calc((100vw - 32px)/50));line-height:1.45;padding:2.4em 3em 2.1em;display:flex;flex-direction:column}
+.js .slide{cursor:pointer}
+.slide.dark{background:var(--s-dark);color:var(--s-ondark)}
+.slide.pine{background:var(--s-pine);color:#fff}
+.slide .num{position:absolute;right:3em;bottom:1.3em;font-family:var(--mono);font-size:.6em;letter-spacing:.12em;color:var(--s-slate)}
+.slide.dark .num,.slide.pine .num{color:rgba(255,255,255,.5)}
+
+/* langkah yang muncul bertahap */
+.js .unit [data-step]{transition:opacity .35s ease}
+.js .unit [data-step].hid{visibility:hidden;opacity:0}
+.js .unit [data-until].gone{visibility:hidden;opacity:0}
+[data-hl]{transition:background-color .3s ease}
+[data-hl].lit,html:not(.js) [data-hl]{background:var(--s-lit)}
+@media (prefers-reduced-motion:reduce){.js .unit [data-step],[data-hl]{transition:none}}
+
+/* kendali di bawah slide */
+#ctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:12px auto 0;padding:10px 12px;background:var(--surface);
+  border:1px solid var(--line);border-radius:8px}
+#ctl .stepinfo{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+#ctl .dots{display:flex;gap:4px}
+#ctl .dots i{width:9px;height:9px;border-radius:50%;background:var(--track);display:block}
+#ctl .dots i.on{background:var(--accent)}
+#ctl .nextup{flex:1 1 240px;min-width:0;font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#ctl .nextup b{color:var(--fg);font-weight:600}
+#ctl .pos{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+
+/* catatan dosen */
+.notes{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);padding:14px 18px 16px;
+  font-size:15.5px;color:var(--fg);margin-top:12px;border-radius:0 0 8px 8px}
+#hn:checked ~ #deck .notes{display:none}
+.notes .nh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-bottom:8px}
+.notes .nh b{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.notes .nh .min{font-family:var(--mono);font-size:12px;color:var(--warn);font-weight:600}
+.notes p{margin:.4em 0;max-width:80ch}
+.notes ul,.notes ol{margin:.4em 0 .4em 1.3em;max-width:78ch}
+.notes li{margin:.15em 0}
+.notes .say{font-style:italic;border-left:3px solid var(--accent);padding-left:10px}
+.notes .tip{background:var(--soft);padding:8px 10px;border-radius:6px}
+.notes table{border-collapse:collapse;margin:.5em 0;font-size:14px;width:100%;max-width:760px}
+.notes th,.notes td{border-bottom:1px solid var(--line);padding:5px 8px 5px 0;text-align:left;vertical-align:top}
+.notes th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+
+.intro{background:var(--surface);border:1px solid var(--line);padding:14px 16px;margin-bottom:20px;border-radius:8px;font-size:15px}
+.intro b{color:var(--accent)}
+
+/* daftar slide */
+#outline{position:fixed;z-index:40;top:0;right:0;bottom:0;width:min(380px,100%);background:var(--surface);border-left:1px solid var(--line);
+  overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 14px) 16px 24px;box-shadow:-10px 0 30px rgba(0,0,0,.18)}
+#outline h3{font-size:15px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+#outline .blk{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:14px 0 4px}
+#outline button.it{display:flex;gap:10px;width:100%;text-align:left;background:none;border:0;color:var(--fg);padding:6px 8px;border-radius:5px;font-size:14px}
+#outline button.it:hover{background:var(--soft)}
+#outline button.it.cur{background:var(--accent);color:var(--accent-fg)}
+#outline button.it span{font-family:var(--mono);font-size:12px;min-width:3.6em;opacity:.75}
+#help{position:fixed;z-index:45;left:50%;top:50%;transform:translate(-50%,-50%);width:min(520px,calc(100% - 32px));background:var(--surface);
+  border:1px solid var(--line);border-radius:10px;padding:18px 20px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+#help h3{font-size:16px;margin-bottom:8px}
+#help table{width:100%;border-collapse:collapse;font-size:14px}
+#help td{padding:5px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+#help td:first-child{font-family:var(--mono);white-space:nowrap;color:var(--accent);width:9em}
+#toast{position:fixed;z-index:50;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 20px);transform:translateX(-50%);background:var(--fg);color:var(--bg);
+  padding:8px 14px;border-radius:6px;font-size:14px;max-width:calc(100% - 32px)}
+
+/* ---------- tipografi slide ---------- */
+.eyebrow{font-family:var(--mono);font-size:.66em;letter-spacing:.16em;text-transform:uppercase;color:var(--s-pine);margin-bottom:.8em}
+.dark .eyebrow{color:var(--s-sage)}
+.pine .eyebrow{color:#BFE0D8}
+h1.display{font-family:var(--serif);font-weight:400;font-size:2.6em;line-height:1.12;letter-spacing:-.01em;text-wrap:balance}
+.slide h2{font-size:1.62em;line-height:1.2;font-weight:600;margin-bottom:.65em;text-wrap:balance}
+.slide h3{font-size:1em;font-weight:600;margin-bottom:.25em}
+.lede{font-size:1.04em;color:#B9CDD4;margin-top:.8em;max-width:52ch}
+.center{justify-content:center}
+.muted{color:var(--s-slate)}
+.small{font-size:.78em}
+.mono{font-family:var(--mono)}
+.grid{display:grid;gap:.85em}
+.g2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.card{background:#fff;border:1px solid var(--s-rule);padding:.85em 1em}
+.card.tint{background:var(--s-panel);border-color:transparent}
+.card .n{font-family:var(--mono);font-size:.62em;letter-spacing:.12em;text-transform:uppercase;color:var(--s-pine);display:block;margin-bottom:.45em}
+.card p{font-size:.86em;color:var(--s-ink2);margin:0}
+.card.hot{border:2px solid var(--s-ochre)}
+.dark .card{background:var(--s-dark2);border-color:var(--s-dline)}
+.dark .card p{color:#C8D9DF}
+.dark .card .n{color:var(--s-sage)}
+.divider{flex-direction:row;align-items:center;gap:1.4em}
+.divider .big{font-size:7.5em;font-weight:700;color:#24414D;line-height:.8}
+.rule-note{margin-top:1.2em;font-size:.86em;padding:.6em .9em;border:1px dashed var(--s-dline);color:#C8D9DF;max-width:46em}
+
+/* SIAP + agenda */
+.siap{display:grid;grid-template-columns:2.2em minmax(0,1fr);gap:.5em 1em;align-items:start}
+.siap .k{font-family:var(--mono);font-weight:600;color:#fff;background:var(--s-pine);text-align:center;padding:.22em 0}
+.siap p{margin:0;font-size:.96em;padding-top:.12em}
+.siap p b{color:var(--s-pine)}
+.agenda{display:grid;grid-template-columns:6fr 1fr 3fr 2fr;gap:3px;margin-top:1.2em}
+.agenda div{background:var(--s-panel);padding:.5em .7em;font-size:.72em}
+.agenda div b{display:block;font-size:1.05em}
+.agenda div span{font-family:var(--mono);color:var(--s-pine)}
+.agenda .brk{background:#F3F5F5;color:var(--s-slate)}
+.promise{margin-top:1em;font-size:.86em;background:#fff;border-left:4px solid var(--s-ochre);padding:.55em .9em}
+
+/* kalimat pembuka */
+.quote{font-family:var(--serif);font-size:1.7em;line-height:1.3;max-width:34ch;text-wrap:balance}
+.choices{display:flex;gap:.7em;margin-top:1.3em;flex-wrap:wrap}
+.choice{border:1px solid var(--s-rule);padding:.35em .9em;font-size:.8em;color:var(--s-ink2);background:#fff}
+.choice b{font-family:var(--mono);color:var(--s-pine);margin-right:.35em}
+.verdict{margin-top:1em;padding:.65em 1em;border-left:4px solid var(--s-pine);background:var(--s-panel);font-size:.9em;max-width:60ch}
+.verdict b{color:var(--s-pine)}
+.verdict.fake{border-color:var(--s-wrong)}.verdict.fake b{color:var(--s-wrong)}
+.verdict.data{border-color:var(--s-slate)}.verdict.data b{color:var(--s-ink2)}
+.legend3{display:flex;gap:1.1em;margin-top:1.3em;flex-wrap:wrap}
+.legend3 div{border:1px solid var(--s-dline);padding:.55em 1em;min-width:8.5em}
+.legend3 div b{display:block;font-size:1.5em;font-family:var(--mono);color:var(--s-sage);line-height:1.1}
+
+/* tabel data */
+table.dt{border-collapse:collapse;width:100%;font-size:.86em}
+table.dt th{font-family:var(--mono);font-size:.7em;letter-spacing:.1em;text-transform:uppercase;color:var(--s-slate);
+  font-weight:500;text-align:right;padding:0 .8em .45em;border-bottom:2px solid var(--s-ink)}
+table.dt th:first-child,table.dt td:first-child{text-align:left;padding-left:.3em}
+table.dt td{padding:.45em .8em;border-bottom:1px solid var(--s-rule);text-align:right;font-variant-numeric:tabular-nums}
+table.dt tr.tot td{font-weight:700;border-bottom:2px solid var(--s-ink)}
+.up{color:var(--s-pos);font-weight:700}.down{color:var(--s-neg);font-weight:700}
+.tag{font-family:var(--mono);font-size:.62em;letter-spacing:.08em;text-transform:uppercase;background:var(--s-ochre);color:#fff;padding:.1em .45em;margin-left:.5em;vertical-align:middle}
+.say-line{margin-top:.9em;font-size:.95em;font-weight:600;max-width:52ch}
+.say-line.big{font-family:var(--serif);font-weight:400;font-size:1.3em;line-height:1.3}
+.memo{border:1px solid var(--s-rule);border-left:5px solid var(--s-ochre);background:#fff;padding:1em 1.3em;max-width:46em}
+.memo .from{font-family:var(--mono);font-size:.64em;letter-spacing:.12em;text-transform:uppercase;color:var(--s-ochre);margin-bottom:.5em}
+.memo p{margin-bottom:.45em}
+.memo ol{margin:.2em 0 0 1.3em}
+.vote{margin-top:1em;display:inline-flex;align-items:center;gap:.7em;background:var(--s-pine);color:#fff;padding:.5em 1em;font-size:.92em;font-weight:600}
+.vote .h{font-size:1.3em}
+.fnotes{font-size:.82em;color:var(--s-ink2);border-top:1px solid var(--s-rule);padding-top:.6em;max-width:52em}
+.fnotes p{margin:.25em 0;padding:.2em .4em}
+
+/* angka besar */
+.stat{background:#fff;border:1px solid var(--s-rule);padding:.85em 1em}
+.stat .v{font-size:2.2em;font-weight:700;line-height:1.05;color:var(--s-ink);font-variant-numeric:tabular-nums}
+.stat .v.neg{color:var(--s-neg)}
+.stat .l{font-size:.78em;color:var(--s-ink2);margin-top:.3em}
+
+/* langkah bernomor */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.6em}
+.flow .card h3{font-size:.95em}
+.flow .card .t{font-family:var(--mono);font-size:.6em;color:var(--s-ochre);display:block;margin-top:.55em}
+.qa{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.55em 1.3em}
+.qa div{font-size:.84em}
+.qa b{display:block}
+.qa span{display:block;color:var(--s-pine);margin-top:.15em}
+.versions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1em}
+.versions .card p{font-size:.8em;line-height:1.45}
+.versions .card .n{font-size:.66em}
+
+/* jebakan grafik */
+.trap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2em;flex:1;min-height:0}
+.panel{display:flex;flex-direction:column;min-width:0}
+.ptitle{font-family:var(--mono);font-size:.6em;letter-spacing:.1em;text-transform:uppercase;color:var(--s-slate);margin-bottom:.3em}
+.ptitle b{color:var(--s-wrong);font-weight:600}
+.ptitle b.ok{color:var(--s-pine)}
+.chart svg{width:100%;height:auto;display:block}
+.stack{display:grid}
+.stack > *{grid-area:1/1}
+.guess{border:2px dashed var(--s-rule);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1em;gap:.5em}
+.guess .q{font-family:var(--serif);font-size:1.5em;line-height:1.2;max-width:14em}
+.pcap{font-size:.74em;color:var(--s-ink2);margin-top:.3em}
+.pq{font-size:.74em;margin-top:.35em;font-weight:600;color:var(--s-pine)}
+.claim{font-family:var(--serif);font-weight:400}
+.checklist{display:grid;gap:.45em;max-width:46em}
+.checklist div{display:grid;grid-template-columns:2em minmax(0,1fr);gap:.8em;align-items:baseline;font-size:.95em;border-bottom:1px solid var(--s-rule);padding-bottom:.4em}
+.checklist div i{font-style:normal;font-family:var(--mono);font-weight:600;color:var(--s-pine)}
+.checklist div small{color:var(--s-slate);font-size:.8em;display:block}
+
+/* project */
+.ex{display:grid;grid-template-columns:9em minmax(0,1fr);gap:.3em 1em;font-size:.84em}
+.ex dt{font-family:var(--mono);font-size:.76em;letter-spacing:.06em;text-transform:uppercase;color:var(--s-pine);padding-top:.25em}
+.ex dd{margin:0;color:var(--s-ink2);border-bottom:1px solid var(--s-rule);padding-bottom:.3em}
+.ex dd.lead{color:var(--s-ink);font-weight:600}
+[contenteditable]{outline:none;border-bottom:1px dashed var(--s-sage);min-width:3em;display:inline-block;cursor:text}
+[contenteditable]:focus{background:rgba(192,121,31,.12)}
+.ph{color:var(--s-ochre)}
+.blank{display:block;min-height:1.4em}
+
+/* timer */
+.tchips{display:flex;gap:.6em;flex-wrap:wrap;margin-top:.9em}
+.tchip{font-family:var(--mono);font-size:.74em;font-weight:600;border:1px solid var(--s-pine);color:var(--s-pine);background:#fff;padding:.3em .8em;border-radius:2em}
+.dark .tchip,.pine .tchip{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.tchip:hover{background:var(--s-pine);color:#fff}
+html:not(.js) .tchip{display:none}
+#timer{position:fixed;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:35;display:flex;align-items:center;gap:10px;
+  background:#0E2430;color:#fff;padding:10px 14px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-family:var(--mono);cursor:pointer;user-select:none}
+#timer .clk{font-size:30px;font-weight:600;min-width:3.2em;text-align:center;font-variant-numeric:tabular-nums}
+#timer .lbl{font-size:11px;color:#A9C0C8;max-width:9em;line-height:1.3}
+#timer.paused .clk{opacity:.55}
+#timer.done{background:#B4701D}
+#timer .x{background:none;border:0;color:#fff;font-size:20px;padding:0 0 0 4px}
+.proj #timer .clk,.aud #timer .clk{font-size:46px}
+
+/* ---------- layar proyektor ---------- */
+.proj,.aud{background:#000}
+.proj .bar,.proj .strip,.proj #ctl,.proj .notes,.proj .intro,.proj #lampiran,.proj #outline,
+.aud .bar,.aud .strip,.aud #ctl,.aud .notes,.aud .intro,.aud #lampiran,.aud #outline{display:none!important}
+.proj main#deck,.aud main#deck{max-width:none;padding:0}
+.proj #deck .unit.cur,.aud #deck .unit.cur{display:flex;align-items:center;justify-content:center;height:100vh}
+.proj .frame,.aud .frame{box-shadow:none}
+
+/* ---------- lampiran cetak ---------- */
+#lampiran{max-width:1200px;margin:0 auto;padding:0 16px 60px}
+.js #lampiran{display:none}
+#lampiran h2{font-size:20px;margin:10px 0 6px}
+.page{background:#fff;color:#0E2430;width:210mm;max-width:100%;min-height:297mm;margin:0 auto 22px;padding:14mm 15mm;
+  box-shadow:0 6px 20px rgba(14,36,48,.15);font-size:11pt;overflow:hidden}
+.page h3{font-size:15pt;margin-bottom:4mm}
+.page .ey{font-family:var(--mono);font-size:8pt;letter-spacing:.14em;text-transform:uppercase;color:#1D6F63;margin-bottom:2mm}
+.page table.dt{font-size:10.5pt;margin:2mm 0 5mm}
+.page .memo{max-width:none;margin-bottom:5mm}
+.page .lines div{border-bottom:1px solid #B9C6CA;height:8mm}
+.cuts{display:grid;grid-template-rows:1fr 1fr;height:269mm}
+.cut{border:1px dashed #9AAAB0;padding:6mm 7mm;font-size:10.5pt;overflow:hidden}
+.cut .field{font-weight:600;margin-top:3mm;font-size:10pt}
+.cut .hint{font-weight:400;color:#6B818B;font-size:8.5pt}
+.cut .line{border-bottom:1px solid #B9C6CA;height:8mm}
+.rolemap{width:100%;border-collapse:collapse;font-size:8.5pt;margin:2mm 0}
+.rolemap td{border:1px solid #C9D3D6;padding:1mm 1.5mm;text-align:center}
+.roles td,.roles th{text-align:left!important;vertical-align:top}
+.roles td:first-child{white-space:nowrap;font-family:var(--mono)}
+
+@media (max-width:700px){.bar .name{flex-basis:100%}.tb .lbl-long{display:none}}
+@media print{
+  @page{size:A4;margin:0}
+  body{background:#fff;color:#000}
+  .bar,.strip,#ctl,#timer,#outline,#help,#toast,.intro{display:none!important}
+  main#deck{max-width:none;padding:8mm 10mm}
+  .js #deck .unit{display:block!important;margin-bottom:6mm;break-inside:avoid;page-break-inside:avoid}
+  .js .unit [data-step].hid,.js .unit [data-until].gone{visibility:visible;opacity:1}
+  .js .unit [data-until]{display:none}
+  .frame{box-shadow:none;border:1px solid #ccc;width:100%!important}
+  .slide{font-size:10.8px!important}
+  .notes{display:block!important;font-size:10pt}
+  .page{box-shadow:none;margin:0;break-after:page;page-break-after:always}
+  body.print-handout main#deck{display:none}
+  body.print-handout #lampiran{display:block!important;padding:0;max-width:none}
+  body:not(.print-handout) #lampiran{display:none}
+  #lampiran h2,#lampiran .lp{display:none}
+}
+
+/* ================= tambahan: tutorial AI copilot ================= */
+.slide .foot{position:absolute;left:3em;bottom:1.2em;font-size:.56em;color:var(--s-slate);letter-spacing:.02em;max-width:70%}
+.slide.dark .foot{color:rgba(255,255,255,.5)}
+.notes h4{font-size:13px;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:.9em 0 .2em}
+.notes .tablewrap{overflow-x:auto}
+.notes pre.mdn{white-space:pre-wrap;font-family:var(--mono);font-size:12.5px;line-height:1.5;background:var(--soft);padding:10px 12px;border-radius:6px;margin:.3em 0 .8em;max-width:100%;overflow-x:auto}
+.agenda.a3{grid-template-columns:5fr 1.3fr 5fr}
+.slide h2{font-size:1.5em}
+.n.wr{color:var(--s-wrong)!important}.n.oc{color:var(--s-ochre)!important}
+.card.wrongc{border-left:4px solid var(--s-wrong)}
+.card h3{font-size:.95em;margin:.1em 0 .3em}
+.ul{list-style:none;display:flex;flex-direction:column;gap:.32em;margin:.2em 0 0}
+.ul li{font-size:.8em;line-height:1.35;padding-left:.9em;position:relative;color:var(--s-ink2)}
+.ul li::before{content:"";position:absolute;left:0;top:.5em;width:.38em;height:.38em;background:var(--s-pine)}
+.card:not(.tint) .ul li::before{background:var(--s-slate)}
+.say-line.sm{font-size:.8em;margin-top:.8em}
+.eva{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6em;margin-top:.9em}
+.eva div{border-top:3px solid var(--s-pine);padding:.5em .2em 0}
+.eva b{display:block;font-size:.95em}
+.eva span{font-size:.76em;color:var(--s-ink2);line-height:1.35;display:block}
+.kl .card{padding:.75em .95em .85em}
+
+.steps6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.45em;margin-top:.2em}
+.st6{background:#fff;border:1px solid var(--s-rule);padding:.6em .65em .7em;display:flex;flex-direction:column;position:relative}
+.st6 .no{font-family:var(--mono);font-size:.62em;color:var(--s-pine);font-weight:600}
+.st6 h3{font-size:.86em;margin:.15em 0 .3em}
+.st6 p{font-size:.68em;line-height:1.36;color:var(--s-ink2);flex:1}
+.st6 .who{font-family:var(--mono);font-size:.54em;letter-spacing:.06em;text-transform:uppercase;color:var(--s-slate);margin-top:.5em}
+.st6 .rep{font-family:var(--mono);font-size:.54em;color:var(--s-ochre);margin-top:.15em}
+.st6.me{background:var(--s-dark);border-color:var(--s-dark)}
+.st6.me h3{color:#fff}.st6.me p{color:#C8D9DF}.st6.me .no{color:var(--s-sage)}.st6.me .who{color:#9FB9C2}
+
+.why{margin-top:.9em}
+.why div{border-left:3px solid var(--s-sage);padding:.1em 0 .1em .7em}
+.why b{display:block;font-size:.84em}
+.why span{font-size:.72em;color:var(--s-ink2);line-height:1.35}
+
+pre.md{font-family:var(--mono);font-size:.62em;line-height:1.55;background:#0F2733;color:#D8E6EA;padding:.9em 1.1em;white-space:pre-wrap;overflow:hidden;margin:0}
+pre.md.sm{font-size:.5em;line-height:1.5}
+pre.md .mh{color:#F0B566;font-weight:600}
+pre.md .mt{color:#9FC9BF}
+pre.md .mb{color:#7FA8A0}
+pre.md .mp{color:#F3D7A6;background:rgba(192,121,31,.22)}
+pre.md .mk{color:#fff;font-weight:600}
+.mdv{align-items:start}
+.mdkey{display:flex;flex-direction:column;gap:.4em}
+.mdkey div{display:grid;grid-template-columns:4em minmax(0,1fr);gap:.6em;align-items:baseline;border-bottom:1px solid var(--s-rule);padding-bottom:.35em}
+.mdkey code,.slide p code,.slide td code,.annot code,.inst code,.tipline code{font-family:var(--mono);font-size:.92em;background:var(--s-panel);padding:0 .25em;color:var(--s-ink)}
+.mdkey div > code{font-size:.8em;font-weight:600;color:var(--s-pine);background:transparent}
+.mdkey span{font-size:.8em}
+.tipline{font-size:.74em;color:var(--s-ink2);margin-top:.5em;background:#fff;border-left:3px solid var(--s-ochre);padding:.45em .7em}
+
+table.dt.files td,table.dt.files th,table.dt.std td,table.dt.std th,table.dt.cls td,table.dt.cls th,table.dt.sm td,table.dt.sm th{text-align:left}
+table.dt.files{font-size:.7em}
+table.dt.files td{padding:.42em .6em .42em 0;vertical-align:top}
+table.dt.files td:first-child{white-space:nowrap}
+table.dt.std{font-size:.72em}
+table.dt.std td{padding:.35em .6em .35em 0}
+table.dt.sm{font-size:.66em}
+table.dt.sm td{padding:.3em .5em .3em 0}
+table.dt.rnum td:not(:first-child),table.dt.rnum th:not(:first-child){text-align:right}
+table.dt.cls{font-size:.72em}
+table.dt.cls td{padding:.45em .6em .45em 0}
+.ok2,.mid2,.no2{font-family:var(--mono);font-size:.86em;font-weight:600;padding:.1em .45em;white-space:nowrap}
+.ok2{background:#E2F0EC;color:var(--s-pine)}.mid2{background:#F8EBD8;color:#8A5410}.no2{background:#F6E1DD;color:var(--s-wrong)}
+.pcap{font-size:.72em;color:var(--s-ink2);margin-top:.55em;line-height:1.4}
+.hint{font-size:.66em;color:var(--s-ink2);margin-top:.45em;line-height:1.4}
+
+.mdsplit{grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:1em;align-items:start;flex:1;min-height:0}
+.annot{display:flex;flex-direction:column;gap:.45em}
+.an{background:#fff;border-left:3px solid var(--s-pine);padding:.35em .7em}
+.an.hot{border-left-color:var(--s-ochre);background:#FBF3E7}
+.an b{font-size:.78em;display:block}
+.an p{font-size:.7em;color:var(--s-ink2);line-height:1.38;margin-top:.1em}
+.ba{margin-top:.8em}
+.ba .ttl{font-family:var(--serif);font-size:1.02em;line-height:1.25;color:var(--s-ink);margin-top:.2em}
+.flab{font-family:var(--mono);font-size:.56em;letter-spacing:.12em;text-transform:uppercase;color:var(--s-pine);margin-bottom:.35em}
+.inst .card p{font-size:.76em;line-height:1.42}
+
+.tokg{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:1.2em;align-items:center;flex:1;min-height:0}
+.chart svg{width:100%;height:auto;display:block}
+.chart svg .ax{font-family:var(--mono);font-size:10px;fill:#6B818B}
+.chart svg .lb{font-family:var(--sans);font-size:11.5px;font-weight:600}
+.side .stat .v{color:var(--s-pine)}
+.sw{display:inline-block;width:.8em;height:.8em;vertical-align:-.05em;margin-right:.2em}
+.sw.g{background:#B9C6CA}.sw.p{background:var(--s-pine)}
+
+.r8w{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.1em;align-items:start}
+.r8{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.35em .8em}
+.r8 div{display:grid;grid-template-columns:1.8em minmax(0,1fr);column-gap:.4em;border-bottom:1px solid var(--s-rule);padding-bottom:.3em}
+.r8 i{font-style:normal;font-family:var(--mono);font-size:.62em;color:var(--s-pine);font-weight:600;grid-row:span 2;padding-top:.25em}
+.r8 b{font-size:.74em;line-height:1.25}
+.r8 span{font-size:.64em;color:var(--s-ink2);line-height:1.3}
+.vs2{display:flex;flex-direction:column;gap:.6em}
+
+.pr{background:#fff;border:1px solid var(--s-rule);border-left:4px solid var(--s-pine);padding:.45em .8em .5em;margin-bottom:.55em}
+.pr.bad{border-left-color:var(--s-wrong)}
+.pr p{font-family:var(--mono);font-size:.62em;line-height:1.5;color:var(--s-ink)}
+.pr p b{color:var(--s-pine)}
+.lab{display:block;font-family:var(--mono);font-size:.52em;letter-spacing:.12em;text-transform:uppercase;color:var(--s-slate);margin-bottom:.25em}
+.pr.bad .lab{color:var(--s-wrong)}
+.ai{background:var(--s-panel);padding:.55em .85em .6em;margin-bottom:.55em}
+.ai p{font-size:.72em;line-height:1.42}
+.chk{border-left:4px solid var(--s-ochre);background:#FBF3E7;padding:.45em .8em .5em}
+.chk .lab{color:var(--s-ochre)}
+.chk p{font-size:.7em;line-height:1.45}
+.chk.bad{border-left-color:var(--s-pine);background:#EAF3F1}
+.chk.bad .lab{color:var(--s-pine)}
+.calc{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:1em;align-items:start}
+.ins{display:grid;grid-template-columns:4.6em minmax(0,1fr);gap:.6em;align-items:start;padding:.35em 0;border-bottom:1px solid var(--s-rule)}
+.ins:last-child{border-bottom:0}
+.tag2{font-family:var(--mono);font-size:.54em;font-weight:600;letter-spacing:.08em;background:var(--s-pine);color:#fff;text-align:center;padding:.2em 0;margin-top:.2em}
+.tag2.d{background:var(--s-ochre)}
+.ins p{font-size:.7em;line-height:1.42}
+.ins p i{color:var(--s-pine);font-style:normal;font-weight:600}
+.trap2{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2em;flex:1;min-height:0;margin-bottom:.5em}
+.sj{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1em;align-items:start}
+.siap.sm{gap:.3em .6em;margin-top:.2em}
+.siap.sm .k{font-size:.7em;padding:.15em 0}
+.siap.sm p{font-size:.68em;line-height:1.38}
+.tl4{margin:.1em 0 0 1.1em;display:flex;flex-direction:column;gap:.3em}
+.tl4 li{font-family:var(--serif);font-size:.82em;line-height:1.28}
+.repw{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:1.1em;align-items:start}
+.rep{display:flex;flex-direction:column;gap:.3em}
+.rep div{display:grid;grid-template-columns:1.6em 7.6em minmax(0,1fr);gap:.5em;align-items:baseline;border-bottom:1px solid var(--s-rule);padding-bottom:.3em}
+.rep i{font-style:normal;font-family:var(--mono);font-weight:600;color:#fff;background:var(--s-pine);text-align:center;font-size:.7em}
+.rep b{font-size:.74em}
+.rep span{font-size:.7em;color:var(--s-ink2);line-height:1.38}
+.decl{background:#fff;border:1px solid var(--s-rule);padding:.65em .85em}
+.decl p{font-size:.68em;line-height:1.42;margin-top:.35em;color:var(--s-ink2)}
+.decl b{color:var(--s-ink)}
+
+.q4{margin-top:.9em;font-size:.76em;background:var(--s-panel);padding:.55em .85em;line-height:1.4}
+.q4 b{color:var(--s-pine)}
+.rks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.5em;margin-top:.2em}
+.rk{background:#fff;border-top:3px solid var(--s-wrong);padding:.6em .7em .7em;display:flex;flex-direction:column}
+.rk h3{font-size:.84em;line-height:1.2;margin-bottom:.35em}
+.rk p{font-size:.68em;line-height:1.38;color:var(--s-ink2);flex:1}
+.rk span{font-size:.64em;color:var(--s-pine);font-weight:600;margin-top:.5em;line-height:1.3;border-top:1px solid var(--s-rule);padding-top:.35em}
+.gov .card p{font-size:.78em;line-height:1.42}
+.rgs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6em .9em}
+.rg{background:#fff;border-left:4px solid var(--s-pine);padding:.55em .85em .6em}
+.rg .where{font-family:var(--mono);font-size:.54em;letter-spacing:.12em;text-transform:uppercase;color:var(--s-slate)}
+.rg b{display:block;font-size:.8em;line-height:1.3;margin:.1em 0 .25em}
+.rg p{font-size:.7em;color:var(--s-ink2);line-height:1.4}
+.bwt .card{padding:.75em .95em .85em}
+.dlg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55em;margin-top:.2em}
+.dlc{background:#fff;border:1px solid var(--s-rule);padding:.65em .8em;display:grid;grid-template-columns:1fr auto auto;gap:.35em .45em;align-items:center}
+.dlc code{grid-column:1/-1;font-family:var(--mono);font-size:.74em;font-weight:600;color:var(--s-ink)}
+.dlc span{font-size:.64em;color:var(--s-slate)}
+.tb2{font-family:var(--sans);font-size:.62em;font-weight:600;border:1px solid var(--s-pine);color:var(--s-pine);background:#fff;padding:.25em .7em;border-radius:2em}
+.tb2:hover{background:var(--s-pine);color:#fff}
+html:not(.js) .tb2{display:none}
+</style>
+</head>
+<body>
+<input type="checkbox" id="hn" class="sr" aria-label="Sembunyikan catatan dosen">
+
+<header class="bar">
+  <div class="name">AI sebagai copilot project · etika &amp; tata kelola<small>Analitika Bisnis · Sabtu, 17 Oktober 2026 · 45 + 15 + 45 menit</small></div>
+  <button class="tb js-only" type="button" id="b-prev" aria-label="Langkah sebelumnya">◀</button>
+  <button class="tb primary js-only" type="button" id="b-next">Lanjut <kbd>→</kbd></button>
+  <label class="tb" for="hn"><span class="on-txt">Sembunyikan catatan</span><span class="off-txt">Tampilkan catatan</span> <kbd class="js-only">N</kbd></label>
+  <button class="tb js-only" type="button" id="b-outline"><span class="lbl-long">Daftar slide</span><span aria-hidden="true">☰</span> <kbd>O</kbd></button>
+  <button class="tb js-only" type="button" id="b-proj">Layar penuh <kbd>F</kbd></button>
+  <button class="tb js-only local-only" type="button" id="b-aud">Jendela proyektor</button>
+  <span class="clock js-only"><button class="tb" type="button" id="b-class">Mulai jam kelas</button><span class="el" id="c-el" hidden></span><span class="badge" id="c-badge" hidden></span><button class="tb" type="button" id="b-class-x" hidden aria-label="Reset jam kelas">×</button></span>
+  <button class="tb js-only" type="button" id="b-help" aria-label="Pintasan keyboard">?</button>
+</header>
+<nav class="strip js-only" id="strip" aria-label="Peta waktu pertemuan"></nav>
+
+<main id="deck">
+  <div class="intro nojs-only">
+    <b>Tampilan statis.</b> Skrip tidak berjalan di pratinjau ini, jadi semua slide dan catatan tampil berurutan.
+    Buka file ini di Chrome atau Edge untuk mode interaktif: slide satu per satu, pertanyaan muncul bertahap, timer per kelompok, jam kelas, dan layar penuh.
+  </div>
+<article class="unit" data-title="Sampul" data-block="Sesi 1 · Copilot" data-at="0">
+  <div class="frame"><section class="slide dark center">
+    <div class="eyebrow">Analitika Bisnis · Pertemuan 11 + 14 · Sabtu, 17 Oktober 2026</div>
+    <h1 class="display">AI sebagai copilot project Anda,<br>dan aturan main yang menyertainya</h1>
+    <p class="lede">Satu alur kerja, lima file markdown, satu latihan utuh dari tebakan sampai laporan, lalu etika, risiko, dan tata kelolanya.</p>
+    <span class="num">01</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 0–1</span></div>
+    <p class="say">“Sebagian besar dari Anda akan memakai AI untuk project ini, dan itu boleh. Hari ini saya tunjukkan cara memakainya yang benar: hemat, bisa dipertanggungjawabkan, dan tetap mengikuti standar presentasi yang sudah kita pelajari.”</p>
+    <p class="tip">Pertemuan ini menggabungkan Pertemuan 11 (AI sebagai copilot) dan Pertemuan 14 (etika, risiko, tata kelola) dari RPS, ditempelkan langsung ke project 10 Oktober.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Rangka sesi" data-block="Sesi 1 · Copilot" data-at="1">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Rangka sesi · SIAP</div>
+    <div class="siap">
+      <div class="k">S</div><p>Anda sudah memegang dataset project, dan sebagian besar akan memakai AI untuk mengerjakannya.</p>
+      <div class="k">I</div><p>Tanpa aturan, AI mulai dari nol di setiap chat, boros kuota, dan bisa memberi angka yang meyakinkan tetapi salah.</p>
+      <div class="k">A</div><p><b>Pasang konteks dan standar Anda sekali dalam file markdown, lalu jalankan Ask → Check → Explain.</b></p>
+      <div class="k">P</div><p>Anda pulang dengan lima file .md dan satu latihan utuh, dari tebakan sampai pernyataan penggunaan AI.</p>
+    </div>
+    <div class="agenda a3">
+      <div><b>Sesi 1 · Menyiapkan copilot</b><span>45 menit</span> · alur kerja, markdown, hemat usage</div>
+      <div class="brk"><b>Istirahat</b><span>15</span></div>
+      <div><b>Sesi 2 · Mengeksekusi dan mempertanggungjawabkan</b><span>45 menit</span> · demo, etika, tata kelola</div>
+    </div>
+    <span class="num">02</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 1–3</span></div>
+    <div class="tablewrap"><table>
+      <tr><th>Menit</th><th>Blok</th><th>Gaya</th></tr>
+      <tr><td>0–14</td><td>Copilot vs oracle, kekuatan dan kelemahan AI, alur 6 langkah</td><td>Dosen bercerita, satu tebakan serentak</td></tr>
+      <tr><td>14–36</td><td>Markdown dan lima file .md</td><td>Dosen menunjukkan isi file</td></tr>
+      <tr><td>36–45</td><td>Cara memasang dan hemat usage</td><td>Tebakan serentak: prompt mana yang hemat</td></tr>
+      <tr><td>45–60</td><td>Istirahat</td><td>Mahasiswa mengunduh file .md dari hub</td></tr>
+      <tr><td>60–85</td><td>Demo di data latihan: 6 prompt, laporan a–e</td><td>Prompt → keluaran → apa yang dicek</td></tr>
+      <tr><td>85–100</td><td>Etika, risiko, tata kelola, aturan AI project</td><td>Dosen bercerita, contoh dari demo</td></tr>
+      <tr><td>100–105</td><td>Daftar cek dan penutup</td><td>—</td></tr>
+    </table></div>
+    <p>Klik <b>Mulai jam kelas</b> saat kelas dimulai. Lencana di bilah atas membandingkan menit sekarang dengan rencana slide.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Oracle atau copilot" data-block="Sesi 1 · Copilot" data-at="3">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Ingat Pertemuan 11</div>
+    <h2>AI yang dipercaya karena fasih adalah oracle; AI yang diperiksa adalah copilot</h2>
+    <div class="grid g2">
+      <div class="card wrongc"><span class="n">AI sebagai oracle</span><p>Jawaban diterima karena terdengar meyakinkan. Tidak ada pengecekan. Ketika angkanya salah, tidak ada yang bisa menjelaskan dari mana asalnya.</p></div>
+      <div class="card tint"><span class="n">AI sebagai copilot</span><p>AI mempercepat eksplorasi dan drafting. Anda memeriksa, memilih, dan menjelaskan. Penilaian akhir tetap di tangan Anda.</p></div>
+    </div>
+    <div class="eva">
+      <div><b>Explain</b><span>Anda bisa menjelaskan metode, asumsi, dan keluaran yang dipakai.</span></div>
+      <div><b>Validate</b><span>Angka, sumber, dan logika diperiksa terhadap data asli.</span></div>
+      <div><b>Account</b><span>Anda mempertanggungjawabkan keputusan dan menyatakan penggunaan AI.</span></div>
+    </div>
+    <span class="num">03</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 3–6</span></div>
+    <p class="say">“Ingat analogi kopilot: kopilot membantu membaca instrumen, tetapi pilot tetap yang bertanggung jawab. Bedanya, AI generatif bisa mengarang jawaban baru yang salah. Karena itu langkah Validate tidak boleh dilewati.”</p>
+    <p>Tiga kata di bawah (Explain, Validate, Account) akan muncul lagi di akhir sesi sebagai isi pernyataan penggunaan AI yang dilampirkan di laporan.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Kuat dan lemah" data-block="Sesi 1 · Copilot" data-at="6">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Bagi kerja yang jujur</div>
+    <h2>Minta AI menulis rumusnya, jangan memintanya menghitung di kepala</h2>
+    <div class="grid g2 kl">
+      <div class="card tint"><span class="n">Serahkan ke AI</span><ul class="ul">
+        <li>Menyusun rencana analisis dan dugaan penyebab</li>
+        <li>Menulis rumus Excel, langkah pivot, atau kode Python</li>
+        <li>Menghitung dengan <i>menjalankan kode</i> pada file yang Anda unggah</li>
+        <li>Mengkritik judul slide dan alur cerita</li>
+        <li>Merapikan bahasa laporan</li></ul></div>
+      <div class="card"><span class="n wr">Jangan serahkan ke AI</span><ul class="ul">
+        <li>Menghitung ribuan baris tanpa menjalankan kode</li>
+        <li>Menebak arti kolom yang tidak tertulis</li>
+        <li>Mengetahui konteks bisnis yang tidak Anda ceritakan</li>
+        <li>Memutuskan pertanyaan mana yang penting</li>
+        <li>Bertanggung jawab atas angka di laporan Anda</li></ul></div>
+    </div>
+    <p class="say-line">AI menjawab pertanyaan yang Anda ajukan, bukan pertanyaan yang seharusnya diajukan.</p>
+    <span class="num">04</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 6–9</span></div>
+    <p class="say">“Kalau AI tidak menjalankan kode, angka yang ia sebut bisa saja hanya kalimat yang terdengar seperti angka. Biasakan bertanya: ‘Tunjukkan rumus atau kodenya.’”</p>
+    <p>Kalimat terakhir di slide akan dibuktikan di Sesi 2: AI menjawab “apakah respons membaik?” dengan rata-rata yang menyesatkan.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Alur project dengan AI" data-block="Sesi 1 · Copilot" data-at="9">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Alur kerja project</div>
+    <h2>Enam langkah: AI membantu di tengah, Anda memegang awal dan akhir</h2>
+    <div class="steps6"><div class="st6 me"><span class="no">1</span><h3>Tebak</h3><p>Tulis jawaban satu kalimat untuk pertanyaan peran Anda.</p><span class="who">tanpa AI</span><span class=rep>laporan a</span></div><div class="st6"><span class="no">2</span><h3>Pasang konteks</h3><p>Lima file .md di asisten AI Anda: peran, kamus data, standar.</p><span class="who">sekali saja</span></div><div class="st6"><span class="no">3</span><h3>Rencanakan</h3><p>AI mengusulkan dugaan, pembanding, dan pivot yang perlu dibuat.</p><span class="who">AI membantu</span></div><div class="st6 me"><span class="no">4</span><h3>Hitung</h3><p>Anda membuat pivot dan rumus di Excel. Angka AI dicocokkan, bukan disalin.</p><span class="who">Anda memegang</span><span class=rep>laporan c</span></div><div class="st6"><span class="no">5</span><h3>Maknai</h3><p>AI memberi kandidat insight dan jebakan grafik. Anda memilih dan menguji.</p><span class="who">AI membantu</span><span class=rep>laporan b · d</span></div><div class="st6 me"><span class="no">6</span><h3>Sampaikan</h3><p>SIAP, action title, uji 6 detik, lalu pernyataan penggunaan AI.</p><span class="who">Anda memegang</span><span class=rep>laporan e</span></div></div>
+    <p class="say-line">Langkah 1 sengaja tanpa AI: tebakan Anda adalah bagian (a) laporan, dan tebakan yang salah tidak mengurangi nilai.</p>
+    <span class="num">05</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 9–14</span></div>
+    <p class="say">“Perhatikan warnanya. Kotak gelap dipegang Anda: menebak, menghitung di Excel, dan menyampaikan. AI membantu di langkah 3 dan 5. Kalau urutannya dibalik, yang terjadi adalah AI sebagai oracle.”</p>
+    <p>Hubungkan dengan sheet Petunjuk di dataset: laporan a–e, file Excel kerja yang menunjukkan asal angka, dan pengecekan 10 menit tanpa membuka laporan.</p>
+    <p class="tip">Tebakan serentak (ketik di chat atau angkat tangan): “Langkah mana yang paling sering dilewati mahasiswa yang memakai AI?” Jawaban yang dicari: langkah 4, mencocokkan angka.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Kenapa file markdown" data-block="Sesi 1 · Copilot" data-at="14">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Masalahnya</div>
+    <h2>Setiap chat baru, AI seperti konsultan di hari pertama: tidak tahu apa-apa tentang Anda</h2>
+    <div class="grid g2">
+      <div class="card"><span class="n wr">Tanpa brief</span><p>Setiap kali Anda mengetik ulang: peran saya apa, kolom ini artinya apa, judul slide harus seperti apa, jawab dalam bahasa apa. Yang lupa diketik, tidak dipakai AI.</p></div>
+      <div class="card tint"><span class="n">Dengan file .md</span><p>Brief tertulis yang dibaca AI setiap kali Anda bertanya. Ditulis sekali, dipakai di semua chat project, dan bisa diperbaiki seperti dokumen biasa.</p></div>
+    </div>
+    <div class="grid g3 why">
+      <div><b>Teks biasa</b><span>Dibuat di Notepad, dibaca manusia dan AI sama baiknya.</span></div>
+      <div><b>Ringan</b><span>Tidak membawa format Word atau PDF yang ikut memakan kuota.</span></div>
+      <div><b>Terstruktur</b><span>Judul, daftar, dan tabel membantu AI tahu mana aturan, mana data.</span></div>
+    </div>
+    <span class="num">06</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 14–17</span></div>
+    <p class="say">“Bayangkan Anda menyewa konsultan, tetapi setiap pagi ia lupa semuanya. Anda punya dua pilihan: menjelaskan ulang setiap pagi, atau memberinya satu map brief. File markdown adalah map itu.”</p>
+    <p>Markdown (.md) adalah teks biasa dengan beberapa tanda untuk struktur. Banyak asisten AI juga menulis jawabannya dalam markdown, jadi formatnya sudah akrab bagi model.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Markdown dalam lima tanda" data-block="Sesi 1 · Copilot" data-at="17">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Markdown dasar</div>
+    <h2>Lima tanda sudah cukup untuk semua file project Anda</h2>
+    <div class="grid g2 mdv">
+      <pre class="md"><span class="mh"># Instruksi Project</span>
+<span class="mh">## Konteks saya</span>
+<span class="mb">-</span> Peran saya: Manajer Gudang
+<span class="mb">-</span> Pembaca: direksi, waktu baca ±5 menit
+<span class="mh">## Cara bekerja</span>
+<span class="mb">1.</span> Jangan menebak angka.
+<span class="mb">2.</span> Setiap angka disertai <span class="mk">**rumus atau pivot**</span>.
+<span class="mt">| Kolom | Arti |</span>
+<span class="mt">|---|---|</span>
+<span class="mt">| Klaim_per_1000 | Klaim ÷ kiriman × 1.000 |</span></pre>
+      <div class="mdkey">
+        <div><code>#</code><span>Judul. <code>##</code> untuk subjudul.</span></div>
+        <div><code>-</code><span>Daftar poin.</span></div>
+        <div><code>1.</code><span>Langkah berurutan.</span></div>
+        <div><code>**…**</code><span>Penekanan. Pakai hemat.</span></div>
+        <div><code>| |</code><span>Tabel. Baris kedua <code>|---|</code> memisahkan judul kolom.</span></div>
+        <p class="tipline">Simpan dari Notepad: <b>Save as type: All files</b>, nama <code>instruksi-project.md</code>, encoding UTF-8.</p>
+      </div>
+    </div>
+    <span class="num">07</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 17–19</span></div>
+    <p>Tidak perlu menghafal sintaks lain. Yang penting: satu file satu tujuan, judul jelas, kalimat pendek, dan tanda kurung siku <code>[ ]</code> untuk bagian yang diisi sendiri.</p>
+    <p class="tip">Di Mac: TextEdit → Format → Make Plain Text, lalu simpan dengan akhiran .md. Atau tulis di Google Docs, lalu unduh sebagai Markdown (.md) bila menu itu tersedia.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Lima file, satu folder" data-block="Sesi 1 · Copilot" data-at="19">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Paket file project</div>
+    <h2>Lima file, ±1.200 kata: lebih pendek dari satu halaman laporan Anda</h2>
+    <table class="dt files"><tr><th>File</th><th>Isi</th><th>Dipakai</th><th>Dipasang di</th></tr><tr><td><code>instruksi-project.md</code></td><td>Peran Anda, pertanyaan direksi, aturan kerja AI, format jawaban, struktur laporan</td><td>setiap prompt</td><td>kolom instruksi project</td></tr><tr><td><code>kamus-data.md</code></td><td>Arti setiap kolom di lima sheet, satuan, dan kolom berumus</td><td>saat menghitung</td><td>file pengetahuan project</td></tr><tr><td><code>standar-presentasi.md</code></td><td>SIAP, tiga alur cerita, action title, 8 aturan deck, uji 6 detik</td><td>saat menyusun slide</td><td>file pengetahuan project</td></tr><tr><td><code>catatan-progres.md</code></td><td>Angka yang sudah Anda verifikasi, keputusan, langkah berikutnya</td><td>saat memulai chat baru</td><td>Anda isi; dikirim di pesan pertama</td></tr><tr><td><code>pernyataan-ai.md</code></td><td>Explain · Validate · Account dalam enam baris</td><td>saat mengumpulkan</td><td>lampiran laporan</td></tr></table>
+    <p class="pcap">Unduh kelimanya di hub: kartu Analitika Bisnis → Template markdown project. Kamus data sudah terisi dari dataset; tiga file lain tinggal Anda lengkapi.</p>
+    <span class="num">08</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 19–22</span></div>
+    <p class="say">“Satu file satu tujuan. Yang selalu dipakai hanya instruksi-project.md, dan itu sengaja dibuat pendek: sekitar 256 kata. Yang lain diambil AI hanya ketika relevan.”</p>
+    <p>Memisahkan file juga hemat usage: standar presentasi tidak perlu ikut dibaca ketika Anda hanya bertanya rumus pivot.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="instruksi-project.md" data-block="Sesi 1 · Copilot" data-at="22">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">File 1 · instruksi-project.md</div>
+    <h2>Dua aturan di file ini yang paling sering menyelamatkan nilai Anda</h2>
+    <div class="grid mdsplit">
+      <pre class="md sm"><span class="mh"># Instruksi Project · Analitika Bisnis · Nusantara Kargo 2025</span>
+<span class="mh">## Konteks saya</span>
+<span class="mb">-</span> Peran saya: <span class="mp">[Manajer Operasional / Manajer Komersial / Manajer Armada / Manajer Gudang / Analis Terminal]</span>
+<span class="mb">-</span> Pertanyaan direksi: <span class="mp">[salin dari sheet Peran]</span>
+<span class="mb">-</span> Tebakan awal saya, ditulis sebelum memakai AI: <span class="mp">[satu kalimat]</span>
+<span class="mh">## Cara bekerja</span>
+<span class="mb">1.</span> Jangan menebak angka. Hitung dengan menjalankan kode pada file yang saya unggah, atau beri saya rumus dan langkah pivot. Tanpa file, jawab &quot;perlu data&quot;.
+<span class="mb">2.</span> Setiap angka disertai cara mendapatkannya di Excel: rumus, atau pivot (baris · kolom · nilai · filter).
+<span class="mb">4.</span> Sebelum menyimpulkan, cek definisi, porsi/komposisi, ukuran sampel, dan outlier. Bila ada nilai ekstrem, laporkan median di samping rata-rata.
+<span class="mh">## Format jawaban</span>
+<span class="mb">-</span> Bahasa Indonesia, ringkas: tabel untuk angka, maksimal 150 kata kecuali saya minta lebih.</pre>
+      <div class="annot">
+        <div class="an"><b>Isi bagian bertanda [ ]</b><p>Peran, pertanyaan direksi, sheet utama, dan tebakan awal Anda.</p></div>
+        <div class="an hot"><b>Aturan 1 dan 2: anti-halusinasi</b><p>AI tidak boleh menebak angka. Setiap angka datang bersama rumus atau pivot, jadi bisa Anda cocokkan di Excel.</p></div>
+        <div class="an"><b>Aturan 4: validasi otomatis</b><p>Definisi, porsi, ukuran sampel, outlier. Median ikut dilaporkan bila ada nilai ekstrem.</p></div>
+        <div class="an"><b>Format jawaban: hemat kuota</b><p>Tabel, maksimal 150 kata, revisi hanya bagian yang berubah.</p></div>
+      </div>
+    </div>
+    <span class="num">09</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 22–26</span></div>
+    <p>Di slide, beberapa baris disembunyikan agar terbaca; file lengkapnya ada di hub.</p>
+    <p class="say">“Kalau Anda hanya sempat menulis dua aturan, tulis aturan 1 dan 2. Itu yang membuat angka AI bisa ditelusuri, dan itu yang saya nilai di kriteria ketepatan analisis.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="standar-presentasi.md" data-block="Sesi 1 · Copilot" data-at="26">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">File 2 · standar-presentasi.md</div>
+    <h2>Framework yang sudah Anda pelajari, ditulis ulang sebagai perintah</h2>
+    <table class="dt std"><tr><th>Yang dipelajari di kelas</th><th>Yang tertulis di file</th></tr><tr><td>SIAP: empat kalimat sebelum membuka aplikasi presentasi</td><td><code>## 1. SIAP</code> · “Jika keempat kalimat belum jelas, jangan membuat slide dulu.”</td></tr><tr><td>Tiga alur: Performance Review, Proposal, Problem Solving</td><td><code>## 2. Pilih satu alur cerita</code> · tabel tiga baris</td></tr><tr><td>Anatomi action title: subjek, arah, bukti, so what</td><td><code>## 3. Action title</code> · satu contoh</td></tr><tr><td>Delapan aturan standar deck</td><td><code>## 4.</code> · ditulis apa adanya</td></tr><tr><td>Uji 6 detik: pesan, bukti, langkah berikutnya</td><td><code>## 5.</code> · tiga pertanyaan per slide</td></tr></table>
+    <div class="grid g2 ba">
+      <div class="card"><span class="n wr">Tanpa file · “buatkan judul slide”</span><p class="ttl">Analisis Tiket Pelanggan 2025</p></div>
+      <div class="card tint"><span class="n">Dengan file · prompt yang sama</span><p class="ttl">Tiket naik 42%, tetapi 89% tambahannya hanya pertanyaan status kiriman</p></div>
+    </div>
+    <span class="num">10</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 26–30</span></div>
+    <p class="say">“Anda tidak perlu mengingatkan AI setiap kali: ‘judulnya temuan ya, satu pesan per slide ya’. Itu sudah tertulis. Prompt Anda cukup pendek.”</p>
+    <p>Contoh di bawah diambil dari data latihan yang dibedah di Sesi 2. Perhatikan bagian 6 file: AI dilarang memakai angka yang belum tercatat di catatan-progres.md, supaya slide tidak berisi angka yang belum Anda cek.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="kamus-data.md dan catatan-progres.md" data-block="Sesi 1 · Copilot" data-at="30">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">File 3 dan 4</div>
+    <h2>Kamus data membuat AI paham kolom; catatan progres membuat Anda bisa mulai chat baru</h2>
+    <div class="grid g2">
+      <div><div class="flab">kamus-data.md · sudah terisi, 5 sheet</div><pre class="md sm"><span class="mh">## Kiriman · transaksi kiriman 2025, satu baris per resi (±11 ribu baris)</span>
+<span class="mt">| Kolom | Arti | Satuan |</span>
+<span class="mt">|---|---|---|</span>
+<span class="mt">| Tepat_Waktu | Rumus: &quot;Ya&quot; bila Lama_Kirim_hari ≤ SLA_hari. OTD = porsi kiriman &quot;Ya&quot; | Ya / Tidak |</span>
+<span class="mt">| Ongkir_Rp | Pendapatan dari kiriman, sudah dikurangi diskon pelanggan | Rupiah |</span>
+…
+<span class="mh">## Gudang · 5 gudang × 12 bulan 2025</span>
+<span class="mt">| Klaim_per_1000 | Rumus: Klaim_Rusak ÷ Kiriman_Keluar × 1.000 | klaim per 1.000 kiriman |</span></pre>
+        <p class="pcap">Tanpa kamus, AI menebak arti kolom dari namanya. Kamus memberi definisi resmi, misalnya OTD = porsi kiriman dengan Tepat_Waktu “Ya”.</p></div>
+      <div><div class="flab">catatan-progres.md · Anda yang mengisi</div><pre class="md sm"><span class="mh"># Catatan Progres · <span class="mp">[Peran saya]</span></span>
+<span class="mh">## Tebakan awal (ditulis tanpa AI)</span>
+<span class="mh">## Angka yang sudah saya verifikasi</span>
+<span class="mt">| Angka | Nilai | Cara mendapat (sheet · pivot/rumus) | Dicek di Excel? |</span>
+<span class="mt">|---|---|---|---|</span>
+<span class="mh">## Dugaan yang belum terbukti</span>
+<span class="mh">## Keputusan yang sudah saya ambil</span>
+<span class="mh">## Langkah berikutnya</span></pre>
+        <p class="pcap">Hanya angka yang sudah Anda cocokkan di Excel yang masuk tabel ini.</p></div>
+    </div>
+    <span class="num">11</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 30–33</span></div>
+    <p>Kamus data disalin dari sheet Kamus Data di file dataset, jadi tidak ada informasi baru di dalamnya. Gunanya agar AI bisa menulis rumus dan langkah pivot tanpa Anda mengunggah seluruh data.</p>
+    <p class="say">“Catatan progres adalah memori Anda, bukan memori AI. Ketika percakapan sudah panjang, buka chat baru, kirim file ini, dan katakan: lanjutkan dari langkah berikutnya nomor 1.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Cara memasang" data-block="Sesi 1 · Copilot" data-at="33">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Memasang file di asisten AI Anda</div>
+    <h2>Pasang sekali di project, lalu buka chat baru di dalamnya untuk setiap tugas</h2>
+    <div class="grid g3 inst">
+      <div class="card tint"><span class="n">A · Ada fitur project</span><p>Project, Gem, atau GPT kustom. Tempel isi <code>instruksi-project.md</code> di kolom instruksi. Unggah <code>kamus-data.md</code> dan <code>standar-presentasi.md</code> sebagai file pengetahuan.</p></div>
+      <div class="card"><span class="n">B · Akun gratis tanpa project</span><p>Pesan pertama setiap chat: isi <code>instruksi-project.md</code> + lampiran <code>kamus-data.md</code>. Lampirkan <code>standar-presentasi.md</code> hanya saat menyusun slide.</p></div>
+      <div class="card"><span class="n">C · Agen koding (lanjutan)</span><p>Claude Code, Cursor, Codex, dan sejenisnya membaca file instruksi dari folder kerja, misalnya <code>CLAUDE.md</code> atau <code>AGENTS.md</code>. Ganti nama file instruksi Anda.</p></div>
+    </div>
+    <p class="pcap">Nama menu berbeda di tiap aplikasi dan sering berubah. Cari kata <b>Instructions</b>, <b>Instruksi</b>, atau <b>Knowledge</b>.</p>
+    <span class="num">12</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 33–36</span></div>
+    <p>Saya sengaja tidak menunjuk satu merek. Mahasiswa memakai asisten AI yang berbeda, dan polanya sama: instruksi permanen, file rujukan, lalu chat terpisah per tugas.</p>
+    <p class="tip">Kalau kelas daring, minta mahasiswa membuka asisten AI masing-masing dan menunjukkan di mana kolom instruksinya. Cukup satu menit; yang belum menemukannya pakai cara B.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Kenapa boros" data-block="Sesi 1 · Copilot" data-at="36">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Hemat usage · mengapa</div>
+    <h2>Setiap balasan membaca ulang seluruh percakapan, jadi pesan ke-12 membayar sebelas pesan sebelumnya</h2>
+    <div class="grid tokg">
+      <div class="chart"><svg viewBox="0 0 560 250" role="img" aria-label="Token yang dibaca per balasan: satu percakapan panjang dibanding percakapan baru setelah pesan ke-6"><line x1="46" x2="554" y1="216.0" y2="216.0" stroke="#C3D0D4" stroke-width="1"/><text x="40" y="220.0" text-anchor="end" class="ax">0</text><line x1="46" x2="554" y1="124.2" y2="124.2" stroke="#C3D0D4" stroke-width="1"/><text x="40" y="128.2" text-anchor="end" class="ax">5.000</text><line x1="46" x2="554" y1="32.4" y2="32.4" stroke="#C3D0D4" stroke-width="1"/><text x="40" y="36.4" text-anchor="end" class="ax">10.000</text><rect x="49.0" y="170.1" width="17.6" height="45.9" fill="#B9C6CA"/><text x="67.1" y="231" text-anchor="middle" class="ax">1</text><rect x="91.0" y="157.2" width="17.6" height="58.8" fill="#B9C6CA"/><text x="109.1" y="231" text-anchor="middle" class="ax">2</text><rect x="133.0" y="144.4" width="17.6" height="71.6" fill="#B9C6CA"/><text x="151.1" y="231" text-anchor="middle" class="ax">3</text><rect x="175.0" y="131.5" width="17.6" height="84.5" fill="#B9C6CA"/><text x="193.1" y="231" text-anchor="middle" class="ax">4</text><rect x="217.0" y="118.7" width="17.6" height="97.3" fill="#B9C6CA"/><text x="235.1" y="231" text-anchor="middle" class="ax">5</text><rect x="259.0" y="105.8" width="17.6" height="110.2" fill="#B9C6CA"/><text x="277.1" y="231" text-anchor="middle" class="ax">6</text><rect x="301.0" y="93.0" width="17.6" height="123.0" fill="#B9C6CA"/><rect x="319.5" y="153.6" width="17.6" height="62.4" fill="#1D6F63"/><text x="319.1" y="231" text-anchor="middle" class="ax">7</text><rect x="343.0" y="80.1" width="17.6" height="135.9" fill="#B9C6CA"/><rect x="361.5" y="140.7" width="17.6" height="75.3" fill="#1D6F63"/><text x="361.1" y="231" text-anchor="middle" class="ax">8</text><rect x="385.0" y="67.3" width="17.6" height="148.7" fill="#B9C6CA"/><rect x="403.5" y="127.9" width="17.6" height="88.1" fill="#1D6F63"/><text x="403.1" y="231" text-anchor="middle" class="ax">9</text><rect x="427.0" y="54.4" width="17.6" height="161.6" fill="#B9C6CA"/><rect x="445.5" y="115.0" width="17.6" height="101.0" fill="#1D6F63"/><text x="445.1" y="231" text-anchor="middle" class="ax">10</text><rect x="469.0" y="41.5" width="17.6" height="174.5" fill="#B9C6CA"/><rect x="487.5" y="102.1" width="17.6" height="113.9" fill="#1D6F63"/><text x="487.1" y="231" text-anchor="middle" class="ax">11</text><rect x="511.0" y="28.7" width="17.6" height="187.3" fill="#B9C6CA"/><rect x="529.5" y="89.3" width="17.6" height="126.7" fill="#1D6F63"/><text x="529.1" y="231" text-anchor="middle" class="ax">12</text><text x="301.0" y="22" class="lb" fill="#1D6F63">← chat baru + catatan-progres.md</text><text x="46" y="246" class="ax">pesan ke-</text></svg></div>
+      <div class="side">
+        <div class="stat"><div class="v">26%</div><div class="l">lebih sedikit token untuk 12 pesan bila Anda pindah ke chat baru setelah pesan ke-6, membawa catatan-progres.md</div></div>
+        <p class="pcap"><span class="sw g"></span>satu percakapan panjang &nbsp; <span class="sw p"></span>chat baru + catatan</p>
+        <p class="pcap">Ilustrasi: file konteks ±2.500 token, setiap tanya-jawab menambah ±700 token.</p>
+      </div>
+    </div>
+    <span class="num">13</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 36–39</span></div>
+    <p class="say">“Di kebanyakan asisten AI, setiap kali Anda mengirim pesan, model membaca ulang seluruh percakapan dan file yang terlampir. Percakapan panjang bukan hanya boros; AI juga mulai kurang memperhatikan bagian awal.”</p>
+    <p>Angka di grafik ilustrasi, bukan pengukuran satu aplikasi tertentu: total 76.200 token untuk satu percakapan panjang dibanding 56.400 token bila dipecah.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Delapan kebiasaan hemat" data-block="Sesi 1 · Copilot" data-at="39">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Hemat usage · bagaimana</div>
+    <h2>Delapan kebiasaan yang memangkas kuota tanpa mengurangi mutu jawaban</h2>
+    <div class="grid r8w">
+      <div class="r8"><div><i>01</i><b>Konteks tetap di file .md</b><span>bukan diketik ulang di setiap chat</span></div><div><i>02</i><b>Satu chat, satu tugas</b><span>ganti tugas → chat baru + catatan-progres.md</span></div><div><i>03</i><b>Jangan tempel ribuan baris</b><span>unggah file sekali, atau beri kamus data dan minta rumus</span></div><div><i>04</i><b>Minta rumus atau kode</b><span>bukan meminta AI membaca semua baris</span></div><div><i>05</i><b>Tentukan bentuk dan panjang</b><span>“tabel, maksimal 120 kata”</span></div><div><i>06</i><b>Revisi yang spesifik</b><span>“perbaiki judul slide 3”, bukan “buat ulang semua”</span></div><div><i>07</i><b>Perbaiki prompt, jangan regenerate</b><span>jawaban buruk biasanya karena perintahnya kabur</span></div><div><i>08</i><b>Lampirkan file sesuai keperluan</b><span>standar presentasi hanya saat menyusun slide</span></div></div>
+      <div class="vs2">
+        <div class="pr bad"><span class="lab">Boros</span><p>ini datanya [tempel 11.000 baris]. tolong analisis semuanya dan buatkan ppt lengkap</p></div>
+        <div class="pr"><span class="lab">Hemat</span><p>Pakai kamus-data.md. Beri rencana analisis 3 langkah untuk pertanyaan peran saya, lalu langkah pivot untuk langkah 1 saja. Tabel, maks. 120 kata.</p></div>
+      </div>
+    </div>
+    <span class="num">14</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 39–45</span></div>
+    <p class="tip">Tebakan serentak sebelum membuka kotak kanan: “Prompt mana yang menghasilkan jawaban lebih baik?” Jawabannya keduanya berbeda di dua hal: yang hemat juga lebih baik, karena AI tahu konteks, langkah, dan bentuk jawabannya.</p>
+    <p>Prompt boros di kiri gagal tiga kali: menempel data mentah (mahal), meminta “semuanya” (kabur), dan meminta PPT sebelum ada temuan yang diverifikasi.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Istirahat" data-block="Istirahat" data-at="45">
+  <div class="frame"><section class="slide dark center">
+    <div class="eyebrow">Istirahat · 15 menit</div>
+    <h1 class="display">Sambil istirahat, unduh lima file .md dan data latihan dari hub.</h1>
+    <p class="lede">irwanraditya.github.io/ITL-Trisakti → kartu Analitika Bisnis → Materi &amp; tugas.</p>
+    <div style="margin-top:1.2em"><button class="tchip" type="button" data-sec="900" data-label="Istirahat">▶ Timer 15 menit</button></div>
+    <span class="num">15</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 45–60</span></div>
+    <p>Sesi 2 dimulai dengan data latihan. Mahasiswa yang sudah mengunduh bisa mengikuti setiap prompt di asisten AI masing-masing.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Data latihan" data-block="Sesi 2 · Demo" data-at="60">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Sesi 2 · demo di data latihan</div>
+    <h2>Kita bedah data latihan, bukan dataset project, supaya cerita peran Anda tetap milik Anda</h2>
+    <div class="grid g2">
+      <div class="memo"><div class="from">Pertanyaan direksi · latihan</div>
+        <p>Tiket keluhan pelanggan semester 2 naik sekitar 40%. Apakah layanan kita memburuk, dan apa yang harus dilakukan tim layanan pelanggan?</p></div>
+      <div class="card tint"><span class="n">Data Latihan · Tiket Layanan Pelanggan 2025</span>
+        <p>6.525 tiket, satu baris per tiket. Kolom: tanggal, hari, kanal, kategori, hub, menit respons, selesai sekali kontak, skor kepuasan. Chat Aplikasi baru dibuka 1 Agustus 2025.</p></div>
+    </div>
+    <p class="say-line">Alurnya sama persis dengan project Anda: tebakan → rencana → hitung → maknai → sampaikan.</p>
+    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">16</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 60–62</span></div>
+    <p class="say">“Kalau saya membedah salah satu peran project di depan kelas, separuh dari Anda kehilangan kesempatan menemukan ceritanya sendiri. Jadi saya pakai data latihan dari perusahaan yang sama, dengan cerita yang berbeda.”</p>
+    <p>Data latihan tersedia di hub. Prompt di slide berikutnya bisa ditiru persis oleh mahasiswa.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Langkah 1: tebakan" data-block="Sesi 2 · Demo" data-at="62">
+  <div class="frame"><section class="slide center">
+    <div class="eyebrow">Langkah 1 · tanpa AI</div>
+    <div class="quote">“Keluhan naik karena keterlambatan pengiriman memburuk di semester 2.”</div>
+    <p class="pcap" style="margin-top:1.1em;font-size:.8em">Tebakan saya, ditulis sebelum membuka data. Kita lihat di akhir: benar, salah, atau meleset seberapa jauh.</p>
+    <span class="num">17</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 62–64</span></div>
+    <p class="tip">Tebakan serentak: “Setuju atau tidak dengan tebakan ini?” Minta jawaban di chat atau angkat tangan bersamaan. Jangan beri petunjuk.</p>
+    <p>Tebakan sengaja dibuat masuk akal tetapi salah, supaya bagian (a) laporan terlihat fungsinya.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Prompt 1: rencana" data-block="Sesi 2 · Demo" data-at="64">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Langkah 3 · rencanakan</div>
+    <h2>Prompt pertama meminta rencana, bukan jawaban</h2>
+    <div class="pr"><span class="lab">Prompt</span><p>Pakai instruksi-project.md dan kamus-data-latihan.md. <b>Jangan hitung dulu.</b> Beri 3 dugaan penyebab kenaikan tiket, pembanding untuk masing-masing, dan pivot yang perlu saya buat. Tabel, maks. 120 kata.</p></div>
+    <div class="ai"><span class="lab">Keluaran AI · diringkas</span><table class="dt sm"><tr><th>Dugaan</th><th>Pembanding</th><th>Pivot di Excel</th></tr><tr><td>Keterlambatan memburuk</td><td>Kategori Keterlambatan S1 vs S2</td><td>Baris Kategori · Kolom Semester · Nilai Count No_Tiket</td></tr><tr><td>Kanal baru menambah tiket</td><td>Kanal × bulan, sebelum dan sesudah 1 Agustus</td><td>Baris Bulan · Kolom Kanal · Nilai Count</td></tr><tr><td>Satu hub bermasalah</td><td>Hub S1 vs S2</td><td>Baris Hub · Kolom Semester · Nilai Count</td></tr></table><p class="hint">Tambahkan kolom Semester: <code>=IF(MONTH(B2)&lt;=6;"S1";"S2")</code></p></div>
+    <div class="chk"><span class="lab">Yang perlu dicek</span><p>Apakah tebakan saya ikut diuji? Ya, dugaan 1. Apakah ada dugaan yang belum terpikir? Dua lainnya justru dari AI.</p></div>
+    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">18</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 64–67</span></div>
+    <p class="say">“Ini peran AI yang paling berguna: memperluas dugaan. Tebakan saya hanya satu; AI menambah dua yang belum saya pikirkan. Tetapi belum ada satu angka pun yang keluar.”</p>
+    <p>Pemisah argumen rumus memakai titik koma untuk Excel berbahasa Indonesia; di Excel berbahasa Inggris memakai koma.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Prompt 2: hitung" data-block="Sesi 2 · Demo" data-at="67">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Langkah 4 · hitung</div>
+    <h2>AI menghitung dengan kode; Anda mencocokkannya dengan pivot sendiri</h2>
+    <div class="grid calc">
+      <div><div class="pr"><span class="lab">Prompt</span><p>File data latihan sudah saya unggah. Hitung tabel dugaan 1 dan 2 dengan menjalankan kode, lalu tulis langkah pivot yang sama untuk Excel supaya bisa saya cocokkan.</p></div>
+        <div class="chk"><span class="lab">Yang perlu dicek</span><p>Total 2.693 + 3.832 = 6.525 = jumlah baris sheet Tiket. Pivot saya menunjukkan angka yang sama. Masuk catatan-progres.md.</p></div></div>
+      <div class="ai"><span class="lab">Keluaran AI · diringkas</span><table class="dt sm rnum"><tr><th>Kategori</th><th>S1</th><th>S2</th><th>Selisih</th></tr><tr><td>Status kiriman</td><td>791</td><td>1.802</td><td>+1.011</td></tr><tr><td>Keterlambatan</td><td>712</td><td>737</td><td>+25</td></tr><tr><td>Barang rusak</td><td>325</td><td>355</td><td>+30</td></tr><tr><td>Ubah alamat</td><td>343</td><td>351</td><td>+8</td></tr><tr><td>Tagihan</td><td>96</td><td>132</td><td>+36</td></tr><tr><td>Lainnya</td><td>426</td><td>455</td><td>+29</td></tr><tr><td><b>Total</b></td><td><b>2.693</b></td><td><b>3.832</b></td><td><b>+1.139</b></td></tr></table><p class="hint">Chat Aplikasi (mulai 1 Agustus): 1.502 tiket di S2, 72% di antaranya Status kiriman.</p></div>
+    </div>
+    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">19</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 67–71</span></div>
+    <p class="say">“Lihat baris Keterlambatan: 712 menjadi 737, naik 4%. Tebakan saya mulai goyah. Hampir seluruh tambahan ada di Status kiriman.”</p>
+    <p>Kebiasaan yang ditekankan: cek total terhadap jumlah baris. Ini pengecekan paling murah dan menangkap banyak kesalahan, termasuk AI yang lupa sebagian data.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Jawaban AI yang menyesatkan" data-block="Sesi 2 · Demo" data-at="71">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Langkah 4 · ketika AI benar tetapi menyesatkan</div>
+    <h2>“Respons membaik 41%” benar secara hitungan, salah secara makna</h2>
+    <div class="grid g2">
+      <div><div class="pr"><span class="lab">Prompt · tanpa file instruksi</span><p>Apakah waktu respons kita membaik di semester 2?</p></div>
+        <div class="ai"><span class="lab">Keluaran AI</span><p>Ya. Rata-rata waktu respons turun dari <b>61 menit</b> menjadi <b>36 menit</b> (41%). Tim layanan pelanggan layak diapresiasi.</p></div></div>
+      <div><div class="chk bad"><span class="lab">Hasil pengecekan</span><p><b>Median</b> 13 → 12 menit: praktis tidak berubah.<br><b>Outlier:</b> gangguan sistem 11–13 Juni, 23 tiket dibalas ≥600 menit. Tanpa tiga hari itu, rata-rata S1 48 menit.<br><b>Komposisi:</b> Chat Aplikasi yang cepat menambah banyak tiket di S2. Per kanal, waktu respons tidak berubah.</p></div>
+        <p class="say-line sm">Aturan 4 di instruksi-project.md (laporkan median bila ada nilai ekstrem) mencegah jawaban ini.</p></div>
+    </div>
+    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">20</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 71–74</span></div>
+    <p class="say">“Angka AI tidak salah: rata-ratanya memang turun. Yang salah adalah kesimpulannya. Ini lebih berbahaya daripada angka yang dikarang, karena lolos ketika dicocokkan dengan Excel.”</p>
+    <p>Contoh ini disengaja: prompt tanpa file instruksi. Dengan instruksi-project.md terpasang, AI diminta melaporkan median di samping rata-rata. Inilah bagian (c) laporan: satu pengecekan validasi.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Prompt 3: insight" data-block="Sesi 2 · Demo" data-at="74">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Langkah 5 · maknai</div>
+    <h2>AI mengusulkan insight dari angka terverifikasi; Anda memilih dan melabeli</h2>
+    <div class="pr"><span class="lab">Prompt</span><p>Dari tabel di catatan-progres.md, beri maksimal 3 kandidat insight: apa yang berubah · mengapa penting · apa yang dilakukan. Label FAKTA atau DUGAAN. <b>Jangan menambah angka baru.</b></p></div>
+    <div class="ai"><span class="lab">Keluaran AI · diringkas</span><div class="ins"><span class="tag2 ">FAKTA</span><p><b>Tiket naik 42%, tetapi 89% tambahannya pertanyaan Status kiriman, terutama lewat Chat Aplikasi.</b> Layanan tidak memburuk; pelanggan bertanya di kanal yang lebih mudah. <i>→ Notifikasi status otomatis di aplikasi.</i></p></div><div class="ins"><span class="tag2 ">FAKTA</span><p><b>Akhir pekan dibalas 5× lebih lambat (median 39 vs 8 menit); tiket akhir pekan naik 62% sejak Chat Aplikasi.</b> Respons di atas 60 menit diikuti skor kepuasan 3,2 vs 4,1. <i>→ Tambah satu agen chat akhir pekan.</i></p></div><div class="ins"><span class="tag2 d">DUGAAN</span><p><b>Pelanggan bertanya status karena tidak ada notifikasi saat kiriman bergerak.</b> Bila benar, sebagian besar tiket status bisa hilang. <i>→ Cek sampel isi chat sebelum memutuskan.</i></p></div></div>
+    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">21</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 74–77</span></div>
+    <p class="say">“Perhatikan insight ketiga berlabel DUGAAN. Data kita tidak memuat alasan pelanggan bertanya. AI yang baik menandainya; AI tanpa instruksi akan menulisnya seolah fakta.”</p>
+    <p>Angka insight kedua juga sudah dicek di Excel: median per hari (Sabtu/Minggu vs hari kerja, tanpa Email) dan rata-rata skor kepuasan per kelompok respons.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Prompt 4: jebakan grafik" data-block="Sesi 2 · Demo" data-at="77">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Langkah 5 · jebakan grafik (bagian d)</div>
+    <h2>Data yang sama: satu grafik berteriak “meledak”, satu menunjukkan apa yang naik</h2>
+    <div class="grid trap2">
+      <div class="panel"><div class="ptitle"><b>Menipu</b> · sumbu mulai dari 400, total saja</div><div class="chart"><svg viewBox="0 0 400 230" role="img" aria-label="Versi menipu: total tiket per bulan dengan sumbu dimulai dari 400"><line x1="40" x2="396" y1="202.0" y2="202.0" stroke="#C3D0D4"/><text x="35" y="206.0" text-anchor="end" class="ax">400</text><line x1="40" x2="396" y1="122.3" y2="122.3" stroke="#C3D0D4"/><text x="35" y="126.3" text-anchor="end" class="ax">550</text><line x1="40" x2="396" y1="42.6" y2="42.6" stroke="#C3D0D4"/><text x="35" y="46.6" text-anchor="end" class="ax">700</text><polyline fill="none" stroke="#A63D2F" stroke-width="3" points="46.0,177.0 77.5,196.7 108.9,136.1 140.4,168.0 171.8,187.7 203.3,190.8 234.7,166.9 266.2,70.7 297.6,58.5 329.1,34.6 360.5,76.1 392.0,44.2"/><text x="46.0" y="217" text-anchor="middle" class="ax">Jan</text><text x="234.7" y="217" text-anchor="middle" class="ax">Jul</text><text x="266.2" y="217" text-anchor="middle" class="ax">Agu</text><text x="392.0" y="217" text-anchor="middle" class="ax">Des</text><text x="329.1" y="24.6" text-anchor="middle" class="lb" fill="#A63D2F">Tiket meledak!</text></svg></div></div>
+      <div class="panel"><div class="ptitle"><b class="ok">Jujur</b> · sumbu dari nol, status kiriman dipisahkan</div><div class="chart"><svg viewBox="0 0 400 230" role="img" aria-label="Versi jujur: tiket per bulan dari nol, pertanyaan status kiriman dipisahkan dari keluhan lain"><line x1="40" x2="396" y1="202.0" y2="202.0" stroke="#C3D0D4"/><text x="35" y="206.0" text-anchor="end" class="ax">0</text><line x1="40" x2="396" y1="109.0" y2="109.0" stroke="#C3D0D4"/><text x="35" y="113.0" text-anchor="end" class="ax">400</text><line x1="40" x2="396" y1="16.0" y2="16.0" stroke="#C3D0D4"/><text x="35" y="20.0" text-anchor="end" class="ax">800</text><rect x="43.0" y="129.9" width="24.2" height="72.1" fill="#B9C6CA"/><rect x="43.0" y="98.1" width="24.2" height="31.9" fill="#1D6F63"/><text x="55.1" y="217" text-anchor="middle" class="ax">Jan</text><rect x="72.2" y="133.6" width="24.2" height="68.4" fill="#B9C6CA"/><rect x="72.2" y="106.7" width="24.2" height="27.0" fill="#1D6F63"/><rect x="101.3" y="114.1" width="24.2" height="87.9" fill="#B9C6CA"/><rect x="101.3" y="80.2" width="24.2" height="33.9" fill="#1D6F63"/><rect x="130.5" y="126.0" width="24.2" height="76.0" fill="#B9C6CA"/><rect x="130.5" y="94.1" width="24.2" height="31.9" fill="#1D6F63"/><rect x="159.7" y="131.6" width="24.2" height="70.4" fill="#B9C6CA"/><rect x="159.7" y="102.7" width="24.2" height="28.8" fill="#1D6F63"/><rect x="188.8" y="134.6" width="24.2" height="67.4" fill="#B9C6CA"/><rect x="188.8" y="104.1" width="24.2" height="30.5" fill="#1D6F63"/><rect x="218.0" y="126.4" width="24.2" height="75.6" fill="#B9C6CA"/><rect x="218.0" y="93.7" width="24.2" height="32.8" fill="#1D6F63"/><text x="230.1" y="217" text-anchor="middle" class="ax">Jul</text><rect x="247.2" y="123.2" width="24.2" height="78.8" fill="#B9C6CA"/><rect x="247.2" y="51.6" width="24.2" height="71.6" fill="#1D6F63"/><text x="259.2" y="217" text-anchor="middle" class="ax">Agu</text><rect x="276.3" y="123.9" width="24.2" height="78.1" fill="#B9C6CA"/><rect x="276.3" y="46.2" width="24.2" height="77.7" fill="#1D6F63"/><rect x="305.5" y="114.3" width="24.2" height="87.7" fill="#B9C6CA"/><rect x="305.5" y="35.8" width="24.2" height="78.6" fill="#1D6F63"/><rect x="334.7" y="128.8" width="24.2" height="73.2" fill="#B9C6CA"/><rect x="334.7" y="53.9" width="24.2" height="74.9" fill="#1D6F63"/><rect x="363.8" y="123.4" width="24.2" height="78.6" fill="#B9C6CA"/><rect x="363.8" y="39.9" width="24.2" height="83.5" fill="#1D6F63"/><text x="375.9" y="217" text-anchor="middle" class="ax">Des</text><text x="247.2" y="18" class="lb" fill="#1D6F63">Status kiriman</text><text x="48.0" y="171.8" class="lb" fill="#0E2430">Keluhan lain: datar</text></svg></div></div>
+    </div>
+    <div class="pr"><span class="lab">Prompt</span><p>Buat dua versi grafik tiket per bulan: satu yang menipu seperti yang sering muncul di laporan, satu yang jujur. Jelaskan bedanya dalam 2 kalimat dan beri langkah membuatnya di Excel.</p></div>
+    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">22</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 77–80</span></div>
+    <p class="say">“Grafik kiri tidak berbohong soal angka. Ia berbohong lewat sumbu yang dipotong dan total yang menyembunyikan komposisi. Grafik kanan memakai satu warna aksen, sisanya abu, sesuai aturan 5 standar deck.”</p>
+    <p>Untuk project, mahasiswa membuat jebakan grafik dari data perannya sendiri. AI boleh membantu membuat versi menipu, karena tujuannya mengajarkan pembaca mengenalinya.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Prompt 5: SIAP dan judul" data-block="Sesi 2 · Demo" data-at="80">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Langkah 6 · sampaikan</div>
+    <h2>Dengan standar-presentasi.md, prompt pendek menghasilkan SIAP dan judul temuan</h2>
+    <div class="grid sj">
+      <div><div class="pr"><span class="lab">Prompt</span><p>Pakai standar-presentasi.md. Tulis 4 kalimat SIAP, lalu draf 4 judul slide. Uji 6 detik setiap judul.</p></div>
+        <div class="siap sm"><div class="k">S</div><p>Tiket pelanggan semester 2 naik 42%, dari 2.693 menjadi 3.832.</p><div class="k">I</div><p>Kenaikan ini dibaca sebagai tanda layanan memburuk.</p><div class="k">A</div><p>89% tambahannya pertanyaan status lewat Chat Aplikasi; keluhan lain hanya naik 7%. Titik lemahnya akhir pekan: dibalas 5× lebih lambat.</p><div class="k">P</div><p>Setujui notifikasi status otomatis dan satu agen chat akhir pekan bulan ini; Kepala Layanan melapor hasilnya dalam 3 bulan.</p></div></div>
+      <div class="ai"><span class="lab">Keluaran AI · judul slide</span><ol class="tl4"><li>Tiket naik 42%, tetapi 89% tambahannya hanya pertanyaan status kiriman</li><li>Di luar pertanyaan status, keluhan hanya naik 7%: layanan tidak memburuk</li><li>Akhir pekan dibalas 5× lebih lambat, dan volumenya naik 62% sejak Chat Aplikasi</li><li>Notifikasi status + satu agen akhir pekan: keputusan direksi bulan ini</li></ol><p class="hint">Uji 6 detik: keempat judul menyebut pesan; judul 4 memuat permintaan dan tenggat.</p></div>
+    </div>
+    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">23</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 80–83</span></div>
+    <p class="say">“Bandingkan dengan judul tanpa file tadi: ‘Analisis Tiket Pelanggan 2025’. Prompt-nya sama pendeknya; bedanya ada di file yang terpasang.”</p>
+    <p>Alur yang dipilih AI: Problem Solving (apa yang terjadi → akar masalah → perbaikan + pemilik). Push memiliki pemilik dan tenggat, sesuai aturan 8 standar deck.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Laporan latihan a–e" data-block="Sesi 2 · Demo" data-at="83">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Hasil latihan · struktur laporan project</div>
+    <h2>Lima bagian laporan selesai; AI membantu di tiga, keputusan tetap di saya</h2>
+    <div class="grid repw">
+      <div class="rep"><div><i>a</i><b>Tebakan vs temuan</b><span>Salah. Keterlambatan hanya naik 4%; kenaikan datang dari pertanyaan status.</span></div><div><i>b</i><b>Insight</b><span>Status kiriman lewat Chat Aplikasi; akhir pekan lambat. Dugaan soal notifikasi ditandai sebagai dugaan.</span></div><div><i>c</i><b>Validasi</b><span>“Respons membaik 41%” ditolak: median 13 → 12 menit, ada gangguan 11–13 Juni.</span></div><div><i>d</i><b>Jebakan grafik</b><span>Sumbu dipotong dan total tanpa komposisi vs batang dari nol yang memisahkan status.</span></div><div><i>e</i><b>Rekomendasi</b><span>Notifikasi status + agen akhir pekan. Batasan: alasan bertanya tidak tercatat; skor kepuasan bias karena pelanggan kecewa lebih rajin mengisi (73% vs 46%).</span></div></div>
+      <div class="decl"><div class="flab">pernyataan-ai.md · terisi</div>
+        <p><b>Explain:</b> AI dipakai untuk rencana analisis, kode pengecekan, kandidat insight, dan draf judul. Tebakan dan rekomendasi saya tulis sendiri.</p>
+        <p><b>Validate:</b> semua angka dicocokkan dengan pivot; klaim “respons membaik” dari AI saya tolak setelah cek median.</p>
+        <p><b>Account:</b> hanya data latihan fiktif yang diunggah. Saya bertanggung jawab atas seluruh isi.</p></div>
+    </div>
+    <span class="foot">Data latihan fiktif · Tiket Layanan Pelanggan Nusantara Kargo 2025 · bukan dataset project</span><span class="num">24</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 83–85</span></div>
+    <p class="say">“Ini seluruh tugas dalam satu slide. Yang Anda kumpulkan nanti sama strukturnya, dengan data peran Anda dan file Excel yang menunjukkan asal setiap angka.”</p>
+    <p>Pernyataan penggunaan AI memakai tiga kata dari Pertemuan 11. Template-nya ada di paket file .md.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Sebelum menempel data" data-block="Sesi 2 · Etika &amp; tata kelola" data-at="85">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Etika · sebelum menempel data apa pun</div>
+    <h2>Pertanyaan pertama bukan “bisa dianalisis AI?”, melainkan “boleh keluar dari kantor?”</h2>
+    <table class="dt cls"><tr><th>Jenis data</th><th>Contoh di pelayaran dan logistik</th><th>Ke akun AI pribadi?</th><th>Syarat</th></tr><tr><td><b>Publik</b></td><td>laporan tahunan, siaran pers, dataset kuliah</td><td><span class="ok2">Boleh</span></td><td>sebut sumbernya</td></tr><tr><td><b>Internal</b></td><td>SOP, KPI internal, jadwal kapal</td><td><span class="mid2">Hanya alat resmi kantor</span></td><td>izin atasan atau TI</td></tr><tr><td><b>Rahasia</b></td><td>kontrak, tarif pelanggan, manifest</td><td><span class="no2">Tidak</span></td><td>hanya sistem AI yang disetujui perusahaan</td></tr><tr><td><b>Data pribadi</b></td><td>nama dan HP penerima, data kru, NIK</td><td><span class="no2">Tidak</span></td><td>anonimkan dulu; tunduk UU PDP</td></tr></table>
+    <div class="q4"><b>Empat pertanyaan Pertemuan 14:</b> siapa yang terdampak · data apa yang dipakai · bagaimana keputusan dibuat · siapa yang bertanggung jawab</div>
+    <span class="num">25</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 85–89</span></div>
+    <p class="say">“Banyak dari Anda bekerja di pelayaran. Manifest, tarif kontrak, atau data kru tidak boleh ditempel ke akun AI pribadi, sekalipun untuk tugas kuliah. Untuk project ini aman, karena datanya fiktif.”</p>
+    <p>Kebijakan penyimpanan dan pelatihan data berbeda di tiap layanan AI dan bisa berubah. Pegangan paling aman: perlakukan apa pun yang Anda tempel ke akun pribadi sebagai sudah keluar dari perusahaan.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Lima risiko" data-block="Sesi 2 · Etika &amp; tata kelola" data-at="89">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Risiko · semuanya muncul di demo tadi</div>
+    <h2>Lima risiko saat AI ikut menganalisis, dan pengendalian untuk masing-masing</h2>
+    <div class="rks"><div class="rk"><h3>Halusinasi</h3><p>Angka atau sumber dikarang dengan yakin.</p><span>Minta rumus/kode; cocokkan dengan pivot.</span></div><div class="rk"><h3>Benar tetapi menyesatkan</h3><p>Rata-rata turun 41%, median tidak bergerak.</p><span>Median, outlier, komposisi.</span></div><div class="rk"><h3>Bias</h3><p>Pelanggan kecewa lebih rajin mengisi survei: 73% vs 46%.</p><span>Tanyakan siapa yang tidak terwakili.</span></div><div class="rk"><h3>Kebocoran data</h3><p>Data kantor atau pribadi masuk ke layanan pihak ketiga.</p><span>Klasifikasi data sebelum menempel.</span></div><div class="rk"><h3>Ketergantungan</h3><p>Laporan rapi, tetapi penulisnya tidak bisa menjelaskan angkanya.</p><span>Pengecekan 10 menit tanpa laporan.</span></div></div>
+    <span class="num">26</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 89–92</span></div>
+    <p class="say">“Risiko pertama paling sering dibicarakan. Risiko kedua dan ketiga lebih berbahaya, karena lolos dari pengecekan angka. Bias survei di data latihan tadi contohnya: rata-rata skor kepuasan terlihat lebih buruk dari kenyataan karena yang kecewa lebih rajin mengisi.”</p>
+    <p>Tiga risiko utama Pertemuan 14 (privasi, bias, akuntabilitas) tercakup: privasi = kebocoran data; akuntabilitas = ketergantungan dan halusinasi tanpa penanggung jawab.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Tata kelola" data-block="Sesi 2 · Etika &amp; tata kelola" data-at="92">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Tata kelola · Pertemuan 3 bertemu Pertemuan 14</div>
+    <h2>Tiga pilar tata kelola data berlaku juga untuk AI</h2>
+    <div class="grid g3 gov">
+      <div class="card tint"><span class="n">01 · Definisi</span><h3>Aturan tertulis</h3><p>AI boleh dipakai untuk apa, dengan data kelas apa, di alat yang mana. Untuk project ini: slide berikutnya.</p></div>
+      <div class="card tint"><span class="n">02 · Kepemilikan</span><h3>Nama orang, bukan alat</h3><p>Siapa yang menyetujui keluaran AI sebelum dipakai untuk keputusan. “Kata AI” bukan pemilik.</p></div>
+      <div class="card tint"><span class="n">03 · Kualitas</span><h3>Jejak yang bisa diperiksa</h3><p>Prompt penting disimpan, versi file dicatat, angka diverifikasi, ada tinjauan manusia sebelum dipakai.</p></div>
+    </div>
+    <p class="say-line">Di skala Anda, jejak itu sederhana: catatan-progres.md dan pernyataan-ai.md.</p>
+    <span class="num">27</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 92–95</span></div>
+    <p class="say">“Di Pertemuan 3 kita bilang tata kelola data adalah kesepakatan tentang definisi dan kepemilikan, bukan perkara teknologi. Untuk AI sama saja. Perusahaan yang tidak punya aturan tertulis tentang AI sebenarnya sudah punya aturan: setiap orang memakai seleranya sendiri.”</p>
+    <p>Tanyakan ke kelas (ketik di chat): “Apakah kantor Anda sudah punya aturan tertulis penggunaan AI?” Jawaban ini sering membuka diskusi yang hidup di kelas pekerja.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Regulasi dan rujukan" data-block="Sesi 2 · Etika &amp; tata kelola" data-at="95">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Regulasi dan rujukan · status per Oktober 2026</div>
+    <h2>Regulasi AI Indonesia sedang disusun; perlindungan data pribadi sudah berlaku</h2>
+    <div class="rgs"><div class="rg"><span class="where">Indonesia</span><b>UU 27/2022 tentang Pelindungan Data Pribadi</b><p>Berlaku penuh sejak Oktober 2024. Lembaga pengawasnya belum terbentuk per Februari 2026; pengawasan sementara oleh Komdigi.</p></div><div class="rg"><span class="where">Indonesia</span><b>SE Menkominfo 9/2023 tentang Etika Kecerdasan Artifisial</b><p>Pedoman etika bagi pelaku usaha dan penyelenggara sistem elektronik berbasis AI.</p></div><div class="rg"><span class="where">Indonesia</span><b>Rancangan Perpres Peta Jalan AI dan Perpres Etika AI</b><p>Per 4 September 2026 menunggu tanda tangan Presiden. Cek status terbaru sebelum mengutip.</p></div><div class="rg"><span class="where">Global</span><b>NIST AI RMF 1.0 (2023) · ISO/IEC 42001:2023 · EU AI Act (2024)</b><p>Rujukan manajemen risiko dan sistem manajemen AI yang banyak dipakai perusahaan multinasional.</p></div></div>
+    <span class="foot">Sumber: Selular.id (4 Sep 2026); CNBC Indonesia (4 Feb 2026); teks UU 27/2022. Status regulasi cepat berubah.</span><span class="num">28</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 95–97</span></div>
+    <p>Tekankan dua hal saja: (1) data pribadi sudah dilindungi undang-undang, jadi menempel data pelanggan atau kru ke AI bisa menjadi pelanggaran, bukan sekadar kurang etis; (2) aturan khusus AI di Indonesia masih dalam proses, jadi untuk sekarang perusahaan bergantung pada kebijakan internal.</p>
+    <h4>Sumber</h4>
+    <ul>
+      <li>Selular.id, “Dua Perpres AI tunggu tanda tangan Presiden Prabowo”, 4 September 2026.</li>
+      <li>CNBC Indonesia, “Telat 2 tahun, Komdigi janji badan penjaga data warga RI berdiri 2026”, 4 Februari 2026.</li>
+      <li>UU Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (masa transisi dua tahun sejak diundangkan 17 Oktober 2022).</li>
+    </ul>
+    <p class="tip">Status Perpres dan lembaga PDP dapat berubah setelah slide ini dibuat. Periksa berita terbaru sebelum kelas bila ingin menyebut statusnya.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Aturan AI project ini" data-block="Sesi 2 · Etika &amp; tata kelola" data-at="97">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Aturan AI · project Analitika Bisnis</div>
+    <h2>AI boleh membantu di mana pun, selama setiap angka bisa Anda tunjukkan asalnya</h2>
+    <div class="grid g3 bwt">
+      <div class="card tint"><span class="n">Boleh</span><ul class="ul">
+        <li>Merencanakan analisis dan dugaan</li><li>Menulis rumus, pivot, atau kode</li><li>Mengkritik judul dan alur</li><li>Merapikan bahasa</li></ul></div>
+      <div class="card hot"><span class="n oc">Wajib</span><ul class="ul">
+        <li>Tebakan awal ditulis tanpa AI</li><li>File Excel kerja yang menunjukkan asal angka</li><li>Pernyataan penggunaan AI di lampiran</li><li>Siap pengecekan 10 menit tanpa laporan</li></ul></div>
+      <div class="card"><span class="n wr">Tidak boleh</span><ul class="ul">
+        <li>Angka yang tidak bisa Anda tunjukkan asalnya</li><li>Mengunggah data kantor atau data pribadi</li><li>Menyerahkan keluaran AI atau laporan teman tanpa verifikasi</li></ul></div>
+    </div>
+    <span class="num">29</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 97–100</span></div>
+    <p>Kolom Boleh dan Wajib sejalan dengan sheet Petunjuk di dataset (“AI boleh membantu… Anda tetap bertanggung jawab atas setiap angka”) dan dengan langkah Account di Pertemuan 11. Sesuaikan bila kebijakan program studi berbeda.</p>
+    <p class="say">“Saya tidak melarang AI. Saya melarang angka tanpa asal-usul.”</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Daftar cek sebelum mengumpulkan" data-block="Penutup" data-at="100">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Sebelum mengumpulkan</div>
+    <h2>Enam cek sebelum laporan dan file Excel Anda dikirim</h2>
+    <div class="checklist"><div><i>01</i><span>Tebakan awal tercantum apa adanya<small>bagian (a), ditulis sebelum memakai AI</small></span></div><div><i>02</i><span>Setiap angka di laporan ada di catatan-progres.md<small>lengkap dengan sheet dan pivot atau rumusnya</small></span></div><div><i>03</i><span>Minimal satu pengecekan validasi ditulis<small>definisi, porsi, ukuran sampel, atau outlier</small></span></div><div><i>04</i><span>Setiap judul lulus uji 6 detik<small>pesan, bukti, langkah berikutnya</small></span></div><div><i>05</i><span>Pernyataan penggunaan AI terlampir<small>Explain · Validate · Account</small></span></div><div><i>06</i><span>Anda bisa menjelaskan angka utama tanpa membuka laporan<small>latihan untuk pengecekan 10 menit</small></span></div></div>
+    <span class="num">30</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 100–103</span></div>
+    <p class="say">“Kalau nomor 6 belum bisa, berarti AI yang mengerjakan dan Anda yang mengetik. Kembali ke langkah 4.”</p>
+    <p>Bentuk dan tenggat pengumpulan mengikuti yang sudah diumumkan untuk project 10 Oktober.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Penutup" data-block="Penutup" data-at="103">
+  <div class="frame"><section class="slide dark center">
+    <div class="eyebrow">Penutup</div>
+    <h1 class="display">AI mempercepat pekerjaan Anda.<br>Yang menjawab direksi tetap Anda.</h1>
+    <p class="lede">Minggu ini: pasang lima file .md, tulis tebakan peran Anda tanpa AI, lalu mulai catatan-progres.md.</p>
+    <span class="num">31</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 103–105</span></div>
+    <p>Arahkan ke hub untuk unduhan: tutorial ini, template markdown (ZIP), dan data latihan. Slide terakhir (lampiran) berisi kelima file yang bisa disalin langsung.</p>
+  </div>
+</article>
+
+<article class="unit" data-title="Lampiran: file .md" data-block="Penutup" data-at="104">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Lampiran · enam file siap pakai</div>
+    <h2>Salin atau unduh file markdown untuk project Anda</h2>
+    <div class="dlg"><div class="dlc"><code>instruksi-project.md</code><span>256 kata</span><button class="tb2 js-only" type="button" data-copy="instruksi-project.md">Salin</button><button class="tb2 js-only" type="button" data-dl="instruksi-project.md">Unduh</button></div><div class="dlc"><code>kamus-data.md</code><span>457 kata</span><button class="tb2 js-only" type="button" data-copy="kamus-data.md">Salin</button><button class="tb2 js-only" type="button" data-dl="kamus-data.md">Unduh</button></div><div class="dlc"><code>standar-presentasi.md</code><span>277 kata</span><button class="tb2 js-only" type="button" data-copy="standar-presentasi.md">Salin</button><button class="tb2 js-only" type="button" data-dl="standar-presentasi.md">Unduh</button></div><div class="dlc"><code>catatan-progres.md</code><span>67 kata</span><button class="tb2 js-only" type="button" data-copy="catatan-progres.md">Salin</button><button class="tb2 js-only" type="button" data-dl="catatan-progres.md">Unduh</button></div><div class="dlc"><code>pernyataan-ai.md</code><span>96 kata</span><button class="tb2 js-only" type="button" data-copy="pernyataan-ai.md">Salin</button><button class="tb2 js-only" type="button" data-dl="pernyataan-ai.md">Unduh</button></div><div class="dlc"><code>kamus-data-latihan.md</code><span>148 kata</span><button class="tb2 js-only" type="button" data-copy="kamus-data-latihan.md">Salin</button><button class="tb2 js-only" type="button" data-dl="kamus-data-latihan.md">Unduh</button></div></div>
+    <p class="pcap">Semua file juga ada di hub dalam satu ZIP: kartu Analitika Bisnis → Template markdown project. Isi lengkap tiap file ada di catatan di bawah slide ini.</p>
+    <script type="text/plain" id="md-instruksi-project.md"># Instruksi Project · Analitika Bisnis · Nusantara Kargo 2025
+
+## Peran Anda (AI)
+Anda copilot analisis data saya. Saya yang memutuskan dan bertanggung jawab atas setiap angka dan kesimpulan.
+
+## Konteks saya
+- Peran saya: [Manajer Operasional / Manajer Komersial / Manajer Armada / Manajer Gudang / Analis Terminal]
+- Pertanyaan direksi: [salin dari sheet Peran]
+- Sheet utama: [salin dari sheet Peran]
+- Tebakan awal saya, ditulis sebelum memakai AI: [satu kalimat]
+- Pembaca: direksi Nusantara Kargo, waktu baca ±5 menit.
+- Arti kolom ada di kamus-data.md. Aturan slide dan laporan ada di standar-presentasi.md.
+
+## Cara bekerja
+1. Jangan menebak angka. Hitung dengan menjalankan kode pada file yang saya unggah, atau beri saya rumus dan langkah pivot. Tanpa file, jawab &quot;perlu data&quot;.
+2. Setiap angka disertai cara mendapatkannya di Excel: rumus, atau pivot (baris · kolom · nilai · filter).
+3. Selalu beri pembanding: periode, segmen, atau target.
+4. Sebelum menyimpulkan, cek definisi, porsi/komposisi, ukuran sampel, dan outlier. Bila ada nilai ekstrem, laporkan median di samping rata-rata.
+5. Pisahkan FAKTA (dari data), DUGAAN (perlu dicek), dan SARAN. Dugaan ditulis dengan kata &quot;kemungkinan&quot;.
+6. Bila permintaan saya ambigu, ajukan satu pertanyaan sebelum mengerjakan.
+7. Jangan mengarang sumber, kutipan, atau data di luar file.
+
+## Format jawaban
+- Bahasa Indonesia, ringkas: tabel untuk angka, maksimal 150 kata kecuali saya minta lebih.
+- Pemisah ribuan titik, desimal koma, satuan selalu ditulis.
+- Untuk revisi, kirim bagian yang berubah saja.
+
+## Struktur laporan
+a. Tebakan vs temuan · b. Maksimal 3 insight (apa yang berubah · mengapa penting · apa yang dilakukan) · c. Satu pengecekan validasi · d. Satu jebakan grafik (versi menipu vs jujur) · e. Satu rekomendasi beserta batasannya.
+</script><script type="text/plain" id="md-kamus-data.md"># Kamus Data · Dataset Project AB 2026 · Nusantara Kargo 2025
+
+Data fiktif mata kuliah. Kolom berlabel &quot;Rumus&quot; sudah berisi rumus Excel di file.
+
+## Kiriman · transaksi kiriman 2025, satu baris per resi (±11 ribu baris)
+| Kolom | Arti | Satuan |
+|---|---|---|
+| No_Resi | Nomor resi kiriman | teks |
+| Tgl_Pickup | Tanggal barang diambil dari pelanggan | tanggal |
+| Hub_Asal | Hub tempat kiriman diproses: Jakarta, Surabaya, Medan, Makassar | teks |
+| Layanan | Darat Jawa, Darat Sumatra, Laut Antarpulau, Laut Kawasan Timur, Udara Kilat | teks |
+| Kota_Tujuan | Kota penerima | teks |
+| Kode_Pelanggan | Kode pengirim; detail di sheet Pelanggan | teks |
+| Jenis_Barang | Kategori barang | teks |
+| Berat_kg | Berat tertagih | kg |
+| SLA_hari | Janji waktu kirim untuk layanan tersebut | hari |
+| Tgl_Terima | Tanggal barang diterima penerima | tanggal |
+| Lama_Kirim_hari | Rumus: Tgl_Terima − Tgl_Pickup | hari |
+| Tepat_Waktu | Rumus: &quot;Ya&quot; bila Lama_Kirim_hari ≤ SLA_hari. OTD = porsi kiriman &quot;Ya&quot; | Ya / Tidak |
+| Ongkir_Rp | Pendapatan dari kiriman, sudah dikurangi diskon pelanggan | Rupiah |
+| Catatan_Kurir | Catatan bebas dari kurir; sering kosong | teks |
+
+## Pelanggan · 120 pelanggan, satu baris per pelanggan
+| Kolom | Arti | Satuan |
+|---|---|---|
+| Kode_Pelanggan | Kode pelanggan | teks |
+| Segmen | Jenis usaha pelanggan | teks |
+| Kota | Kota pelanggan (menentukan hub asal) | teks |
+| Jenis_Tarif | Reguler, Kontrak, atau Kontrak Proyek | teks |
+| Diskon | Potongan dari tarif dasar | % |
+| Tanggal_Bergabung | Tanggal mulai menjadi pelanggan atau mulai kontrak | tanggal |
+
+## Armada · 36 truk × 12 bulan 2025
+| Kolom | Arti | Satuan |
+|---|---|---|
+| Bulan | Bulan laporan (tanggal 1) | tanggal |
+| Truk_ID / Depo / Tahun_Pembuatan | Identitas truk, depo asal, dan tahun pembuatan | teks / tahun |
+| Jumlah_Rit / Rit_Terlambat | Jumlah perjalanan dan perjalanan yang terlambat dari jadwal | rit |
+| Km_Tempuh / Liter_Solar | Jarak tempuh dan solar yang dipakai dalam bulan itu | km / liter |
+| Harga_Solar_per_Liter | Harga solar yang dibayar perusahaan | Rupiah |
+| Biaya_Solar_Rp | Rumus: Liter_Solar × Harga_Solar_per_Liter | Rupiah |
+| Biaya_Perawatan_Rp | Biaya servis dan suku cadang bulan itu | Rupiah |
+| Hari_Tidak_Operasi | Hari truk tidak bisa jalan (rusak atau servis) | hari |
+
+## Gudang · 5 gudang × 12 bulan 2025
+| Kolom | Arti | Satuan |
+|---|---|---|
+| Kiriman_Keluar | Jumlah kiriman yang keluar dari gudang | kiriman |
+| Rata_Hari_di_Gudang | Rata-rata lama barang menginap di gudang | hari |
+| Klaim_Rusak / Nilai_Klaim_Rp | Jumlah klaim barang rusak dan nilai gantinya | klaim / Rupiah |
+| Klaim_per_1000 | Rumus: Klaim_Rusak ÷ Kiriman_Keluar × 1.000 | klaim per 1.000 kiriman |
+
+## Terminal · 2 terminal peti kemas × bulan, 2022–2025
+| Kolom | Arti | Satuan |
+|---|---|---|
+| Terminal | TPK Utara dan TPK Selatan, dua terminal peti kemas mitra di pelabuhan yang sama | teks |
+| Kunjungan_Kapal | Jumlah kapal yang sandar dalam bulan itu | kapal |
+| TEU_Total / TEU_Transshipment | Volume peti kemas; transshipment = peti kemas pindah kapal (tarif lebih rendah) | TEU |
+| Pendapatan_Rp_juta | Pendapatan layanan peti kemas | juta Rupiah |
+| BOR | Berth occupancy ratio: porsi waktu dermaga terpakai | % |
+| Waiting_Time_jam | Rata-rata waktu kapal menunggu sebelum sandar | jam |
+
+Kunci penghubung: Kiriman.Kode_Pelanggan → Pelanggan.Kode_Pelanggan.
+</script><script type="text/plain" id="md-standar-presentasi.md"># Standar Presentasi · dipakai setiap menyusun slide atau laporan
+
+## 1. SIAP: empat kalimat sebelum membuat slide
+- **S · Situation**: yang sudah kita sepakati benar.
+- **I · Issue**: apa yang berubah atau rusak.
+- **A · Answer**: apa yang sebenarnya dikatakan data.
+- **P · Push**: apa yang pembaca harus lakukan, dengan pemilik dan tenggat.
+
+Jika keempat kalimat belum jelas, jangan membuat slide dulu.
+
+## 2. Pilih satu alur cerita
+| Alur | Pertanyaan pembaca | Urutan |
+|---|---|---|
+| Performance Review | Bagaimana hasil kita? | hasil vs target → pendorong selisih → yang sudah dikerjakan → yang dibutuhkan |
+| Proposal | Apa yang sebaiknya kita lakukan? | peluang/risiko → opsi → rekomendasi + alasan → biaya, waktu, keputusan |
+| Problem Solving | Apa yang salah? | apa yang terjadi (angka) → akar masalah → perbaikan + pemilik → pencegahan |
+
+## 3. Action title: empat bagian
+Subjek · kata kerja + arah (dengan angka) · bukti · so what.
+Contoh: &quot;Modern Trade turun 17% pada tiga SKU teratas — alokasi darurat Jumat.&quot;
+
+## 4. Delapan aturan deck
+1. Empat kalimat SIAP ditulis sebelum membuka aplikasi presentasi.
+2. Setiap judul slide adalah temuan, bukan label topik.
+3. Satu pesan per slide; dua poin berarti dua slide.
+4. Kesimpulan di depan, bukti menyusul (answer-first).
+5. Satu warna aksen per grafik, sisanya abu.
+6. Angka dibulatkan ke satuan tempat keputusan diambil.
+7. Sumber dan periode tercantum di slide.
+8. Ditutup dengan permintaan yang punya pemilik dan tenggat.
+
+## 5. Uji 6 detik untuk setiap slide
+1. Dari judul saja, bisakah pembaca menyebut pesannya?
+2. Bisakah mereka menemukan buktinya? Satu elemen yang menarik mata, bukan tiga.
+3. Tahukah mereka apa yang terjadi berikutnya? Implikasi atau permintaan terlihat di slide.
+
+## 6. Format draf slide dari AI
+| No | Judul (action title) | Bukti: grafik/tabel apa, dari pivot mana | Angka callout | Sumber &amp; periode |
+
+Jangan memakai angka yang belum tercatat di catatan-progres.md.
+</script><script type="text/plain" id="md-catatan-progres.md"># Catatan Progres · [Peran saya]
+Diperbarui: [tanggal]
+
+## Tebakan awal (ditulis tanpa AI)
+[satu kalimat]
+
+## Angka yang sudah saya verifikasi
+| Angka | Nilai | Cara mendapat (sheet · pivot/rumus) | Dicek di Excel? |
+|---|---|---|---|
+| | | | |
+
+## Dugaan yang belum terbukti
+- 
+
+## Keputusan yang sudah saya ambil
+- 
+
+## Langkah berikutnya
+1. 
+
+---
+Cara pakai: saat percakapan dengan AI sudah panjang, mulai percakapan baru dan kirim file ini dengan pesan: &quot;Ini catatan progres saya. Lanjutkan dari Langkah berikutnya nomor 1.&quot;
+</script><script type="text/plain" id="md-pernyataan-ai.md"># Pernyataan Penggunaan AI
+(Lampirkan di halaman terakhir laporan.)
+
+- **Alat**: [nama asisten AI] · dipakai pada [tanggal–tanggal]
+- **Explain · dipakai untuk**: [mis. menyusun rencana analisis, menulis langkah pivot, mengkritik judul slide]
+- **Explain · tidak dipakai untuk**: [mis. menentukan rekomendasi akhir, menulis tebakan awal]
+- **Validate · cara saya memeriksa**: [mis. setiap angka dicocokkan dengan pivot di file Excel saya; AI menyebut X, pivot menunjukkan Y, saya pakai Y]
+- **Data yang saya unggah ke AI**: [mis. hanya dataset fiktif mata kuliah; tidak ada data kantor atau data pribadi]
+- **Account**: Saya memahami dan bertanggung jawab atas setiap angka dan kesimpulan dalam laporan ini.
+</script><script type="text/plain" id="md-kamus-data-latihan.md"># Kamus Data · Data Latihan · Tiket Layanan Pelanggan Nusantara Kargo 2025
+
+Data fiktif untuk latihan, tidak dinilai. Sheet Tiket: satu baris per tiket, 6.525 baris.
+
+| Kolom | Arti | Satuan |
+|---|---|---|
+| No_Tiket | Nomor tiket | teks |
+| Tgl_Masuk | Tanggal tiket masuk | tanggal |
+| Hari | Nama hari dari Tgl_Masuk | teks |
+| Kanal | Telepon (hanya hari kerja), WhatsApp, Email, Chat Aplikasi (mulai 1 Agustus 2025) | teks |
+| Kategori | Status kiriman, Keterlambatan, Barang rusak, Ubah alamat, Tagihan, Lainnya | teks |
+| Hub | Hub yang menangani kiriman: Jakarta, Surabaya, Medan, Makassar | teks |
+| Respons_menit | Menit dari tiket masuk sampai balasan pertama agen | menit |
+| Selesai_Sekali_Kontak | Ya bila masalah selesai tanpa pelanggan menghubungi lagi | Ya / Tidak |
+| Skor_Kepuasan | Survei setelah tiket ditutup, 1 (buruk) sampai 5 (sangat baik). Kosong bila pelanggan tidak mengisi | skor 1–5 |
+
+Pertanyaan direksi (latihan): Tiket keluhan pelanggan semester 2 naik sekitar 40%. Apakah layanan kita memburuk, dan apa yang harus dilakukan tim layanan pelanggan?
+</script>
+    <span class="num">32</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Lampiran</span></div>
+    <p>Isi lengkap setiap file, untuk disalin bila tombol Salin atau Unduh diblokir browser:</p>
+<h4>instruksi-project.md</h4><pre class="mdn"># Instruksi Project · Analitika Bisnis · Nusantara Kargo 2025
+
+## Peran Anda (AI)
+Anda copilot analisis data saya. Saya yang memutuskan dan bertanggung jawab atas setiap angka dan kesimpulan.
+
+## Konteks saya
+- Peran saya: [Manajer Operasional / Manajer Komersial / Manajer Armada / Manajer Gudang / Analis Terminal]
+- Pertanyaan direksi: [salin dari sheet Peran]
+- Sheet utama: [salin dari sheet Peran]
+- Tebakan awal saya, ditulis sebelum memakai AI: [satu kalimat]
+- Pembaca: direksi Nusantara Kargo, waktu baca ±5 menit.
+- Arti kolom ada di kamus-data.md. Aturan slide dan laporan ada di standar-presentasi.md.
+
+## Cara bekerja
+1. Jangan menebak angka. Hitung dengan menjalankan kode pada file yang saya unggah, atau beri saya rumus dan langkah pivot. Tanpa file, jawab &quot;perlu data&quot;.
+2. Setiap angka disertai cara mendapatkannya di Excel: rumus, atau pivot (baris · kolom · nilai · filter).
+3. Selalu beri pembanding: periode, segmen, atau target.
+4. Sebelum menyimpulkan, cek definisi, porsi/komposisi, ukuran sampel, dan outlier. Bila ada nilai ekstrem, laporkan median di samping rata-rata.
+5. Pisahkan FAKTA (dari data), DUGAAN (perlu dicek), dan SARAN. Dugaan ditulis dengan kata &quot;kemungkinan&quot;.
+6. Bila permintaan saya ambigu, ajukan satu pertanyaan sebelum mengerjakan.
+7. Jangan mengarang sumber, kutipan, atau data di luar file.
+
+## Format jawaban
+- Bahasa Indonesia, ringkas: tabel untuk angka, maksimal 150 kata kecuali saya minta lebih.
+- Pemisah ribuan titik, desimal koma, satuan selalu ditulis.
+- Untuk revisi, kirim bagian yang berubah saja.
+
+## Struktur laporan
+a. Tebakan vs temuan · b. Maksimal 3 insight (apa yang berubah · mengapa penting · apa yang dilakukan) · c. Satu pengecekan validasi · d. Satu jebakan grafik (versi menipu vs jujur) · e. Satu rekomendasi beserta batasannya.
+</pre><h4>kamus-data.md</h4><pre class="mdn"># Kamus Data · Dataset Project AB 2026 · Nusantara Kargo 2025
+
+Data fiktif mata kuliah. Kolom berlabel &quot;Rumus&quot; sudah berisi rumus Excel di file.
+
+## Kiriman · transaksi kiriman 2025, satu baris per resi (±11 ribu baris)
+| Kolom | Arti | Satuan |
+|---|---|---|
+| No_Resi | Nomor resi kiriman | teks |
+| Tgl_Pickup | Tanggal barang diambil dari pelanggan | tanggal |
+| Hub_Asal | Hub tempat kiriman diproses: Jakarta, Surabaya, Medan, Makassar | teks |
+| Layanan | Darat Jawa, Darat Sumatra, Laut Antarpulau, Laut Kawasan Timur, Udara Kilat | teks |
+| Kota_Tujuan | Kota penerima | teks |
+| Kode_Pelanggan | Kode pengirim; detail di sheet Pelanggan | teks |
+| Jenis_Barang | Kategori barang | teks |
+| Berat_kg | Berat tertagih | kg |
+| SLA_hari | Janji waktu kirim untuk layanan tersebut | hari |
+| Tgl_Terima | Tanggal barang diterima penerima | tanggal |
+| Lama_Kirim_hari | Rumus: Tgl_Terima − Tgl_Pickup | hari |
+| Tepat_Waktu | Rumus: &quot;Ya&quot; bila Lama_Kirim_hari ≤ SLA_hari. OTD = porsi kiriman &quot;Ya&quot; | Ya / Tidak |
+| Ongkir_Rp | Pendapatan dari kiriman, sudah dikurangi diskon pelanggan | Rupiah |
+| Catatan_Kurir | Catatan bebas dari kurir; sering kosong | teks |
+
+## Pelanggan · 120 pelanggan, satu baris per pelanggan
+| Kolom | Arti | Satuan |
+|---|---|---|
+| Kode_Pelanggan | Kode pelanggan | teks |
+| Segmen | Jenis usaha pelanggan | teks |
+| Kota | Kota pelanggan (menentukan hub asal) | teks |
+| Jenis_Tarif | Reguler, Kontrak, atau Kontrak Proyek | teks |
+| Diskon | Potongan dari tarif dasar | % |
+| Tanggal_Bergabung | Tanggal mulai menjadi pelanggan atau mulai kontrak | tanggal |
+
+## Armada · 36 truk × 12 bulan 2025
+| Kolom | Arti | Satuan |
+|---|---|---|
+| Bulan | Bulan laporan (tanggal 1) | tanggal |
+| Truk_ID / Depo / Tahun_Pembuatan | Identitas truk, depo asal, dan tahun pembuatan | teks / tahun |
+| Jumlah_Rit / Rit_Terlambat | Jumlah perjalanan dan perjalanan yang terlambat dari jadwal | rit |
+| Km_Tempuh / Liter_Solar | Jarak tempuh dan solar yang dipakai dalam bulan itu | km / liter |
+| Harga_Solar_per_Liter | Harga solar yang dibayar perusahaan | Rupiah |
+| Biaya_Solar_Rp | Rumus: Liter_Solar × Harga_Solar_per_Liter | Rupiah |
+| Biaya_Perawatan_Rp | Biaya servis dan suku cadang bulan itu | Rupiah |
+| Hari_Tidak_Operasi | Hari truk tidak bisa jalan (rusak atau servis) | hari |
+
+## Gudang · 5 gudang × 12 bulan 2025
+| Kolom | Arti | Satuan |
+|---|---|---|
+| Kiriman_Keluar | Jumlah kiriman yang keluar dari gudang | kiriman |
+| Rata_Hari_di_Gudang | Rata-rata lama barang menginap di gudang | hari |
+| Klaim_Rusak / Nilai_Klaim_Rp | Jumlah klaim barang rusak dan nilai gantinya | klaim / Rupiah |
+| Klaim_per_1000 | Rumus: Klaim_Rusak ÷ Kiriman_Keluar × 1.000 | klaim per 1.000 kiriman |
+
+## Terminal · 2 terminal peti kemas × bulan, 2022–2025
+| Kolom | Arti | Satuan |
+|---|---|---|
+| Terminal | TPK Utara dan TPK Selatan, dua terminal peti kemas mitra di pelabuhan yang sama | teks |
+| Kunjungan_Kapal | Jumlah kapal yang sandar dalam bulan itu | kapal |
+| TEU_Total / TEU_Transshipment | Volume peti kemas; transshipment = peti kemas pindah kapal (tarif lebih rendah) | TEU |
+| Pendapatan_Rp_juta | Pendapatan layanan peti kemas | juta Rupiah |
+| BOR | Berth occupancy ratio: porsi waktu dermaga terpakai | % |
+| Waiting_Time_jam | Rata-rata waktu kapal menunggu sebelum sandar | jam |
+
+Kunci penghubung: Kiriman.Kode_Pelanggan → Pelanggan.Kode_Pelanggan.
+</pre><h4>standar-presentasi.md</h4><pre class="mdn"># Standar Presentasi · dipakai setiap menyusun slide atau laporan
+
+## 1. SIAP: empat kalimat sebelum membuat slide
+- **S · Situation**: yang sudah kita sepakati benar.
+- **I · Issue**: apa yang berubah atau rusak.
+- **A · Answer**: apa yang sebenarnya dikatakan data.
+- **P · Push**: apa yang pembaca harus lakukan, dengan pemilik dan tenggat.
+
+Jika keempat kalimat belum jelas, jangan membuat slide dulu.
+
+## 2. Pilih satu alur cerita
+| Alur | Pertanyaan pembaca | Urutan |
+|---|---|---|
+| Performance Review | Bagaimana hasil kita? | hasil vs target → pendorong selisih → yang sudah dikerjakan → yang dibutuhkan |
+| Proposal | Apa yang sebaiknya kita lakukan? | peluang/risiko → opsi → rekomendasi + alasan → biaya, waktu, keputusan |
+| Problem Solving | Apa yang salah? | apa yang terjadi (angka) → akar masalah → perbaikan + pemilik → pencegahan |
+
+## 3. Action title: empat bagian
+Subjek · kata kerja + arah (dengan angka) · bukti · so what.
+Contoh: &quot;Modern Trade turun 17% pada tiga SKU teratas — alokasi darurat Jumat.&quot;
+
+## 4. Delapan aturan deck
+1. Empat kalimat SIAP ditulis sebelum membuka aplikasi presentasi.
+2. Setiap judul slide adalah temuan, bukan label topik.
+3. Satu pesan per slide; dua poin berarti dua slide.
+4. Kesimpulan di depan, bukti menyusul (answer-first).
+5. Satu warna aksen per grafik, sisanya abu.
+6. Angka dibulatkan ke satuan tempat keputusan diambil.
+7. Sumber dan periode tercantum di slide.
+8. Ditutup dengan permintaan yang punya pemilik dan tenggat.
+
+## 5. Uji 6 detik untuk setiap slide
+1. Dari judul saja, bisakah pembaca menyebut pesannya?
+2. Bisakah mereka menemukan buktinya? Satu elemen yang menarik mata, bukan tiga.
+3. Tahukah mereka apa yang terjadi berikutnya? Implikasi atau permintaan terlihat di slide.
+
+## 6. Format draf slide dari AI
+| No | Judul (action title) | Bukti: grafik/tabel apa, dari pivot mana | Angka callout | Sumber &amp; periode |
+
+Jangan memakai angka yang belum tercatat di catatan-progres.md.
+</pre><h4>catatan-progres.md</h4><pre class="mdn"># Catatan Progres · [Peran saya]
+Diperbarui: [tanggal]
+
+## Tebakan awal (ditulis tanpa AI)
+[satu kalimat]
+
+## Angka yang sudah saya verifikasi
+| Angka | Nilai | Cara mendapat (sheet · pivot/rumus) | Dicek di Excel? |
+|---|---|---|---|
+| | | | |
+
+## Dugaan yang belum terbukti
+- 
+
+## Keputusan yang sudah saya ambil
+- 
+
+## Langkah berikutnya
+1. 
+
+---
+Cara pakai: saat percakapan dengan AI sudah panjang, mulai percakapan baru dan kirim file ini dengan pesan: &quot;Ini catatan progres saya. Lanjutkan dari Langkah berikutnya nomor 1.&quot;
+</pre><h4>pernyataan-ai.md</h4><pre class="mdn"># Pernyataan Penggunaan AI
+(Lampirkan di halaman terakhir laporan.)
+
+- **Alat**: [nama asisten AI] · dipakai pada [tanggal–tanggal]
+- **Explain · dipakai untuk**: [mis. menyusun rencana analisis, menulis langkah pivot, mengkritik judul slide]
+- **Explain · tidak dipakai untuk**: [mis. menentukan rekomendasi akhir, menulis tebakan awal]
+- **Validate · cara saya memeriksa**: [mis. setiap angka dicocokkan dengan pivot di file Excel saya; AI menyebut X, pivot menunjukkan Y, saya pakai Y]
+- **Data yang saya unggah ke AI**: [mis. hanya dataset fiktif mata kuliah; tidak ada data kantor atau data pribadi]
+- **Account**: Saya memahami dan bertanggung jawab atas setiap angka dan kesimpulan dalam laporan ini.
+</pre><h4>kamus-data-latihan.md</h4><pre class="mdn"># Kamus Data · Data Latihan · Tiket Layanan Pelanggan Nusantara Kargo 2025
+
+Data fiktif untuk latihan, tidak dinilai. Sheet Tiket: satu baris per tiket, 6.525 baris.
+
+| Kolom | Arti | Satuan |
+|---|---|---|
+| No_Tiket | Nomor tiket | teks |
+| Tgl_Masuk | Tanggal tiket masuk | tanggal |
+| Hari | Nama hari dari Tgl_Masuk | teks |
+| Kanal | Telepon (hanya hari kerja), WhatsApp, Email, Chat Aplikasi (mulai 1 Agustus 2025) | teks |
+| Kategori | Status kiriman, Keterlambatan, Barang rusak, Ubah alamat, Tagihan, Lainnya | teks |
+| Hub | Hub yang menangani kiriman: Jakarta, Surabaya, Medan, Makassar | teks |
+| Respons_menit | Menit dari tiket masuk sampai balasan pertama agen | menit |
+| Selesai_Sekali_Kontak | Ya bila masalah selesai tanpa pelanggan menghubungi lagi | Ya / Tidak |
+| Skor_Kepuasan | Survei setelah tiket ditutup, 1 (buruk) sampai 5 (sangat baik). Kosong bila pelanggan tidak mengisi | skor 1–5 |
+
+Pertanyaan direksi (latihan): Tiket keluhan pelanggan semester 2 naik sekitar 40%. Apakah layanan kita memburuk, dan apa yang harus dilakukan tim layanan pelanggan?
+</pre>
+  </div>
+</article>
+
+</main>
+
+<div id="ctl" class="js-only">
+  <button class="tb" type="button" data-act="prev" aria-label="Sebelumnya">◀</button>
+  <span class="pos" id="c-pos">1 / 1</span>
+  <span class="stepinfo"><span class="dots" id="c-dots"></span><span id="c-step"></span></span>
+  <button class="tb primary" type="button" data-act="next">Lanjut ▶</button>
+  <span class="nextup" id="c-next"></span>
+</div>
+
+<aside id="outline" hidden aria-label="Daftar slide">
+  <h3>Daftar slide <button class="tb" type="button" id="b-outline-x" aria-label="Tutup daftar">×</button></h3>
+  <div id="outline-list"></div>
+</aside>
+<div id="help" hidden role="dialog" aria-label="Pintasan keyboard">
+  <h3>Pintasan keyboard</h3>
+  <table>
+    <tr><td>→ · Spasi · klik slide</td><td>Lanjut (munculkan langkah berikutnya, lalu pindah slide)</td></tr>
+    <tr><td>← · Backspace</td><td>Mundur satu langkah</td></tr>
+    <tr><td>N</td><td>Tampilkan / sembunyikan catatan</td></tr>
+    <tr><td>F</td><td>Layar penuh (tampilan untuk mahasiswa); Esc untuk keluar</td></tr>
+    <tr><td>T · R</td><td>Mulai/jeda timer slide ini · ulang timer</td></tr>
+    <tr><td>O</td><td>Daftar slide</td></tr>
+    <tr><td>Home · End</td><td>Slide pertama · terakhir</td></tr>
+  </table>
+  <p style="margin-top:10px;font-size:13px;color:var(--muted)">Clicker presentasi (tombol Page Down / Page Up) juga bisa dipakai.</p>
+  <p style="margin-top:10px"><button class="tb" type="button" id="b-help-x">Tutup</button></p>
+</div>
+<div id="timer" role="timer" hidden title="Klik untuk jeda / lanjut"><div class="clk">0:00</div><div class="lbl"></div><button class="x" type="button" aria-label="Tutup timer">×</button></div>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function(){
+  'use strict';
+  var D=document, root=D.documentElement, body=D.body;
+  root.classList.add('js');
+  if(window.__ARTIFACT__) root.classList.add('artifact');
+  var AUD=(location.hash==='#proyektor');
+  if(AUD) body.classList.add('aud');
+  var $=function(s,c){return (c||D).querySelector(s);}, $$=function(s,c){return [].slice.call((c||D).querySelectorAll(s));};
+  var units=$$('#deck .unit'), N=units.length, cur=0, step=0, TOTAL=105;
+  var KEY='ab-ai-20261017:';
+  function sget(k){try{return window.localStorage.getItem(KEY+k);}catch(e){return null;}}
+  function sset(k,v){try{window.localStorage.setItem(KEY+k,v);}catch(e){}}
+  function sdel(k){try{window.localStorage.removeItem(KEY+k);}catch(e){}}
+  var toastEl=$('#toast'),toastT;
+  function toast(m){toastEl.textContent=m;toastEl.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){toastEl.hidden=true;},3200);}
+
+  /* ---------- blok waktu ---------- */
+  var blocks=[];
+  units.forEach(function(u,i){
+    var b=u.getAttribute('data-block');
+    if(!blocks.length||blocks[blocks.length-1].name!==b) blocks.push({name:b,first:i,last:i,from:+u.getAttribute('data-at')});
+    else blocks[blocks.length-1].last=i;
+  });
+  blocks.forEach(function(b,i){b.to=(i<blocks.length-1)?blocks[i+1].from:TOTAL;});
+  var strip=$('#strip');
+  blocks.forEach(function(b){
+    var el=D.createElement('button');el.type='button';el.style.flexGrow=String(b.to-b.from);
+    el.innerHTML='<b></b><span></span><i class="fill"></i>';
+    el.querySelector('b').textContent=b.name;
+    el.querySelector('span').textContent=b.from+'–'+b.to+'′';
+    el.title=b.name+' · menit '+b.from+'–'+b.to;
+    el.addEventListener('click',function(){go(b.first,0);});
+    b.el=el;strip.appendChild(el);
+  });
+
+  /* ---------- daftar slide ---------- */
+  var olist=$('#outline-list'), oitems=[];
+  blocks.forEach(function(b){
+    var h=D.createElement('div');h.className='blk';h.textContent=b.name+' · '+b.from+'–'+b.to+'′';olist.appendChild(h);
+    for(var i=b.first;i<=b.last;i++){(function(i){
+      var it=D.createElement('button');it.type='button';it.className='it';
+      it.innerHTML='<span></span><em></em>';
+      it.querySelector('span').textContent=(i+1)+' · '+units[i].getAttribute('data-at')+'′';
+      it.querySelector('em').textContent=units[i].getAttribute('data-title');
+      it.querySelector('em').style.fontStyle='normal';
+      it.addEventListener('click',function(){go(i,0);toggleOutline(false);});
+      olist.appendChild(it);oitems[i]=it;
+    })(i);}
+  });
+  function toggleOutline(v){var o=$('#outline');o.hidden=(v===undefined)?!o.hidden:!v;}
+  $('#b-outline').addEventListener('click',function(){toggleOutline();});
+  $('#b-outline-x').addEventListener('click',function(){toggleOutline(false);});
+  function toggleHelp(v){var h=$('#help');h.hidden=(v===undefined)?!h.hidden:!v;}
+  $('#b-help').addEventListener('click',function(){toggleHelp();});
+  $('#b-help-x').addEventListener('click',function(){toggleHelp(false);});
+
+  /* ---------- langkah ---------- */
+  function maxStep(u){var m=0;$$('[data-step]',u).forEach(function(el){m=Math.max(m,+el.getAttribute('data-step')||0);});return m;}
+  var ctl=$('#ctl');
+  function render(){
+    units.forEach(function(u,k){u.classList.toggle('cur',k===cur);});
+    var u=units[cur], mx=maxStep(u);
+    $$('[data-step]',u).forEach(function(el){el.classList.toggle('hid',+el.getAttribute('data-step')>step);});
+    if(!AUD){
+      var notes=$('.notes',u); u.insertBefore(ctl,notes);
+      $('#c-pos').textContent=(cur+1)+' / '+N;
+      var dots=$('#c-dots'); dots.innerHTML='';
+      for(var i=1;i<=mx;i++){var d=D.createElement('i');if(i<=step)d.className='on';dots.appendChild(d);}
+      $('#c-step').textContent=mx?('Langkah '+step+' dari '+mx+(step<mx?' · klik Lanjut untuk membuka berikutnya':' · semua terbuka')):'Tidak ada langkah tersembunyi';
+      var nx=$('#c-next'); nx.innerHTML='';
+      if(cur<N-1){nx.appendChild(D.createTextNode('Slide berikutnya: '));var b=D.createElement('b');b.textContent=units[cur+1].getAttribute('data-title');nx.appendChild(b);}
+      else nx.textContent='Slide terakhir';
+      blocks.forEach(function(bk){var on=cur>=bk.first&&cur<=bk.last;bk.el.classList.toggle('cur',on);
+        bk.el.querySelector('.fill').style.width=on?(((cur-bk.first+1)/(bk.last-bk.first+1))*100+'%'):'0';});
+      oitems.forEach(function(it,k){it.classList.toggle('cur',k===cur);});
+      sset('pos',cur+':'+step);
+      try{history.replaceState(null,'','#s'+(cur+1));}catch(e){}
+      updateClock(); send();
+    }
+    size();
+  }
+  function go(i,s){cur=Math.max(0,Math.min(N-1,i));step=(s==='max')?maxStep(units[cur]):(s||0);render();}
+  function next(){var mx=maxStep(units[cur]);if(step<mx){step++;render();}else if(cur<N-1){go(cur+1,0);}}
+  function prev(){if(step>0){step--;render();}else if(cur>0){go(cur-1,'max');}}
+  $('#b-next').addEventListener('click',next);$('#b-prev').addEventListener('click',prev);
+  $$('[data-act]',ctl).forEach(function(b){b.addEventListener('click',function(){b.getAttribute('data-act')==='next'?next():prev();});});
+
+  /* ---------- ukuran slide ---------- */
+  function size(){
+    var u=units[cur], f=$('.frame',u), s=$('.slide',u), W;
+    if(body.classList.contains('proj')||AUD){W=Math.min(window.innerWidth,window.innerHeight*16/9);}
+    else{
+      var avail=$('#deck').clientWidth-32, top=$('.bar').offsetHeight+(strip.offsetHeight||0);
+      var maxH=window.innerHeight-top-150;
+      W=Math.max(280,Math.min(avail,maxH*16/9));
+    }
+    f.style.width=W+'px'; s.style.fontSize=(W/50)+'px';
+  }
+  window.addEventListener('resize',size);
+
+  /* ---------- catatan ---------- */
+  var hn=$('#hn');
+  if(sget('hideNotes')==='1') hn.checked=true;
+  hn.addEventListener('change',function(){sset('hideNotes',hn.checked?'1':'0');size();});
+
+  /* ---------- layar penuh (tampilan mahasiswa) ---------- */
+  function enterProj(){body.classList.add('proj');try{var r=root.requestFullscreen&&root.requestFullscreen();if(r&&r.catch)r.catch(function(){});}catch(e){}size();}
+  function exitProj(){body.classList.remove('proj');try{if(D.fullscreenElement)D.exitFullscreen();}catch(e){}size();}
+  $('#b-proj').addEventListener('click',enterProj);
+  D.addEventListener('fullscreenchange',function(){if(!D.fullscreenElement&&body.classList.contains('proj')){body.classList.remove('proj');size();}});
+
+  /* ---------- jendela proyektor (file lokal) ---------- */
+  var aud=null;
+  function send(){if(aud&&!aud.closed){try{aud.postMessage({t:'state',i:cur,s:step},'*');}catch(e){}}}
+  $('#b-aud').addEventListener('click',function(){
+    try{aud=window.open(location.href.split('#')[0]+'#proyektor','ab_ai_proyektor','width=1280,height=720');}catch(e){aud=null;}
+    if(!aud){toast('Browser memblokir jendela baru. Izinkan pop-up, atau pakai tombol Layar penuh.');return;}
+    toast('Seret jendela proyektor ke layar proyektor, klik di dalamnya, lalu tekan F.');
+    setTimeout(function(){send();sendTimer();},800);
+  });
+  window.addEventListener('message',function(e){
+    var d=e.data||{};
+    if(AUD){
+      if(d.t==='state'){cur=d.i;step=d.s;render();}
+      if(d.t==='timer')paintRemote(d);
+    }else{
+      if(d.t==='key')handleKey({key:d.k,preventDefault:function(){}});
+      if(d.t==='hello'){if(!aud)aud=e.source;send();sendTimer();}
+    }
+  });
+
+  /* ---------- timer kegiatan ---------- */
+  var tEl=$('#timer'),tClk=$('.clk',tEl),tLbl=$('.lbl',tEl);
+  var T={total:0,left:0,label:'',on:false,done:false,iv:null,end:0};
+  function fmt(s){s=Math.max(0,Math.ceil(s));return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2);}
+  function paint(){tClk.textContent=T.done?'Waktu':fmt(T.left);tLbl.textContent=T.done?(T.label+' selesai'):T.label;
+    tEl.classList.toggle('paused',!T.on&&!T.done);tEl.classList.toggle('done',T.done);sendTimer();}
+  function sendTimer(){if(aud&&!aud.closed){try{aud.postMessage({t:'timer',vis:!tEl.hidden,clk:tClk.textContent,lbl:tLbl.textContent,paused:!T.on&&!T.done,done:T.done},'*');}catch(e){}}}
+  function paintRemote(d){tEl.hidden=!d.vis;tClk.textContent=d.clk;tLbl.textContent=d.lbl;tEl.classList.toggle('paused',d.paused);tEl.classList.toggle('done',d.done);}
+  function beep(){try{var C=window.AudioContext||window.webkitAudioContext;if(!C)return;var c=new C();
+    [0,.35,.7].forEach(function(t){var o=c.createOscillator(),g=c.createGain();o.frequency.value=880;g.gain.value=.12;o.connect(g);g.connect(c.destination);o.start(c.currentTime+t);o.stop(c.currentTime+t+.2);});}catch(e){}}
+  function tick(){T.left=(T.end-Date.now())/1000;if(T.left<=0){T.left=0;T.on=false;T.done=true;clearInterval(T.iv);beep();}paint();}
+  function start(sec,label){clearInterval(T.iv);T.total=sec;T.left=sec;T.label=label||'';T.on=true;T.done=false;T.end=Date.now()+sec*1000;tEl.hidden=false;T.iv=setInterval(tick,250);paint();}
+  function toggleT(){if(T.done||!T.total)return;if(T.on){T.on=false;clearInterval(T.iv);T.left=(T.end-Date.now())/1000;}else{T.on=true;T.end=Date.now()+T.left*1000;T.iv=setInterval(tick,250);}paint();}
+  $$('.tchip').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();if(AUD)return;start(+b.getAttribute('data-sec'),b.getAttribute('data-label'));});});
+  tEl.addEventListener('click',function(e){if(e.target.classList.contains('x')||AUD)return;toggleT();});
+  $('.x',tEl).addEventListener('click',function(e){e.stopPropagation();clearInterval(T.iv);T.on=false;T.total=0;tEl.hidden=true;sendTimer();});
+  function slideTimer(){
+    if(T.total&&!T.done&&!tEl.hidden){toggleT();return;}
+    var c=$('.tchip',units[cur]);if(c)c.click();else toast('Slide ini tidak punya timer.');}
+
+  /* ---------- jam kelas ---------- */
+  var cStart=+(sget('classStart')||0), cIv=null;
+  function updateClock(){
+    var el=$('#c-el'),bd=$('#c-badge'),bs=$('#b-class'),bx=$('#b-class-x');
+    if(!cStart){el.hidden=true;bd.hidden=true;bx.hidden=true;bs.hidden=false;return;}
+    bs.hidden=true;el.hidden=false;bd.hidden=false;bx.hidden=false;
+    var m=(Date.now()-cStart)/60000; el.textContent='Menit '+Math.floor(m)+':'+('0'+Math.floor((m%1)*60)).slice(-2);
+    var u=units[cur], plan=+u.getAttribute('data-at'), nxt=(cur<N-1)?+units[cur+1].getAttribute('data-at'):TOTAL;
+    var diff=0; if(m<plan)diff=m-plan; else if(m>nxt)diff=m-nxt;
+    if(Math.abs(diff)<1){bd.textContent='sesuai rencana';bd.classList.remove('late');}
+    else if(diff>0){bd.textContent='terlambat '+Math.round(diff)+' mnt';bd.classList.add('late');}
+    else{bd.textContent='lebih cepat '+Math.round(-diff)+' mnt';bd.classList.remove('late');}
+  }
+  function runClock(){clearInterval(cIv);if(cStart)cIv=setInterval(updateClock,1000);updateClock();}
+  $('#b-class').addEventListener('click',function(){cStart=Date.now();sset('classStart',String(cStart));runClock();toast('Jam kelas berjalan. Lencana membandingkan menit sekarang dengan rencana slide ini.');});
+  $('#b-class-x').addEventListener('click',function(){cStart=0;sdel('classStart');runClock();});
+  if(cStart&&Date.now()-cStart>4*3600000){cStart=0;sdel('classStart');}
+
+  /* ---------- klik slide & keyboard ---------- */
+  units.forEach(function(u){$('.slide',u).addEventListener('click',function(e){
+    if(e.target.closest('.tchip,.tb2'))return;
+    if(AUD){try{window.opener.postMessage({t:'key',k:'ArrowRight'},'*');}catch(x){}return;}
+    next();});});
+  function handleKey(e){
+    var k=e.key;
+    if(k==='ArrowRight'||k==='PageDown'||k===' '||k==='Enter'||k==='ArrowDown'){e.preventDefault();next();}
+    else if(k==='ArrowLeft'||k==='PageUp'||k==='ArrowUp'||k==='Backspace'){e.preventDefault();prev();}
+    else if(k==='Home'){go(0,0);}else if(k==='End'){go(N-1,0);}
+    else if(k==='n'||k==='N'){hn.checked=!hn.checked;hn.dispatchEvent(new Event('change'));}
+    else if(k==='f'||k==='F'){body.classList.contains('proj')?exitProj():enterProj();}
+    else if(k==='Escape'){if(body.classList.contains('proj'))exitProj();toggleOutline(false);toggleHelp(false);}
+    else if(k==='t'||k==='T'){slideTimer();}
+    else if(k==='r'||k==='R'){if(T.total)start(T.total,T.label);}
+    else if(k==='o'||k==='O'){toggleOutline();}
+    else if(k==='?'){toggleHelp();}
+  }
+  D.addEventListener('keydown',function(e){
+    if(e.target&&(e.target.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&e.target.id!=='hn'))return;
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    if(AUD){
+      if(e.key==='f'||e.key==='F'){try{if(!D.fullscreenElement)root.requestFullscreen();else D.exitFullscreen();}catch(x){}return;}
+      try{window.opener.postMessage({t:'key',k:e.key},'*');}catch(x){}e.preventDefault();return;
+    }
+    handleKey(e);
+  });
+
+
+  /* ---------- salin / unduh file markdown ---------- */
+  function mdText(f){var s=D.getElementById('md-'+f);return s?s.textContent:'';}
+  $$('[data-copy]').forEach(function(b){b.addEventListener('click',function(ev){ev.stopPropagation();var t=mdText(b.getAttribute('data-copy'));
+    var ok=function(){toast('Disalin: '+b.getAttribute('data-copy'));}, no=function(){toast('Browser menolak menyalin. Salin dari catatan di bawah slide.');};
+    try{navigator.clipboard.writeText(t).then(ok,no);}catch(x){no();}});});
+  $$('[data-dl]').forEach(function(b){b.addEventListener('click',function(ev){ev.stopPropagation();var f=b.getAttribute('data-dl');
+    try{var u=URL.createObjectURL(new Blob([mdText(f)],{type:'text/markdown;charset=utf-8'}));var a=D.createElement('a');a.href=u;a.download=f;D.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},1500);}
+    catch(x){toast('Unduhan diblokir di sini. Pakai ZIP di hub.');}});});
+  /* ---------- mulai ---------- */
+  var h=/^#s(\d+)$/.exec(location.hash||''), pos=(sget('pos')||'').split(':');
+  if(h&&+h[1]>=1&&+h[1]<=N)go(+h[1]-1,0);
+  else if(!AUD&&pos.length===2&&+pos[0]<N)go(+pos[0],Math.min(+pos[1]||0,maxStep(units[+pos[0]])));
+  else go(0,0);
+  runClock();
+  if(AUD){try{window.opener&&window.opener.postMessage({t:'hello'},'*');}catch(e){}}
+})();
+</script>
+</body>
+</html>

@@ -51,7 +51,7 @@ input{width:min(380px,100%);padding:13px 16px;border:1px solid var(--line);borde
 .mat{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
 .mat:first-of-type{border-top:0}
 .mat .tag{flex:0 0 auto;font-size:11px;font-weight:800;letter-spacing:.06em;color:#fff;background:var(--navy);border-radius:5px;padding:3px 7px;margin-top:2px}
-.mat .tag.excel{background:#1d6f42}.mat .tag.pdf{background:#a63d2f}
+.mat .tag.excel{background:#1d6f42}.mat .tag.pdf{background:#a63d2f}.mat .tag.zip{background:#6b4f12}
 .mat .txt{flex:1;min-width:0}
 .mat .txt a{color:var(--navy);font-weight:700;text-decoration:none}
 .mat .txt a:hover{text-decoration:underline}
@@ -150,10 +150,11 @@ function materiBlock(p){
       <div class="materi-label">Materi &amp; tugas</div>
       ${list.map(m=>{
         const jenis=String(m.jenis||'File');
-        const cls=jenis.toLowerCase()==='excel'?'excel':jenis.toLowerCase()==='pdf'?'pdf':'';
+        const j=jenis.toLowerCase();
+        const cls=j==='excel'?'excel':j==='pdf'?'pdf':j==='zip'?'zip':'';
         const href=encodeURI(m.file);
-        const isExcel=cls==='excel';
-        const main=isExcel
+        const isDownload=cls==='excel'||cls==='zip';
+        const main=isDownload
           ? `<a href="${href}" download="${esc(m.unduh||'')}">${esc(m.judul)}</a>`
           : `<a href="${href}" target="_blank" rel="noopener">${esc(m.judul)}</a>`;
         const dl=m.unduh?`<a class="dl" href="${href}" download="${esc(m.unduh)}">Unduh ↓</a>`:'';

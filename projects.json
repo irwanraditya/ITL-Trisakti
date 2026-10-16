@@ -19,6 +19,26 @@
         "jenis": "Excel",
         "file": "materi/ab/dataset-project-ab-2026.xlsx",
         "unduh": "Dataset Project AB 2026 - Nusantara Kargo.xlsx"
+      },
+      {
+        "judul": "Tutorial AI sebagai copilot project · 17 Oktober 2026",
+        "keterangan": "Alur kerja dengan AI, file markdown, hemat usage, demo laporan a–e, etika, risiko, dan tata kelola data & AI",
+        "jenis": "Slide",
+        "file": "materi/ab/tutorial-ai-copilot-17-okt-2026.html"
+      },
+      {
+        "judul": "Template markdown project (6 file)",
+        "keterangan": "instruksi-project, kamus-data, standar-presentasi, catatan-progres, pernyataan-ai, kamus-data-latihan",
+        "jenis": "ZIP",
+        "file": "materi/ab/template-markdown-project-ab.zip",
+        "unduh": "Template Markdown Project AB.zip"
+      },
+      {
+        "judul": "Data latihan tutorial AI · Tiket layanan pelanggan 2025",
+        "keterangan": "Excel, tidak dinilai: untuk mencoba alur kerja AI sebelum mengerjakan peran Anda",
+        "jenis": "Excel",
+        "file": "materi/ab/data-latihan-ai-tiket-2025.xlsx",
+        "unduh": "Data Latihan AI - Tiket Layanan Pelanggan 2025.xlsx"
       }
     ]
   },

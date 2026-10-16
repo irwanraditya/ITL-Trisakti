@@ -172,12 +172,15 @@ pada `Code.gs`.
 
 ## 📎 Materi & Tugas per Mata Kuliah
 
-Kartu mata kuliah menampilkan blok **Materi & tugas** dari kunci `materi` di `projects.json`. Setiap entri berisi `judul`, `keterangan`, `jenis` (`Slide`, `PDF`, atau `Excel`), `file` (jalur di repo), dan `unduh` (opsional: nama file saat diunduh). Slide dan PDF dibuka di tab baru; Excel langsung diunduh.
+Kartu mata kuliah menampilkan blok **Materi & tugas** dari kunci `materi` di `projects.json`. Setiap entri berisi `judul`, `keterangan`, `jenis` (`Slide`, `PDF`, `Excel`, atau `ZIP`), `file` (jalur di repo), dan `unduh` (opsional: nama file saat diunduh). Slide dan PDF dibuka di tab baru; Excel dan ZIP langsung diunduh.
 
 | Mata kuliah | Materi | File |
 |---|---|---|
 | Analitika Bisnis | Slide tatap muka 10 Oktober 2026 | `materi/ab/tatap-muka-10-okt-2026.html` |
 | Analitika Bisnis | Dataset project Nusantara Kargo 2025 (fiktif) | `materi/ab/dataset-project-ab-2026.xlsx` |
+| Analitika Bisnis | Tutorial AI sebagai copilot project (17 Oktober 2026) | `materi/ab/tutorial-ai-copilot-17-okt-2026.html` |
+| Analitika Bisnis | Template markdown project (ZIP, 6 file) | `materi/ab/template-markdown-project-ab.zip` |
+| Analitika Bisnis | Data latihan tutorial AI: tiket layanan pelanggan 2025 (fiktif, tidak dinilai) | `materi/ab/data-latihan-ai-tiket-2025.xlsx` |
 | Prinsip-Prinsip Manajemen | Tugas Kelompok Organizing & Actuating | `materi/ppm/tugas-kelompok-organizing-actuating.pdf` |
 | Prinsip-Prinsip Manajemen | Pembahasan progres minggu 1 (17 Oktober 2026) | `materi/ppm/progres-minggu-1-17-okt-2026.html` |
 
