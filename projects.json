@@ -73,5 +73,13 @@
     "description": "Deck satu semester untuk setiap mata kuliah yang memiliki tugas membuat presentasi.",
     "icon": "M",
     "filename": "Presentation Skills.html"
+  },
+  {
+    "title": "Agile untuk Manajemen Proyek",
+    "category": "Teaching",
+    "type": "Topic Deck",
+    "description": "Manifesto dan 12 prinsip Agile dibaca ulang untuk manajemen proyek umum (bukan hanya software): simulasi gedung interaktif business as usual vs proyek baru, sprint, dan CI/CD di luar software.",
+    "icon": "↻",
+    "filename": "Agile untuk Manajemen Proyek.html"
   }
 ]
