@@ -157,12 +157,19 @@ Semua diatur dari Google Sheet, tanpa mengubah repositori:
 | Lembar | Kolom | Fungsi |
 | --- | --- | --- |
 | `Kuis` | `kode`, `judul`, `durasi_menit` | Identitas kuis |
-| `Kuis` | `aktif` | `TRUE` = muncul di landing page dan bisa dikerjakan |
+| `Kuis` | `aktif` | Kotak centang. Dicentang (`TRUE`) = muncul di landing page dan bisa dikerjakan; tidak dicentang = soal tidak bisa dibuka siapa pun |
 | `Kuis` | `mata_kuliah` | Harus sama dengan judul kartu, misalnya `Analitika Bisnis` |
 | `Soal` | `kode`, `no`, `soal` | Satu baris per soal |
-| `Ringkasan` | `tanda` | Indikator untuk pertanyaan lisan |
+| `Sesi` | `status` | Log mulai per mahasiswa: `berjalan` atau `terkirim` |
+| `Jawaban` | per soal | Jawaban dan log ketikan per soal per mahasiswa |
+| `Ringkasan` | `tanda` | Log per mahasiswa per kuis; indikator untuk pertanyaan lisan |
+| `Panduan` | — | Catatan langkah membuka, menutup, dan merekap kuis (tidak dibaca sistem) |
 
 Landing page memperbarui daftar kuis setiap 60 detik.
+
+> **Menutup kuis:** hapus centang `aktif` hanya setelah semua mahasiswa terkirim. Kuis yang sudah ditutup menolak kiriman,
+> termasuk kiriman otomatis di akhir waktu. Pastikan tidak ada status `berjalan` di lembar `Sesi` untuk kode kuis itu,
+> atau tunggu durasi + 2 menit sejak mahasiswa terakhir menekan Mulai.
 
 ### Yang dicatat halaman kuis
 
