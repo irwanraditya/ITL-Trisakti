@@ -167,6 +167,19 @@ Semua diatur dari Google Sheet, tanpa mengubah repositori:
 
 Landing page memperbarui daftar kuis setiap 60 detik.
 
+#### Format teks di sel `soal`
+
+| Isi sel | Tampil di halaman kuis |
+| --- | --- |
+| Baris biasa | Teks soal (baris baru ikut tampil) |
+| Baris berturut-turut berisi ` \| ` (spasi, garis tegak, spasi) | Tabel; baris pertama menjadi judul kolom. Kolom yang isinya angka rata kanan |
+| Baris berawalan `## ` | Judul kecil tebal, misalnya judul tabel atau gambar |
+| Satu baris `<svg …>…</svg>` | Gambar. Ditampilkan sebagai gambar terpisah (`<img>`), sehingga isi SVG tidak bisa menjalankan skrip |
+| Teks **sebelum** baris `[SOAL]` | Kartu bacaan (cerita kasus, tabel, gambar) di atas kartu soal itu, tanpa kotak jawaban. Tombol **↑ Kasus** di bilah bawah kembali ke kartu ini |
+
+Cerita kasus dan gambar ikut tersembunyi selama kuis belum dicentang `aktif`, karena seluruhnya
+disimpan di Sheet dan baru dikirim API saat kuis dibuka. Jangan simpan isi ujian di repositori ini.
+
 > **Menutup kuis:** hapus centang `aktif` hanya setelah semua mahasiswa terkirim. Kuis yang sudah ditutup menolak kiriman,
 > termasuk kiriman otomatis di akhir waktu. Pastikan tidak ada status `berjalan` di lembar `Sesi` untuk kode kuis itu,
 > atau tunggu durasi + 2 menit sejak mahasiswa terakhir menekan Mulai.

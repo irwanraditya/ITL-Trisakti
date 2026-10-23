@@ -31,18 +31,26 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
 .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--navy);color:#fff;border:none;border-radius:9px;
   padding:12px 18px;font:inherit;font-weight:700;cursor:pointer;min-height:46px}
 .btn[disabled]{opacity:.55;cursor:default}
+.btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--line)}
 .note{background:#fbf6e6;border:1px solid #ecdba6;border-radius:12px;padding:14px 16px;font-size:14px;color:#5b4a12}
 .note ul{margin:8px 0 0 18px}
 .q{font-weight:650;margin-bottom:12px;-webkit-user-select:none;user-select:none}
-.q [data-q]{white-space:pre-line}   /* baris baru di sel Soal (studi kasus, tabel data) ikut tampil */
+.q [data-q],.q [data-b]{white-space:pre-line}   /* baris baru di sel Soal (studi kasus, tabel data) ikut tampil */
+/* kartu bacaan: teks sebelum baris [SOAL] (cerita kasus, tabel, gambar), tanpa kotak jawaban */
+.bacaan{border-left:4px solid var(--gold)}
+.bacaan .q{font-weight:450;margin-bottom:0}
+.q .jdl{display:block;font-weight:750;margin:10px 0 2px;white-space:normal}
+.q .gambar{margin:10px 0 12px;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;text-align:center;white-space:normal}
+.q .gambar img{max-width:100%;height:auto;display:inline-block;-webkit-user-drag:none;pointer-events:none}
 /* baris "a | b | c" di sel Soal ditampilkan sebagai tabel; baris pertama = judul kolom */
 .q .tabel{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0 12px;border:1px solid var(--line);border-radius:10px;white-space:normal}
 .q table{border-collapse:collapse;width:100%;font-size:14px;font-weight:500}
-.q th,.q td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
-.q th:first-child,.q td:first-child{text-align:left}
+.q th,.q td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.q th.num,.q td.num{text-align:right}   /* kolom angka rata kanan, kolom teks rata kiri */
 .q td{white-space:normal}
 .q th{background:#f5edcf;font-weight:700;font-size:12px;line-height:1.35}
-@media(max-width:520px){.card{padding:16px 14px}.q table{font-size:12px}.q th,.q td{padding:6px 4px}.q th{font-size:10.5px}}
+@media(max-width:520px){.card{padding:16px 14px}.q table{font-size:12px}.q th,.q td{padding:6px 4px}.q th{font-size:10.5px}
+  .q .gambar{overflow-x:auto;-webkit-overflow-scrolling:touch;text-align:left}.q .gambar img{max-width:none;width:600px}}
 .q tr:last-child td{border-bottom:none}
 .qno{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:#f5edcf;color:var(--navy);
   font-weight:900;font-size:13px;margin-right:8px;vertical-align:1px}
@@ -118,6 +126,7 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
 <div class="bar" id="bar" hidden>
   <div class="barin">
     <span class="timer" id="timer">--:--</span>
+    <button class="btn ghost" id="bKasus" hidden>↑ Kasus</button>
     <button class="btn" id="bKirim">Kirim jawaban</button>
   </div>
 </div>
@@ -220,17 +229,29 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     $('vMasuk').hidden = true; $('vKuis').hidden = false; $('bar').hidden = false;
     $('kembali').hidden = true;
     $('siapa').textContent = S.nama + ' · ' + S.nim;
-    var html = '';
+    var html = '', bagian = {};
     CFG.soal.forEach(function (q) {
-      html += '<div class="card"><p class="q"><span class="qno">' + q.no + '</span><span data-q></span></p>' +
+      bagian[q.no] = pisahBacaan(q.teks);
+      if (bagian[q.no].bacaan) {
+        html += '<div class="card bacaan" id="bc' + q.no + '"><p class="q"><span data-b="' + q.no + '"></span></p></div>';
+      }
+      html += '<div class="card"><p class="q"><span class="qno">' + q.no + '</span><span data-q="' + q.no + '"></span></p>' +
               '<textarea id="ta' + q.no + '" spellcheck="false" autocomplete="off" autocorrect="off" ' +
               'autocapitalize="sentences" aria-label="Jawaban soal ' + q.no + '"></textarea>' +
               '<p class="count" id="ct' + q.no + '">0 karakter</p></div>';
       S.soal[q.no] = { diketik: 0, tempel: 0, aktifMs: 0, fokusSejak: null };
     });
     $('daftarSoal').innerHTML = html;
-    var spans = document.querySelectorAll('[data-q]');
-    CFG.soal.forEach(function (q, i) { isiSoal(spans[i], q.teks); });
+    CFG.soal.forEach(function (q) {
+      var b = bagian[q.no];
+      if (b.bacaan) isiSoal(document.querySelector('[data-b="' + q.no + '"]'), b.bacaan);
+      isiSoal(document.querySelector('[data-q="' + q.no + '"]'), b.soal);
+    });
+    var kartuBacaan = document.querySelector('.bacaan');
+    if (kartuBacaan) {
+      $('bKasus').hidden = false;
+      $('bKasus').addEventListener('click', function () { kartuBacaan.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+    }
 
     CFG.soal.forEach(function (q) { pasang($('ta' + q.no), q.no); });
     muatDraf();
@@ -238,14 +259,44 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     detak(); S.iv = setInterval(detak, 1000);
   }
 
+  /* Teks sebelum baris "[SOAL]" di sel Soal = bacaan (cerita kasus) yang tampil sebagai kartu
+     tersendiri tanpa kotak jawaban. Sel tanpa "[SOAL]" seluruhnya soal (perilaku lama). */
+  function pisahBacaan(teks) {
+    var t = String(teks || ''), m = /(^|\n)[ \t]*\[SOAL\][ \t]*(\n|$)/.exec(t);
+    if (!m) return { bacaan: '', soal: t };
+    return { bacaan: t.slice(0, m.index).replace(/\s+$/, ''), soal: t.slice(m.index + m[0].length) };
+  }
+
+  /* Gambar: satu baris "<svg ...>...</svg>". Ditampilkan sebagai <img> data URI, jadi isi SVG
+     tidak pernah masuk ke DOM halaman dan tidak bisa menjalankan skrip. */
+  function gambarSvg(baris) {
+    var svg = baris.trim();
+    if (!/xmlns=/.test(svg)) svg = svg.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+    var fig = document.createElement('div'), img = document.createElement('img');
+    fig.className = 'gambar';
+    img.alt = (/aria-label="([^"]*)"/.exec(svg) || [0, 'Gambar'])[1];
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    img.draggable = false;
+    fig.appendChild(img);
+    return fig;
+  }
+
   /* Isi teks soal lewat DOM (bukan innerHTML). Baris berturut-turut yang memuat " | "
-     menjadi satu tabel: baris pertama judul kolom, sisanya isi. Awalan "• " dibuang. */
+     menjadi satu tabel: baris pertama judul kolom, sisanya isi. Awalan "• " dibuang.
+     Baris "## judul" = judul kecil tebal; baris "<svg ...>...</svg>" = gambar. */
   function isiSoal(el, teks) {
     var buf = [], tbody = null;
     function tulisTeks() {
       if (buf.length) { el.appendChild(document.createTextNode(buf.join('\n'))); buf = []; }
     }
     String(teks || '').split('\n').forEach(function (baris) {
+      var bt = baris.trim();
+      if (/^<svg[\s>]/i.test(bt) && /<\/svg>$/i.test(bt)) { tbody = null; tulisTeks(); el.appendChild(gambarSvg(bt)); return; }
+      if (bt.indexOf('## ') === 0) {
+        tbody = null; tulisTeks();
+        var j = document.createElement('span'); j.className = 'jdl'; j.textContent = bt.slice(3); el.appendChild(j);
+        return;
+      }
       if (baris.indexOf(' | ') === -1) { tbody = null; buf.push(baris); return; }
       var sel = baris.replace(/^\s*[•\-]\s*/, '').split('|').map(function (x) { return x.trim(); });
       var tr = document.createElement('tr');
@@ -264,6 +315,22 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
       tbody.appendChild(tr);
     });
     tulisTeks();
+    rataAngka(el);
+  }
+
+  /* Kolom yang seluruh isinya angka (1.000 · 87,4% · 40–55 menit) ditandai .num agar rata kanan. */
+  var ANGKA = /^[\s\d.,%+\-–−]*\d[\s\d.,%+\-–−]*(hari|menit|jam|kg|ton|orang)?$/i;
+  function rataAngka(el) {
+    Array.prototype.forEach.call(el.querySelectorAll('table'), function (t) {
+      var n = t.rows[0] ? t.rows[0].cells.length : 0;
+      for (var c = 1; c < n; c++) {
+        var isi = [];
+        for (var r = 1; r < t.rows.length; r++) { var sel = t.rows[r].cells[c]; if (sel && sel.textContent.trim()) isi.push(sel.textContent.trim()); }
+        if (isi.length && isi.every(function (x) { return ANGKA.test(x); })) {
+          for (var r2 = 0; r2 < t.rows.length; r2++) { if (t.rows[r2].cells[c]) t.rows[r2].cells[c].className = 'num'; }
+        }
+      }
+    });
   }
 
   function hitung(no) { $('ct' + no).textContent = $('ta' + no).value.length + ' karakter'; }
