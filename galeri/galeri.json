@@ -1,5 +1,5 @@
 {
- "diperbarui": "2026-10-04",
+ "diperbarui": "2026-10-23",
  "mata_kuliah": [
   {
    "nama": "Analitika Bisnis",
@@ -395,6 +395,13 @@
        "topik": "Turnaround time kereta api batubara di Sumatera Selatan",
        "bidang": "Perkeretaapian",
        "halaman": 4,
+       "pilihan": false
+      },
+      {
+       "id": "ab-t2-24",
+       "topik": "Tujuh kontrak freight rugi: waktu molor, biaya meleset",
+       "bidang": "Angkutan laut",
+       "halaman": 1,
        "pilihan": false
       }
      ]
