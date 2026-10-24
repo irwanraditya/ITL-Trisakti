@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Progres Minggu Kedua PPM</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Pembahasan progres minggu kedua Tugas Organizing &amp; Actuating, Prinsip-Prinsip Manajemen: data chat 17–24 Oktober 2026, sebelum presentasi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;display=swap" rel="stylesheet">
+<style>
+/* Ruang kendali dosen: satu slide 16:9 di tengah, kendali di bawahnya, catatan dosen di bawah lagi.
+   Slide memakai palet tetap brief Tugas Organizing & Actuating (kertas hangat, navy, emas) agar terbaca di proyektor;
+   bingkai di sekitarnya mengikuti tema terang/gelap. Tanpa JavaScript semua slide tampil berurutan. */
+:root{
+  --bg:#ECE8DF;--surface:#FFFFFF;--fg:#13213A;--muted:#5E6878;--line:#D6CFC1;
+  --accent:#12263F;--accent-fg:#FFFFFF;--soft:#F1ECE0;--warn:#8C6A0E;--track:#DDD6C7;
+  --s-ink:#12263F;--s-ink2:#3F4D5E;--s-paper:#F6F3EC;--s-panel:#ECE6D8;--s-card:#FFFFFF;--s-rule:#D8D0BF;
+  --s-gold:#8C6A0E;--s-gold2:#C9A227;--s-goldwash:#F3E8C8;--s-wrong:#A8442F;--s-wrongwash:#F7E6E0;--s-slate:#6F7A88;
+  --s-dark:#12263F;--s-dark2:#1C3453;--s-dline:#30496A;--s-ondark:#F2EEE4;
+  --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,monospace;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1520;--surface:#16202E;--fg:#E7E3D9;--muted:#9AA3AF;--line:#2A3647;
+  --accent:#D6B55C;--accent-fg:#1A1405;--soft:#1E2A3A;--warn:#E0B65A;--track:#243145;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1520;--surface:#16202E;--fg:#E7E3D9;--muted:#9AA3AF;--line:#2A3647;
+  --accent:#D6B55C;--accent-fg:#1A1405;--soft:#1E2A3A;--warn:#E0B65A;--track:#243145;color-scheme:dark}
+
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.5;font-size:15px}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+html:not(.js) .js-only{display:none!important}
+.js .nojs-only{display:none!important}
+.artifact .local-only{display:none!important}
+
+/* ---------- bilah atas ---------- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--surface);border-bottom:1px solid var(--line);
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:8px 16px}
+.bar .name{font-weight:600;flex:1 1 220px;min-width:0;line-height:1.25}
+.bar .name small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.tb{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--fg);
+  padding:6px 10px;border-radius:6px;font-size:13px;font-weight:500;white-space:nowrap}
+.tb:hover{border-color:var(--accent)}
+.tb.primary{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.tb kbd{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:3px;padding:0 4px}
+.tb.primary kbd{color:inherit;border-color:currentColor;opacity:.7}
+#hn:checked ~ .bar label[for="hn"] .on-txt{display:none}
+#hn:not(:checked) ~ .bar label[for="hn"] .off-txt{display:none}
+#hn:focus-visible ~ .bar label[for="hn"]{outline:2px solid var(--accent);outline-offset:2px}
+.clock{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px}
+.clock .el{font-weight:600;font-variant-numeric:tabular-nums}
+.clock .tb{font-family:var(--sans)}
+.badge{font-family:var(--sans);font-size:12px;padding:2px 8px;border-radius:20px;background:var(--soft);color:var(--accent);font-weight:600}
+.badge.late{background:rgba(140,106,14,.16);color:var(--warn)}
+
+/* ---------- peta waktu ---------- */
+.strip{display:flex;gap:3px;padding:8px 16px 0;max-width:1200px;margin:0 auto}
+.strip button{flex:1 1 0;min-width:0;border:0;background:var(--track);color:var(--muted);text-align:left;
+  padding:5px 8px;border-radius:4px;font-size:12px;line-height:1.25;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;position:relative}
+.strip button b{display:block;color:var(--fg);font-weight:600;overflow:hidden;text-overflow:ellipsis}
+.strip button.cur{background:var(--accent);color:var(--accent-fg)}
+.strip button.cur b{color:var(--accent-fg)}
+.strip button .fill{position:absolute;left:0;bottom:0;height:3px;background:var(--accent-fg);opacity:.75}
+
+/* ---------- panggung ---------- */
+main#deck{max-width:1200px;margin:0 auto;padding-block:14px 40px;padding-inline:16px}
+.unit{margin-bottom:28px}
+.js #deck .unit{display:none;margin:0}
+.js #deck .unit.cur{display:block}
+.frame{position:relative;width:100%;margin:0 auto;aspect-ratio:16/9;max-width:100%;box-shadow:0 10px 30px rgba(18,38,63,.2)}
+.slide{position:absolute;inset:0;background:var(--s-paper);color:var(--s-ink);overflow:hidden;
+  font-size:min(23.36px,calc((100vw - 32px)/50));line-height:1.42;padding:2.1em 2.7em 1.9em;display:flex;flex-direction:column}
+.js .slide{cursor:pointer}
+.slide.dark{background:var(--s-dark);color:var(--s-ondark)}
+.slide .num{position:absolute;right:2.7em;bottom:1.15em;font-family:var(--mono);font-size:.58em;letter-spacing:.12em;color:var(--s-slate)}
+.slide .foot{position:absolute;left:2.7em;bottom:1.1em;font-size:.58em;color:var(--s-slate);letter-spacing:.02em}
+.slide .foot b{color:var(--s-gold);font-weight:600}
+.unit[data-block^="Kelompok"] .slide h2{font-size:1.42em}
+.slide.dark .num,.slide.dark .foot{color:rgba(242,238,228,.55)}
+
+/* langkah yang muncul bertahap */
+.js .unit [data-step]{transition:opacity .35s ease}
+.js .unit [data-step].hid{visibility:hidden;opacity:0}
+@media (prefers-reduced-motion:reduce){.js .unit [data-step]{transition:none}}
+
+/* kendali di bawah slide */
+#ctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:12px auto 0;padding:10px 12px;background:var(--surface);
+  border:1px solid var(--line);border-radius:8px}
+#ctl .stepinfo{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+#ctl .dots{display:flex;gap:4px}
+#ctl .dots i{width:9px;height:9px;border-radius:50%;background:var(--track);display:block}
+#ctl .dots i.on{background:var(--accent)}
+#ctl .nextup{flex:1 1 240px;min-width:0;font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#ctl .nextup b{color:var(--fg);font-weight:600}
+#ctl .pos{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+
+/* catatan dosen */
+.notes{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--warn);padding:14px 18px 16px;
+  font-size:15.5px;color:var(--fg);margin-top:12px;border-radius:0 0 8px 8px}
+#hn:checked ~ #deck .notes{display:none}
+.notes .nh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-bottom:8px}
+.notes .nh b{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--warn)}
+.notes .nh .min{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:600}
+.notes p{margin:.4em 0;max-width:80ch}
+.notes h4{font-size:13px;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:.9em 0 .2em}
+.notes ul,.notes ol{margin:.4em 0 .4em 1.3em;max-width:78ch}
+.notes li{margin:.15em 0}
+.notes .say{font-style:italic;border-left:3px solid var(--warn);padding-left:10px}
+.notes .tip{background:var(--soft);padding:8px 10px;border-radius:6px}
+.notes .tablewrap{overflow-x:auto}
+.notes table{border-collapse:collapse;margin:.5em 0;font-size:14px;width:100%;max-width:860px}
+.notes th,.notes td{border-bottom:1px solid var(--line);padding:5px 10px 5px 0;text-align:left;vertical-align:top}
+.notes th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.notes td:first-child{white-space:nowrap;font-family:var(--mono);font-size:12.5px}
+
+.intro{background:var(--surface);border:1px solid var(--line);padding:14px 16px;margin-bottom:20px;border-radius:8px;font-size:15px}
+.intro b{color:var(--warn)}
+
+/* daftar slide */
+#outline{position:fixed;z-index:40;top:0;right:0;bottom:0;width:min(380px,100%);background:var(--surface);border-left:1px solid var(--line);
+  overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 14px) 16px 24px;box-shadow:-10px 0 30px rgba(0,0,0,.18)}
+#outline h3{font-size:15px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+#outline .blk{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--warn);margin:14px 0 4px}
+#outline button.it{display:flex;gap:10px;width:100%;text-align:left;background:none;border:0;color:var(--fg);padding:6px 8px;border-radius:5px;font-size:14px}
+#outline button.it:hover{background:var(--soft)}
+#outline button.it.cur{background:var(--accent);color:var(--accent-fg)}
+#outline button.it span{font-family:var(--mono);font-size:12px;min-width:3.6em;opacity:.75}
+#help{position:fixed;z-index:45;left:50%;top:50%;transform:translate(-50%,-50%);width:min(520px,calc(100% - 32px));background:var(--surface);
+  border:1px solid var(--line);border-radius:10px;padding:18px 20px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+#help h3{font-size:16px;margin-bottom:8px}
+#help table{width:100%;border-collapse:collapse;font-size:14px}
+#help td{padding:5px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+#help td:first-child{font-family:var(--mono);white-space:nowrap;color:var(--warn);width:9em}
+#toast{position:fixed;z-index:50;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 20px);transform:translateX(-50%);background:var(--fg);color:var(--bg);
+  padding:8px 14px;border-radius:6px;font-size:14px;max-width:calc(100% - 32px)}
+
+/* ---------- tipografi slide ---------- */
+.eyebrow{font-family:var(--mono);font-size:.62em;letter-spacing:.16em;text-transform:uppercase;color:var(--s-gold);margin-bottom:.7em;font-weight:500}
+.dark .eyebrow{color:var(--s-gold2)}
+h1.display{font-family:var(--serif);font-weight:500;font-size:2.55em;line-height:1.1;letter-spacing:-.01em;text-wrap:balance}
+.slide h2{font-family:var(--serif);font-size:1.5em;line-height:1.18;font-weight:600;margin-bottom:.6em;text-wrap:balance;letter-spacing:-.005em}
+.slide h3{font-size:.92em;font-weight:600;margin-bottom:.2em}
+.lede{font-size:1em;color:#C9D2DD;margin-top:.9em;max-width:50ch}
+.center{justify-content:center}
+.small{font-size:.78em}
+.grow{flex:1;min-height:0}
+
+/* status indikator: bentuk + warna, tidak bergantung pada warna saja */
+.st{display:inline-block;width:.95em;height:.95em;border-radius:50%;flex:none;vertical-align:-.12em}
+.st.S{background:var(--s-ink)}
+.st.M{border:.14em solid var(--s-gold);background:linear-gradient(90deg,var(--s-gold) 0 50%,transparent 50% 100%)}
+.st.B{border:.14em solid var(--s-wrong);background:transparent}
+.st.N{height:.95em;border-radius:0;background:linear-gradient(transparent 0 42%,var(--s-slate) 42% 58%,transparent 58%)}
+.legend{display:flex;flex-wrap:wrap;gap:.35em 1.2em;font-size:.66em;color:var(--s-ink2);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:.45em}
+
+/* baris status satu kelompok */
+.srow{display:flex;flex-wrap:wrap;gap:.35em;margin:-.15em 0 .75em}
+.chip{display:inline-flex;align-items:center;gap:.45em;font-size:.6em;font-family:var(--mono);letter-spacing:.02em;
+  background:var(--s-card);border:1px solid var(--s-rule);padding:.28em .65em .28em .5em;color:var(--s-ink2)}
+.chip .st{width:1.05em;height:1.05em}
+
+/* linimasa kejadian */
+.ga{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(0,1fr);gap:1.3em;flex:1;min-height:0}
+.tl{display:flex;flex-direction:column;gap:.38em}
+.ev{display:grid;grid-template-columns:5.9em 1.15em minmax(0,1fr);gap:.55em;align-items:start}
+.ev .d{font-family:var(--mono);font-size:.6em;color:var(--s-slate);padding-top:.45em;letter-spacing:.02em;white-space:nowrap}
+.ev p{font-size:.76em;line-height:1.36;color:var(--s-ink)}
+.ic{width:1.15em;height:1.15em;border-radius:50%;position:relative;margin-top:.12em;display:block}
+.ic::after{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-family:var(--sans);font-size:.72em;line-height:1}
+.ic.ok{background:var(--s-ink)}
+.ic.ok::after{content:"";inset:auto;left:.4em;top:.2em;width:.26em;height:.52em;border:solid #fff;border-width:0 .13em .13em 0;transform:rotate(45deg)}
+.ic.warn{background:var(--s-gold)}.ic.warn::after{content:"!"}
+.ic.miss{background:var(--s-wrong)}.ic.miss::after{content:"\00D7";font-size:.95em}
+.ic.plan{border:.12em dashed var(--s-slate);background:transparent}
+.ev.plan p{color:var(--s-ink2);font-style:italic}
+
+/* pertanyaan untuk kelompok */
+.qcol{display:flex;flex-direction:column;gap:.6em}
+.qcol .lab{font-family:var(--mono);font-size:.58em;letter-spacing:.14em;text-transform:uppercase;color:var(--s-slate)}
+.q{background:var(--s-card);border-left:.22em solid var(--s-gold);padding:.55em .8em .6em}
+.q .who{display:inline-block;font-family:var(--mono);font-size:.56em;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--s-ink);padding:.15em .5em;margin-bottom:.4em}
+.q p{font-size:.8em;line-height:1.36}
+.flowmini{display:flex;gap:.3em;font-family:var(--mono);font-size:.56em;color:var(--s-ink2);flex-wrap:wrap}
+.flowmini span{background:var(--s-panel);padding:.2em .5em}
+.flowmini b{color:var(--s-gold)}
+
+/* umpan balik tiga kolom */
+.fb{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8em;flex:0 0 auto}
+.fb .col{background:var(--s-card);border-top:.22em solid var(--s-ink);padding:.6em .8em .7em}
+.fb .col.fix{border-top-color:var(--s-wrong)}
+.fb .col.tip{border-top-color:var(--s-gold)}
+.fb .col h3{font-family:var(--mono);font-size:.6em;letter-spacing:.14em;text-transform:uppercase;color:var(--s-ink);margin-bottom:.5em;font-weight:600}
+.fb .col.fix h3{color:var(--s-wrong)}
+.fb .col.tip h3{color:var(--s-gold)}
+.fb ul{list-style:none;display:flex;flex-direction:column;gap:.45em}
+.fb li{font-size:.72em;line-height:1.36;padding-left:.95em;position:relative;color:var(--s-ink)}
+.fb li::before{content:"";position:absolute;left:0;top:.55em;width:.42em;height:.42em;background:var(--s-ink)}
+.fb .fix li::before{background:var(--s-wrong)}
+.fb .tip li::before{background:var(--s-gold)}
+.bot{margin-top:auto;padding-top:.7em;padding-bottom:.9em}
+.bubble{background:var(--s-card);border:1px solid var(--s-rule);border-radius:.55em .55em .55em .1em;padding:.5em .85em .55em;position:relative}
+.bubble .h{display:flex;gap:.7em;align-items:baseline;font-family:var(--mono);font-size:.55em;letter-spacing:.06em;margin-bottom:.25em}
+.bubble .h b{color:var(--s-gold);text-transform:uppercase;letter-spacing:.1em}
+.bubble .h span{color:var(--s-slate)}
+.bubble .h i{color:var(--s-slate);font-style:italic;margin-left:auto;letter-spacing:0}
+.bubble p{font-size:.72em;line-height:1.38;font-family:var(--serif)}
+.bubble p + p{margin-top:.1em}
+.blab{font-family:var(--mono);font-size:.55em;letter-spacing:.14em;text-transform:uppercase;color:var(--s-slate);margin-bottom:.3em}
+.commit{background:var(--s-ink);color:var(--s-ondark);padding:.55em .8em;font-size:.66em;line-height:1.38}
+.commit b{color:var(--s-gold2);display:block;font-family:var(--mono);font-size:.82em;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.2em}
+
+/* potret kelas */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8em;margin-top:.3em}
+.stat{background:var(--s-card);border-top:.22em solid var(--s-ink);padding:.75em .9em .85em}
+.stat.lo{border-top-color:var(--s-gold)}
+.stat .v{font-family:var(--serif);font-size:2.5em;font-weight:500;line-height:1;font-variant-numeric:tabular-nums;color:var(--s-ink)}
+.stat .v small{font-size:.42em;color:var(--s-slate);font-family:var(--sans);font-weight:500;margin-left:.15em}
+.stat .l{font-size:.74em;color:var(--s-ink2);margin-top:.45em;line-height:1.35}
+.stat .k{font-family:var(--mono);font-size:.54em;letter-spacing:.12em;text-transform:uppercase;color:var(--s-slate);margin-bottom:.5em}
+.say-line{margin-top:1.1em;font-family:var(--serif);font-size:1.12em;line-height:1.3;max-width:44ch}
+
+table.mx{border-collapse:collapse;width:100%;font-size:.72em;margin-top:.2em}
+table.mx th{font-family:var(--mono);font-size:.74em;letter-spacing:.06em;color:var(--s-slate);font-weight:500;text-align:center;padding:0 .3em .45em;vertical-align:bottom;line-height:1.25}
+table.mx th.grp{font-size:.72em;letter-spacing:.14em;text-transform:uppercase;color:var(--s-gold);padding-bottom:.2em;border-bottom:1px solid var(--s-rule)}
+table.mx th:first-child,table.mx td:first-child{text-align:left}
+table.mx thead tr:last-child th{border-bottom:2px solid var(--s-ink)}
+table.mx td{padding:.36em .3em;border-bottom:1px solid var(--s-rule);text-align:center;vertical-align:middle}
+table.mx td:first-child b{font-weight:600}
+table.mx td:first-child{white-space:nowrap}
+table.mx td:first-child span{color:var(--s-ink2);margin-left:.5em}
+table.mx td .st{width:1.15em;height:1.15em}
+table.mx td.sep,table.mx th.sep{border-left:1px solid var(--s-rule)}
+
+/* linimasa fase */
+.days{display:grid;grid-template-columns:repeat(13,minmax(0,1fr)) 1.6fr;gap:3px;margin-top:.6em}
+.dy{background:var(--s-panel);padding:.45em .2em .5em;text-align:center;position:relative}
+.dy b{display:block;font-family:var(--mono);font-size:.62em;color:var(--s-slate);font-weight:500}
+.dy span{display:block;font-size:.7em;font-weight:600;color:var(--s-ink);margin-top:.1em}
+.dy.f2{background:var(--s-goldwash)}
+.dy.f3{background:#DCE2EA}
+.dy.done{opacity:.55}
+.dy.today{background:var(--s-ink)}
+.dy.today b,.dy.today span{color:#fff}
+.dy.pres{background:var(--s-dark2)}
+.dy.pres span,.dy.pres b{color:#fff}
+.phs{display:grid;grid-template-columns:3fr 7fr 3fr 1.6fr;gap:3px;margin-top:3px}
+.phs div{font-family:var(--mono);font-size:.58em;letter-spacing:.1em;text-transform:uppercase;padding:.3em .5em;color:var(--s-ink2);border-top:2px solid var(--s-rule)}
+.phs .f2{border-top-color:var(--s-gold);color:var(--s-gold)}
+.marks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8em;margin-top:1.2em}
+.mk{background:var(--s-card);padding:.65em .85em;border-left:.22em solid var(--s-ink)}
+.mk.hot{border-left-color:var(--s-gold)}
+.mk .t{font-family:var(--mono);font-size:.58em;letter-spacing:.1em;text-transform:uppercase;color:var(--s-slate)}
+.mk p{font-size:.8em;margin-top:.2em;line-height:1.35}
+
+/* cara membahas */
+.steps4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7em;margin-top:.2em}
+.s4{background:var(--s-card);padding:.75em .9em .85em;border-top:.22em solid var(--s-ink)}
+.s4 .m{font-family:var(--mono);font-size:.6em;color:var(--s-gold);letter-spacing:.08em}
+.s4 h3{font-family:var(--serif);font-size:1.15em;font-weight:600;margin:.15em 0 .3em}
+.s4 p{font-size:.72em;color:var(--s-ink2);line-height:1.38}
+.rules2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8em;margin-top:1em}
+.rule{border:1px dashed var(--s-rule);padding:.6em .85em;font-size:.76em;line-height:1.38;background:rgba(255,255,255,.5)}
+.rule b{color:var(--s-gold)}
+
+/* pola kelas */
+.cards3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7em}
+.hb{background:var(--s-card);padding:.65em .85em .7em;border-top:.22em solid var(--s-ink);display:flex;flex-direction:column}
+.hb h3{font-size:.84em;line-height:1.25;margin-bottom:.3em}
+.hb p{font-size:.7em;color:var(--s-ink2);line-height:1.38;flex:1}
+.hb .who{font-family:var(--mono);font-size:.56em;color:var(--s-gold);letter-spacing:.08em;margin-top:.45em}
+.traps{display:flex;flex-direction:column;gap:.45em}
+.trap{display:grid;grid-template-columns:4.6em minmax(0,13em) minmax(0,1fr);gap:1em;align-items:center;background:var(--s-card);padding:.5em .9em}
+.trap .n{font-family:var(--serif);font-size:1.55em;font-weight:500;line-height:1;color:var(--s-wrong)}
+.trap .n small{font-family:var(--sans);font-size:.4em;color:var(--s-slate);display:block;margin-top:.2em;line-height:1.2}
+.trap h3{font-size:.84em;margin:0}
+.trap p{font-size:.74em;color:var(--s-ink2);line-height:1.36}
+.myth{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:.4em 1.4em;align-items:start}
+.myth .x{font-family:var(--serif);font-size:1.12em;line-height:1.3;color:var(--s-ink2);text-decoration:line-through;text-decoration-color:var(--s-wrong);text-decoration-thickness:.07em;padding:.55em 0;border-bottom:1px solid var(--s-rule)}
+.myth .y{font-size:.86em;line-height:1.42;padding:.65em 0;border-bottom:1px solid var(--s-rule)}
+.myth .y b{color:var(--s-ink)}
+
+/* penutup */
+.checklist{display:flex;flex-direction:column;gap:.5em;max-width:48em}
+.checklist div{display:grid;grid-template-columns:2.1em minmax(0,1fr);gap:.8em;align-items:baseline;font-size:.9em;border-bottom:1px solid var(--s-rule);padding-bottom:.45em}
+.checklist div i{font-style:normal;font-family:var(--mono);font-weight:600;color:var(--s-gold)}
+.checklist div small{color:var(--s-ink2);font-size:.82em;display:block;line-height:1.35}
+.wa{background:#fff;border:1px solid var(--s-rule);border-radius:.6em .6em .6em .12em;padding:.8em 1.1em;max-width:30em;font-family:var(--mono);font-size:.82em;line-height:1.55;color:var(--s-ink)}
+.wa .h{font-size:.72em;color:var(--s-gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3em;font-weight:600}
+.wa em{font-style:normal;color:var(--s-slate)}
+.split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:1.6em;align-items:start}
+.pointer{font-size:.84em;line-height:1.45;color:var(--s-ink2)}
+.pointer p+p{margin-top:.6em}
+.pointer b{color:var(--s-ink)}
+
+/* timer */
+.tchip{font-family:var(--mono);font-size:.62em;font-weight:600;border:1px solid var(--s-gold);color:var(--s-gold);background:#fff;padding:.3em .8em;border-radius:2em;align-self:flex-start}
+.dark .tchip{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.tchip:hover{background:var(--s-gold);color:#fff}
+html:not(.js) .tchip{display:none}
+#timer{position:fixed;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:35;display:flex;align-items:center;gap:10px;
+  background:#12263F;color:#fff;padding:10px 14px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-family:var(--mono);cursor:pointer;user-select:none}
+#timer .clk{font-size:30px;font-weight:600;min-width:3.2em;text-align:center;font-variant-numeric:tabular-nums}
+#timer .lbl{font-size:11px;color:#C9D2DD;max-width:9em;line-height:1.3}
+#timer.paused .clk{opacity:.55}
+#timer.done{background:#8C6A0E}
+#timer .x{background:none;border:0;color:#fff;font-size:20px;padding:0 0 0 4px}
+.proj #timer .clk,.aud #timer .clk{font-size:46px}
+
+/* ---------- layar proyektor ---------- */
+.proj,.aud{background:#000}
+.proj .bar,.proj .strip,.proj #ctl,.proj .notes,.proj .intro,.proj #outline,
+.aud .bar,.aud .strip,.aud #ctl,.aud .notes,.aud .intro,.aud #outline{display:none!important}
+.proj main#deck,.aud main#deck{max-width:none;padding:0}
+.proj #deck .unit.cur,.aud #deck .unit.cur{display:flex;align-items:center;justify-content:center;height:100vh}
+.proj .frame,.aud .frame{box-shadow:none}
+
+@media (max-width:700px){.bar .name{flex-basis:100%}.tb .lbl-long{display:none}}
+@media print{
+  @page{size:A4 landscape;margin:8mm}
+  body{background:#fff;color:#000}
+  .bar,.strip,#ctl,#timer,#outline,#help,#toast,.intro{display:none!important}
+  main#deck{max-width:none;padding:0}
+  .js #deck .unit{display:block!important;margin-bottom:6mm;break-inside:avoid;page-break-inside:avoid}
+  .js .unit [data-step].hid{visibility:visible;opacity:1}
+  .frame{box-shadow:none;border:1px solid #ccc;width:100%!important}
+  .slide{font-size:12.4px!important}
+  .notes{display:none!important}
+}
+
+/* tambahan minggu kedua: penanda perubahan dan tabel saran */
+.chg{display:inline-block;font-family:var(--mono);font-size:.62em;margin-left:.3em;vertical-align:.18em;line-height:1}
+.chg.up{color:var(--s-ink)}
+.chg.dn{color:var(--s-wrong)}
+.chip .chg{font-size:.9em;margin-left:.1em}
+table.ct{border-collapse:collapse;width:100%;font-size:.64em;margin-top:.1em}
+table.ct th{font-family:var(--mono);font-size:.8em;letter-spacing:.08em;text-transform:uppercase;color:var(--s-slate);font-weight:500;text-align:left;padding:0 .6em .4em 0;border-bottom:2px solid var(--s-ink)}
+table.ct td{padding:.34em .6em .34em 0;border-bottom:1px solid var(--s-rule);vertical-align:top;line-height:1.3;color:var(--s-ink)}
+table.ct td:first-child{white-space:nowrap;font-weight:600}
+table.ct td.s,table.ct th.s{width:1.6em;padding-right:.4em}
+table.ct td.s .ic{margin-top:0}
+.legend .ic{display:inline-block;width:1em;height:1em;margin-top:0}
+</style>
+</head>
+<body>
+<input type="checkbox" id="hn" class="sr" aria-label="Sembunyikan catatan dosen">
+
+<header class="bar">
+  <div class="name">Progres minggu kedua · Tugas Organizing &amp; Actuating<small>Prinsip-Prinsip Manajemen · pembahasan sebelum presentasi · 100 menit · data chat 17–24 Okt 2026</small></div>
+  <button class="tb js-only" type="button" id="b-prev" aria-label="Langkah sebelumnya">◀</button>
+  <button class="tb primary js-only" type="button" id="b-next">Lanjut <kbd>→</kbd></button>
+  <label class="tb" for="hn"><span class="on-txt">Sembunyikan catatan</span><span class="off-txt">Tampilkan catatan</span> <kbd class="js-only">N</kbd></label>
+  <button class="tb js-only" type="button" id="b-outline"><span class="lbl-long">Daftar slide</span><span aria-hidden="true">☰</span> <kbd>O</kbd></button>
+  <button class="tb js-only" type="button" id="b-proj">Layar penuh <kbd>F</kbd></button>
+  <button class="tb js-only local-only" type="button" id="b-aud">Jendela proyektor</button>
+  <span class="clock js-only"><button class="tb" type="button" id="b-class">Mulai jam kelas</button><span class="el" id="c-el" hidden></span><span class="badge" id="c-badge" hidden></span><button class="tb" type="button" id="b-class-x" hidden aria-label="Reset jam kelas">×</button></span>
+  <button class="tb js-only" type="button" id="b-help" aria-label="Pintasan keyboard">?</button>
+</header>
+<nav class="strip js-only" id="strip" aria-label="Peta waktu pertemuan"></nav>
+
+<main id="deck">
+  <div class="intro nojs-only">
+    <b>Tampilan statis.</b> Skrip tidak berjalan di pratinjau ini, jadi semua slide dan catatan tampil berurutan.
+    Buka file ini di Chrome atau Edge untuk mode interaktif: slide satu per satu, pertanyaan muncul bertahap, timer per kelompok, jam kelas, dan layar penuh.
+  </div>
+<article class="unit" data-title="Sampul" data-block="Pembuka" data-at="0">
+  <div class="frame"><section class="slide dark center">
+    <div class="eyebrow">Prinsip-Prinsip Manajemen · Tugas Organizing &amp; Actuating · Pembahasan minggu kedua</div>
+    <h1 class="display">Dua minggu menjadi organisasi:<br>apa yang berubah sejak 17 Oktober</h1>
+    <p class="lede">Delapan kelompok, satu per satu. Minggu lalu Anda membagi tugas. Minggu ini kita lihat siapa yang menagih, menolong, memutuskan, dan merekap.</p>
+    <span class="num">01</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 0–1</span></div>
+    <p class="say">“Minggu lalu kita membaca rencana Anda. Hari ini kita membaca pelaksanaannya: Fase 2 dan Fase 3, dari chat grup Anda sendiri. Ini juga latihan untuk Bagian 2 presentasi, ‘Membaca chat kami’.”</p>
+    <p class="tip">Data diambil dari ekspor chat Sabtu, 24 Oktober 2026 sekitar pukul 20.00. Fokus minggu kedua: Sabtu 17 Okt sampai Sabtu 24 Okt. Status minggu pertama (16 Okt 18.00) dipakai sebagai pembanding.</p>
+    <p>Halaman ini juga dibagikan di hub. Isinya hanya memakai nomor kelompok dan nama peran, tanpa nama, NIM, atau nomor telepon.</p></div>
+</article>
+<article class="unit" data-title="Cara kita membahas" data-block="Pembuka" data-at="1">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Aturan sesi</div>
+    <h2>Setiap kelompok: delapan menit, empat langkah yang sama</h2>
+    <div class="steps4">
+      <div class="s4"><span class="m">1 menit</span><h3>Lihat</h3><p>Dosen membacakan yang berubah sejak 17 Oktober dan status enam indikator.</p></div>
+      <div class="s4"><span class="m">2 menit</span><h3>Jawab</h3><p>Dua pertanyaan. Yang menjawab peran yang disebut di slide, bukan selalu koordinator.</p></div>
+      <div class="s4"><span class="m">3 menit</span><h3>Umpan balik</h3><p>Sudah baik · Perlu diperbaiki · Saran. Format yang sama dengan Pemberi Umpan Balik di grup.</p></div>
+      <div class="s4"><span class="m">2 menit</span><h3>Komitmen</h3><p>Satu atau dua langkah sebelum presentasi, dengan siapa–apa–kapan. Ditulis di grup.</p></div>
+    </div>
+    <div class="rules2">
+      <div class="rule"><b>Yang dibahas pesannya, bukan orangnya.</b> Status di slide bukan nilai; skor 1–4 per indikator dihitung dari seluruh chat sampai presentasi.</div>
+      <div class="rule"><b>Momen yang kurang baik itu bahan wajib.</b> Bagian 2 presentasi meminta satu momen yang tidak berjalan baik, dan apa yang Anda lakukan sesudahnya.</div>
+    </div>
+    <span class="num">02</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 1–3</span></div>
+    <p class="say">“Formatnya sama dengan minggu lalu, tetapi lebih ringkas: delapan menit per kelompok. Saya tetap menyebut peran, bukan nama.”</p>
+    <h4>Rencana waktu (100 menit)</h4>
+    <div class="tablewrap"><table>
+      <tr><th>Menit</th><th>Blok</th><th>Catatan</th></tr>
+      <tr><td>0–12</td><td>Pembuka: posisi kita, potret kelas, komitmen minggu lalu</td><td>Jangan bahas kelompok tertentu dulu</td></tr>
+      <tr><td>12–44</td><td>Kelompok 1–4 (8 menit per kelompok)</td><td>Tekan T di slide pertama tiap kelompok untuk timer 8 menit</td></tr>
+      <tr><td>44–47</td><td>Jeda</td><td>Kelompok 1–4 menulis komitmen</td></tr>
+      <tr><td>47–79</td><td>Kelompok 5–8</td><td>Sama</td></tr>
+      <tr><td>79–87</td><td>Pola kelas: ditiru, jebakan, yang terbaca keliru</td><td>Jebakan hanya menyebut jumlah kelompok</td></tr>
+      <tr><td>87–100</td><td>Daftar cek sebelum presentasi, menulis komitmen, penutup</td><td>5 menit hening untuk mengetik</td></tr>
+    </table></div>
+    <p class="tip"><b>Kalau hanya 75 menit:</b> 6 menit per kelompok (1 · 2 · 2 · 1), tanpa jeda; pola kelas cukup slide jebakan, dan komitmen ditulis di rumah malam itu.</p></div>
+</article>
+<article class="unit" data-title="Posisi kita: setelah Hari 13" data-block="Pembuka" data-at="3">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Posisi kita</div>
+    <h2>Ketiga fase sudah ditutup; yang tersisa presentasi</h2>
+    <div class="days"><div class="dy f1 done"><b>H1</b><span>Sab 10</span></div><div class="dy f1 done"><b>H2</b><span>Min 11</span></div><div class="dy f1 done"><b>H3</b><span>Sen 12</span></div><div class="dy f2 done"><b>H4</b><span>Sel 13</span></div><div class="dy f2 done"><b>H5</b><span>Rab 14</span></div><div class="dy f2 done"><b>H6</b><span>Kam 15</span></div><div class="dy f2 done"><b>H7</b><span>Jum 16</span></div><div class="dy f2 done"><b>H8</b><span>Sab 17</span></div><div class="dy f2 done"><b>H9</b><span>Min 18</span></div><div class="dy f2 done"><b>H10</b><span>Sen 19</span></div><div class="dy f3 done"><b>H11</b><span>Sel 20</span></div><div class="dy f3 done"><b>H12</b><span>Rab 21</span></div><div class="dy f3 done"><b>H13</b><span>Kam 22</span></div><div class="dy today"><b>Berikutnya</b><span>Presentasi</span></div></div>
+    <div class="phs"><div>Fase 1 · Rencana</div><div>Fase 2 · Pengerjaan</div><div>Fase 3 · Finalisasi</div><div class="f2">Presentasi</div></div>
+    <div class="marks">
+      <div class="mk"><span class="t">Sudah lewat · Senin 19 Okt · Hari 10</span><p>Fase 2 ditutup: draf setiap PIC masuk grup, Rekap Fase 2 dikirim.</p></div>
+      <div class="mk"><span class="t">Sudah lewat · Kamis 22 Okt · Hari 13</span><p>Fase 3 ditutup: slide disatukan, latihan, potongan chat dipilih, Rekap Fase 3.</p></div>
+      <div class="mk hot"><span class="t">Sekarang · sebelum presentasi</span><p>Rekap yang jujur, tiga potongan chat, latihan dengan penyaji yang diacak.</p></div>
+    </div>
+    <span class="foot">Data: ekspor chat grup sampai Sabtu, 24 Oktober 2026 pukul 20.00</span><span class="num">03</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 3–5</span></div>
+    <p class="say">“Secara jadwal, pengerjaan sudah selesai. Penilaian koordinasi tetap berjalan sampai presentasi, jadi yang Anda tulis di grup setelah hari ini masih dihitung.”</p>
+    <p>Hari dihitung dari Hari 1 = Sabtu 10 Oktober: Fase 1 = Hari 1–3, Fase 2 = Hari 4–10 (13–19 Okt), Fase 3 = Hari 11–13 (20–22 Okt). Presentasi setelah UTS.</p>
+    <p class="tip">Dua kelompok memakai jadwal sendiri (Fase 3 sampai 23 Okt). Tidak perlu dipersoalkan di sini; yang dinilai adalah apakah tenggat yang mereka tetapkan sendiri dicek.</p></div>
+</article>
+<article class="unit" data-title="Potret kelas: angka" data-block="Pembuka" data-at="5">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Potret kelas · delapan kelompok · sampai 24 Oktober</div>
+    <h2>Menagih sudah berjalan; menutup fase dengan rekap belum</h2>
+    <div class="stats">
+      <div class="stat"><div class="k">Tindak lanjut</div><div class="v">5<small>/ 8</small></div><div class="l">kelompok dengan Pengingat Tenggat yang bekerja (minggu lalu 3)</div></div>
+      <div class="stat"><div class="k">Informasi sampai</div><div class="v">5<small>/ 8</small></div><div class="l">kelompok mengirim Rekap Fase 2; hanya 2 di hari penutupan</div></div>
+      <div class="stat lo"><div class="k">Informasi sampai</div><div class="v">3<small>/ 8</small></div><div class="l">kelompok mengirim Rekap Fase 3</div></div>
+      <div class="stat lo"><div class="k">Siap presentasi</div><div class="v">1<small>/ 8</small></div><div class="l">kelompok mencatat latihan bersama di grup</div></div>
+    </div>
+    <p class="say-line">Organisasi Anda sudah bergerak. Yang tertinggal: menutup dengan rekap yang jujur dan bersiap tampil.</p>
+    <span class="foot">Data: ekspor chat grup sampai Sabtu, 24 Oktober 2026 pukul 20.00</span><span class="num">04</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 5–7</span></div>
+    <p class="say">“Kabar baiknya: Pengingat Tenggat sekarang bekerja di lima kelompok, naik dari tiga. Kabar kurangnya: baru tiga kelompok menutup Fase 3 dengan rekap, dan baru satu yang mencatat latihan.”</p>
+    <h4>Cara menghitung</h4>
+    <ul>
+      <li><b>Pengingat Tenggat bekerja:</b> pemegang peran sendiri yang menagih atau mengecek tenggat minggu ini (Kel. 1, 2, 4, 7, 8).</li>
+      <li><b>Rekap Fase 2:</b> pesan atau lampiran berlabel Rekap Fase 2 setelah Fase 2 berjalan (Kel. 2, 4, 5, 7, 8). Di hari penutupan 19 Okt: Kel. 4 dan 5. Rekap tengah fase 14 Okt (Kel. 3) tidak dihitung.</li>
+      <li><b>Rekap Fase 3:</b> Kel. 4, 5, 7.</li>
+      <li><b>Latihan tercatat:</b> latihan disebut sudah terjadi di grup (Kel. 4, lewat Rekap Fase 3). Kel. 2, 6, 7 baru merencanakan.</li>
+      <li>Potongan chat untuk Bagian 2 sudah dipilih di grup: Kel. 4 dan 7. Kel. 2 sudah memberi instruksi.</li>
+    </ul></div>
+</article>
+<article class="unit" data-title="Potret kelas: enam indikator" data-block="Pembuka" data-at="7">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Potret kelas · status, bukan nilai</div>
+    <h2>Tindak lanjut naik di lima kelompok; informasi belum ikut naik</h2>
+    <table class="mx">
+      <thead>
+        <tr><th></th><th class="grp" colspan="3">Organizing</th><th class="grp sep" colspan="3">Actuating</th></tr>
+        <tr><th>Kelompok</th><th>Pembagian tugas</th><th>Wewenang</th><th>Tenggat antara</th><th class="sep">Tindak lanjut</th><th>Beda pendapat</th><th>Informasi sampai</th></tr>
+      </thead>
+      <tbody><tr><td><b>Kel. 1</b><span>Posko arus mudik Lebaran</span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class="sep"><span class="st M" role="img" aria-label="Mulai terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class=""><span class="st M" role="img" aria-label="Mulai terlihat"></span><span class="chg dn" role="img" aria-label="turun dari minggu pertama">▼</span></td></tr><tr><td><b>Kel. 2</b><span>Gudang e-commerce saat promo besar</span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class="sep"><span class="st M" role="img" aria-label="Mulai terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class=""><span class="st N" role="img" aria-label="Belum ada momen"></span></td><td class=""><span class="st M" role="img" aria-label="Mulai terlihat"></span><span class="chg dn" role="img" aria-label="turun dari minggu pertama">▼</span></td></tr><tr><td><b>Kel. 3</b><span>Struktur organisasi BUMN transportasi</span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class="sep"><span class="st S" role="img" aria-label="Sudah terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class=""><span class="st M" role="img" aria-label="Mulai terlihat"></span></td><td class=""><span class="st M" role="img" aria-label="Mulai terlihat"></span></td></tr><tr><td><b>Kel. 4</b><span>Mitra ojek dan kurir online</span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class="sep"><span class="st S" role="img" aria-label="Sudah terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td></tr><tr><td><b>Kel. 5</b><span>Tujuh hari pertama karyawan baru</span></td><td class=""><span class="st M" role="img" aria-label="Mulai terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class=""><span class="st B" role="img" aria-label="Belum terlihat"></span></td><td class="sep"><span class="st M" role="img" aria-label="Mulai terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td></tr><tr><td><b>Kel. 6</b><span>Ketika layanan transportasi terganggu</span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class=""><span class="st M" role="img" aria-label="Mulai terlihat"></span><span class="chg dn" role="img" aria-label="turun dari minggu pertama">▼</span></td><td class="sep"><span class="st M" role="img" aria-label="Mulai terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class=""><span class="st M" role="img" aria-label="Mulai terlihat"></span></td></tr><tr><td><b>Kel. 7</b><span>Panitia acara kampus</span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class="sep"><span class="st M" role="img" aria-label="Mulai terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td></tr><tr><td><b>Kel. 8</b><span>Usaha kecil yang mulai tumbuh</span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class=""><span class="st S" role="img" aria-label="Sudah terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class="sep"><span class="st S" role="img" aria-label="Sudah terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class=""><span class="st M" role="img" aria-label="Mulai terlihat"></span><span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></td><td class=""><span class="st M" role="img" aria-label="Mulai terlihat"></span></td></tr></tbody>
+    </table>
+    <div class="legend" style="margin-top:.7em"><span><span class="st S" role="img" aria-label="Sudah terlihat"></span>Sudah terlihat</span><span><span class="st M" role="img" aria-label="Mulai terlihat"></span>Mulai terlihat</span><span><span class="st B" role="img" aria-label="Belum terlihat"></span>Belum terlihat</span><span><span class="st N" role="img" aria-label="Belum ada momen"></span>Belum ada momen</span><span><span class="chg up">▲</span> naik dari minggu pertama</span><span><span class="chg dn">▼</span> turun</span></div>
+    <span class="foot">Data: ekspor chat grup sampai Sabtu, 24 Oktober 2026 pukul 20.00</span><span class="num">05</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 7–9</span></div>
+    <p class="say">“Bandingkan dengan minggu lalu. Segitiga naik paling banyak ada di kolom tenggat antara dan tindak lanjut. Itu actuating yang mulai hidup. Kolom informasi hampir tidak bergerak: rekap belum menjadi kebiasaan.”</p>
+    <ul>
+      <li>Naik paling jauh: Kel. 8 (lima indikator) dan Kel. 3, 4 (tiga indikator).</li>
+      <li>Turun: Kel. 1 dan 2 di informasi (rekap tidak ada atau tidak sesuai laporan), Kel. 6 di tenggat antara (tenggat bergeser tiga kali).</li>
+      <li>Tetap: Kel. 5. Wawancara selesai, tetapi tahap PPT tanpa titik cek.</li>
+    </ul>
+    <p class="tip">Status ini untuk umpan balik, bukan nilai. Skor 1–4 per indikator dihitung dari seluruh chat setelah presentasi.</p></div>
+</article>
+<article class="unit" data-title="Saran minggu lalu: terlihat?" data-block="Pembuka" data-at="9">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Tindak lanjut dari 17 Oktober</div>
+    <h2>Enam dari delapan saran minggu lalu terlihat dijalankan di chat</h2>
+    <table class="ct">
+      <thead><tr><th>Kelompok</th><th>Saran minggu lalu (judul slide)</th><th class="s"></th><th>Yang terlihat di chat 17–24 Okt</th></tr></thead>
+      <tbody><tr><td>Kel. 1</td><td>Tuliskan hasil rapat, lalu kejar dua laporan yang belum masuk</td><td class="s"><span class="ic miss" aria-hidden="true"></span></td><td>Call 18 Okt juga tanpa catatan; laporan draf 19 Okt tidak ada.</td></tr><tr><td>Kel. 2</td><td>Samakan tanggal penutupan; Pengingat Tenggat yang menagih</td><td class="s"><span class="ic ok" aria-hidden="true"></span></td><td>Tanggal diralat 17 Okt; Pengingat Tenggat menulis status per slide.</td></tr><tr><td>Kel. 3</td><td>Ubah tenggat fase menjadi tenggat per orang, lalu cek</td><td class="s"><span class="ic ok" aria-hidden="true"></span></td><td>PIC per slide; dua PIC disapa dan diberi tenggat baru 18 Okt.</td></tr><tr><td>Kel. 4</td><td>Tulis status 15 Oktober; beri PIC untuk slide bersama</td><td class="s"><span class="ic ok" aria-hidden="true"></span></td><td>Status ditulis 17 Okt pagi; PIC slide 1, 2, 11, 12 ditunjuk.</td></tr><tr><td>Kel. 5</td><td>Serahkan Pengingat Tenggat; fokuskan wawancara ke hari 1–7</td><td class="s"><span class="ic ok" aria-hidden="true"></span></td><td>Peran ditukar 17 Okt; rangkuman wawancara memuat hari 1–7.</td></tr><tr><td>Kel. 6</td><td>Majukan draf ke Fase 2, dan tulis keputusan kasus final</td><td class="s"><span class="ic warn" aria-hidden="true"></span></td><td>KEPUTUSAN kasus final ditulis 18 Okt; draf justru mundur ke 21 Okt.</td></tr><tr><td>Kel. 7</td><td>Pertahankan ritme; tambahkan rekap dan tenggat draf</td><td class="s"><span class="ic ok" aria-hidden="true"></span></td><td>Rekap Fase 1–3 dan tenggat draf per PIC. Rangkuman wawancara tetap terlambat.</td></tr><tr><td>Kel. 8</td><td>Bentuk empat peran tim hari ini, sebelum menambah slide</td><td class="s"><span class="ic ok" aria-hidden="true"></span></td><td>Peran dibagi lewat rapat 17 Okt malam; PJ Presentasi belum ada.</td></tr></tbody>
+    </table>
+    <div class="legend" style="margin-top:.6em"><span><span class="ic ok" aria-hidden="true"></span>terlihat</span><span><span class="ic warn" aria-hidden="true"></span>sebagian</span><span><span class="ic miss" aria-hidden="true"></span>belum terlihat</span></div>
+    <span class="foot">Data: ekspor chat grup sampai Sabtu, 24 Oktober 2026 pukul 20.00</span><span class="num">06</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 9–12</span></div>
+    <p class="say">“Minggu lalu saya meminta komitmen ditulis di grup dengan label KOMITMEN 17 OKT. Tidak ada satu kelompok pun yang menulisnya. Tetapi enam kelompok menjalankan sarannya. Jadi pekerjaannya ada, buktinya yang tidak tertulis.”</p>
+    <p>Hitungan judul slide: enam terlihat penuh (Kel. 2, 3, 4, 5, 7, 8), satu sebagian (Kel. 6), satu belum (Kel. 1). Kel. 7 diberi tanda terlihat karena rekap dan tenggat draf ada, walau rangkuman wawancara tetap terlambat.</p>
+    <p class="tip">Pesan komitmen yang ditulis lalu dijalankan adalah potongan chat yang sangat kuat untuk Bagian 2: rencana, pelaksanaan, dan buktinya ada di satu tempat.</p></div>
+</article>
+<article class="unit" data-title="Kel. 1 · yang terlihat" data-block="Kelompok 1–4" data-at="12">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 1 · Posko arus mudik Lebaran · 4 anggota</div>
+    <h2>Diskusi paling rapi minggu ini; hasil rapatnya kembali tidak tertulis</h2>
+    <div class="srow"><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tugas</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Wewenang</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tenggat antara</span><span class="chip"><span class="st M" role="img" aria-label="Mulai terlihat"></span>Tindak lanjut</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Beda pendapat<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st M" role="img" aria-label="Mulai terlihat"></span>Informasi<span class="chg dn" role="img" aria-label="turun dari minggu pertama">▼</span></span></div>
+    <div class="ga">
+      <div class="tl"><div class="ev ok"><span class="d">Sab 17 · 20.06</span><span class="ic ok" aria-hidden="true"></span><p>Pengingat Tenggat menagih tahap umpan balik sesuai linimasa, dengan @all.</p></div><div class="ev ok"><span class="d">Sab 17 · 20.13</span><span class="ic ok" aria-hidden="true"></span><p>Koordinator merinci lima hal soal wawancara, memberi dua opsi diskusi lengkap dengan plus-minusnya, membuka polling, lalu menutup sebelum jam tenang.</p></div><div class="ev warn"><span class="d">Min 18 · 15.10</span><span class="ic warn" aria-hidden="true"></span><p>Diskusi lewat call. Sesudahnya tidak ada catatan keputusan di grup.</p></div><div class="ev miss"><span class="d">Sen 19</span><span class="ic miss" aria-hidden="true"></span><p>Tenggat draf lengkap lewat tanpa laporan. Rekap Fase 2 tidak ada.</p></div><div class="ev warn"><span class="d">Rab 21 · 19.18</span><span class="ic warn" aria-hidden="true"></span><p>Pengingat Tenggat menanyakan kendala dan meminta materi yang kosong dilengkapi. Belum dibalas.</p></div><div class="ev miss"><span class="d">Kam 22 – Sab 24</span><span class="ic miss" aria-hidden="true"></span><p>Grup diam. Rekap Fase 3, potongan chat, dan latihan belum terlihat.</p></div></div>
+      <div class="qcol">
+        <button class="tchip" type="button" data-sec="480" data-label="Kelompok 1">▶ Timer 8 menit</button>
+        <div class="lab" data-step="1">Pertanyaan untuk kelompok</div>
+        <div data-step="1" class="qcol"><div class="q"><span class="who">Koordinator</span><p>Call 18 Oktober memutuskan apa? Wawancara petugas posko jadi atau tidak?</p></div><div class="q"><span class="who">Pengingat Tenggat</span><p>Pesan Anda 21 Oktober belum dibalas. Bagian mana yang masih kosong, dan sampai kapan?</p></div></div>
+        <div class="flowmini" data-step="1"><span><b>1′</b> lihat</span><span><b>2′</b> jawab</span><span><b>3′</b> umpan balik</span><span><b>2′</b> komitmen</span></div>
+      </div>
+    </div>
+    <span class="foot">Data: ekspor chat grup sampai Sabtu, 24 Oktober 2026 pukul 20.00</span><span class="num">07</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 12–15 · lihat 1′ + jawab 2′</span></div>
+    <p><b>Fokus topik:</b> Koordinasi lintas instansi, kesatuan perintah. Tekan <b>T</b> untuk timer 8 menit, bacakan linimasa (±1 menit), lalu klik Lanjut untuk memunculkan pertanyaan.</p>
+    <h4>Bukti di chat (17–24 Okt)</h4>
+    <div class="tablewrap"><table><tr><th>Waktu</th><th>Peran</th><th>Yang terlihat</th></tr><tr><td>Sab 17 · 20.06</td><td>Pengingat Tenggat</td><td>“…hari ini harusnya kita udah masuk tahap pengecekan dan pemberian umpan balik… @all”.</td></tr><tr><td>Sab 17 · 20.13–20.17</td><td>Koordinator</td><td>Lima pertanyaan soal wawancara (siapa, apa, di mana, kapan, siapa mengerjakan apa), lalu usulan jawabannya sendiri.</td></tr><tr><td>Sab 17 · 20.29</td><td>Koordinator</td><td>Meminta umpan balik disertai alasan, terutama dari Pemberi Umpan Balik, bukan sekadar “bagus”.</td></tr><tr><td>Sab 17 · 20.33–20.49</td><td>Koordinator</td><td>Dua opsi (call 18 Okt atau tatap muka 19 Okt) dengan plus-minus, polling, hasil diumumkan pukul 20.49.</td></tr><tr><td>Min 18 · 12.20–14.47</td><td>Koordinator</td><td>Menagih anggota yang belum menjawab dengan @tag; tautan call pukul 15.10. Tidak ada catatan hasil call.</td></tr><tr><td>Rab 21 · 19.18</td><td>Pengingat Tenggat</td><td>Menanyakan kendala dan meminta materi kosong dilengkapi. Pesan terakhir di grup.</td></tr></table></div>
+    <h4>Yang perlu didengar</h4>
+    <p>Kelompok ini mengulang jebakan minggu lalu: pertemuan terjadi, tetapi keputusannya tidak sampai ke grup. Tanyakan apa hasil call 18 Okt dan minta ditulis malam ini. Puji polling 17 Okt sebagai contoh beda pendapat yang dikelola. Dua rapat tanpa catatan ini justru bahan jujur untuk “momen yang tidak berjalan baik” di Bagian 2.</p></div>
+</article>
+<article class="unit" data-title="Kel. 1 · umpan balik" data-block="Kelompok 1–4" data-at="15">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 1 · umpan balik</div>
+    <h2>Tulis hasil call 18 Oktober, lalu tutup fase dengan rekap</h2>
+    <div class="fb">
+      <div class="col good"><h3>Sudah baik</h3><ul><li>Beda pendapat dikelola lengkap: opsi, plus-minus, polling, keputusan sebelum jam tenang.</li><li>Pengingat Tenggat bekerja sesuai linimasa (17 dan 21 Okt).</li><li>Koordinator meminta umpan balik yang beralasan, bukan sekadar setuju.</li></ul></div>
+      <div class="col fix"><h3>Perlu diperbaiki</h3><ul><li>Hasil call 18 Okt tidak tertulis, sama seperti rapat 13 Okt.</li><li>Tenggat draf 19 Okt lewat tanpa laporan; Rekap Fase 2 dan 3 belum ada.</li><li>Grup diam sejak 21 Okt; pertanyaan Pengingat Tenggat tidak dijawab.</li></ul></div>
+      <div class="col tip"><h3>Saran</h3><ul><li>Tulis hasil call 18 Okt sekarang: jadi wawancara atau tidak, siapa mengerjakan apa.</li><li>Kirim Rekap Fase 2 dan 3 dengan bagian “Belum” yang jujur.</li><li>Jadikan rapat tanpa catatan sebagai “momen yang tidak berjalan baik” di Bagian 2.</li></ul></div>
+    </div>
+    <div class="bot">
+      <div class="blab">Pesan yang layak ditiru</div><div class="bubble"><div class="h"><b>Koordinator</b><span>Sab 17 · 20.33</span><i>diringkas</i></div><p>Opsi 1: diskusi tanggal 19, tatap muka, tapi mepet. Opsi 2: diskusi besok lewat call, persiapan lebih jelas, tapi tidak tatap muka.</p><p>Tolong di-vote ya.</p></div>
+    </div>
+    <span class="foot"><b>Komitmen:</b> 1–2 langkah siapa–apa–kapan sebelum presentasi, ditulis di grup dengan label KOMITMEN.</span><span class="num">08</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 15–20 · umpan balik 3′ + komitmen 2′</span></div>
+    <p>Bacakan kolom <b>Sudah baik</b> lebih dulu dan sebutkan perannya, lalu <b>Perlu diperbaiki</b> di tingkat kelompok, lalu <b>Saran</b>. Tutup dengan meminta peran yang menjawab tadi menyebut 1–2 komitmen.</p>
+    <p class="say">“Komitmen Kelompok 1 ditulis di grup hari ini dengan label KOMITMEN, @tag orangnya, dan tenggatnya. Minggu lalu tidak ada yang menulis label itu; kali ini tolong ditulis.”</p>
+    <p class="tip">Kalimat di gelembung disalin dari chat dengan @tag dan nama panggilan diganti nama peran; diringkas.</p></div>
+</article>
+<article class="unit" data-title="Kel. 2 · yang terlihat" data-block="Kelompok 1–4" data-at="20">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 2 · Gudang e-commerce saat promo besar · 4 anggota</div>
+    <h2>Titik cek berjalan dan tanggal sudah diralat; rekapnya belum jujur</h2>
+    <div class="srow"><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tugas</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Wewenang</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tenggat antara<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st M" role="img" aria-label="Mulai terlihat"></span>Tindak lanjut<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st N" role="img" aria-label="Belum ada momen"></span>Beda pendapat</span><span class="chip"><span class="st M" role="img" aria-label="Mulai terlihat"></span>Informasi<span class="chg dn" role="img" aria-label="turun dari minggu pertama">▼</span></span></div>
+    <div class="ga">
+      <div class="tl"><div class="ev ok"><span class="d">Jum 16 · 20.39</span><span class="ic ok" aria-hidden="true"></span><p>Pengingat Tenggat menjalankan cek ≥50% tepat jadwal: siapa sudah, siapa belum, dengan @tag.</p></div><div class="ev ok"><span class="d">Sab 17 · 09.02</span><span class="ic ok" aria-hidden="true"></span><p>Penutupan Fase 2 diralat ke Senin 19 Okt. Status per slide ditulis; salah nama diralat dengan pesan baru; slide templat terisi sore itu.</p></div><div class="ev warn"><span class="d">Sen 19 · 19.07</span><span class="ic warn" aria-hidden="true"></span><p>Pengingat Tenggat melaporkan materi “80%”.</p></div><div class="ev warn"><span class="d">Sel 20 · 11.12</span><span class="ic warn" aria-hidden="true"></span><p>Rekap Fase 2 (terlambat, dengan permintaan maaf) menulis “Belum: tidak ada … 100% tepat waktu”.</p></div><div class="ev warn"><span class="d">Sel 20 – Jum 23</span><span class="ic warn" aria-hidden="true"></span><p>Grup diam tiga hari. Umpan balik koordinator yang dijanjikan ≤ 24 jam tidak terlihat.</p></div><div class="ev ok"><span class="d">Jum 23 · 16.16</span><span class="ic ok" aria-hidden="true"></span><p>Instruksi Fase 3 untuk PJ Presentasi: tiga potongan chat (organizing, actuating, refleksi) beserta narasinya.</p></div></div>
+      <div class="qcol">
+        <button class="tchip" type="button" data-sec="480" data-label="Kelompok 2">▶ Timer 8 menit</button>
+        <div class="lab" data-step="1">Pertanyaan untuk kelompok</div>
+        <div data-step="1" class="qcol"><div class="q"><span class="who">Koordinator</span><p>Rekap 20 Oktober menulis 100% selesai; malam sebelumnya tertulis 80%. Mana yang benar, dan apa yang masih kurang?</p></div><div class="q"><span class="who">PJ Presentasi &amp; Refleksi</span><p>Tiga potongan chat sudah terpilih? Kapan latihan bersama, dan sudah tertulis di grup?</p></div></div>
+        <div class="flowmini" data-step="1"><span><b>1′</b> lihat</span><span><b>2′</b> jawab</span><span><b>3′</b> umpan balik</span><span><b>2′</b> komitmen</span></div>
+      </div>
+    </div>
+    <span class="foot">Data: ekspor chat grup sampai Sabtu, 24 Oktober 2026 pukul 20.00</span><span class="num">09</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 20–23 · lihat 1′ + jawab 2′</span></div>
+    <p><b>Fokus topik:</b> Rentang kendali, pembagian kerja, gaya mengarahkan. Tekan <b>T</b> untuk timer 8 menit, bacakan linimasa (±1 menit), lalu klik Lanjut untuk memunculkan pertanyaan.</p>
+    <h4>Bukti di chat (17–24 Okt)</h4>
+    <div class="tablewrap"><table><tr><th>Waktu</th><th>Peran</th><th>Yang terlihat</th></tr><tr><td>Jum 16 · 20.26–20.39</td><td>Koordinator, Pengingat Tenggat</td><td>Koordinator mengingatkan jadwal cek; Pengingat Tenggat menjalankannya dengan @tag ke dua PIC.</td></tr><tr><td>Sab 17 · 09.02</td><td>Koordinator</td><td>Ralat: batas draf kasar menjadi Senin 19 Okt pukul 20.30 (saran minggu lalu).</td></tr><tr><td>Sab 17 · 09.18 · 14.48 · 16.08</td><td>Pengingat Tenggat</td><td>Status per slide dan langkah berikutnya; pesan pertama tertukar nama PIC, diralat terbuka.</td></tr><tr><td>Sen 19 · 19.07</td><td>Pengingat Tenggat</td><td>“…materi kita sudah di tahap 80%”.</td></tr><tr><td>Sel 20 · 11.12</td><td>Koordinator</td><td>REKAP FASE 2: “Belum: Tidak ada. Seluruh draf … dikunci 100% tepat waktu.” Keputusan: umpan balik koordinator ≤ 24 jam.</td></tr><tr><td>Jum 23 · 16.16</td><td>Koordinator</td><td>“Masa tenang” tiga hari, lalu instruksi tiga potongan chat untuk PJ Presentasi dan ajakan latihan daring tanpa tanggal.</td></tr></table></div>
+    <h4>Yang perlu didengar</h4>
+    <p>Puji perbaikannya: titik cek benar-benar dijalankan Pengingat Tenggat dan tanggal diralat. Lalu tunjukkan selisih 80% vs 100%: rekap yang bagus itu jujur, bukan sempurna. Koordinator merangkap Pemberi Umpan Balik; umpan balik yang dijanjikan belum terlihat. Grup diam tiga hari di Fase 3 juga perlu ditanyakan: apa yang sebenarnya terjadi di luar grup?</p></div>
+</article>
+<article class="unit" data-title="Kel. 2 · umpan balik" data-block="Kelompok 1–4" data-at="23">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 2 · umpan balik</div>
+    <h2>Tulis “Belum” apa adanya, lalu jadwalkan latihan dengan tanggal</h2>
+    <div class="fb">
+      <div class="col good"><h3>Sudah baik</h3><ul><li>Pengingat Tenggat menjalankan titik cek tepat jam dan menulis status per orang.</li><li>Saran minggu lalu dijalankan: tanggal penutupan diralat dengan pesan baru.</li><li>Instruksi potongan chat paling jelas di kelas: tiga jenis, ada narasinya.</li></ul></div>
+      <div class="col fix"><h3>Perlu diperbaiki</h3><ul><li>Rekap Fase 2 menulis 100% padahal laporan sehari sebelumnya 80%.</li><li>Umpan balik koordinator (dijanjikan ≤ 24 jam) tidak terlihat di grup.</li><li>Latihan presentasi belum punya tanggal dan jam.</li></ul></div>
+      <div class="col tip"><h3>Saran</h3><ul><li>Ralat Rekap Fase 2 dengan pesan baru: tulis yang benar-benar belum.</li><li>Koordinator, sebagai Pemberi Umpan Balik, menulis masukan per slide: Sudah baik · Perlu diperbaiki · Saran.</li><li>PJ Presentasi menetapkan jadwal latihan; semua membalas “Siap”.</li></ul></div>
+    </div>
+    <div class="bot">
+      <div class="blab">Pesan yang layak ditiru</div><div class="bubble"><div class="h"><b>Pengingat Tenggat</b><span>Jum 16 · 20.39</span><i>diringkas</i></div><p>Malam ini titik cek kemajuan draf 50%. Slide 1 sudah terisi rapi. Bagaimana dengan @[PIC slide 5–6] dan @[PIC slide 7–8]?</p><p>Mohon perbarui atau laporkan progresnya di bawah chat ini.</p></div>
+    </div>
+    <span class="foot"><b>Komitmen:</b> 1–2 langkah siapa–apa–kapan sebelum presentasi, ditulis di grup dengan label KOMITMEN.</span><span class="num">10</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 23–28 · umpan balik 3′ + komitmen 2′</span></div>
+    <p>Bacakan kolom <b>Sudah baik</b> lebih dulu dan sebutkan perannya, lalu <b>Perlu diperbaiki</b> di tingkat kelompok, lalu <b>Saran</b>. Tutup dengan meminta peran yang menjawab tadi menyebut 1–2 komitmen.</p>
+    <p class="say">“Komitmen Kelompok 2 ditulis di grup hari ini dengan label KOMITMEN, @tag orangnya, dan tenggatnya. Minggu lalu tidak ada yang menulis label itu; kali ini tolong ditulis.”</p>
+    <p class="tip">Kalimat di gelembung disalin dari chat dengan @tag dan nama panggilan diganti nama peran; diringkas.</p></div>
+</article>
+<article class="unit" data-title="Kel. 3 · yang terlihat" data-block="Kelompok 1–4" data-at="28">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 3 · Struktur organisasi BUMN transportasi · 4 anggota</div>
+    <h2>Dari diam menjadi menyapa: tindak lanjut paling rapi minggu ini</h2>
+    <div class="srow"><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tugas<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Wewenang</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tenggat antara<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tindak lanjut<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st M" role="img" aria-label="Mulai terlihat"></span>Beda pendapat</span><span class="chip"><span class="st M" role="img" aria-label="Mulai terlihat"></span>Informasi</span></div>
+    <div class="ga">
+      <div class="tl"><div class="ev ok"><span class="d">Jum 16 · 18.59</span><span class="ic ok" aria-hidden="true"></span><p>Koordinator menulis PIC untuk setiap slide (saran minggu lalu).</p></div><div class="ev ok"><span class="d">Min 18 · 11.41</span><span class="ic ok" aria-hidden="true"></span><p>Dua PIC yang belum mengirim disapa: kendala ditanya, bantuan ditawarkan, tenggat baru disepakati. Malamnya tiga draf masuk sebagai teks.</p></div><div class="ev ok"><span class="d">Sel 20 · 19.50</span><span class="ic ok" aria-hidden="true"></span><p>Pengingat sebelum tenggat 20.30; satu PIC konfirmasi.</p></div><div class="ev ok"><span class="d">Rab 21 · 11.19</span><span class="ic ok" aria-hidden="true"></span><p>Isi PPT selesai; tinggal potongan chat.</p></div><div class="ev warn"><span class="d">Sepanjang minggu</span><span class="ic warn" aria-hidden="true"></span><p>Yang menagih Koordinator dan Penjaga File; Pengingat Tenggat sendiri termasuk yang ditagih.</p></div><div class="ev miss"><span class="d">Sampai Sab 24</span><span class="ic miss" aria-hidden="true"></span><p>Rekap Fase 2 dan 3 belum ada. Draf diterima dengan “mantap” tanpa umpan balik isi.</p></div></div>
+      <div class="qcol">
+        <button class="tchip" type="button" data-sec="480" data-label="Kelompok 3">▶ Timer 8 menit</button>
+        <div class="lab" data-step="1">Pertanyaan untuk kelompok</div>
+        <div data-step="1" class="qcol"><div class="q"><span class="who">Pengingat Tenggat</span><p>Minggu ini yang menagih Koordinator dan Penjaga File. Apa yang membuat peran Anda belum berjalan?</p></div><div class="q"><span class="who">Koordinator &amp; Pemberi Umpan Balik</span><p>Slide kelebihan menulis “tugas jelas”, slide kekurangan menulis “wewenang kurang jelas”. Mana yang didukung bagan PT KAI?</p></div></div>
+        <div class="flowmini" data-step="1"><span><b>1′</b> lihat</span><span><b>2′</b> jawab</span><span><b>3′</b> umpan balik</span><span><b>2′</b> komitmen</span></div>
+      </div>
+    </div>
+    <span class="foot">Data: ekspor chat grup sampai Sabtu, 24 Oktober 2026 pukul 20.00</span><span class="num">11</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 28–31 · lihat 1′ + jawab 2′</span></div>
+    <p><b>Fokus topik:</b> Struktur garis, garis dan staf, matriks. Tekan <b>T</b> untuk timer 8 menit, bacakan linimasa (±1 menit), lalu klik Lanjut untuk memunculkan pertanyaan.</p>
+    <h4>Bukti di chat (17–24 Okt)</h4>
+    <div class="tablewrap"><table><tr><th>Waktu</th><th>Peran</th><th>Yang terlihat</th></tr><tr><td>Jum 16 · 18.59</td><td>Koordinator</td><td>Sembilan slide dengan PIC; slide kesimpulan dan bukti koordinasi dikerjakan bersama.</td></tr><tr><td>Min 18 · 11.41</td><td>Koordinator</td><td>Meminta dua PIC mengirim hari itu; menawarkan bantuan Penjaga File.</td></tr><tr><td>Min 18 · 11.42–11.45</td><td>Penjaga File &amp; Keputusan</td><td>“Apa ada kendala…? Kalau ada bilang aja, nanti diusahain dibantu.” Tenggat 20 Okt, “kalau bisa dipercepat”.</td></tr><tr><td>Min 18 · 19.12–19.17</td><td>Koordinator, dua PIC</td><td>Profil, kelebihan-kekurangan, dan usulan perubahan masuk; koordinator membalas “mantap”.</td></tr><tr><td>Sel 20 · 19.50</td><td>Penjaga File &amp; Keputusan</td><td>Pengingat 40 menit sebelum tenggat pukul 20.30.</td></tr><tr><td>Rab 21 · 11.09–11.19</td><td>Penjaga File &amp; Keputusan</td><td>Kesimpulan dan kabar isi PPT selesai. Pesan terakhir di grup.</td></tr></table></div>
+    <h4>Yang perlu didengar</h4>
+    <p>Indikator 3 dan 4 kelompok ini naik paling jauh: dari belum terlihat menjadi sudah. Bacakan pesan 18 Okt sebagai contoh tindak lanjut tiga langkah. Lalu dua hal: peran Pengingat Tenggat belum dijalankan pemegangnya, dan umpan balik isi belum ada. Kelebihan “tugas jelas” dan kekurangan “wewenang kurang jelas” perlu dijelaskan dengan bukti bagan.</p></div>
+</article>
+<article class="unit" data-title="Kel. 3 · umpan balik" data-block="Kelompok 1–4" data-at="31">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 3 · umpan balik</div>
+    <h2>Pertahankan cara menyapa; sekarang tulis rekapnya</h2>
+    <div class="fb">
+      <div class="col good"><h3>Sudah baik</h3><ul><li>Pola tindak lanjut lengkap: tanya kendala, tawarkan bantuan, tenggat baru, lalu dicek.</li><li>Saran minggu lalu dijalankan: PIC per slide dan tenggat per orang.</li><li>Draf dikirim sebagai teks di grup, jadi bisa dibaca dan dinilai.</li></ul></div>
+      <div class="col fix"><h3>Perlu diperbaiki</h3><ul><li>Belum ada Rekap Fase 2 dan 3; rekap 14 Okt tanpa bagian “Belum”.</li><li>Pengingat Tenggat belum terlihat bekerja; tugasnya diambil peran lain.</li><li>Umpan balik baru sebatas “mantap”.</li></ul></div>
+      <div class="col tip"><h3>Saran</h3><ul><li>Kirim Rekap Fase 2 dan 3 sekarang: Selesai · Belum · Keputusan · Fokus.</li><li>Pengingat Tenggat memegang jadwal latihan: H-1 dengan @tag.</li><li>Periksa isi: kelebihan dan kekurangan tidak boleh bertentangan tanpa penjelasan.</li></ul></div>
+    </div>
+    <div class="bot">
+      <div class="blab">Pesan yang layak ditiru</div><div class="bubble"><div class="h"><b>Penjaga File &amp; Keputusan</b><span>Min 18 · 11.42–11.45</span><i>diringkas</i></div><p>Apa ada kendala buat nyari materinya? @[PIC] @[PIC] Kalau ada, bilang aja, nanti diusahain dibantu.</p><p>Tenggatnya tanggal 20 ya, kalau bisa dipercepat lebih baik.</p></div>
+    </div>
+    <span class="foot"><b>Komitmen:</b> 1–2 langkah siapa–apa–kapan sebelum presentasi, ditulis di grup dengan label KOMITMEN.</span><span class="num">12</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 31–36 · umpan balik 3′ + komitmen 2′</span></div>
+    <p>Bacakan kolom <b>Sudah baik</b> lebih dulu dan sebutkan perannya, lalu <b>Perlu diperbaiki</b> di tingkat kelompok, lalu <b>Saran</b>. Tutup dengan meminta peran yang menjawab tadi menyebut 1–2 komitmen.</p>
+    <p class="say">“Komitmen Kelompok 3 ditulis di grup hari ini dengan label KOMITMEN, @tag orangnya, dan tenggatnya. Minggu lalu tidak ada yang menulis label itu; kali ini tolong ditulis.”</p>
+    <p class="tip">Kalimat di gelembung disalin dari chat dengan @tag dan nama panggilan diganti nama peran; diringkas.</p></div>
+</article>
+<article class="unit" data-title="Kel. 4 · yang terlihat" data-block="Kelompok 1–4" data-at="36">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 4 · Mitra ojek dan kurir online · 4 anggota</div>
+    <h2>Paling lengkap minggu ini: tenggat dicek, wawancara ditulis, rekap tiga fase</h2>
+    <div class="srow"><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tugas</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Wewenang</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tenggat antara<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tindak lanjut<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Beda pendapat<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Informasi</span></div>
+    <div class="ga">
+      <div class="tl"><div class="ev ok"><span class="d">Sab 17 · 09.02</span><span class="ic ok" aria-hidden="true"></span><p>Status tenggat 15 Okt ditulis; Pengingat Tenggat mengakui lupa menagih. PIC slide 1, 2, 11, 12 ditunjuk.</p></div><div class="ev ok"><span class="d">Sab 17 · 09.19</span><span class="ic ok" aria-hidden="true"></span><p>Jadwal wawancara dengan pembagian peran; diundur dengan alasan.</p></div><div class="ev ok"><span class="d">Sab 17 · 15.52</span><span class="ic ok" aria-hidden="true"></span><p>Draf pertanyaan dibahas: dua dicoret dengan alasan (kurang sopan, kurang relevan), satu diganti.</p></div><div class="ev ok"><span class="d">Sab 17 · 21.03</span><span class="ic ok" aria-hidden="true"></span><p>Hasil wawancara dan dokumentasi masuk grup hari itu juga.</p></div><div class="ev ok"><span class="d">Min 18 – Jum 23</span><span class="ic ok" aria-hidden="true"></span><p>Pengingat Tenggat menagih dan mengecek; Rekap Fase 2 di hari penutupan; potongan chat dipilih bersama; Rekap Fase 3.</p></div><div class="ev warn"><span class="d">Catatan</span><span class="ic warn" aria-hidden="true"></span><p>Fokus di Rekap Fase 2 tersalin dari Fase 1; latihan 21 Okt hanya tercatat di rekap; potongan “momen yang tidak berjalan baik” belum dipilih.</p></div></div>
+      <div class="qcol">
+        <button class="tchip" type="button" data-sec="480" data-label="Kelompok 4">▶ Timer 8 menit</button>
+        <div class="lab" data-step="1">Pertanyaan untuk kelompok</div>
+        <div data-step="1" class="qcol"><div class="q"><span class="who">PJ Presentasi &amp; Refleksi</span><p>Dua potongan sudah dipilih (organizing, actuating). Momen yang tidak berjalan baik mana yang akan Anda tampilkan?</p></div><div class="q"><span class="who">Koordinator</span><p>Latihan 21 Oktober: siapa hadir, dan apa yang diperbaiki sesudahnya?</p></div></div>
+        <div class="flowmini" data-step="1"><span><b>1′</b> lihat</span><span><b>2′</b> jawab</span><span><b>3′</b> umpan balik</span><span><b>2′</b> komitmen</span></div>
+      </div>
+    </div>
+    <span class="foot">Data: ekspor chat grup sampai Sabtu, 24 Oktober 2026 pukul 20.00</span><span class="num">13</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 36–39 · lihat 1′ + jawab 2′</span></div>
+    <p><b>Fokus topik:</b> Faktor penjaga dan pemuas, komunikasi. Tekan <b>T</b> untuk timer 8 menit, bacakan linimasa (±1 menit), lalu klik Lanjut untuk memunculkan pertanyaan.</p>
+    <h4>Bukti di chat (17–24 Okt)</h4>
+    <div class="tablewrap"><table><tr><th>Waktu</th><th>Peran</th><th>Yang terlihat</th></tr><tr><td>Sab 17 · 09.02–09.06</td><td>Koordinator, Pengingat Tenggat</td><td>Laporan penyelesaian slide per orang; Pengingat Tenggat: “maaf kemarin lupa mengingatkan”.</td></tr><tr><td>Sab 17 · 09.10</td><td>Koordinator</td><td>PIC untuk slide 1, 2, 11, 12 (saran minggu lalu).</td></tr><tr><td>Sab 17 · 15.52–16.20</td><td>Koordinator, PJ Presentasi, anggota</td><td>Pertanyaan pendapatan harian dinilai kurang sopan dan diganti “alasan bertahan” (faktor penjaga); dua pertanyaan dicoret karena kurang relevan; koordinator menetapkan empat pertanyaan.</td></tr><tr><td>Sab 17 · 21.03–21.05</td><td>PJ Presentasi, Pengingat Tenggat</td><td>Rangkuman jawaban narasumber dan foto dokumentasi.</td></tr><tr><td>Min 18 · 20.33 · Sen 19 · 05.53</td><td>Pengingat Tenggat</td><td>Menagih status slide; pagi harinya menulis semua sudah selesai.</td></tr><tr><td>Jum 23 · 20.09–21.38</td><td>Koordinator</td><td>Meminta persetujuan dua potongan chat, keputusan mayoritas, lalu REKAP FASE 3.</td></tr></table></div>
+    <h4>Yang perlu didengar</h4>
+    <p>Kelompok dengan perubahan terbesar ke arah baik: semua saran minggu lalu terlihat dijalankan. Tekan dua hal kecil yang menentukan Bagian 2: potongan ketiga (momen yang tidak berjalan baik) dan catatan latihan. Tenggat 15 Okt yang dulu lewat tanpa jejak, lalu diperbaiki, adalah cerita refleksi yang sangat baik.</p></div>
+</article>
+<article class="unit" data-title="Kel. 4 · umpan balik" data-block="Kelompok 1–4" data-at="39">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 4 · umpan balik</div>
+    <h2>Tinggal satu potongan chat dan satu catatan latihan</h2>
+    <div class="fb">
+      <div class="col good"><h3>Sudah baik</h3><ul><li>Saran minggu lalu dijalankan semua: status 15 Okt, PIC slide bersama, wawancara.</li><li>Beda pendapat sehat: pertanyaan dikoreksi anggota, alasannya ditulis, koordinator memutuskan.</li><li>Hasil wawancara masuk grup di hari yang sama.</li></ul></div>
+      <div class="col fix"><h3>Perlu diperbaiki</h3><ul><li>Fokus Fase 3 di Rekap Fase 2 tersalin dari Fase 1.</li><li>Latihan 21 Okt tidak ditulis di grup hari itu.</li><li>Rekap Fase 3 tanpa bagian “Belum” dan “Fokus”.</li></ul></div>
+      <div class="col tip"><h3>Saran</h3><ul><li>Pilih potongan ketiga: tenggat 15 Okt yang lewat tanpa jejak, lalu diperbaiki.</li><li>Tulis hasil latihan: siapa menjelaskan slide apa, apa yang diperbaiki.</li><li>Pastikan semua anggota bisa menjelaskan slide mana pun; penyaji diacak.</li></ul></div>
+    </div>
+    <div class="bot">
+      <div class="blab">Pesan yang layak ditiru</div><div class="bubble"><div class="h"><b>PJ Presentasi &amp; Refleksi</b><span>Sab 17 · 15.53–15.57</span><i>ejaan dirapikan</i></div><p>Sepertinya pertanyaan tentang perkiraan pendapatan harian terlalu sensitif, kurang sopan.</p><p>Bagaimana kalau kita tanya alasan yang membuat driver bertahan di perusahaan tertentu? Ini bisa menjadi jawaban untuk faktor penjaga.</p></div>
+    </div>
+    <span class="foot"><b>Komitmen:</b> 1–2 langkah siapa–apa–kapan sebelum presentasi, ditulis di grup dengan label KOMITMEN.</span><span class="num">14</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 39–44 · umpan balik 3′ + komitmen 2′</span></div>
+    <p>Bacakan kolom <b>Sudah baik</b> lebih dulu dan sebutkan perannya, lalu <b>Perlu diperbaiki</b> di tingkat kelompok, lalu <b>Saran</b>. Tutup dengan meminta peran yang menjawab tadi menyebut 1–2 komitmen.</p>
+    <p class="say">“Komitmen Kelompok 4 ditulis di grup hari ini dengan label KOMITMEN, @tag orangnya, dan tenggatnya. Minggu lalu tidak ada yang menulis label itu; kali ini tolong ditulis.”</p>
+    <p class="tip">Kalimat di gelembung disalin dari chat dengan @tag dan nama panggilan diganti nama peran; ejaan dirapikan.</p></div>
+</article>
+<article class="unit" data-title="Jeda" data-block="Jeda" data-at="44">
+  <div class="frame"><section class="slide dark center">
+    <div class="eyebrow">Jeda · 3 menit</div>
+    <h1 class="display">Kelompok 1–4: tulis komitmen Anda di grup sekarang.</h1>
+    <p class="lede">Format: KOMITMEN · @peran · apa · kapan. Kelompok 5–8: buka chat grup dan cari Rekap Fase terakhir Anda.</p>
+    <div style="margin-top:1.2em"><button class="tchip" type="button" data-sec="180" data-label="Jeda">▶ Timer 3 menit</button></div>
+    <span class="num">15</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 44–47</span></div>
+    <p>Jeda singkat sekaligus waktu kerja. Kelompok yang sudah dibahas menulis komitmennya; kelompok yang belum dibahas mencari Rekap Fase terakhir mereka, karena pertanyaan berikutnya banyak menyangkut rekap.</p>
+    <p class="tip">Kalau waktu sudah terlambat lebih dari 5 menit menurut lencana jam kelas, lewati jeda dan pakai versi 6 menit per kelompok.</p></div>
+</article>
+<article class="unit" data-title="Kel. 5 · yang terlihat" data-block="Kelompok 5–8" data-at="47">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 5 · Tujuh hari pertama karyawan baru · 4 anggota</div>
+    <h2>Wawancara tuntas dan peran sudah dipisah; PPT dikerjakan tanpa titik cek</h2>
+    <div class="srow"><span class="chip"><span class="st M" role="img" aria-label="Mulai terlihat"></span>Tugas</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Wewenang</span><span class="chip"><span class="st B" role="img" aria-label="Belum terlihat"></span>Tenggat antara</span><span class="chip"><span class="st M" role="img" aria-label="Mulai terlihat"></span>Tindak lanjut</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Beda pendapat</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Informasi</span></div>
+    <div class="ga">
+      <div class="tl"><div class="ev ok"><span class="d">Sab 17 · 15.34</span><span class="ic ok" aria-hidden="true"></span><p>Wawancara diundur karena anggota sakit; jadwal fase direvisi. Malamnya Pengingat Tenggat diserahkan ke anggota lain.</p></div><div class="ev ok"><span class="d">Min 18 · 17.26</span><span class="ic ok" aria-hidden="true"></span><p>Wawancara selesai; rekaman dan rangkuman tujuh pertanyaan masuk grup hari itu.</p></div><div class="ev warn"><span class="d">Min 18 · 17.30</span><span class="ic warn" aria-hidden="true"></span><p>Data pribadi narasumber ditulis lengkap di grup; video wawancara diunggah ke YouTube.</p></div><div class="ev warn"><span class="d">Sen 19 – Kam 22</span><span class="ic warn" aria-hidden="true"></span><p>Rekap Fase 2 satu baris; PPT dimulai 20 Okt tanpa pembagian dan tenggat; 22 Okt PPT dikirim koordinator.</p></div><div class="ev miss"><span class="d">Sejak Sab 17</span><span class="ic miss" aria-hidden="true"></span><p>Pengingat Tenggat yang baru belum mengirim satu pengingat pun.</p></div><div class="ev warn"><span class="d">Jum 23 · 20.27</span><span class="ic warn" aria-hidden="true"></span><p>“Potongan chat” yang dikirim berisi rangkuman wawancara, bukan pesan dari grup.</p></div></div>
+      <div class="qcol">
+        <button class="tchip" type="button" data-sec="480" data-label="Kelompok 5">▶ Timer 8 menit</button>
+        <div class="lab" data-step="1">Pertanyaan untuk kelompok</div>
+        <div data-step="1" class="qcol"><div class="q"><span class="who">Pengingat Tenggat</span><p>Sejak 17 Oktober peran ini milik Anda. Tenggat apa yang sudah Anda tagih?</p></div><div class="q"><span class="who">PJ Presentasi &amp; Refleksi</span><p>Bagian 2 meminta potongan chat grup. Pesan mana yang akan dipakai untuk organizing, actuating, dan momen yang tidak berjalan baik?</p></div></div>
+        <div class="flowmini" data-step="1"><span><b>1′</b> lihat</span><span><b>2′</b> jawab</span><span><b>3′</b> umpan balik</span><span><b>2′</b> komitmen</span></div>
+      </div>
+    </div>
+    <span class="foot">Data: ekspor chat grup sampai Sabtu, 24 Oktober 2026 pukul 20.00</span><span class="num">16</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 47–50 · lihat 1′ + jawab 2′</span></div>
+    <p><b>Fokus topik:</b> Orientasi, gaya membimbing, pendelegasian. Tekan <b>T</b> untuk timer 8 menit, bacakan linimasa (±1 menit), lalu klik Lanjut untuk memunculkan pertanyaan.</p>
+    <h4>Bukti di chat (17–24 Okt)</h4>
+    <div class="tablewrap"><table><tr><th>Waktu</th><th>Peran</th><th>Yang terlihat</th></tr><tr><td>Sab 17 · 15.34–15.37</td><td>Koordinator</td><td>Wawancara dipindah ke Minggu 16.00 karena anggota sakit; tenggat Fase 2 menjadi 19 Okt; jadwal fase ditulis ulang.</td></tr><tr><td>Sab 17 · 19.10</td><td>Koordinator</td><td>Menukar peran dengan Pemberi Umpan Balik setelah masukan di kelas.</td></tr><tr><td>Min 18 · 17.26–17.30</td><td>Penjaga File &amp; Keputusan</td><td>Video dan audio wawancara; data narasumber (nama, umur, status kerja) ditulis di grup.</td></tr><tr><td>Min 18 · 19.31</td><td>Koordinator</td><td>Rangkuman tujuh jawaban, termasuk kegiatan hari 1–7 karyawan baru.</td></tr><tr><td>Sen 19 · 19.40</td><td>Koordinator</td><td>REKAP FASE 2 tiga baris, tanpa “Belum”.</td></tr><tr><td>Kam 22 · 07.53 · Jum 23 · 20.27</td><td>Koordinator, Pengingat Tenggat</td><td>PPT dibagikan dengan pembagian penyaji; tiga “potongan chat” berisi ringkasan wawancara.</td></tr></table></div>
+    <h4>Yang perlu didengar</h4>
+    <p>Saran minggu lalu dijalankan: peran dipisah dan wawancara fokus ke hari 1–7. Masalahnya pindah ke tahap PPT: tidak ada pembagian per orang dan titik cek, sehingga indikator 3 tetap belum terlihat. Luruskan salah baca “potongan chat”. Soal etika: identitas narasumber cukup jabatan dan lama kerja; video publik perlu izin narasumber. Sampaikan tanpa menyebut nama narasumber.</p></div>
+</article>
+<article class="unit" data-title="Kel. 5 · umpan balik" data-block="Kelompok 5–8" data-at="50">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 5 · umpan balik</div>
+    <h2>Bagian 2 membaca chat grup, bukan hasil wawancara</h2>
+    <div class="fb">
+      <div class="col good"><h3>Sudah baik</h3><ul><li>Saran minggu lalu dijalankan: Pengingat Tenggat diserahkan; wawancara fokus hari 1–7.</li><li>Jadwal yang berubah diumumkan dengan alasan dan revisi tertulis.</li><li>Hasil wawancara masuk grup di hari yang sama.</li></ul></div>
+      <div class="col fix"><h3>Perlu diperbaiki</h3><ul><li>Pembuatan PPT tanpa pembagian per orang dan tanpa titik cek.</li><li>Rekap Fase 2 dan 3 hanya satu baris, tanpa “Belum”.</li><li>Identitas narasumber tersebar di grup dan video publik.</li></ul></div>
+      <div class="col tip"><h3>Saran</h3><ul><li>Pilih tiga potongan chat grup: organizing, actuating, momen yang tidak berjalan baik.</li><li>Pengingat Tenggat menjadwalkan latihan dengan @tag, H-1.</li><li>Samarkan identitas narasumber; minta izin bila video dipublikasikan.</li></ul></div>
+    </div>
+    <div class="bot">
+      <div class="blab">Pesan yang layak ditiru</div><div class="bubble"><div class="h"><b>Koordinator</b><span>Sab 17 · 15.34–15.36</span><i>diringkas</i></div><p>Kita reschedule wawancara karena kemarin [Penjaga File] sakit, jadi hari Minggu jam 16.00 sudah sampai di gudang.</p><p>Karena wawancara diundur, tenggat Fase 2 aku ubah menjadi 19 Oktober.</p></div>
+    </div>
+    <span class="foot"><b>Komitmen:</b> 1–2 langkah siapa–apa–kapan sebelum presentasi, ditulis di grup dengan label KOMITMEN.</span><span class="num">17</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 50–55 · umpan balik 3′ + komitmen 2′</span></div>
+    <p>Bacakan kolom <b>Sudah baik</b> lebih dulu dan sebutkan perannya, lalu <b>Perlu diperbaiki</b> di tingkat kelompok, lalu <b>Saran</b>. Tutup dengan meminta peran yang menjawab tadi menyebut 1–2 komitmen.</p>
+    <p class="say">“Komitmen Kelompok 5 ditulis di grup hari ini dengan label KOMITMEN, @tag orangnya, dan tenggatnya. Minggu lalu tidak ada yang menulis label itu; kali ini tolong ditulis.”</p>
+    <p class="tip">Kalimat di gelembung disalin dari chat dengan @tag dan nama panggilan diganti nama peran; diringkas.</p></div>
+</article>
+<article class="unit" data-title="Kel. 6 · yang terlihat" data-block="Kelompok 5–8" data-at="55">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 6 · Ketika layanan transportasi terganggu · 4 anggota</div>
+    <h2>Keputusan kasus paling rapi di kelas; tenggatnya tiga kali bergeser</h2>
+    <div class="srow"><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tugas</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Wewenang</span><span class="chip"><span class="st M" role="img" aria-label="Mulai terlihat"></span>Tenggat antara<span class="chg dn" role="img" aria-label="turun dari minggu pertama">▼</span></span><span class="chip"><span class="st M" role="img" aria-label="Mulai terlihat"></span>Tindak lanjut</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Beda pendapat<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st M" role="img" aria-label="Mulai terlihat"></span>Informasi</span></div>
+    <div class="ga">
+      <div class="tl"><div class="ev ok"><span class="d">Jum 16 · 19.00</span><span class="ic ok" aria-hidden="true"></span><p>Diskusi dua kandidat kasus ditutup sebelum jam tenang, dengan rekap dan pengakuan keputusan tertunda.</p></div><div class="ev ok"><span class="d">Min 18 · 20.48</span><span class="ic ok" aria-hidden="true"></span><p>KEPUTUSAN kasus final: tanggal, sumber utama, alasan memilih, terima kasih ke pengusul, batas keberatan, jadwal baru.</p></div><div class="ev ok"><span class="d">Min 18 · 21.50</span><span class="ic ok" aria-hidden="true"></span><p>Rekap Fase 1 dengan bagian “Belum” yang jujur.</p></div><div class="ev warn"><span class="d">Sen 19 · 12.31</span><span class="ic warn" aria-hidden="true"></span><p>Koordinator yang menagih (Pengingat Tenggat lupa), lalu menggeser tenggat draf ke Selasa; drafnya sendiri masuk Selasa malam.</p></div><div class="ev ok"><span class="d">Rab 21</span><span class="ic ok" aria-hidden="true"></span><p>Kumpul di perpustakaan (usul Pemberi Umpan Balik); tiga draf masuk siang sampai malam.</p></div><div class="ev warn"><span class="d">Jum 23 · 16.11</span><span class="ic warn" aria-hidden="true"></span><p>Hasil kumpul Rabu baru ditulis dua hari kemudian; PPT dirapikan koordinator; latihan belum dijadwalkan.</p></div></div>
+      <div class="qcol">
+        <button class="tchip" type="button" data-sec="480" data-label="Kelompok 6">▶ Timer 8 menit</button>
+        <div class="lab" data-step="1">Pertanyaan untuk kelompok</div>
+        <div data-step="1" class="qcol"><div class="q"><span class="who">Pengingat Tenggat</span><p>Tenggat bergeser tiga kali. Apa yang membuat pengingat belum berjalan, dan siapa yang akan mengingatkan latihan?</p></div><div class="q"><span class="who">Pemberi Umpan Balik</span><p>Draf masuk 21 Oktober. Umpan balik apa yang sudah Anda berikan, dan di mana tertulisnya?</p></div></div>
+        <div class="flowmini" data-step="1"><span><b>1′</b> lihat</span><span><b>2′</b> jawab</span><span><b>3′</b> umpan balik</span><span><b>2′</b> komitmen</span></div>
+      </div>
+    </div>
+    <span class="foot">Data: ekspor chat grup sampai Sabtu, 24 Oktober 2026 pukul 20.00</span><span class="num">18</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 55–58 · lihat 1′ + jawab 2′</span></div>
+    <p><b>Fokus topik:</b> Komando, gaya mengarahkan, komunikasi krisis. Tekan <b>T</b> untuk timer 8 menit, bacakan linimasa (±1 menit), lalu klik Lanjut untuk memunculkan pertanyaan.</p>
+    <h4>Bukti di chat (17–24 Okt)</h4>
+    <div class="tablewrap"><table><tr><th>Waktu</th><th>Peran</th><th>Yang terlihat</th></tr><tr><td>Jum 16 · 21.04</td><td>Koordinator</td><td>“Recap diskusi”: dua kandidat, langkah berikutnya, dan pengakuan bahwa keputusan kasus belum bisa diambil hari itu.</td></tr><tr><td>Min 18 · 20.48</td><td>Koordinator</td><td>KEPUTUSAN kasus final dengan sumber KNKT dan KAI/KCI, tiga alasan memilih KRL, batas masukan Senin 12.00, jadwal baru.</td></tr><tr><td>Min 18 · 21.50</td><td>Koordinator</td><td>REKAP FASE 1: “Belum: Fase 1 kelar terlambat”; satu anggota belum konfirmasi.</td></tr><tr><td>Sen 19 · 12.31 · 19.34</td><td>Koordinator</td><td>Menagih atas nama Pengingat Tenggat; tenggat draf digeser karena acara kampus.</td></tr><tr><td>Sel 20 · 20.48–21.08</td><td>Koordinator, Pengingat Tenggat</td><td>Draf koordinator masuk terlambat dengan permintaan maaf; Pengingat Tenggat juga minta maaf karena lupa menagih.</td></tr><tr><td>Rab 21 · 11.03–18.57</td><td>Pemberi Umpan Balik, anggota</td><td>Usul kumpul setelah kelas; tiga draf dan sumber masuk.</td></tr><tr><td>Jum 23 · 16.11</td><td>Koordinator</td><td>Ringkasan pertemuan Rabu, tautan PPT final, ajakan cek dan latihan tanpa tanggal.</td></tr></table></div>
+    <h4>Yang perlu didengar</h4>
+    <p>Pesan KEPUTUSAN 18 Okt layak dibacakan utuh sebagai contoh wewenang yang baik. Tetapi semua penagihan masih dilakukan koordinator, dan tenggat bergeser tiga kali. Tanyakan pada Pengingat Tenggat dan Pemberi Umpan Balik apa rencana mereka sampai presentasi.</p></div>
+</article>
+<article class="unit" data-title="Kel. 6 · umpan balik" data-block="Kelompok 5–8" data-at="58">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 6 · umpan balik</div>
+    <h2>Pertahankan cara memutuskan; serahkan menagih ke Pengingat Tenggat</h2>
+    <div class="fb">
+      <div class="col good"><h3>Sudah baik</h3><ul><li>Pesan KEPUTUSAN 18 Okt layak jadi contoh: alasan, sumber, dan batas keberatan.</li><li>Koordinator mengakui keterlambatannya sendiri secara terbuka.</li><li>Rekap Fase 1 akhirnya dikirim dengan bagian “Belum”.</li></ul></div>
+      <div class="col fix"><h3>Perlu diperbaiki</h3><ul><li>Tenggat draf bergeser 18 → 19 → 20 Okt; draf baru lengkap 21 Okt.</li><li>Pengingat Tenggat belum bekerja; semua penagihan dari koordinator.</li><li>Hasil kumpul 21 Okt baru ditulis 23 Okt; Rekap Fase 2 dan 3 belum ada.</li></ul></div>
+      <div class="col tip"><h3>Saran</h3><ul><li>Pengingat Tenggat menetapkan dan mengingatkan jadwal latihan, H-1 dengan @tag.</li><li>Pemberi Umpan Balik menulis umpan balik per bagian sebelum latihan.</li><li>Kirim Rekap Fase 2 dan 3, jujur soal tenggat yang bergeser.</li></ul></div>
+    </div>
+    <div class="bot">
+      <div class="blab">Pesan yang layak ditiru</div><div class="bubble"><div class="h"><b>Koordinator</b><span>Min 18 · 20.48</span><i>diringkas</i></div><p>KEPUTUSAN: kasus final = tabrakan KA Argo Bromo Anggrek dengan KRL di Stasiun Bekasi Timur, 27 April 2026. Alasannya: laporan KNKT membahas jalur komunikasi masinis ke petugas.</p><p>Masukan paling lambat Senin 12.00. Keputusan tetap jalan, kecuali ada alasan kuat.</p></div>
+    </div>
+    <span class="foot"><b>Komitmen:</b> 1–2 langkah siapa–apa–kapan sebelum presentasi, ditulis di grup dengan label KOMITMEN.</span><span class="num">19</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 58–63 · umpan balik 3′ + komitmen 2′</span></div>
+    <p>Bacakan kolom <b>Sudah baik</b> lebih dulu dan sebutkan perannya, lalu <b>Perlu diperbaiki</b> di tingkat kelompok, lalu <b>Saran</b>. Tutup dengan meminta peran yang menjawab tadi menyebut 1–2 komitmen.</p>
+    <p class="say">“Komitmen Kelompok 6 ditulis di grup hari ini dengan label KOMITMEN, @tag orangnya, dan tenggatnya. Minggu lalu tidak ada yang menulis label itu; kali ini tolong ditulis.”</p>
+    <p class="tip">Kalimat di gelembung disalin dari chat dengan @tag dan nama panggilan diganti nama peran; diringkas.</p></div>
+</article>
+<article class="unit" data-title="Kel. 7 · yang terlihat" data-block="Kelompok 5–8" data-at="63">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 7 · Panitia acara kampus · 5 anggota</div>
+    <h2>Ritme terjaga sampai Fase 3; rekapnya selalu menulis “Belum: tidak ada”</h2>
+    <div class="srow"><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tugas</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Wewenang</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tenggat antara</span><span class="chip"><span class="st M" role="img" aria-label="Mulai terlihat"></span>Tindak lanjut<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Beda pendapat</span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Informasi<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span></div>
+    <div class="ga">
+      <div class="tl"><div class="ev ok"><span class="d">Sab 17 · 20.01</span><span class="ic ok" aria-hidden="true"></span><p>Rekap Fase 1 dikirim; draf per PIC dengan tenggat Senin 15.00.</p></div><div class="ev warn"><span class="d">Sab 17</span><span class="ic warn" aria-hidden="true"></span><p>Wawancara selesai sore itu, tetapi rangkumannya baru masuk lewat draf Senin malam.</p></div><div class="ev ok"><span class="d">Sen 19 · 13.50</span><span class="ic ok" aria-hidden="true"></span><p>Tenggat diperpanjang ke 23.59 dengan alasan (acara kampus).</p></div><div class="ev ok"><span class="d">Sen 19 · 21.36</span><span class="ic ok" aria-hidden="true"></span><p>Pengingat Tenggat menagih dua kali dengan @tag; keempat draf masuk sebelum 23.59.</p></div><div class="ev ok"><span class="d">Sel 20 – Sab 24</span><span class="ic ok" aria-hidden="true"></span><p>Rekap Fase 2, pembagian Fase 3 per PIC, pengingat H-1 dan hari-H, lalu Rekap Fase 3.</p></div><div class="ev warn"><span class="d">Catatan</span><span class="ic warn" aria-hidden="true"></span><p>Dua draf berbeda soal jumlah divisi (5 vs 6) dan belum ada yang mengoreksi.</p></div></div>
+      <div class="qcol">
+        <button class="tchip" type="button" data-sec="480" data-label="Kelompok 7">▶ Timer 8 menit</button>
+        <div class="lab" data-step="1">Pertanyaan untuk kelompok</div>
+        <div data-step="1" class="qcol"><div class="q"><span class="who">Pemberi Umpan Balik</span><p>Draf pertanyaan 1 menyebut 5 divisi, draf pertanyaan 2 menyebut 6. Mana yang benar, dan sudah dicek ke narasumber?</p></div><div class="q"><span class="who">PJ Presentasi &amp; Refleksi</span><p>Rekap menulis “Belum: tidak ada”. Momen yang tidak berjalan baik apa yang akan Anda tampilkan?</p></div></div>
+        <div class="flowmini" data-step="1"><span><b>1′</b> lihat</span><span><b>2′</b> jawab</span><span><b>3′</b> umpan balik</span><span><b>2′</b> komitmen</span></div>
+      </div>
+    </div>
+    <span class="foot">Data: ekspor chat grup sampai Sabtu, 24 Oktober 2026 pukul 20.00</span><span class="num">20</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 63–66 · lihat 1′ + jawab 2′</span></div>
+    <p><b>Fokus topik:</b> Wewenang seimbang, kesatuan perintah, motivasi. Tekan <b>T</b> untuk timer 8 menit, bacakan linimasa (±1 menit), lalu klik Lanjut untuk memunculkan pertanyaan.</p>
+    <h4>Bukti di chat (17–24 Okt)</h4>
+    <div class="tablewrap"><table><tr><th>Waktu</th><th>Peran</th><th>Yang terlihat</th></tr><tr><td>Sab 17 · 20.01–20.03</td><td>Koordinator</td><td>REKAP FASE 1 (bagian Selesai saja), lalu tugas draf per PIC dengan tenggat Senin 15.00.</td></tr><tr><td>Sen 19 · 13.50</td><td>Koordinator</td><td>Perpanjangan tenggat ke 23.59 karena acara penyambutan mahasiswa baru.</td></tr><tr><td>Sen 19 · 21.36 · 23.14</td><td>Pengingat Tenggat</td><td>Menagih semua, lalu @tag dua PIC yang belum mengirim.</td></tr><tr><td>Sen 19 · 22.46–23.21</td><td>Tiga PIC</td><td>Draf masuk; satu PIC bertanya “kira-kira bener ga?” dan dijawab koordinator.</td></tr><tr><td>Sel 20 · 21.36–21.38</td><td>Koordinator</td><td>REKAP FASE 2 (“Belum: Tidak ada”) dan pembagian Fase 3; satu PIC tertulis “pertanyaan ke-3”, seharusnya ke-4.</td></tr><tr><td>Kam 22 · 20.19 · Jum 23 · 17.38</td><td>Pengingat Tenggat</td><td>Pengingat H-1 dan hari-H dengan @tag.</td></tr><tr><td>Sab 24 · 14.55</td><td>Koordinator</td><td>REKAP FASE 3 dan rencana latihan; presentasi setelah UTS.</td></tr></table></div>
+    <h4>Yang perlu didengar</h4>
+    <p>Ritme kelompok ini paling stabil: setiap fase ditutup dengan rekap, dan Pengingat Tenggat bekerja H-1 dan hari-H. Kelemahannya pada isi dan kejujuran rekap: Pemberi Umpan Balik tidak terlihat minggu ini sehingga selisih jumlah divisi lolos, dan perpanjangan tenggat tidak muncul di bagian “Belum”.</p></div>
+</article>
+<article class="unit" data-title="Kel. 7 · umpan balik" data-block="Kelompok 5–8" data-at="66">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 7 · umpan balik</div>
+    <h2>Pertahankan ritmenya; periksa isi dan tulis “Belum” yang sebenarnya</h2>
+    <div class="fb">
+      <div class="col good"><h3>Sudah baik</h3><ul><li>Tiga rekap fase terkirim; pembagian Fase 3 jelas sampai siapa memilih potongan chat.</li><li>Pengingat Tenggat menagih H-1 dan hari-H dengan @tag.</li><li>Perpanjangan tenggat diumumkan dengan alasan.</li></ul></div>
+      <div class="col fix"><h3>Perlu diperbaiki</h3><ul><li>Rangkuman wawancara tidak ditulis di hari wawancara.</li><li>Umpan balik minggu ini tidak terlihat; selisih jumlah divisi lolos.</li><li>“Belum: tidak ada”, padahal penagihan dan perpanjangan terjadi.</li></ul></div>
+      <div class="col tip"><h3>Saran</h3><ul><li>Pemberi Umpan Balik memeriksa angka dan istilah antarbagian sebelum latihan.</li><li>Tulis yang belum: latihan, dokumentasi narasumber.</li><li>Pakai perpanjangan tenggat 19 Okt sebagai “momen yang tidak berjalan baik”.</li></ul></div>
+    </div>
+    <div class="bot">
+      <div class="blab">Pesan yang layak ditiru</div><div class="bubble"><div class="h"><b>Pengingat Tenggat</b><span>Sen 19 · 21.36 · 23.14</span><i>diringkas</i></div><p>Yuk teman-teman, disegerakan mengirim draf jawabannya, tenggatnya tinggal beberapa jam lagi.</p><p>@[PIC] @[PIC] gimana? Yuk disegerakan.</p></div>
+    </div>
+    <span class="foot"><b>Komitmen:</b> 1–2 langkah siapa–apa–kapan sebelum presentasi, ditulis di grup dengan label KOMITMEN.</span><span class="num">21</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 66–71 · umpan balik 3′ + komitmen 2′</span></div>
+    <p>Bacakan kolom <b>Sudah baik</b> lebih dulu dan sebutkan perannya, lalu <b>Perlu diperbaiki</b> di tingkat kelompok, lalu <b>Saran</b>. Tutup dengan meminta peran yang menjawab tadi menyebut 1–2 komitmen.</p>
+    <p class="say">“Komitmen Kelompok 7 ditulis di grup hari ini dengan label KOMITMEN, @tag orangnya, dan tenggatnya. Minggu lalu tidak ada yang menulis label itu; kali ini tolong ditulis.”</p>
+    <p class="tip">Kalimat di gelembung disalin dari chat dengan @tag dan nama panggilan diganti nama peran; diringkas.</p></div>
+</article>
+<article class="unit" data-title="Kel. 8 · yang terlihat" data-block="Kelompok 5–8" data-at="71">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 8 · Usaha kecil yang mulai tumbuh · 5 anggota</div>
+    <h2>Lompatan terbesar minggu ini: lima indikator naik</h2>
+    <div class="srow"><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tugas<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Wewenang<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tenggat antara<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st S" role="img" aria-label="Sudah terlihat"></span>Tindak lanjut<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st M" role="img" aria-label="Mulai terlihat"></span>Beda pendapat<span class="chg up" role="img" aria-label="naik dari minggu pertama">▲</span></span><span class="chip"><span class="st M" role="img" aria-label="Mulai terlihat"></span>Informasi</span></div>
+    <div class="ga">
+      <div class="tl"><div class="ev ok"><span class="d">Sab 17 · 09.26</span><span class="ic ok" aria-hidden="true"></span><p>Koordinator menilai PPT sendiri (“monoton, data belum jelas”) dan mengajak terbuka soal kendala.</p></div><div class="ev ok"><span class="d">Sab 17 · 13.52</span><span class="ic ok" aria-hidden="true"></span><p>Rapat dijadwalkan lewat polling, digeser atas usul anggota; notulensi dan Rekap Fase 1 masuk malam itu.</p></div><div class="ev warn"><span class="d">Sab 17 · 20.20</span><span class="ic warn" aria-hidden="true"></span><p>Peran dibagi, tetapi PJ Presentasi &amp; Refleksi belum ada.</p></div><div class="ev ok"><span class="d">Sen 19 – Sel 20</span><span class="ic ok" aria-hidden="true"></span><p>Narasumber baru diwawancarai; bagian PPT dibagi ulang per orang dengan @tag, tenggat Jumat 20.00.</p></div><div class="ev ok"><span class="d">Jum 23 · 08.55</span><span class="ic ok" aria-hidden="true"></span><p>Pengingat Tenggat menanyakan kendala, memeriksa, memberi masukan tampilan, lalu cek akhir.</p></div><div class="ev warn"><span class="d">Sab 24 · 11.19</span><span class="ic warn" aria-hidden="true"></span><p>Rekap Fase 2 dikirim sebagai file dokumen, lima hari setelah fase ditutup.</p></div></div>
+      <div class="qcol">
+        <button class="tchip" type="button" data-sec="480" data-label="Kelompok 8">▶ Timer 8 menit</button>
+        <div class="lab" data-step="1">Pertanyaan untuk kelompok</div>
+        <div data-step="1" class="qcol"><div class="q"><span class="who">Koordinator</span><p>Siapa PJ Presentasi &amp; Refleksi? Brief meminta lima peran, dan PJ yang memilih potongan chat.</p></div><div class="q"><span class="who">Pemberi Umpan Balik</span><p>Ada dua Pemberi Umpan Balik, tetapi masukan minggu ini datang dari Pengingat Tenggat. Draf mana yang sudah Anda beri umpan balik?</p></div></div>
+        <div class="flowmini" data-step="1"><span><b>1′</b> lihat</span><span><b>2′</b> jawab</span><span><b>3′</b> umpan balik</span><span><b>2′</b> komitmen</span></div>
+      </div>
+    </div>
+    <span class="foot">Data: ekspor chat grup sampai Sabtu, 24 Oktober 2026 pukul 20.00</span><span class="num">22</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 71–74 · lihat 1′ + jawab 2′</span></div>
+    <p><b>Fokus topik:</b> Pendelegasian, rentang kendali. Tekan <b>T</b> untuk timer 8 menit, bacakan linimasa (±1 menit), lalu klik Lanjut untuk memunculkan pertanyaan.</p>
+    <h4>Bukti di chat (17–24 Okt)</h4>
+    <div class="tablewrap"><table><tr><th>Waktu</th><th>Peran</th><th>Yang terlihat</th></tr><tr><td>Sab 17 · 09.26</td><td>Koordinator</td><td>“PPT kita dah jadi tapi masih kurang… terlalu monoton dan datanya belum clear… kalau ada kendala sampaikan terang-terangan.”</td></tr><tr><td>Sab 17 · 13.54–19.40</td><td>Koordinator, anggota</td><td>Polling empat jadwal; satu anggota mengusulkan setelah salat, diterima; rapat daring pukul 19.40.</td></tr><tr><td>Sab 17 · 20.20</td><td>Pengingat Tenggat, Koordinator</td><td>NOTULENSI RAPAT: peran (ketua, Pengingat Tenggat, dua Pemberi Umpan Balik, Penjaga File), rencana wawancara ulang; file Rekap Fase 1.</td></tr><tr><td>Min 18 · 14.48–14.54</td><td>Koordinator</td><td>Memantau member tag; menyebut Pengingat Tenggat sebagai “koordinator”.</td></tr><tr><td>Sel 20 · 12.33</td><td>Koordinator</td><td>Pembagian ulang tujuh bagian PPT untuk narasumber baru dengan @tag.</td></tr><tr><td>Jum 23 · 08.55–21.05</td><td>Pengingat Tenggat</td><td>“Bagaimana progresnya…, apa ada kendala? Mohon dibicarakan saja”; cek pukul 13.36; masukan font pukul 19.40; “sudah aman” pukul 21.05.</td></tr><tr><td>Sab 24 · 11.19</td><td>Koordinator</td><td>Rekap Fase 2 sebagai lampiran dokumen.</td></tr></table></div>
+    <h4>Yang perlu didengar</h4>
+    <p>Dari kelompok yang belum punya peran menjadi kelompok yang paling banyak naik: lima dari enam indikator. Puji keberanian koordinator menilai hasil kerjanya sendiri dan Pengingat Tenggat yang bertanya penyebab. Dua permintaan: tunjuk PJ Presentasi &amp; Refleksi, dan tulis rekap sebagai teks di grup. Lampiran dokumen tidak terbaca di ekspor chat yang dinilai.</p></div>
+</article>
+<article class="unit" data-title="Kel. 8 · umpan balik" data-block="Kelompok 5–8" data-at="74">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Kelompok 8 · umpan balik</div>
+    <h2>Lengkapi peran kelima, lalu tulis rekap sebagai teks di grup</h2>
+    <div class="fb">
+      <div class="col good"><h3>Sudah baik</h3><ul><li>Saran minggu lalu dijalankan: peran dibagi, rapat bernotulen hari itu juga.</li><li>Koordinator jujur menilai hasil kerja sendiri dan membuka ruang kendala.</li><li>Pengingat Tenggat menanyakan penyebab, memeriksa, dan menutup dengan cek akhir.</li></ul></div>
+      <div class="col fix"><h3>Perlu diperbaiki</h3><ul><li>PJ Presentasi &amp; Refleksi belum ditunjuk; label peran sempat tertukar.</li><li>Rekap dikirim sebagai file dokumen: tidak terbaca di ekspor chat, dan terlambat.</li><li>Dua Pemberi Umpan Balik belum terlihat bekerja.</li></ul></div>
+      <div class="col tip"><h3>Saran</h3><ul><li>Tunjuk PJ Presentasi &amp; Refleksi hari ini; ia memilih tiga potongan chat.</li><li>Tulis Rekap Fase 2 dan 3 sebagai teks di grup, lalu sematkan.</li><li>Jadwalkan latihan; penyaji diacak, jadi semua harus bisa menjelaskan semua bagian.</li></ul></div>
+    </div>
+    <div class="bot">
+      <div class="blab">Pesan yang layak ditiru</div><div class="bubble"><div class="h"><b>Pengingat Tenggat</b><span>Jum 23 · 08.55</span><i>ejaan dirapikan</i></div><p>Halo @[PIC] @[PIC], bagaimana progresnya? Kenapa sampai sekarang belum diubah, apa ada kendala?</p><p>Kalau ada kendala, dibicarakan saja.</p></div>
+    </div>
+    <span class="foot"><b>Komitmen:</b> 1–2 langkah siapa–apa–kapan sebelum presentasi, ditulis di grup dengan label KOMITMEN.</span><span class="num">23</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 74–79 · umpan balik 3′ + komitmen 2′</span></div>
+    <p>Bacakan kolom <b>Sudah baik</b> lebih dulu dan sebutkan perannya, lalu <b>Perlu diperbaiki</b> di tingkat kelompok, lalu <b>Saran</b>. Tutup dengan meminta peran yang menjawab tadi menyebut 1–2 komitmen.</p>
+    <p class="say">“Komitmen Kelompok 8 ditulis di grup hari ini dengan label KOMITMEN, @tag orangnya, dan tenggatnya. Minggu lalu tidak ada yang menulis label itu; kali ini tolong ditulis.”</p>
+    <p class="tip">Kalimat di gelembung disalin dari chat dengan @tag dan nama panggilan diganti nama peran; ejaan dirapikan.</p></div>
+</article>
+<article class="unit" data-title="Kebiasaan yang layak ditiru" data-block="Pola kelas" data-at="79">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Pola kelas · 1 dari 3</div>
+    <h2>Enam kebiasaan baru minggu ini yang layak ditiru semua kelompok</h2>
+    <div class="cards3 grow"><div class="hb"><h3>Menyapa yang terlambat, tiga langkah</h3><p>Tanya kendalanya, tawarkan bantuan, sepakati tenggat baru, lalu cek lagi.</p><span class="who">Kel. 3 · 8</span></div><div class="hb"><h3>KEPUTUSAN dengan alasan dan batas keberatan</h3><p>Apa yang diputuskan, mengapa, dari sumber apa, dan sampai kapan boleh keberatan.</p><span class="who">Kel. 6</span></div><div class="hb"><h3>Opsi, plus-minus, polling</h3><p>Pilihan ditulis berdampingan, dipilih bersama, diumumkan sebelum jam tenang.</p><span class="who">Kel. 1 · 8</span></div><div class="hb"><h3>Draf dikoreksi bersama, alasannya ditulis</h3><p>“Kurang sopan”, “kurang relevan”: koreksi menilai isi, bukan orang.</p><span class="who">Kel. 4</span></div><div class="hb"><h3>Titik cek tepat jam, status per orang</h3><p>Pengingat Tenggat menulis siapa sudah, siapa belum, dengan @tag.</p><span class="who">Kel. 2 · 7</span></div><div class="hb"><h3>Rapat dan wawancara → ditulis hari itu</h3><p>Notulensi atau rangkuman masuk grup sebelum hari berganti.</p><span class="who">Kel. 4 · 5 · 8</span></div></div>
+    <span class="num">24</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 79–82</span></div>
+    <p class="say">“Semua contoh ini datang dari chat minggu ini. Perhatikan: tiga di antaranya datang dari kelompok yang minggu lalu masih tertinggal.”</p>
+    <p>Pujian di slide ini boleh menyebut nomor kelompok. Untuk jebakan di slide berikutnya, yang disebut hanya jumlah kelompok.</p></div>
+</article>
+<article class="unit" data-title="Jebakan yang berulang" data-block="Pola kelas" data-at="82">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Pola kelas · 2 dari 3</div>
+    <h2>Lima jebakan minggu ini; yang paling umum ada di umpan balik</h2>
+    <div class="traps grow"><div class="trap"><div class="n">7<small>dari 8 kelompok</small></div><h3>Umpan balik atas draf belum terlihat</h3><p>Draf masuk, dibalas “mantap” atau tidak dibalas, lalu langsung ke PPT.</p></div><div class="trap"><div class="n">5<small>dari 8 kelompok</small></div><h3>Rekap Fase 3 belum ada</h3><p>Fase ditutup tanpa peta: apa selesai, apa belum, apa yang diputuskan.</p></div><div class="trap"><div class="n">4<small>dari 8 kelompok</small></div><h3>Rekap tanpa “Belum” yang sebenarnya</h3><p>“Belum: tidak ada”, padahal ada tenggat yang digeser atau bagian yang tertinggal.</p></div><div class="trap"><div class="n">3<small>dari 8 kelompok</small></div><h3>Pengingat Tenggat belum bekerja</h3><p>Turun dari 5 kelompok. Yang tersisa: penagihan masih diambil koordinator atau peran lain.</p></div><div class="trap"><div class="n">3<small>dari 8 kelompok</small></div><h3>Rapat atau latihan tanpa catatan hari itu</h3><p>Pertemuannya terjadi; keputusannya tidak sampai ke grup, atau baru sampai dua hari kemudian.</p></div></div>
+    <span class="foot">Data: ekspor chat grup sampai Sabtu, 24 Oktober 2026 pukul 20.00</span><span class="num">25</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 82–85</span></div>
+    <p class="say">“Minggu lalu jebakan terbesar ada di Pengingat Tenggat. Minggu ini sudah membaik. Jebakan terbesar pindah ke Pemberi Umpan Balik: hampir semua draf diterima tanpa diperiksa isinya.”</p>
+    <h4>Kelompok di balik angka (untuk dosen)</h4>
+    <ul>
+      <li>Umpan balik atas draf belum terlihat: Kel. 1, 2, 3, 5, 6, 7, 8. Kel. 4 mengoreksi daftar pertanyaan wawancara bersama.</li>
+      <li>Rekap Fase 3 belum ada: Kel. 1, 2, 3, 6, 8.</li>
+      <li>Rekap tanpa “Belum” yang sebenarnya: Kel. 2 (100% vs 80%), 4 dan 5 (tanpa bagian Belum), 7 (“tidak ada” walau tenggat diperpanjang).</li>
+      <li>Pengingat Tenggat belum bekerja: Kel. 3, 5, 6.</li>
+      <li>Rapat atau latihan tanpa catatan hari itu: Kel. 1 (call 18 Okt), 4 (latihan 21 Okt), 6 (kumpul 21 Okt, ditulis 23 Okt).</li>
+    </ul></div>
+</article>
+<article class="unit" data-title="Yang sering terbaca keliru" data-block="Pola kelas" data-at="85">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Pola kelas · 3 dari 3 · menjelang presentasi</div>
+    <h2>Tiga hal yang sering terbaca keliru tentang Bagian 2</h2>
+    <div class="myth"><div class="x">“Potongan chat = rangkuman materi.”</div><div class="y">Potongan chat adalah pesan dari grup Anda: siapa menulis apa, jam berapa. Bukan isi wawancara atau isi slide.</div><div class="x">“Momen yang tidak berjalan baik itu memalukan.”</div><div class="y">Itu bagian wajib. Yang dinilai adalah yang Anda lakukan sesudahnya: tenggat yang lewat lalu disapa, rapat yang lupa dicatat lalu ditulis.</div><div class="x">“Rekap yang baik = semua selesai.”</div><div class="y">Rekap yang baik itu jujur. Bagian “Belum” berisi yang tertunda dan rencananya. “Belum: tidak ada” jarang benar.</div></div>
+    <span class="num">26</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 85–87</span></div>
+    <ul>
+      <li><b>Potongan chat:</b> satu kelompok mengirim tiga “potongan” berupa ringkasan wawancara. Brief meminta 2–3 potongan chat grup: satu contoh organizing, satu contoh actuating, satu momen yang tidak berjalan baik.</li>
+      <li><b>Momen tidak baik:</b> beberapa kelompok sudah memilih organizing dan actuating, tetapi belum memilih momen yang tidak berjalan baik.</li>
+      <li><b>Rekap:</b> empat kelompok menulis rekap tanpa bagian “Belum” yang sebenarnya.</li>
+    </ul></div>
+</article>
+<article class="unit" data-title="Sebelum presentasi" data-block="Penutup" data-at="87">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Sebelum presentasi</div>
+    <h2>Empat hal yang harus terlihat di chat sebelum Anda tampil</h2>
+    <div class="checklist">
+      <div><i>01</i><span>Rekap Fase 3 dikirim sebagai teks, lalu disematkan.<small>Selesai · Belum · Keputusan · Fokus presentasi. Yang belum punya Rekap Fase 2, susulkan dengan jujur.</small></span></div>
+      <div><i>02</i><span>Tiga potongan chat dipilih dan disetujui di grup.<small>Organizing, actuating, dan momen yang tidak berjalan baik, lengkap dengan jam dan peran.</small></span></div>
+      <div><i>03</i><span>Latihan bersama dijadwalkan dan dicatat.<small>Pengingat Tenggat mengingatkan H-1; hasil latihan ditulis hari itu juga.</small></span></div>
+      <div><i>04</i><span>Setiap anggota bisa menjelaskan slide mana pun.<small>Penyaji diacak. PJ Presentasi &amp; Refleksi memastikannya, dan Pemberi Umpan Balik memeriksa isi.</small></span></div>
+    </div>
+    <span class="num">27</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 87–90</span></div>
+    <p class="say">“Empat hal ini yang saya cari lebih dulu saat membaca chat Anda sebelum presentasi.”</p>
+    <p>Poin 1 menutup indikator 6 (informasi sampai). Poin 2 dan 4 menentukan Bagian 2 presentasi (25% nilai kelompok). Poin 3 memberi Pengingat Tenggat satu tenggat terakhir yang bisa ditagih.</p></div>
+</article>
+<article class="unit" data-title="Tulis komitmen sekarang" data-block="Penutup" data-at="90">
+  <div class="frame"><section class="slide">
+    <div class="eyebrow">Lima menit · di grup WhatsApp kelompok</div>
+    <h2>Tulis komitmen kelompok Anda sekarang, di grup</h2>
+    <div class="split">
+      <div class="wa"><div class="h">Contoh pesan</div>KOMITMEN SEBELUM PRESENTASI<br>1. @<em>[PJ Presentasi]</em> kirim 3 potongan chat untuk disetujui, Minggu 20.00<br>2. @<em>[Pengingat Tenggat]</em> ingatkan latihan H-1 dan tulis siapa hadir<br>3. @<em>[Koordinator]</em> kirim Rekap Fase 3 dengan bagian Belum, Senin 12.00<br>Ada kendala? Kabari paling lambat Senin 09.00.</div>
+      <div class="pointer">
+        <p><b>Ambil dari kolom Saran</b> di slide kelompok Anda. Dua atau tiga langkah sudah cukup.</p>
+        <p><b>Tulis label KOMITMEN.</b> Minggu lalu tidak ada kelompok yang menulisnya, padahal enam kelompok menjalankan sarannya.</p>
+        <p><b>Setiap orang yang di-@tag membalas</b> “Siap” dengan waktunya. Konfirmasi itu bagian dari indikator 1.</p>
+        <div style="margin-top:1em"><button class="tchip" type="button" data-sec="300" data-label="Tulis komitmen">▶ Timer 5 menit</button></div>
+      </div>
+    </div>
+    <span class="num">28</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 90–95</span></div>
+    <p>Biarkan kelas mengetik dalam hening. Dosen tidak menjawab di grup (sesuai aturan brief), cukup mengamati pesan masuk.</p>
+    <p class="tip">Kalau waktu habis, minta komitmen dikirim paling lambat pukul 20.00 malam itu. Pesan setelah 21.00 tetap sah, tetapi tidak wajib dibalas sampai pagi.</p></div>
+</article>
+<article class="unit" data-title="Penutup" data-block="Penutup" data-at="95">
+  <div class="frame"><section class="slide dark center">
+    <div class="eyebrow">Penutup</div>
+    <h1 class="display">Organisasi yang baik bukan yang tanpa masalah.<br>Organisasi yang baik menulis masalahnya, lalu bergerak.</h1>
+    <p class="lede">Ketiga fase sudah ditutup. Yang Anda tulis di grup sampai presentasi tetap dihitung. Penyaji diacak.</p>
+    <span class="num">29</span>
+  </section></div>
+  <div class="notes"><div class="nh"><b>Catatan dosen</b><span class="min">Menit 95–100</span></div>
+    <p class="say">“Minggu pertama Anda membuktikan bisa membagi tugas. Minggu kedua sebagian besar mulai menagih dan menolong. Saat presentasi, tunjukkan bahwa Anda juga bisa jujur soal yang belum berjalan.”</p>
+    <p>Sisa waktu untuk pertanyaan tentang aturan presentasi. Pertanyaan tentang isi topik dijawab di grup kelas, bukan di grup kelompok.</p></div>
+</article>
+
+</main>
+
+<div id="ctl" class="js-only">
+  <button class="tb" type="button" data-act="prev" aria-label="Sebelumnya">◀</button>
+  <span class="pos" id="c-pos">1 / 1</span>
+  <span class="stepinfo"><span class="dots" id="c-dots"></span><span id="c-step"></span></span>
+  <button class="tb primary" type="button" data-act="next">Lanjut ▶</button>
+  <span class="nextup" id="c-next"></span>
+</div>
+
+<aside id="outline" hidden aria-label="Daftar slide">
+  <h3>Daftar slide <button class="tb" type="button" id="b-outline-x" aria-label="Tutup daftar">×</button></h3>
+  <div id="outline-list"></div>
+</aside>
+<div id="help" hidden role="dialog" aria-label="Pintasan keyboard">
+  <h3>Pintasan keyboard</h3>
+  <table>
+    <tr><td>→ · Spasi · klik slide</td><td>Lanjut (munculkan langkah berikutnya, lalu pindah slide)</td></tr>
+    <tr><td>← · Backspace</td><td>Mundur satu langkah</td></tr>
+    <tr><td>N</td><td>Tampilkan / sembunyikan catatan</td></tr>
+    <tr><td>F</td><td>Layar penuh (tampilan untuk mahasiswa); Esc untuk keluar</td></tr>
+    <tr><td>T · R</td><td>Mulai/jeda timer slide ini · ulang timer</td></tr>
+    <tr><td>O</td><td>Daftar slide</td></tr>
+    <tr><td>Home · End</td><td>Slide pertama · terakhir</td></tr>
+  </table>
+  <p style="margin-top:10px;font-size:13px;color:var(--muted)">Clicker presentasi (tombol Page Down / Page Up) juga bisa dipakai.</p>
+  <p style="margin-top:10px"><button class="tb" type="button" id="b-help-x">Tutup</button></p>
+</div>
+<div id="timer" role="timer" hidden title="Klik untuk jeda / lanjut"><div class="clk">0:00</div><div class="lbl"></div><button class="x" type="button" aria-label="Tutup timer">×</button></div>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function(){
+  'use strict';
+  var D=document, root=D.documentElement, body=D.body;
+  root.classList.add('js');
+  if(window.__ARTIFACT__) root.classList.add('artifact');
+  var AUD=(location.hash==='#proyektor');
+  if(AUD) body.classList.add('aud');
+  var $=function(s,c){return (c||D).querySelector(s);}, $$=function(s,c){return [].slice.call((c||D).querySelectorAll(s));};
+  var units=$$('#deck .unit'), N=units.length, cur=0, step=0, TOTAL=100;
+  var KEY='ppm-progres-20261024:';
+  function sget(k){try{return window.localStorage.getItem(KEY+k);}catch(e){return null;}}
+  function sset(k,v){try{window.localStorage.setItem(KEY+k,v);}catch(e){}}
+  function sdel(k){try{window.localStorage.removeItem(KEY+k);}catch(e){}}
+  var toastEl=$('#toast'),toastT;
+  function toast(m){toastEl.textContent=m;toastEl.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){toastEl.hidden=true;},3200);}
+
+  /* ---------- blok waktu ---------- */
+  var blocks=[];
+  units.forEach(function(u,i){
+    var b=u.getAttribute('data-block');
+    if(!blocks.length||blocks[blocks.length-1].name!==b) blocks.push({name:b,first:i,last:i,from:+u.getAttribute('data-at')});
+    else blocks[blocks.length-1].last=i;
+  });
+  blocks.forEach(function(b,i){b.to=(i<blocks.length-1)?blocks[i+1].from:TOTAL;});
+  var strip=$('#strip');
+  blocks.forEach(function(b){
+    var el=D.createElement('button');el.type='button';el.style.flexGrow=String(b.to-b.from);
+    el.innerHTML='<b></b><span></span><i class="fill"></i>';
+    el.querySelector('b').textContent=b.name;
+    el.querySelector('span').textContent=b.from+'–'+b.to+'′';
+    el.title=b.name+' · menit '+b.from+'–'+b.to;
+    el.addEventListener('click',function(){go(b.first,0);});
+    b.el=el;strip.appendChild(el);
+  });
+
+  /* ---------- daftar slide ---------- */
+  var olist=$('#outline-list'), oitems=[];
+  blocks.forEach(function(b){
+    var h=D.createElement('div');h.className='blk';h.textContent=b.name+' · '+b.from+'–'+b.to+'′';olist.appendChild(h);
+    for(var i=b.first;i<=b.last;i++){(function(i){
+      var it=D.createElement('button');it.type='button';it.className='it';
+      it.innerHTML='<span></span><em></em>';
+      it.querySelector('span').textContent=(i+1)+' · '+units[i].getAttribute('data-at')+'′';
+      it.querySelector('em').textContent=units[i].getAttribute('data-title');
+      it.querySelector('em').style.fontStyle='normal';
+      it.addEventListener('click',function(){go(i,0);toggleOutline(false);});
+      olist.appendChild(it);oitems[i]=it;
+    })(i);}
+  });
+  function toggleOutline(v){var o=$('#outline');o.hidden=(v===undefined)?!o.hidden:!v;}
+  $('#b-outline').addEventListener('click',function(){toggleOutline();});
+  $('#b-outline-x').addEventListener('click',function(){toggleOutline(false);});
+  function toggleHelp(v){var h=$('#help');h.hidden=(v===undefined)?!h.hidden:!v;}
+  $('#b-help').addEventListener('click',function(){toggleHelp();});
+  $('#b-help-x').addEventListener('click',function(){toggleHelp(false);});
+
+  /* ---------- langkah ---------- */
+  function maxStep(u){var m=0;$$('[data-step]',u).forEach(function(el){m=Math.max(m,+el.getAttribute('data-step')||0);});return m;}
+  var ctl=$('#ctl');
+  function render(){
+    units.forEach(function(u,k){u.classList.toggle('cur',k===cur);});
+    var u=units[cur], mx=maxStep(u);
+    $$('[data-step]',u).forEach(function(el){el.classList.toggle('hid',+el.getAttribute('data-step')>step);});
+    if(!AUD){
+      var notes=$('.notes',u); u.insertBefore(ctl,notes);
+      $('#c-pos').textContent=(cur+1)+' / '+N;
+      var dots=$('#c-dots'); dots.innerHTML='';
+      for(var i=1;i<=mx;i++){var d=D.createElement('i');if(i<=step)d.className='on';dots.appendChild(d);}
+      $('#c-step').textContent=mx?('Langkah '+step+' dari '+mx+(step<mx?' · klik Lanjut untuk membuka berikutnya':' · semua terbuka')):'Tidak ada langkah tersembunyi';
+      var nx=$('#c-next'); nx.innerHTML='';
+      if(cur<N-1){nx.appendChild(D.createTextNode('Slide berikutnya: '));var b=D.createElement('b');b.textContent=units[cur+1].getAttribute('data-title');nx.appendChild(b);}
+      else nx.textContent='Slide terakhir';
+      blocks.forEach(function(bk){var on=cur>=bk.first&&cur<=bk.last;bk.el.classList.toggle('cur',on);
+        bk.el.querySelector('.fill').style.width=on?(((cur-bk.first+1)/(bk.last-bk.first+1))*100+'%'):'0';});
+      oitems.forEach(function(it,k){it.classList.toggle('cur',k===cur);});
+      sset('pos',cur+':'+step);
+      try{history.replaceState(null,'','#s'+(cur+1));}catch(e){}
+      updateClock(); send();
+    }
+    size();
+  }
+  function go(i,s){cur=Math.max(0,Math.min(N-1,i));step=(s==='max')?maxStep(units[cur]):(s||0);render();}
+  function next(){var mx=maxStep(units[cur]);if(step<mx){step++;render();}else if(cur<N-1){go(cur+1,0);}}
+  function prev(){if(step>0){step--;render();}else if(cur>0){go(cur-1,'max');}}
+  $('#b-next').addEventListener('click',next);$('#b-prev').addEventListener('click',prev);
+  $$('[data-act]',ctl).forEach(function(b){b.addEventListener('click',function(){b.getAttribute('data-act')==='next'?next():prev();});});
+
+  /* ---------- ukuran slide ---------- */
+  function size(){
+    var u=units[cur], f=$('.frame',u), s=$('.slide',u), W;
+    if(body.classList.contains('proj')||AUD){W=Math.min(window.innerWidth,window.innerHeight*16/9);}
+    else{
+      var avail=$('#deck').clientWidth-32, top=$('.bar').offsetHeight+(strip.offsetHeight||0);
+      var maxH=window.innerHeight-top-150;
+      W=Math.max(280,Math.min(avail,maxH*16/9));
+    }
+    f.style.width=W+'px'; s.style.fontSize=(W/50)+'px';
+  }
+  window.addEventListener('resize',size);
+
+  /* ---------- catatan ---------- */
+  var hn=$('#hn');
+  if(sget('hideNotes')==='1') hn.checked=true;
+  hn.addEventListener('change',function(){sset('hideNotes',hn.checked?'1':'0');size();});
+
+  /* ---------- layar penuh (tampilan mahasiswa) ---------- */
+  function enterProj(){body.classList.add('proj');try{var r=root.requestFullscreen&&root.requestFullscreen();if(r&&r.catch)r.catch(function(){});}catch(e){}size();}
+  function exitProj(){body.classList.remove('proj');try{if(D.fullscreenElement)D.exitFullscreen();}catch(e){}size();}
+  $('#b-proj').addEventListener('click',enterProj);
+  D.addEventListener('fullscreenchange',function(){if(!D.fullscreenElement&&body.classList.contains('proj')){body.classList.remove('proj');size();}});
+
+  /* ---------- jendela proyektor (file lokal) ---------- */
+  var aud=null;
+  function send(){if(aud&&!aud.closed){try{aud.postMessage({t:'state',i:cur,s:step},'*');}catch(e){}}}
+  $('#b-aud').addEventListener('click',function(){
+    try{aud=window.open(location.href.split('#')[0]+'#proyektor','ppm_proyektor','width=1280,height=720');}catch(e){aud=null;}
+    if(!aud){toast('Browser memblokir jendela baru. Izinkan pop-up, atau pakai tombol Layar penuh.');return;}
+    toast('Seret jendela proyektor ke layar proyektor, klik di dalamnya, lalu tekan F.');
+    setTimeout(function(){send();sendTimer();},800);
+  });
+  window.addEventListener('message',function(e){
+    var d=e.data||{};
+    if(AUD){
+      if(d.t==='state'){cur=d.i;step=d.s;render();}
+      if(d.t==='timer')paintRemote(d);
+    }else{
+      if(d.t==='key')handleKey({key:d.k,preventDefault:function(){}});
+      if(d.t==='hello'){if(!aud)aud=e.source;send();sendTimer();}
+    }
+  });
+
+  /* ---------- timer kegiatan ---------- */
+  var tEl=$('#timer'),tClk=$('.clk',tEl),tLbl=$('.lbl',tEl);
+  var T={total:0,left:0,label:'',on:false,done:false,iv:null,end:0};
+  function fmt(s){s=Math.max(0,Math.ceil(s));return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2);}
+  function paint(){tClk.textContent=T.done?'Waktu':fmt(T.left);tLbl.textContent=T.done?(T.label+' selesai'):T.label;
+    tEl.classList.toggle('paused',!T.on&&!T.done);tEl.classList.toggle('done',T.done);sendTimer();}
+  function sendTimer(){if(aud&&!aud.closed){try{aud.postMessage({t:'timer',vis:!tEl.hidden,clk:tClk.textContent,lbl:tLbl.textContent,paused:!T.on&&!T.done,done:T.done},'*');}catch(e){}}}
+  function paintRemote(d){tEl.hidden=!d.vis;tClk.textContent=d.clk;tLbl.textContent=d.lbl;tEl.classList.toggle('paused',d.paused);tEl.classList.toggle('done',d.done);}
+  function beep(){try{var C=window.AudioContext||window.webkitAudioContext;if(!C)return;var c=new C();
+    [0,.35,.7].forEach(function(t){var o=c.createOscillator(),g=c.createGain();o.frequency.value=880;g.gain.value=.12;o.connect(g);g.connect(c.destination);o.start(c.currentTime+t);o.stop(c.currentTime+t+.2);});}catch(e){}}
+  function tick(){T.left=(T.end-Date.now())/1000;if(T.left<=0){T.left=0;T.on=false;T.done=true;clearInterval(T.iv);beep();}paint();}
+  function start(sec,label){clearInterval(T.iv);T.total=sec;T.left=sec;T.label=label||'';T.on=true;T.done=false;T.end=Date.now()+sec*1000;tEl.hidden=false;T.iv=setInterval(tick,250);paint();}
+  function toggleT(){if(T.done||!T.total)return;if(T.on){T.on=false;clearInterval(T.iv);T.left=(T.end-Date.now())/1000;}else{T.on=true;T.end=Date.now()+T.left*1000;T.iv=setInterval(tick,250);}paint();}
+  $$('.tchip').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();if(AUD)return;start(+b.getAttribute('data-sec'),b.getAttribute('data-label'));});});
+  tEl.addEventListener('click',function(e){if(e.target.classList.contains('x')||AUD)return;toggleT();});
+  $('.x',tEl).addEventListener('click',function(e){e.stopPropagation();clearInterval(T.iv);T.on=false;T.total=0;tEl.hidden=true;sendTimer();});
+  function slideTimer(){
+    if(T.total&&!T.done&&!tEl.hidden){toggleT();return;}
+    var c=$('.tchip',units[cur]);if(c)c.click();else toast('Slide ini tidak punya timer.');}
+
+  /* ---------- jam kelas ---------- */
+  var cStart=+(sget('classStart')||0), cIv=null;
+  function updateClock(){
+    var el=$('#c-el'),bd=$('#c-badge'),bs=$('#b-class'),bx=$('#b-class-x');
+    if(!cStart){el.hidden=true;bd.hidden=true;bx.hidden=true;bs.hidden=false;return;}
+    bs.hidden=true;el.hidden=false;bd.hidden=false;bx.hidden=false;
+    var m=(Date.now()-cStart)/60000; el.textContent='Menit '+Math.floor(m)+':'+('0'+Math.floor((m%1)*60)).slice(-2);
+    var u=units[cur], plan=+u.getAttribute('data-at'), nxt=(cur<N-1)?+units[cur+1].getAttribute('data-at'):TOTAL;
+    var diff=0; if(m<plan)diff=m-plan; else if(m>nxt)diff=m-nxt;
+    if(Math.abs(diff)<1){bd.textContent='sesuai rencana';bd.classList.remove('late');}
+    else if(diff>0){bd.textContent='terlambat '+Math.round(diff)+' mnt';bd.classList.add('late');}
+    else{bd.textContent='lebih cepat '+Math.round(-diff)+' mnt';bd.classList.remove('late');}
+  }
+  function runClock(){clearInterval(cIv);if(cStart)cIv=setInterval(updateClock,1000);updateClock();}
+  $('#b-class').addEventListener('click',function(){cStart=Date.now();sset('classStart',String(cStart));runClock();toast('Jam kelas berjalan. Lencana membandingkan menit sekarang dengan rencana slide ini.');});
+  $('#b-class-x').addEventListener('click',function(){cStart=0;sdel('classStart');runClock();});
+  if(cStart&&Date.now()-cStart>4*3600000){cStart=0;sdel('classStart');}
+
+  /* ---------- klik slide & keyboard ---------- */
+  units.forEach(function(u){$('.slide',u).addEventListener('click',function(e){
+    if(e.target.closest('.tchip'))return;
+    if(AUD){try{window.opener.postMessage({t:'key',k:'ArrowRight'},'*');}catch(x){}return;}
+    next();});});
+  function handleKey(e){
+    var k=e.key;
+    if(k==='ArrowRight'||k==='PageDown'||k===' '||k==='Enter'||k==='ArrowDown'){e.preventDefault();next();}
+    else if(k==='ArrowLeft'||k==='PageUp'||k==='ArrowUp'||k==='Backspace'){e.preventDefault();prev();}
+    else if(k==='Home'){go(0,0);}else if(k==='End'){go(N-1,0);}
+    else if(k==='n'||k==='N'){hn.checked=!hn.checked;hn.dispatchEvent(new Event('change'));}
+    else if(k==='f'||k==='F'){body.classList.contains('proj')?exitProj():enterProj();}
+    else if(k==='Escape'){if(body.classList.contains('proj'))exitProj();toggleOutline(false);toggleHelp(false);}
+    else if(k==='t'||k==='T'){slideTimer();}
+    else if(k==='r'||k==='R'){if(T.total)start(T.total,T.label);}
+    else if(k==='o'||k==='O'){toggleOutline();}
+    else if(k==='?'){toggleHelp();}
+  }
+  D.addEventListener('keydown',function(e){
+    if(e.target&&(e.target.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&e.target.id!=='hn'))return;
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    if(AUD){
+      if(e.key==='f'||e.key==='F'){try{if(!D.fullscreenElement)root.requestFullscreen();else D.exitFullscreen();}catch(x){}return;}
+      try{window.opener.postMessage({t:'key',k:e.key},'*');}catch(x){}e.preventDefault();return;
+    }
+    handleKey(e);
+  });
+
+  /* ---------- mulai ---------- */
+  var h=/^#s(\d+)$/.exec(location.hash||''), pos=(sget('pos')||'').split(':');
+  if(h&&+h[1]>=1&&+h[1]<=N)go(+h[1]-1,0);
+  else if(!AUD&&pos.length===2&&+pos[0]<N)go(+pos[0],Math.min(+pos[1]||0,maxStep(units[+pos[0]])));
+  else go(0,0);
+  runClock();
+  if(AUD){try{window.opener&&window.opener.postMessage({t:'hello'},'*');}catch(e){}}
+})();
+</script>
+</body>
+</html>
