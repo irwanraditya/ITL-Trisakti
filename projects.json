@@ -32,6 +32,12 @@
         "jenis": "ZIP",
         "file": "materi/ab/template-markdown-project-ab.zip",
         "unduh": "Template Markdown Project AB.zip"
+      },
+      {
+        "judul": "Metode development lewat analogi transportasi · materi tambahan",
+        "keterangan": "Waterfall, Agile, Incremental, Prototype, AI-assisted: umpan balik, eksperimen, KPI, dan tata kelola AI",
+        "jenis": "Slide",
+        "file": "Memahami Metode Development melalui Analogi Transportasi.html?kelas=ab"
       }
     ]
   },
@@ -69,6 +75,12 @@
         "keterangan": "Yang berubah sejak 17 Oktober, status enam indikator, umpan balik per kelompok, dan daftar cek sebelum presentasi",
         "jenis": "Slide",
         "file": "materi/ppm/progres-minggu-2-24-okt-2026.html"
+      },
+      {
+        "judul": "Development: Waterfall, Agile, dan metode lainnya",
+        "keterangan": "Setelah Understand, Planning, Organizing, Actuating, dan Control: cara membangun hasilnya, dengan analogi kendaraan",
+        "jenis": "Slide",
+        "file": "Memahami Metode Development melalui Analogi Transportasi.html?kelas=ppm"
       }
     ]
   },
@@ -87,5 +99,13 @@
     "description": "Manifesto dan 12 prinsip Agile dibaca ulang untuk manajemen proyek umum (bukan hanya software): simulasi gedung interaktif business as usual vs proyek baru, sprint, dan CI/CD di luar software.",
     "icon": "↻",
     "filename": "Agile untuk Manajemen Proyek.html"
+  },
+  {
+    "title": "Memahami Metode Development melalui Analogi Transportasi",
+    "category": "Teaching",
+    "type": "Topic Deck",
+    "description": "Waterfall, Agile, Incremental, Prototype, dan AI-assisted development dijelaskan lewat analogi kendaraan (skateboard sampai mobil), dengan penekanan berbeda untuk PPM (S1) dan Analitika Bisnis (S2). Pilih mode kelas di sampul.",
+    "icon": "⇢",
+    "filename": "Memahami Metode Development melalui Analogi Transportasi.html"
   }
 ]

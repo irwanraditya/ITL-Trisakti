@@ -26,6 +26,7 @@ The landing page intentionally opens the Academic Portal in a new tab instead of
 | Prinsip-Prinsip Manajemen | Course Deck | Teaching |
 | Presentation Skills | Course Deck | Teaching |
 | Agile untuk Manajemen Proyek | Topic Deck | Teaching |
+| Memahami Metode Development melalui Analogi Transportasi | Topic Deck | Teaching |
 
 ## 🚀 GitHub Pages
 
@@ -114,6 +115,7 @@ ITL-Trisakti/
 ├── Prinsip-Prinsip Manajemen.html
 ├── Presentation Skills.html
 ├── Agile untuk Manajemen Proyek.html   ← deck topik ID/EN dengan simulasi gedung interaktif
+├── Memahami Metode Development melalui Analogi Transportasi.html   ← deck topik ID/EN; mode kelas ?kelas=ppm|ab|semua
 │
 └── apps-script/           ← disalin ke Google Apps Script, bukan dijalankan di Pages
     ├── Code.gs
