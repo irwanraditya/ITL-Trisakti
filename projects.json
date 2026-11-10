@@ -107,5 +107,13 @@
     "description": "Waterfall, Agile, Incremental, Prototype, dan AI-assisted development dijelaskan lewat analogi kendaraan (skateboard sampai mobil), dengan penekanan berbeda untuk PPM (S1) dan Analitika Bisnis (S2). Pilih mode kelas di sampul.",
     "icon": "⇢",
     "filename": "Memahami Metode Development melalui Analogi Transportasi.html"
+  },
+  {
+    "title": "English Learning Academy",
+    "category": "Learning",
+    "type": "Learning Platform",
+    "description": "Self-paced English from A1 to C1 and Professional English (CEFR): 99 lessons with Indonesian explanations, vocabulary builder with spaced repetition, daily planner, listening and speaking practice, placement and stage assessments, and ten business simulations. Progress is saved in your browser.",
+    "icon": "En",
+    "filename": "english-learning-academy.html"
   }
 ]

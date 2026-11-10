@@ -27,6 +27,7 @@ The landing page intentionally opens the Academic Portal in a new tab instead of
 | Presentation Skills | Course Deck | Teaching |
 | Agile untuk Manajemen Proyek | Topic Deck | Teaching |
 | Memahami Metode Development melalui Analogi Transportasi | Topic Deck | Teaching |
+| English Learning Academy | Learning Platform | Learning |
 
 ## 🚀 GitHub Pages
 
@@ -117,10 +118,31 @@ ITL-Trisakti/
 ├── Agile untuk Manajemen Proyek.html   ← deck topik ID/EN dengan simulasi gedung interaktif
 ├── Memahami Metode Development melalui Analogi Transportasi.html   ← deck topik ID/EN; mode kelas ?kelas=ppm|ab|semua
 │
+├── english-learning-academy.html   ← platform belajar bahasa Inggris A1 → Professional (dibangun dari english-academy/src)
+├── english-academy/
+│   ├── content/            ← kurikulum, 99 pelajaran, teks, asesmen, simulasi (data)
+│   ├── src/                ← sumber app shell + build.py
+│   ├── tools/              ← validate.js dan e2e.js
+│   └── README.md           ← dokumentasi teknis lengkap
+│
 └── apps-script/           ← disalin ke Google Apps Script, bukan dijalankan di Pages
     ├── Code.gs
     └── Index.html
 ```
+
+## 🇬🇧 English Learning Academy
+
+`english-learning-academy.html` is a self-paced English platform from **A1 Beginner** to **C1** and **Professional English** (CEFR), built for Indonesian learners: 99 lessons with Indonesian explanations, a vocabulary builder with spaced repetition (1–3–7–14–30 days), a daily study planner, listening (browser speech + transcripts), speaking practice, a placement test, six stage assessments, a final assessment and ten professional simulations. Progress is saved in the learner's browser, with JSON export/import.
+
+Content lives in `english-academy/content/` as data files. To change content, edit the file, run the validator, and push:
+
+```bash
+node english-academy/tools/validate.js .     # must report ERRORS 0
+python3 english-academy/src/build.py .       # only if src/ changed or a content file was added
+node english-academy/tools/e2e.js .          # optional full browser test (Playwright)
+```
+
+See [`english-academy/README.md`](english-academy/README.md) for the architecture, content schema, configuration, testing and limitations.
 
 ## 📝 Kuis Esai per Mata Kuliah
 
