@@ -249,6 +249,7 @@ Kartu mata kuliah menampilkan blok **Materi & tugas** dari kunci `materi` di `pr
 | Prinsip-Prinsip Manajemen | Tugas Kelompok Organizing & Actuating | `materi/ppm/tugas-kelompok-organizing-actuating.pdf` |
 | Prinsip-Prinsip Manajemen | Pembahasan progres minggu 1 (17 Oktober 2026) | `materi/ppm/progres-minggu-1-17-okt-2026.html` |
 | Prinsip-Prinsip Manajemen | Pembahasan progres minggu 2 (data chat 17–24 Oktober 2026) | `materi/ppm/progres-minggu-2-24-okt-2026.html` |
+| Prinsip-Prinsip Manajemen | Pembahasan progres minggu 3 (data chat 24 Oktober – 13 November 2026) | `materi/ppm/progres-minggu-3-13-nov-2026.html` |
 
 Kunci jawaban dataset project **tidak** diunggah ke repo; disimpan dosen di PC.
 
