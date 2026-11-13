@@ -28,6 +28,7 @@ The landing page intentionally opens the Academic Portal in a new tab instead of
 | Agile untuk Manajemen Proyek | Topic Deck | Teaching |
 | Memahami Metode Development melalui Analogi Transportasi | Topic Deck | Teaching |
 | English Learning Academy | Learning Platform | Learning |
+| BI Lite · Nusantara Kargo | BI Practice App | Learning |
 
 ## 🚀 GitHub Pages
 
@@ -125,6 +126,12 @@ ITL-Trisakti/
 │   ├── tools/              ← validate.js dan e2e.js
 │   └── README.md           ← dokumentasi teknis lengkap
 │
+├── bi-lite.html            ← BI ringan ala Power BI/Tableau dengan data Nusantara Kargo
+├── bi-lite/
+│   ├── data-nusantara-kargo.js   ← data kolom hasil build (jangan diedit manual)
+│   ├── tools/              ← build_data.py dan e2e.js
+│   └── README.md           ← dokumentasi teknis
+│
 └── apps-script/           ← disalin ke Google Apps Script, bukan dijalankan di Pages
     ├── Code.gs
     └── Index.html
@@ -143,6 +150,19 @@ node english-academy/tools/e2e.js .          # optional full browser test (Playw
 ```
 
 See [`english-academy/README.md`](english-academy/README.md) for the architecture, content schema, configuration, testing and limitations.
+
+## 📊 BI Lite · Nusantara Kargo
+
+`bi-lite.html` is a lightweight, browser-only BI practice app modelled on Power BI and Tableau. Students pick a table, drag fields to Axis, Legend and Values, choose an aggregation (including **% Ya** for OTD), cross-filter by clicking, add slicers and page filters, and arrange multi-page reports. It ships twelve visual types, automatic date hierarchies, a raw Data view, CSV download per visual, light/dark themes and a phone layout. Dashboards autosave in the browser and can be exported/imported as `.json` (e.g. for submission).
+
+Data is the fictitious **Nusantara Kargo 2025** dataset already published at `materi/ab/dataset-project-ab-2026.xlsx` (5 tables, 11,155 shipments). No libraries, no server, no student data.
+
+```bash
+python3 bi-lite/tools/build_data.py .   # rebuild data after the Excel changes (needs openpyxl)
+node bi-lite/tools/e2e.js .             # browser test (Playwright); must report 0 failed
+```
+
+See [`bi-lite/README.md`](bi-lite/README.md) for architecture, design decisions, limitations and ideas.
 
 ## 📝 Kuis Esai per Mata Kuliah
 

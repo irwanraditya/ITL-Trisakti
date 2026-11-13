@@ -115,5 +115,13 @@
     "description": "Self-paced English from A1 to C1 and Professional English (CEFR): 99 lessons with Indonesian explanations, vocabulary builder with spaced repetition, daily planner, listening and speaking practice, placement and stage assessments, and ten business simulations. Progress is saved in your browser.",
     "icon": "En",
     "filename": "english-learning-academy.html"
+  },
+  {
+    "title": "BI Lite · Nusantara Kargo",
+    "category": "Learning",
+    "type": "BI Practice App",
+    "description": "Latihan business intelligence ala Power BI/Tableau langsung di browser: pilih tabel, tarik kolom ke Sumbu, Legenda, dan Nilai, lalu saring dan susun dashboard dari data fiktif Nusantara Kargo 2025 (kiriman, pelanggan, armada, gudang, terminal). Dashboard tersimpan di browser dan bisa diekspor sebagai berkas.",
+    "icon": "BI",
+    "filename": "bi-lite.html"
   }
 ]
