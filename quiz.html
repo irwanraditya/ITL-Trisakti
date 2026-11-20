@@ -99,6 +99,12 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
 .pgring td{padding:8px 6px;border-bottom:1px solid var(--line)}
 .pgring td.num{text-align:right;font-weight:700;white-space:nowrap}
 .pgring tr.tot td{font-weight:800;border-bottom:none}
+/* konfirmasi di dalam halaman: dialog bawaan browser memicu blur jendela
+   sehingga tercatat sebagai "keluar halaman" */
+.modal{position:fixed;inset:0;background:rgba(11,31,58,.45);display:flex;align-items:center;justify-content:center;z-index:20;padding:20px}
+.mbox{background:#fff;border-radius:16px;max-width:420px;width:100%;padding:22px;box-shadow:0 18px 50px rgba(11,31,58,.25)}
+.mbox p{font-size:15px;margin-bottom:18px}
+.mbtn{display:flex;gap:10px;justify-content:flex-end}
 @media(max-width:520px){.barin{gap:8px;padding:10px 12px}.barin .btn{padding:10px 12px;font-size:14px}.timer{font-size:19px}}
 </style>
 </head>
@@ -166,6 +172,9 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal" id="konfirmasi" role="dialog" aria-modal="true" aria-labelledby="kTeks" hidden>
+  <div class="mbox"><p id="kTeks"></p><div class="mbtn"><button class="btn ghost" id="kBatal">Batal</button><button class="btn" id="kYa">Ya</button></div></div>
+</div>
 
 <script src="quiz-config.js"></script>
 <script>
@@ -206,6 +215,20 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     var t = $('toast'); t.textContent = msg; t.classList.add('on');
     clearTimeout(toast._h); toast._h = setTimeout(function () { t.classList.remove('on'); }, 2600);
   }
+  /* Konfirmasi di dalam halaman, pengganti dialog confirm bawaan browser. Dialog bawaan membuat
+     jendela kehilangan fokus (blur), sehingga tercatat sebagai keluar halaman. */
+  function tanya(teks, labelYa, lanjut) {
+    $('kTeks').textContent = teks; $('kYa').textContent = labelYa || 'Ya';
+    tanya._lanjut = lanjut; $('konfirmasi').hidden = false; $('kYa').focus();
+  }
+  $('kYa').addEventListener('click', function () {
+    var f = tanya._lanjut; tanya._lanjut = null; $('konfirmasi').hidden = true; if (f) f();
+  });
+  $('kBatal').addEventListener('click', function () { tanya._lanjut = null; $('konfirmasi').hidden = true; });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !$('konfirmasi').hidden) { tanya._lanjut = null; $('konfirmasi').hidden = true; }
+  });
+
   function kunciDraf() { return 'kuis:' + KODE + ':' + S.nim; }
   function simpanDraf() {
     if (CFG && CFG.pg) { simpanPG(); return; }
@@ -433,7 +456,7 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
   $('bKirim').addEventListener('click', function () {
     var kosongN = CFG.soal.filter(function (q) { return !$('ta' + q.no).value.trim(); }).length;
     var pesan = kosongN ? 'Masih ada ' + kosongN + ' soal kosong. Tetap kirim?' : 'Kirim jawaban sekarang? Jawaban tidak bisa diubah setelahnya.';
-    if (window.confirm(pesan)) kirim(false);
+    tanya(pesan, 'Kirim', function () { kirim(false); });
   });
 
   function kirim(otomatis) {
@@ -608,12 +631,13 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     if (!CFG || !CFG.pg || S.mengirim || S.terkirim) return;
     var P = CFG.halaman[S.pg.idx];
     if (!S.pg.cek[P.hal]) {
-      if (!window.confirm('Cek jawaban halaman ini? Setelah dicek, jawaban di halaman ini tidak bisa diubah.')) return;
-      S.pg.cek[P.hal] = true; simpanPG(); tampilHal(S.pg.idx);
+      tanya('Cek jawaban halaman ini? Setelah dicek, jawaban di halaman ini tidak bisa diubah.', 'Ya, cek', function () {
+        S.pg.cek[P.hal] = true; simpanPG(); tampilHal(S.pg.idx);
+      });
     } else if (S.pg.idx < CFG.halaman.length - 1) {
       tampilHal(S.pg.idx + 1);
-    } else if (window.confirm('Kirim semua jawaban sekarang?')) {
-      kirim(false);
+    } else {
+      tanya('Kirim semua jawaban sekarang?', 'Kirim', function () { kirim(false); });
     }
   });
   $('bHalSebelum').addEventListener('click', function () {
