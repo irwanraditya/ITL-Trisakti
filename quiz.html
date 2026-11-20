@@ -118,6 +118,17 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
   padding:16px 20px 12px;border-bottom:1px solid var(--line)}
 .mpkepala .pgjudul{margin:2px 0 0}
 #pmIsi{padding:16px 20px 20px}
+/* ringkasan kesalahan di layar selesai (hanya jawaban yang salah) */
+.rsalah{max-width:680px;margin:6px auto 26px;text-align:left}
+.rsalah h2{font-family:Georgia,serif;font-size:clamp(21px,3vw,25px);line-height:1.2;margin:0 0 4px}
+.rsinfo{color:var(--muted);font-size:14px;margin-bottom:14px}
+.rsitem{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 5px 20px rgba(11,31,58,.04)}
+.rsno{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.rsq{font-weight:650;line-height:1.5;margin-bottom:4px}
+.rsj{border-radius:10px;padding:10px 12px;font-size:14px;line-height:1.55;margin-top:8px}
+.rsj b{display:block;margin-bottom:2px}
+.rsj.no{background:#fdf0ef;color:#7a1d14}.rsj.ok{background:#eef6f1;color:#1f4d39}
+.rscatat{font-size:13px;color:var(--muted);margin-top:4px}
 @media(max-width:520px){.mgrid{grid-template-columns:1fr}.mpkepala,#pmIsi{padding-left:14px;padding-right:14px}}
 @media(max-width:520px){.barin{gap:8px;padding:10px 12px}.barin .btn{padding:10px 12px;font-size:14px}.timer{font-size:19px}.barin .lbl{display:none}}
 </style>
@@ -170,8 +181,9 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
   <div id="vSelesai" class="center" hidden>
     <div class="eyebrow">Selesai</div>
     <h1>Jawaban terkirim</h1>
-    <p class="lead">Terima kasih. Anda boleh menutup halaman ini.</p>
+    <p class="lead" id="leadSelesai">Terima kasih. Anda boleh menutup halaman ini.</p>
     <div class="pgring" id="ringkasPG" hidden></div>
+    <div class="rsalah" id="ringkasSalah" hidden></div>
     <a href="index.html">Kembali ke hub</a>
   </div>
 </main>
@@ -504,7 +516,7 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
       if (r && r.ok) {
         S.terkirim = true; clearInterval(S.iv);
         try { localStorage.removeItem(kunciDraf()); localStorage.removeItem(kunciDraf() + ':pg'); } catch (e) {}
-        if (CFG.pg) ringkasPG();
+        if (CFG.pg) { ringkasPG(); ringkasSalah(); $('kembali').hidden = false; }
         $('panelMateri').hidden = true;
         $('vKuis').hidden = true; $('bar').hidden = true; $('vSelesai').hidden = false;
         window.scrollTo(0, 0);
@@ -530,6 +542,8 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
        [MATERI] kalimat pembuka | Judul :: isi | Judul :: • butir • butir | ...
      Tampil sebagai slide sebelum soal halaman itu, dan bisa dibuka lagi lewat tombol Materi. */
   var MATERI_RE = /\[MATERI\]\s*([\s\S]*?)\s*(?=\[SOAL\])/i;
+  // Opsional, di akhir sel: [SALAH A] alasan pilihan A keliru [SALAH B] ... (dipakai di ringkasan kesalahan)
+  var SALAH_RE = /\[SALAH\s*([ABCD])\]\s*([\s\S]*?)\s*(?=\[SALAH\s*[ABCD]\]|$)/gi;
   var PG_RE =/^\s*\[PG\]\s*\[HAL\s*(\d+)\]\s*([\s\S]*?)\s*\[SOAL\]\s*([\s\S]*?)\s*\[A\]\s*([\s\S]*?)\s*\[B\]\s*([\s\S]*?)\s*\[C\]\s*([\s\S]*?)\s*\[D\]\s*([\s\S]*?)\s*\[KUNCI\]\s*([ABCD])\s*\[PENJELASAN\]\s*([\s\S]*)$/i;
   var HURUF = ['A', 'B', 'C', 'D'];
   function esc(x) {
@@ -541,10 +555,12 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     cfg.soal.forEach(function (q) {
       var teks = String(q.teks), mt = MATERI_RE.exec(teks), materi = '';
       if (mt) { materi = mt[1]; teks = teks.replace(MATERI_RE, ''); }
+      var salah = {};
+      teks = teks.replace(SALAH_RE, function (_, L, isi) { salah[L.toUpperCase()] = isi; return ''; });
       var m = PG_RE.exec(teks);
       if (!m) { if (rusak === null) rusak = q.no; return; }
-      items.push({ no: q.no, hal: Number(m[1]), judul: m[2], soal: m[3], materi: materi,
-                   ops: { A: m[4], B: m[5], C: m[6], D: m[7] }, kunci: m[8].toUpperCase(), jelas: m[9] });
+      items.push({ no: q.no, hal: Number(m[1]), judul: m[2], soal: m[3], materi: materi, salah: salah,
+                   ops: { A: m[4], B: m[5], C: m[6], D: m[7] }, kunci: m[8].toUpperCase(), jelas: m[9].trim() });
     });
     if (rusak !== null) { kosong('Format soal pilihan ganda no. ' + rusak + ' tidak lengkap. Hubungi dosen.'); return false; }
     var peta = {}, hal = [];
@@ -750,6 +766,35 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     });
     html += '<tr class="tot"><td>Total</td><td class="num">' + tot + ' / ' + CFG.items.length + '</td></tr></table>';
     $('ringkasPG').innerHTML = html; $('ringkasPG').hidden = false;
+  }
+
+  /* Ringkasan kesalahan: hanya soal yang dijawab salah. Alasan pilihan yang keliru diambil dari [SALAH X];
+     bila tidak ada, cukup pilihan yang dipilih, jawaban yang tepat, dan penjelasannya. */
+  function ringkasSalah() {
+    var html = '', nSalah = 0, nKosong = 0;
+    CFG.halaman.forEach(function (P, hi) {
+      P.items.forEach(function (it, qi) {
+        var L = S.pg.jaw[it.no] || '';
+        if (!L) { nKosong++; return; }
+        if (L === it.kunci) return;
+        nSalah++;
+        html += '<div class="rsitem"><div class="rsno">Halaman ' + (hi + 1) + ' · Soal ' + (qi + 1) + '</div>' +
+          '<p class="rsq">' + esc(it.soal) + '</p>' +
+          '<div class="rsj no"><b>Jawaban Anda: ' + L + '. ' + esc(it.ops[L]) + '</b>' +
+            (it.salah[L] ? 'Mengapa bukan ' + L + ': ' + esc(it.salah[L]) : '') + '</div>' +
+          '<div class="rsj ok"><b>Seharusnya: ' + it.kunci + '. ' + esc(it.ops[it.kunci]) + '</b>' +
+            'Mengapa ' + it.kunci + ': ' + esc(it.jelas) + '</div></div>';
+      });
+    });
+    var info = nSalah
+      ? nSalah + ' jawaban salah dari ' + CFG.items.length + ' soal. Untuk setiap soal: mengapa pilihan Anda kurang tepat, dan mengapa jawaban yang tepat benar.'
+      : 'Tidak ada jawaban yang salah.';
+    $('ringkasSalah').innerHTML = '<h2>Ringkasan kesalahan</h2><p class="rsinfo">' + info + '</p>' + html +
+      (nKosong ? '<p class="rscatat">' + nKosong + ' soal tidak dijawab dan tidak dibahas di sini.</p>' : '') +
+      (nSalah ? '<p class="rscatat">Ringkasan ini tidak tersimpan setelah halaman ditutup. Ambil tangkapan layar bila ingin menyimpannya.</p>' : '');
+    $('ringkasSalah').hidden = false;
+    $('leadSelesai').textContent = nSalah ? 'Terima kasih. Baca ringkasan kesalahan di bawah sebelum menutup halaman ini.'
+                                          : 'Terima kasih. Anda boleh menutup halaman ini.';
   }
 })();
 </script>
