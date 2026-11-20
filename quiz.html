@@ -68,6 +68,38 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
 .center a{color:var(--navy);font-weight:700}
 .loading{color:var(--muted);text-align:center;padding:60px 0}
 [hidden]{display:none !important}
+/* ---------- kuis pilihan ganda (sel Soal diawali [PG]) ---------- */
+.pghead{margin:4px 0 14px}
+.pgstep{display:flex;gap:6px;margin-bottom:12px}
+.pgstep span{flex:1;height:6px;border-radius:4px;background:var(--line)}
+.pgstep span.done{background:#2f7d5b}.pgstep span.cur{background:var(--gold)}
+.pgjudul{font-family:Georgia,serif;font-size:clamp(21px,3vw,26px);line-height:1.2;margin:4px 0 6px}
+.pginfo{color:var(--muted);font-size:14px}
+.pgskor{font-size:15px;background:#eef6f1;border:1px solid #cfe5d8;color:#1f5c42;border-radius:10px;padding:10px 14px}
+.pgop{display:flex;flex-direction:column;gap:8px;-webkit-user-select:none;user-select:none}
+.pgop .op{display:flex;align-items:flex-start;gap:10px;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;
+  cursor:pointer;font-size:15px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--ink);margin:0;min-height:46px;line-height:1.45}
+.pgop .op:hover{border-color:#c9cfd8}
+.pgop input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.pgop .ol{flex:none;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;border:1.5px solid #c9cfd8;
+  font-weight:800;font-size:13px;color:var(--navy);margin-top:-1px}
+.pgop .op.dipilih{border-color:var(--navy);background:#f3f6fb}
+.pgop .op.dipilih .ol{background:var(--navy);border-color:var(--navy);color:#fff}
+.pgop input:focus-visible + .ol{outline:3px solid rgba(201,162,39,.45);outline-offset:2px}
+.dicek .pgop .op{cursor:default}
+.dicek .pgop .op.benar{border-color:#2f7d5b;background:#eef6f1}
+.dicek .pgop .op.benar .ol{background:#2f7d5b;border-color:#2f7d5b;color:#fff}
+.dicek .pgop .op.salah{border-color:var(--red);background:#fdf0ef}
+.dicek .pgop .op.salah .ol{background:var(--red);border-color:var(--red);color:#fff}
+.pgx{margin-top:12px;border-radius:10px;padding:11px 13px;font-size:14px;line-height:1.55;-webkit-user-select:none;user-select:none}
+.pgx.ok{background:#eef6f1;color:#1f4d39}.pgx.no{background:#fdf3e7;color:#6b4310}
+.pgx b{display:block;margin-bottom:2px}
+.pgring{max-width:420px;margin:18px auto 22px;text-align:left}
+.pgring table{width:100%;border-collapse:collapse;font-size:14px}
+.pgring td{padding:8px 6px;border-bottom:1px solid var(--line)}
+.pgring td.num{text-align:right;font-weight:700;white-space:nowrap}
+.pgring tr.tot td{font-weight:800;border-bottom:none}
+@media(max-width:520px){.barin{gap:8px;padding:10px 12px}.barin .btn{padding:10px 12px;font-size:14px}.timer{font-size:19px}}
 </style>
 </head>
 <body>
@@ -86,13 +118,13 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
   </div>
 
   <div id="vMasuk" hidden>
-    <div class="eyebrow">Kuis esai</div>
+    <div class="eyebrow" id="ebMasuk">Kuis esai</div>
     <h1 id="judul"></h1>
     <p class="lead" id="info"></p>
     <div class="card">
       <div class="field"><label for="nama">Nama lengkap</label><input id="nama" autocomplete="name"></div>
       <div class="field"><label for="nim">NIM</label><input id="nim" autocomplete="off"></div>
-      <div class="note">
+      <div class="note" id="catatan">
         Selama kuis berlangsung, halaman ini mencatat:
         <ul>
           <li>berapa kali dan berapa lama Anda meninggalkan halaman ini,</li>
@@ -108,7 +140,7 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
   </div>
 
   <div id="vKuis" hidden>
-    <div class="eyebrow">Kuis esai</div>
+    <div class="eyebrow" id="ebKuis">Kuis esai</div>
     <h1 id="judul2"></h1>
     <p class="lead" id="siapa"></p>
     <div id="daftarSoal"></div>
@@ -119,6 +151,7 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     <div class="eyebrow">Selesai</div>
     <h1>Jawaban terkirim</h1>
     <p class="lead">Terima kasih. Anda boleh menutup halaman ini.</p>
+    <div class="pgring" id="ringkasPG" hidden></div>
     <a href="index.html">Kembali ke hub</a>
   </div>
 </main>
@@ -128,6 +161,8 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     <span class="timer" id="timer">--:--</span>
     <button class="btn ghost" id="bKasus" hidden>↑ Kasus</button>
     <button class="btn" id="bKirim">Kirim jawaban</button>
+    <button class="btn ghost" id="bHalSebelum" hidden>← Sebelumnya</button>
+    <button class="btn" id="bAksi" hidden>Cek jawaban</button>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -173,6 +208,7 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
   }
   function kunciDraf() { return 'kuis:' + KODE + ':' + S.nim; }
   function simpanDraf() {
+    if (CFG && CFG.pg) { simpanPG(); return; }
     try {
       var d = {};
       CFG.soal.forEach(function (q) { d[q.no] = $('ta' + q.no).value; });
@@ -200,7 +236,11 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
       CFG = cfg;
       document.title = cfg.judul + ' — ITL Trisakti';
       $('judul').textContent = cfg.judul; $('judul2').textContent = cfg.judul;
-      $('info').textContent = cfg.soal.length + ' soal esai · ' + cfg.durasi + ' menit';
+      if (cfg.soal.every(function (q) { return /^\s*\[PG\]/i.test(q.teks); })) {
+        if (!siapkanPG(cfg)) return;
+      } else {
+        $('info').textContent = cfg.soal.length + ' soal esai · ' + cfg.durasi + ' menit';
+      }
       $('vMuat').hidden = true; $('vMasuk').hidden = false;
     })
     .catch(function () { kosong('Tidak dapat memuat kuis. Periksa koneksi lalu muat ulang halaman.'); });
@@ -216,7 +256,7 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
         if (!r || !r.ok) { throw { pesan: (r && r.pesan) || 'Gagal memulai.' }; }
         S.nim = nim; S.nama = nama; S.mulai = r.mulai;
         S.selisih = r.sekarang - Math.round((t0 + Date.now()) / 2);   // koreksi jam perangkat
-        tampilkanKuis();
+        if (CFG.pg) tampilkanPG(); else tampilkanKuis();
       })
       .catch(function (x) {
         e.textContent = (x && x.pesan) || 'Koneksi gagal. Coba lagi.'; e.hidden = false;
@@ -370,7 +410,7 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     function cegahSalin(e) {
       var el = e.target;
       if (el && el.nodeType === 3) el = el.parentNode;
-      if (el && el.closest && el.closest('.q')) { e.preventDefault(); S.salin++; toast('Menyalin soal tidak diizinkan.'); }
+      if (el && el.closest && el.closest('.q, .pgop, .pgx')) { e.preventDefault(); S.salin++; toast('Menyalin soal tidak diizinkan.'); }
     }
     document.addEventListener('copy', cegahSalin);
     document.addEventListener('cut', cegahSalin);
@@ -404,11 +444,12 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     });
     if (S.keluarSejak !== null) { S.keluarMs += Date.now() - S.keluarSejak; S.keluarSejak = Date.now(); }
 
-    var b = $('bKirim'); b.disabled = true; b.textContent = 'Mengirim…';
+    var b = CFG.pg ? $('bAksi') : $('bKirim'); b.disabled = true; b.textContent = 'Mengirim…';
+    if (CFG.pg) $('bHalSebelum').disabled = true;
     kirimAksi({
       aksi: 'kirim', kode: KODE, nim: S.nim, nama: S.nama, otomatis: otomatis,
       keluar: S.keluar, keluarMs: S.keluarMs, salin: S.salin,
-      jawaban: CFG.soal.map(function (q) {
+      jawaban: CFG.pg ? jawabanPG() : CFG.soal.map(function (q) {
         var s = S.soal[q.no];
         return { no: q.no, jawaban: $('ta' + q.no).value, diketik: s.diketik, tempel: s.tempel, aktifMs: s.aktifMs };
       })
@@ -416,7 +457,8 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
       S.mengirim = false;
       if (r && r.ok) {
         S.terkirim = true; clearInterval(S.iv);
-        try { localStorage.removeItem(kunciDraf()); } catch (e) {}
+        try { localStorage.removeItem(kunciDraf()); localStorage.removeItem(kunciDraf() + ':pg'); } catch (e) {}
+        if (CFG.pg) ringkasPG();
         $('vKuis').hidden = true; $('bar').hidden = true; $('vSelesai').hidden = false;
         window.scrollTo(0, 0);
       } else {
@@ -429,7 +471,172 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
   }
   function gagal(msg) {
     var e = $('errKirim'); e.textContent = msg; e.hidden = false;
-    var b = $('bKirim'); b.disabled = false; b.textContent = 'Kirim jawaban';
+    var b = CFG.pg ? $('bAksi') : $('bKirim'); b.disabled = false; b.textContent = 'Kirim jawaban';
+    if (CFG.pg) $('bHalSebelum').disabled = false;
+  }
+
+  /* ================================================================ pilihan ganda
+     Sel Soal: [PG] [HAL n] judul halaman [SOAL] pertanyaan [A] .. [B] .. [C] .. [D] .. [KUNCI] X [PENJELASAN] ..
+     Soal dikelompokkan per halaman. Satu halaman dicek sekaligus; setelah dicek, kunci dan penjelasan
+     tampil dan jawaban halaman itu terkunci. Jawaban dikirim ke Apps Script yang sama (lembar Jawaban). */
+  var PG_RE = /^\s*\[PG\]\s*\[HAL\s*(\d+)\]\s*([\s\S]*?)\s*\[SOAL\]\s*([\s\S]*?)\s*\[A\]\s*([\s\S]*?)\s*\[B\]\s*([\s\S]*?)\s*\[C\]\s*([\s\S]*?)\s*\[D\]\s*([\s\S]*?)\s*\[KUNCI\]\s*([ABCD])\s*\[PENJELASAN\]\s*([\s\S]*)$/i;
+  var HURUF = ['A', 'B', 'C', 'D'];
+  function esc(x) {
+    return String(x).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+  }
+
+  function siapkanPG(cfg) {
+    var items = [], rusak = null;
+    cfg.soal.forEach(function (q) {
+      var m = PG_RE.exec(q.teks);
+      if (!m) { if (rusak === null) rusak = q.no; return; }
+      items.push({ no: q.no, hal: Number(m[1]), judul: m[2], soal: m[3],
+                   ops: { A: m[4], B: m[5], C: m[6], D: m[7] }, kunci: m[8].toUpperCase(), jelas: m[9] });
+    });
+    if (rusak !== null) { kosong('Format soal pilihan ganda no. ' + rusak + ' tidak lengkap. Hubungi dosen.'); return false; }
+    var peta = {}, hal = [];
+    items.forEach(function (it) {
+      if (!peta[it.hal]) { peta[it.hal] = { hal: it.hal, judul: it.judul, items: [] }; hal.push(peta[it.hal]); }
+      peta[it.hal].items.push(it);
+    });
+    hal.sort(function (a, b) { return a.hal - b.hal; });
+    CFG.pg = true; CFG.items = items; CFG.halaman = hal;
+    $('ebMasuk').textContent = 'Kuis pilihan ganda'; $('ebKuis').textContent = 'Kuis pilihan ganda';
+    $('info').textContent = items.length + ' soal pilihan ganda · ' + hal.length + ' halaman · ' + cfg.durasi + ' menit';
+    $('catatan').innerHTML =
+      'Cara mengerjakan:<ul>' +
+      '<li>Kuis terdiri dari ' + hal.length + ' halaman. Jawab semua soal di satu halaman, lalu tekan <b>Cek jawaban</b>.</li>' +
+      '<li>Setelah dicek, kunci dan penjelasan muncul, dan jawaban di halaman itu tidak bisa diubah lagi.</li>' +
+      '<li>Halaman ini mencatat berapa kali dan berapa lama Anda meninggalkannya, serta percobaan menyalin soal (diblokir).</li>' +
+      '</ul>Waktu berjalan sejak Anda menekan Mulai dan tidak berulang bila halaman dimuat ulang. ' +
+      'Jawaban terkirim setelah Anda menekan <b>Kirim jawaban</b> di halaman terakhir, atau otomatis saat waktu habis.';
+    return true;
+  }
+
+  function simpanPG() {
+    try { localStorage.setItem(kunciDraf() + ':pg', JSON.stringify({ jaw: S.pg.jaw, cek: S.pg.cek })); } catch (e) {}
+  }
+  function muatPG() {
+    try {
+      var d = JSON.parse(localStorage.getItem(kunciDraf() + ':pg') || '{}');
+      if (d.jaw) S.pg.jaw = d.jaw;
+      if (d.cek) S.pg.cek = d.cek;
+    } catch (e) {}
+  }
+  function halamanTerbuka() {   // indeks halaman pertama yang belum dicek (atau halaman terakhir)
+    for (var i = 0; i < CFG.halaman.length; i++) if (!S.pg.cek[CFG.halaman[i].hal]) return i;
+    return CFG.halaman.length - 1;
+  }
+
+  function tampilkanPG() {
+    $('vMasuk').hidden = true; $('vKuis').hidden = false; $('bar').hidden = false;
+    $('kembali').hidden = true; $('bKirim').hidden = true; $('bAksi').hidden = false;
+    $('siapa').textContent = S.nama + ' · ' + S.nim;
+    S.pg = { jaw: {}, cek: {}, idx: 0 };
+    muatPG();
+    pasangHalaman();
+    tampilHal(halamanTerbuka());
+    detak(); S.iv = setInterval(detak, 1000);
+  }
+
+  function tampilHal(idx) {
+    var P = CFG.halaman[idx], cek = !!S.pg.cek[P.hal], benarN = 0;
+    S.pg.idx = idx;
+    P.items.forEach(function (it) { if (S.pg.jaw[it.no] === it.kunci) benarN++; });
+    var html = '<div class="pghead"><div class="pgstep" aria-hidden="true">';
+    CFG.halaman.forEach(function (h, i) {
+      html += '<span class="' + (i === idx ? 'cur' : (S.pg.cek[h.hal] ? 'done' : '')) + '"></span>';
+    });
+    html += '</div><div class="eyebrow">Halaman ' + (idx + 1) + ' dari ' + CFG.halaman.length + '</div>' +
+            '<h2 class="pgjudul">' + esc(P.judul) + '</h2>' +
+            (cek ? '<p class="pgskor">Skor halaman ini: <b>' + benarN + ' dari ' + P.items.length + '</b>. Baca penjelasan di setiap soal.</p>'
+                 : '<p class="pginfo">Jawab semua soal, lalu tekan Cek jawaban. Setelah dicek, jawaban terkunci.</p>') +
+            '</div>';
+    P.items.forEach(function (it, i) {
+      var pil = S.pg.jaw[it.no] || '';
+      html += '<div class="card pgq' + (cek ? ' dicek' : '') + '" id="pq' + it.no + '">' +
+              '<p class="q"><span class="qno">' + (i + 1) + '</span>' + esc(it.soal) + '</p>' +
+              '<div class="pgop" role="radiogroup" aria-label="Pilihan soal ' + (i + 1) + '">';
+      HURUF.forEach(function (L) {
+        var k = 'op' + (pil === L ? ' dipilih' : '');
+        if (cek) { if (L === it.kunci) k += ' benar'; else if (pil === L) k += ' salah'; }
+        html += '<label class="' + k + '"><input type="radio" name="r' + it.no + '" value="' + L + '"' +
+                (pil === L ? ' checked' : '') + (cek ? ' disabled' : '') + '>' +
+                '<span class="ol">' + L + '</span><span class="ot">' + esc(it.ops[L]) + '</span></label>';
+      });
+      html += '</div>';
+      if (cek) {
+        var ok = pil === it.kunci;
+        html += '<div class="pgx ' + (ok ? 'ok' : 'no') + '"><b>' + (ok ? 'Benar.' : (pil ? 'Belum tepat.' : 'Tidak dijawab.')) +
+                ' Jawaban yang tepat: ' + it.kunci + '.</b>' + esc(it.jelas) + '</div>';
+      }
+      html += '</div>';
+    });
+    $('daftarSoal').innerHTML = html;
+    if (!cek) {
+      Array.prototype.forEach.call($('daftarSoal').querySelectorAll('.pgop input'), function (inp) {
+        inp.addEventListener('change', function () {
+          var no = Number(inp.name.slice(1));
+          S.pg.jaw[no] = inp.value;
+          Array.prototype.forEach.call(document.querySelectorAll('input[name="r' + no + '"]'), function (x) {
+            x.parentNode.classList.toggle('dipilih', x.checked);
+          });
+          simpanPG(); perbaruiBar();
+        });
+      });
+    }
+    perbaruiBar();
+    window.scrollTo(0, 0);
+  }
+
+  function perbaruiBar() {
+    var P = CFG.halaman[S.pg.idx], cek = !!S.pg.cek[P.hal], b = $('bAksi');
+    var terjawab = P.items.filter(function (it) { return S.pg.jaw[it.no]; }).length, n = P.items.length;
+    $('bHalSebelum').hidden = S.pg.idx === 0;
+    $('errKirim').hidden = true;
+    if (!cek) {
+      b.textContent = terjawab < n ? 'Cek jawaban (' + terjawab + '/' + n + ')' : 'Cek jawaban';
+      b.disabled = terjawab < n;
+    } else if (S.pg.idx < CFG.halaman.length - 1) {
+      b.textContent = 'Lanjut ke halaman ' + (S.pg.idx + 2); b.disabled = false;
+    } else {
+      b.textContent = 'Kirim jawaban'; b.disabled = false;
+    }
+  }
+
+  $('bAksi').addEventListener('click', function () {
+    if (!CFG || !CFG.pg || S.mengirim || S.terkirim) return;
+    var P = CFG.halaman[S.pg.idx];
+    if (!S.pg.cek[P.hal]) {
+      if (!window.confirm('Cek jawaban halaman ini? Setelah dicek, jawaban di halaman ini tidak bisa diubah.')) return;
+      S.pg.cek[P.hal] = true; simpanPG(); tampilHal(S.pg.idx);
+    } else if (S.pg.idx < CFG.halaman.length - 1) {
+      tampilHal(S.pg.idx + 1);
+    } else if (window.confirm('Kirim semua jawaban sekarang?')) {
+      kirim(false);
+    }
+  });
+  $('bHalSebelum').addEventListener('click', function () {
+    if (CFG && CFG.pg && S.pg.idx > 0) tampilHal(S.pg.idx - 1);
+  });
+
+  function jawabanPG() {
+    return CFG.items.map(function (it) {
+      var L = S.pg.jaw[it.no] || '';
+      return { no: it.no, jawaban: L ? L + (L === it.kunci ? ' · benar' : ' · salah (kunci ' + it.kunci + ')') : '',
+               diketik: 0, tempel: 0, aktifMs: 0 };
+    });
+  }
+
+  function ringkasPG() {
+    var tot = 0, html = '<table>';
+    CFG.halaman.forEach(function (P, i) {
+      var b = P.items.filter(function (it) { return S.pg.jaw[it.no] === it.kunci; }).length;
+      tot += b;
+      html += '<tr><td>Halaman ' + (i + 1) + ' · ' + esc(P.judul) + '</td><td class="num">' + b + ' / ' + P.items.length + '</td></tr>';
+    });
+    html += '<tr class="tot"><td>Total</td><td class="num">' + tot + ' / ' + CFG.items.length + '</td></tr></table>';
+    $('ringkasPG').innerHTML = html; $('ringkasPG').hidden = false;
   }
 })();
 </script>
