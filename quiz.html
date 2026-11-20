@@ -105,7 +105,21 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
 .mbox{background:#fff;border-radius:16px;max-width:420px;width:100%;padding:22px;box-shadow:0 18px 50px rgba(11,31,58,.25)}
 .mbox p{font-size:15px;margin-bottom:18px}
 .mbtn{display:flex;gap:10px;justify-content:flex-end}
-@media(max-width:520px){.barin{gap:8px;padding:10px 12px}.barin .btn{padding:10px 12px;font-size:14px}.timer{font-size:19px}}
+/* ringkasan materi per halaman: segmen [MATERI] di sel soal pertama halaman itu */
+.card.materi{border-top:4px solid var(--gold)}
+.mlead{font-size:16px;font-weight:650;color:var(--navy);line-height:1.45;margin-bottom:14px}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mitem{border:1px solid var(--line);border-radius:12px;padding:11px 13px;background:#fbfcfe;font-size:14px;line-height:1.5}
+.mitem b{display:block;color:var(--navy);font-size:14.5px;margin-bottom:3px}
+.mitem.lebar{grid-column:1/-1}
+.mitem ul{margin:2px 0 0 18px}
+.mpanel{max-width:760px;max-height:88vh;overflow:auto;padding:0}
+.mpkepala{position:sticky;top:0;z-index:1;background:#fff;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
+  padding:16px 20px 12px;border-bottom:1px solid var(--line)}
+.mpkepala .pgjudul{margin:2px 0 0}
+#pmIsi{padding:16px 20px 20px}
+@media(max-width:520px){.mgrid{grid-template-columns:1fr}.mpkepala,#pmIsi{padding-left:14px;padding-right:14px}}
+@media(max-width:520px){.barin{gap:8px;padding:10px 12px}.barin .btn{padding:10px 12px;font-size:14px}.timer{font-size:19px}.barin .lbl{display:none}}
 </style>
 </head>
 <body>
@@ -167,13 +181,20 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     <span class="timer" id="timer">--:--</span>
     <button class="btn ghost" id="bKasus" hidden>↑ Kasus</button>
     <button class="btn" id="bKirim">Kirim jawaban</button>
-    <button class="btn ghost" id="bHalSebelum" hidden>← Sebelumnya</button>
+    <button class="btn ghost" id="bHalSebelum" aria-label="Halaman sebelumnya" hidden>←<span class="lbl">&nbsp;Sebelumnya</span></button>
+    <button class="btn ghost" id="bMateri" aria-haspopup="dialog" hidden>Materi</button>
     <button class="btn" id="bAksi" hidden>Cek jawaban</button>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="modal" id="konfirmasi" role="dialog" aria-modal="true" aria-labelledby="kTeks" hidden>
   <div class="mbox"><p id="kTeks"></p><div class="mbtn"><button class="btn ghost" id="kBatal">Batal</button><button class="btn" id="kYa">Ya</button></div></div>
+</div>
+<div class="modal" id="panelMateri" role="dialog" aria-modal="true" aria-labelledby="pmJudul" hidden>
+  <div class="mbox mpanel">
+    <div class="mpkepala"><div><div class="eyebrow">Ringkasan materi</div><h2 class="pgjudul" id="pmJudul"></h2></div><button class="btn ghost" id="pmTutup">Tutup</button></div>
+    <div id="pmIsi"></div>
+  </div>
 </div>
 
 <script src="quiz-config.js"></script>
@@ -226,7 +247,9 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
   });
   $('kBatal').addEventListener('click', function () { tanya._lanjut = null; $('konfirmasi').hidden = true; });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !$('konfirmasi').hidden) { tanya._lanjut = null; $('konfirmasi').hidden = true; }
+    if (e.key !== 'Escape') return;
+    if (!$('konfirmasi').hidden) { tanya._lanjut = null; $('konfirmasi').hidden = true; }
+    else if (!$('panelMateri').hidden) tutupMateri();
   });
 
   function kunciDraf() { return 'kuis:' + KODE + ':' + S.nim; }
@@ -482,6 +505,7 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
         S.terkirim = true; clearInterval(S.iv);
         try { localStorage.removeItem(kunciDraf()); localStorage.removeItem(kunciDraf() + ':pg'); } catch (e) {}
         if (CFG.pg) ringkasPG();
+        $('panelMateri').hidden = true;
         $('vKuis').hidden = true; $('bar').hidden = true; $('vSelesai').hidden = false;
         window.scrollTo(0, 0);
       } else {
@@ -501,8 +525,12 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
   /* ================================================================ pilihan ganda
      Sel Soal: [PG] [HAL n] judul halaman [SOAL] pertanyaan [A] .. [B] .. [C] .. [D] .. [KUNCI] X [PENJELASAN] ..
      Soal dikelompokkan per halaman. Satu halaman dicek sekaligus; setelah dicek, kunci dan penjelasan
-     tampil dan jawaban halaman itu terkunci. Jawaban dikirim ke Apps Script yang sama (lembar Jawaban). */
-  var PG_RE = /^\s*\[PG\]\s*\[HAL\s*(\d+)\]\s*([\s\S]*?)\s*\[SOAL\]\s*([\s\S]*?)\s*\[A\]\s*([\s\S]*?)\s*\[B\]\s*([\s\S]*?)\s*\[C\]\s*([\s\S]*?)\s*\[D\]\s*([\s\S]*?)\s*\[KUNCI\]\s*([ABCD])\s*\[PENJELASAN\]\s*([\s\S]*)$/i;
+     tampil dan jawaban halaman itu terkunci. Jawaban dikirim ke Apps Script yang sama (lembar Jawaban).
+     Opsional, ringkasan materi halaman (cukup di satu sel per halaman), sebelum [SOAL]:
+       [MATERI] kalimat pembuka | Judul :: isi | Judul :: • butir • butir | ...
+     Tampil sebagai slide sebelum soal halaman itu, dan bisa dibuka lagi lewat tombol Materi. */
+  var MATERI_RE = /\[MATERI\]\s*([\s\S]*?)\s*(?=\[SOAL\])/i;
+  var PG_RE =/^\s*\[PG\]\s*\[HAL\s*(\d+)\]\s*([\s\S]*?)\s*\[SOAL\]\s*([\s\S]*?)\s*\[A\]\s*([\s\S]*?)\s*\[B\]\s*([\s\S]*?)\s*\[C\]\s*([\s\S]*?)\s*\[D\]\s*([\s\S]*?)\s*\[KUNCI\]\s*([ABCD])\s*\[PENJELASAN\]\s*([\s\S]*)$/i;
   var HURUF = ['A', 'B', 'C', 'D'];
   function esc(x) {
     return String(x).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
@@ -511,17 +539,21 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
   function siapkanPG(cfg) {
     var items = [], rusak = null;
     cfg.soal.forEach(function (q) {
-      var m = PG_RE.exec(q.teks);
+      var teks = String(q.teks), mt = MATERI_RE.exec(teks), materi = '';
+      if (mt) { materi = mt[1]; teks = teks.replace(MATERI_RE, ''); }
+      var m = PG_RE.exec(teks);
       if (!m) { if (rusak === null) rusak = q.no; return; }
-      items.push({ no: q.no, hal: Number(m[1]), judul: m[2], soal: m[3],
+      items.push({ no: q.no, hal: Number(m[1]), judul: m[2], soal: m[3], materi: materi,
                    ops: { A: m[4], B: m[5], C: m[6], D: m[7] }, kunci: m[8].toUpperCase(), jelas: m[9] });
     });
     if (rusak !== null) { kosong('Format soal pilihan ganda no. ' + rusak + ' tidak lengkap. Hubungi dosen.'); return false; }
     var peta = {}, hal = [];
     items.forEach(function (it) {
-      if (!peta[it.hal]) { peta[it.hal] = { hal: it.hal, judul: it.judul, items: [] }; hal.push(peta[it.hal]); }
+      if (!peta[it.hal]) { peta[it.hal] = { hal: it.hal, judul: it.judul, materi: '', items: [] }; hal.push(peta[it.hal]); }
+      if (!peta[it.hal].materi && it.materi) peta[it.hal].materi = it.materi;
       peta[it.hal].items.push(it);
     });
+    var adaMateri = hal.some(function (h) { return h.materi; });
     hal.sort(function (a, b) { return a.hal - b.hal; });
     CFG.pg = true; CFG.items = items; CFG.halaman = hal;
     $('ebMasuk').textContent = 'Kuis pilihan ganda'; $('ebKuis').textContent = 'Kuis pilihan ganda';
@@ -529,6 +561,7 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     $('catatan').innerHTML =
       'Cara mengerjakan:<ul>' +
       '<li>Kuis terdiri dari ' + hal.length + ' halaman. Jawab semua soal di satu halaman, lalu tekan <b>Cek jawaban</b>.</li>' +
+      (adaMateri ? '<li>Setiap halaman diawali ringkasan materi. Ringkasan itu bisa dibuka lagi kapan saja lewat tombol <b>Materi</b>.</li>' : '') +
       '<li>Setelah dicek, kunci dan penjelasan muncul, dan jawaban di halaman itu tidak bisa diubah lagi.</li>' +
       '<li>Halaman ini mencatat berapa kali dan berapa lama Anda meninggalkannya, serta percobaan menyalin soal (diblokir).</li>' +
       '</ul>Waktu berjalan sejak Anda menekan Mulai dan tidak berulang bila halaman dimuat ulang. ' +
@@ -537,13 +570,14 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
   }
 
   function simpanPG() {
-    try { localStorage.setItem(kunciDraf() + ':pg', JSON.stringify({ jaw: S.pg.jaw, cek: S.pg.cek })); } catch (e) {}
+    try { localStorage.setItem(kunciDraf() + ':pg', JSON.stringify({ jaw: S.pg.jaw, cek: S.pg.cek, mulai: S.pg.mulai })); } catch (e) {}
   }
   function muatPG() {
     try {
       var d = JSON.parse(localStorage.getItem(kunciDraf() + ':pg') || '{}');
       if (d.jaw) S.pg.jaw = d.jaw;
       if (d.cek) S.pg.cek = d.cek;
+      if (d.mulai) S.pg.mulai = d.mulai;
     } catch (e) {}
   }
   function halamanTerbuka() {   // indeks halaman pertama yang belum dicek (atau halaman terakhir)
@@ -555,22 +589,72 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     $('vMasuk').hidden = true; $('vKuis').hidden = false; $('bar').hidden = false;
     $('kembali').hidden = true; $('bKirim').hidden = true; $('bAksi').hidden = false;
     $('siapa').textContent = S.nama + ' · ' + S.nim;
-    S.pg = { jaw: {}, cek: {}, idx: 0 };
+    S.pg = { jaw: {}, cek: {}, mulai: {}, idx: 0, modeMateri: false };
     muatPG();
     pasangHalaman();
     tampilHal(halamanTerbuka());
     detak(); S.iv = setInterval(detak, 1000);
   }
 
-  function tampilHal(idx) {
-    var P = CFG.halaman[idx], cek = !!S.pg.cek[P.hal], benarN = 0;
-    S.pg.idx = idx;
-    P.items.forEach(function (it) { if (S.pg.jaw[it.no] === it.kunci) benarN++; });
-    var html = '<div class="pghead"><div class="pgstep" aria-hidden="true">';
+  /* Isi [MATERI]: dipisah "|" atau baris baru. Bagian pertama tanpa "::" = kalimat pembuka.
+     "Judul :: isi" = kartu; isi yang diawali "•" = daftar butir (kartu selebar dua kolom). */
+  function htmlMateri(teks) {
+    var lead = '', kartu = [];
+    String(teks).split(/\s*\|\s*|\n+/).filter(function (s) { return s.trim(); }).forEach(function (s, i) {
+      var p = s.indexOf('::'), jdl = p < 0 ? '' : s.slice(0, p).trim(), isi = (p < 0 ? s : s.slice(p + 2)).trim();
+      if (p < 0 && i === 0) { lead = isi; return; }
+      var butir = /^•/.test(isi) ? isi.split(/\s*•\s*/).filter(Boolean) : null;
+      kartu.push({ lebar: !!butir, isi: (jdl ? '<b>' + esc(jdl) + '</b>' : '') +
+        (butir ? '<ul>' + butir.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : '<span>' + esc(isi) + '</span>') });
+    });
+    // kartu biasa yang akan sendirian di barisnya (sebelum kartu lebar atau di akhir) ikut dilebarkan
+    for (var i = 0, kol = 0; i < kartu.length; i++) {
+      if (kartu[i].lebar) { kol = 0; continue; }
+      if (kol === 0 && (!kartu[i + 1] || kartu[i + 1].lebar)) { kartu[i].lebar = true; continue; }
+      kol = 1 - kol;
+    }
+    return (lead ? '<p class="mlead">' + esc(lead) + '</p>' : '') + '<div class="mgrid">' +
+      kartu.map(function (k) { return '<div class="mitem' + (k.lebar ? ' lebar' : '') + '">' + k.isi + '</div>'; }).join('') + '</div>';
+  }
+  function bukaMateri() {
+    var P = CFG.halaman[S.pg.idx];
+    if (!P.materi) return;
+    $('pmJudul').textContent = P.judul; $('pmIsi').innerHTML = htmlMateri(P.materi);
+    $('panelMateri').hidden = false; $('panelMateri').querySelector('.mpanel').scrollTop = 0; $('pmTutup').focus();
+  }
+  function tutupMateri() { $('panelMateri').hidden = true; if (!$('bMateri').hidden) $('bMateri').focus(); }
+  $('bMateri').addEventListener('click', bukaMateri);
+  $('pmTutup').addEventListener('click', tutupMateri);
+  $('panelMateri').addEventListener('click', function (e) { if (e.target === this) tutupMateri(); });
+
+  function langkah(idx) {
+    var html = '<div class="pgstep" aria-hidden="true">';
     CFG.halaman.forEach(function (h, i) {
       html += '<span class="' + (i === idx ? 'cur' : (S.pg.cek[h.hal] ? 'done' : '')) + '"></span>';
     });
-    html += '</div><div class="eyebrow">Halaman ' + (idx + 1) + ' dari ' + CFG.halaman.length + '</div>' +
+    return html + '</div>';
+  }
+
+  function tampilHal(idx) {
+    var P = CFG.halaman[idx], cek = !!S.pg.cek[P.hal], benarN = 0;
+    S.pg.idx = idx;
+    // Slide materi tampil sekali sebelum soal halaman ini. Halaman yang sudah dicek atau sudah ada
+    // jawabannya (draf lama sebelum fitur ini) langsung ke soal.
+    var mulai = cek || S.pg.mulai[P.hal] || P.items.some(function (it) { return S.pg.jaw[it.no]; });
+    S.pg.modeMateri = !!P.materi && !mulai;
+    if (S.pg.modeMateri) {
+      $('daftarSoal').innerHTML = '<div class="pghead">' + langkah(idx) +
+        '<div class="eyebrow">Halaman ' + (idx + 1) + ' dari ' + CFG.halaman.length + ' · Ringkasan materi</div>' +
+        '<h2 class="pgjudul">' + esc(P.judul) + '</h2>' +
+        '<p class="pginfo">Baca ringkasan ini dulu, lalu tekan Mulai soal. Ringkasan bisa dibuka lagi kapan saja lewat tombol Materi.</p></div>' +
+        '<div class="card materi">' + htmlMateri(P.materi) + '</div>';
+      perbaruiBar();
+      window.scrollTo(0, 0);
+      return;
+    }
+    P.items.forEach(function (it) { if (S.pg.jaw[it.no] === it.kunci) benarN++; });
+    var html = '<div class="pghead">' + langkah(idx);
+    html += '<div class="eyebrow">Halaman ' + (idx + 1) + ' dari ' + CFG.halaman.length + '</div>' +
             '<h2 class="pgjudul">' + esc(P.judul) + '</h2>' +
             (cek ? '<p class="pgskor">Skor halaman ini: <b>' + benarN + ' dari ' + P.items.length + '</b>. Baca penjelasan di setiap soal.</p>'
                  : '<p class="pginfo">Jawab semua soal, lalu tekan Cek jawaban. Setelah dicek, jawaban terkunci.</p>') +
@@ -616,8 +700,11 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
     var P = CFG.halaman[S.pg.idx], cek = !!S.pg.cek[P.hal], b = $('bAksi');
     var terjawab = P.items.filter(function (it) { return S.pg.jaw[it.no]; }).length, n = P.items.length;
     $('bHalSebelum').hidden = S.pg.idx === 0;
+    $('bMateri').hidden = !P.materi || S.pg.modeMateri;
     $('errKirim').hidden = true;
-    if (!cek) {
+    if (S.pg.modeMateri) {
+      b.textContent = 'Mulai soal (' + n + ')'; b.disabled = false;
+    } else if (!cek) {
       b.textContent = terjawab < n ? 'Cek jawaban (' + terjawab + '/' + n + ')' : 'Cek jawaban';
       b.disabled = terjawab < n;
     } else if (S.pg.idx < CFG.halaman.length - 1) {
@@ -630,7 +717,9 @@ textarea{min-height:170px;resize:vertical;line-height:1.55}
   $('bAksi').addEventListener('click', function () {
     if (!CFG || !CFG.pg || S.mengirim || S.terkirim) return;
     var P = CFG.halaman[S.pg.idx];
-    if (!S.pg.cek[P.hal]) {
+    if (S.pg.modeMateri) {
+      S.pg.mulai[P.hal] = true; simpanPG(); tampilHal(S.pg.idx);
+    } else if (!S.pg.cek[P.hal]) {
       tanya('Cek jawaban halaman ini? Setelah dicek, jawaban di halaman ini tidak bisa diubah.', 'Ya, cek', function () {
         S.pg.cek[P.hal] = true; simpanPG(); tampilHal(S.pg.idx);
       });
